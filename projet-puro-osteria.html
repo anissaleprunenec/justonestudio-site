@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Étude de cas : Puro Osteria, un site vitrine pour une osteria italienne, maquetté dans Figma puis intégré par Anissa B. Le Prunenec.">
+
+<title>Puro Osteria — Étude de cas · Just One Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<script>
+  // apply the saved theme before first paint so the page doesn't flash dark
+  try { if (localStorage.getItem('theme') === 'light') document.documentElement.dataset.theme = 'light'; } catch (e) {}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  /* same tokens as the home page (index.html) */
+  :root {
+    --bg: #04060b; --text: #f2f4f8; --muted: #8d95a6; --line: rgba(255,255,255,.1);
+    --sans: "Bricolage Grotesque", system-ui, sans-serif; --serif: "Instrument Serif", Georgia, serif;
+    --ease: cubic-bezier(.65,0,.25,1); --accent: #5b8cff;
+    --container: 1200px; --gutter: clamp(16px, 2.5vw, 32px); --section-space: clamp(80px, 13vh, 128px);
+    --glow-1: rgba(86,128,255,.5); --glow-2: rgba(40,70,190,.2);
+    --surface: rgba(255,255,255,.07); --surface-hover: rgba(255,255,255,.08);
+    --link: #d6dbe6; --link-hover: #fff; --btn-bg: #fff; --btn-text: #000;
+    --card: #0b0e16; --card-shadow: rgba(0,0,0,.9); --card-2: #121725; --ok: #2fbf85;
+  }
+  :root[data-theme="light"] {
+    --bg: #f3f5fa; --text: #10131a; --muted: #5d6576; --line: rgba(16,19,26,.1); --accent: #2f5fd6;
+    --glow-1: rgba(91,140,255,.32); --glow-2: rgba(140,170,255,.16);
+    --surface: rgba(255,255,255,.75); --surface-hover: rgba(16,19,26,.05);
+    --link: #39404d; --link-hover: #10131a; --btn-bg: #10131a; --btn-text: #fff;
+    --card: #fff; --card-shadow: rgba(16,19,26,.18); --card-2: #f3f5fa; --ok: #1f9d6b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); transition: background-color .4s, color .4s; font-family: var(--sans); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  a, button { color: inherit; text-decoration: none; font: inherit; }
+  button { background: none; border: 0; cursor: pointer; }
+  img { display: block; max-width: 100%; }
+  .wrap { width: min(var(--container), calc(100% - 2 * var(--gutter))); margin: 0 auto; }
+
+  /* ---------- nav (same as home) ---------- */
+  .top { position: relative; isolation: isolate; overflow-x: clip; } /* the wide glow must not make the page scroll sideways */
+  .top::before { content: ""; position: absolute; z-index: -1; left: 50%; top: -40vh; width: 120vw; height: 90vh; transform: translateX(-50%); pointer-events: none;
+    background: radial-gradient(closest-side, var(--glow-1), var(--glow-2) 45%, transparent 75%); filter: blur(10px); }
+  .nav { position: relative; z-index: 5; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 18px max(var(--gutter), calc((100% - var(--container)) / 2)); font-size: 14px; }
+  /* the menu follows the scroll: fixed at the top, with a blurred bar once the page has moved */
+  .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 60; border-bottom: 1px solid transparent; transition: background .35s, border-color .35s, padding .35s; }
+  .nav-space { height: 72px; }
+  html { scroll-padding-top: 84px; }
+  html.scrolled .nav { background: color-mix(in srgb, var(--bg) 72%, transparent); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border-bottom-color: var(--line); padding-top: 12px; padding-bottom: 12px; }
+  html.scrolled .nav .links { background: transparent; border-color: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .brand { display: flex; align-items: center; }
+  .jos { display: block; height: 32px; width: auto; overflow: visible; }
+  .jos .w { font: 600 100px var(--sans); letter-spacing: -4.5px; fill: currentColor; }
+  .jos .o { font: italic 400 100px var(--serif); fill: var(--accent); }
+  .jos .bx { fill: none; stroke: var(--accent); stroke-width: 4; }
+  .jos .hd { fill: var(--bg); stroke: var(--accent); stroke-width: 3.5; }
+  .links { display: flex; gap: 2px; padding: 4px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+  .links a { padding: 7px 14px; border-radius: 9px; color: var(--link); transition: background .2s, color .2s; }
+  .links a:hover, .links a[aria-current] { background: var(--surface-hover); color: var(--link-hover); }
+  .actions { justify-self: end; display: flex; align-items: center; gap: 18px; }
+  .actions .btn { background: var(--btn-bg); color: var(--btn-text); padding: 9px 16px; border-radius: 10px; font-weight: 500; transition: transform .2s; }
+  .actions .btn:hover { transform: translateY(-1px); }
+  .theme-toggle { width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center; background: var(--surface); border: 1px solid var(--line); color: var(--link); }
+  .theme-toggle svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
+  .theme-toggle .moon, :root[data-theme="light"] .theme-toggle .sun { display: none; }
+  :root[data-theme="light"] .theme-toggle .moon { display: block; }
+
+  /* ---------- case study: head ---------- */
+  .head { padding: clamp(48px, 9vh, 96px) 0 44px; }
+  .back { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: var(--link); margin-bottom: 26px; }
+  .back:hover { color: var(--text); }
+  .kicker { display: block; font: 500 13px ui-monospace, Menlo, monospace; color: var(--accent); margin-bottom: 18px; }
+  .head h1 { font-weight: 500; font-size: clamp(52px, 8vw, 120px); letter-spacing: -.05em; line-height: .92; }
+  .head h1 em { font-family: var(--serif); font-weight: 400; letter-spacing: -.01em; color: var(--accent); }
+  .lead { margin-top: 26px; max-width: 52ch; color: var(--link); font-size: clamp(18px, 1.6vw, 21px); line-height: 1.55; }
+  .note { display: inline-flex; align-items: center; gap: 10px; margin-top: 22px; padding: 7px 14px; border-radius: 999px; border: 1px dashed var(--line); font-size: 13px; color: var(--muted); }
+  .note i { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+  .meta { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 44px; border-top: 1px solid var(--line); }
+  .meta div { padding: 18px 20px 20px 0; border-bottom: 1px solid var(--line); font-size: 15px; line-height: 1.45; }
+  .meta span { display: block; margin-bottom: 6px; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+  .meta a { color: var(--accent); white-space: nowrap; } .meta a:hover { text-decoration: underline; }
+
+  /* a screenshot in a browser window, on the project's flat colour (same as the home cards) */
+  .stage { background: var(--flat, #123b2b); padding: clamp(24px, 4vw, 56px) 0 0 clamp(24px, 4vw, 56px); border-radius: 24px; overflow: hidden; display: flex; align-items: flex-end; }
+  .win { width: 100%; border-radius: 10px 0 0 0; overflow: hidden; background: #fff; box-shadow: 0 30px 60px -30px rgba(0,0,0,.6); }
+  /* scrollable full pages are centred in their colour and rest on its bottom edge */
+  .stage:has(.screen) { padding: clamp(16px, 4vw, 48px) clamp(16px, 4vw, 48px) 0; }
+  .stage:has(.screen) .win { border-radius: 10px 10px 0 0; }
+  .win .bar { height: 30px; display: flex; align-items: center; gap: 6px; padding: 0 12px; background: #eef0f4; }
+  .win .bar i { width: 9px; height: 9px; border-radius: 50%; background: #c9ced8; }
+  .win .bar span { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-left: 12px; font-size: 11px; color: #6b7280; background: #fff; padding: 3px 12px; border-radius: 6px; }
+  .win img { width: 100%; }
+  .case-hero { margin-bottom: var(--section-space); position: relative; }
+  /* opening view: a desktop page with the phone version standing in front of it */
+  .case-hero .hero-phone { position: absolute; right: 6%; top: 20%; width: clamp(84px, 17%, 210px); padding: 6px; border-radius: 28px; box-shadow: 0 40px 80px -30px rgba(0,0,0,.85); }
+  .hero-phone img { border-radius: 22px; aspect-ratio: 390 / 844; object-fit: cover; object-position: top; }
+  @media (max-width: 600px) { .hero-phone { padding: 4px; border-radius: 18px; top: 13%; width: 24%; } .hero-phone img { border-radius: 14px; } }
+
+  /* ---------- sections: a number and title on the left, the content on the right ---------- */
+  .sec { display: grid; grid-template-columns: 4fr 8fr; gap: clamp(28px, 5vw, 80px); padding: clamp(56px, 9vh, 96px) 0; border-top: 1px solid var(--line); }
+  .sec-title { align-self: start; position: sticky; top: 32px; }
+  .sec-title b { display: block; font: 500 12px ui-monospace, Menlo, monospace; color: var(--accent); margin-bottom: 14px; }
+  .sec-title h2 { font-weight: 500; font-size: clamp(32px, 3.6vw, 48px); letter-spacing: -.04em; line-height: 1; }
+  .sec-title h2 em { font-family: var(--serif); font-weight: 400; letter-spacing: -.01em; color: var(--accent); }
+  .sec-body > p { max-width: 60ch; color: var(--link); font-size: 17px; line-height: 1.65; }
+  .sec-body > p + p { margin-top: 14px; }
+  .sec-body > * + :not(p) { margin-top: 32px; }
+  .grid { display: grid; gap: 14px; }
+  .g3 { grid-template-columns: repeat(3, 1fr); } .g2 { grid-template-columns: repeat(2, 1fr); }
+  .card { border-radius: 20px; border: 1px solid var(--line); background: var(--card); padding: 24px; }
+  .card b { display: block; font: 500 12px ui-monospace, Menlo, monospace; color: var(--accent); margin-bottom: 12px; }
+  .card h3 { font-weight: 500; font-size: 20px; letter-spacing: -.02em; line-height: 1.2; }
+  .card p { margin-top: 8px; color: var(--muted); font-size: 14.5px; line-height: 1.55; }
+  figure figcaption { margin-top: 12px; font-size: 13px; color: var(--muted); }
+
+  /* identity: logo before / after, the [A] symbol */
+  .logo-tile { display: grid; place-items: center; aspect-ratio: 16 / 9; border-radius: 20px; overflow: hidden; background: #0b0d0c; border: 1px solid rgba(255,255,255,.08); }
+  .logo-tile img { width: 100%; height: 100%; object-fit: cover; }
+  .logo-tile.svg img { width: 74%; height: auto; object-fit: contain; }
+  .tag { display: inline-block; margin-top: 12px; font-size: 13px; color: var(--muted); }
+  .tag b { color: var(--text); font-weight: 500; }
+  .changes { list-style: none; display: grid; gap: 10px; max-width: 62ch; }
+  .changes li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; color: var(--link); font-size: 15.5px; line-height: 1.55; }
+  .changes li::before { content: "→"; color: var(--accent); }
+  .symbol { display: flex; align-items: center; gap: 24px; padding: 24px; border-radius: 20px; background: #0b0d0c; border: 1px solid rgba(255,255,255,.08); color: #f2f1ec; }
+  .symbol img { width: 88px; height: 88px; flex: none; }
+  .symbol p { font-size: 15.5px; line-height: 1.55; color: rgba(242,241,236,.8); }
+  .symbol em { font-family: var(--serif); font-size: 1.15em; color: #3ddc84; }
+
+  /* art direction: palette and type */
+  .swatch { border-radius: 18px; overflow: hidden; border: 1px solid var(--line); background: var(--card); }
+  .swatch i { display: block; height: 96px; }
+  .swatch span { display: block; padding: 12px 14px 14px; font-size: 14px; }
+  .swatch small { display: block; margin-top: 2px; font: 12px ui-monospace, Menlo, monospace; color: var(--muted); }
+  .type { display: grid; gap: 10px; }
+  .type div { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; padding: 18px 22px; border-radius: 16px; border: 1px solid var(--line); background: var(--card); }
+  .type .sample { font-size: 32px; line-height: 1.1; }
+  .type small { font-size: 13px; color: var(--muted); text-align: right; }
+  .f-inter { font-family: "Inter Tight", var(--sans); font-weight: 600; letter-spacing: -.03em; }
+  .f-serif { font-family: var(--serif); font-style: italic; color: #3ddc84; }
+  .f-mono { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 22px !important; color: #3ddc84; }
+  :root[data-theme="light"] .f-serif, :root[data-theme="light"] .f-mono { color: #14a85a; }
+
+  /* process: big figures */
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .stats div { padding: 22px 20px 24px 0; }
+  .stats div + div { padding-left: 20px; border-left: 1px solid var(--line); }
+  .stats b { display: block; font-size: clamp(40px, 4.4vw, 60px); font-weight: 500; letter-spacing: -.05em; line-height: 1; }
+  .stats span { display: block; margin-top: 6px; font-size: 14px; color: var(--muted); }
+
+  /* pages: one block per page; every mockup holds the whole page, scrollable down to its footer */
+  .page + .page { margin-top: 56px; }
+  .page h3 { font-weight: 500; font-size: 26px; letter-spacing: -.03em; margin-bottom: 8px; }
+  .page h3 small { margin-left: 10px; font: 500 12px ui-monospace, Menlo, monospace; color: var(--accent); letter-spacing: 0; vertical-align: 4px; }
+  .page > p { max-width: 62ch; color: var(--link); font-size: 15.5px; line-height: 1.6; margin-bottom: 20px; }
+  /* the page scrolls inside its frame with no visible scrollbar; with a mouse it can also be grabbed and dragged */
+  .screen { max-height: clamp(380px, 46vw, 600px); overflow-y: auto; scrollbar-width: none; }
+  /* keyboard focus: an accent ring everywhere, drawn inside the mockups because their frames clip */
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .screen:focus-visible { outline-offset: -3px; }
+  /* on a phone the desktop pages are too small to read: a fixed preview of their top, the real mobile screens follow in the next section */
+  @media (max-width: 600px) {
+    .page .stage .screen { overflow: hidden; max-height: 58vw; cursor: auto; }
+    .stage .cue, #pages > .sec-body > .hint { display: none; }
+  }
+  .screen::-webkit-scrollbar { display: none; }
+  .screen img { display: block; pointer-events: none; user-select: none; }
+  .h-hover { display: none; }
+  @media (hover: hover) {
+    .screen { cursor: grab; }
+    .screen.dragging { cursor: grabbing; }
+    .h-hover { display: inline; } .h-touch { display: none; }
+  }
+  /* scroll cue: a pill over each mockup saying it can be scrolled, gone once the visitor has scrolled it */
+  .win:has(.screen), .phone { position: relative; }
+  .cue { position: absolute; left: 50%; bottom: 18px; translate: -50% 0; display: flex; align-items: center; gap: 9px; padding: 9px 15px 9px 12px; border-radius: 999px; background: rgba(11,13,12,.8); border: 1px solid rgba(255,255,255,.16); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); color: #fff; font-size: 12.5px; font-weight: 500; white-space: nowrap; pointer-events: none; box-shadow: 0 12px 30px -10px rgba(0,0,0,.6); transition: opacity .4s, translate .4s var(--ease); }
+  .phone .cue { bottom: 26px; padding: 8px 12px 8px 10px; font-size: 11.5px; }
+  .cue[hidden] { display: none; }
+  .cue.gone { opacity: 0; translate: -50% 8px; }
+  .cue .mouse { width: 13px; height: 19px; border: 1.5px solid currentColor; border-radius: 7px; position: relative; flex: none; }
+  .cue .mouse::after { content: ""; position: absolute; left: 50%; top: 3px; width: 2px; height: 4px; margin-left: -1px; border-radius: 1px; background: currentColor; animation: wheel 1.6s ease-in-out infinite; }
+  .cue .swipe { font-size: 14px; line-height: 1; animation: swipe 1.6s ease-in-out infinite; }
+  @keyframes wheel { 0% { translate: 0 0; opacity: 1; } 70% { translate: 0 6px; opacity: 0; } 100% { translate: 0 0; opacity: 0; } }
+  @keyframes swipe { 0%, 100% { translate: 0 3px; } 50% { translate: 0 -3px; } }
+  .cue .t-touch { display: none; }
+  @media (hover: none) { .cue .mouse, .cue .t-mouse { display: none; } .cue .t-touch { display: inline; } }
+  @media (hover: hover) { .cue .swipe { display: none; } }
+  .sec-body > .hint { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
+  .hint::before { content: "↕"; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; border: 1px solid var(--line); color: var(--accent); font-size: 12px; }
+  .sec-body > .hint + * { margin-top: 24px; }
+
+  /* mobile screens in phone frames */
+  .phones { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(14px, 3vw, 36px); align-items: start; }
+  .phone { border-radius: 34px; padding: 8px; background: #1b1f2a; box-shadow: 0 40px 70px -40px rgba(0,0,0,.8); }
+  .phone .screen { height: auto; max-height: none; aspect-ratio: 390 / 844; border-radius: 27px; }
+  .phone img { width: 100%; }
+  .phone-tabs { display: none; }
+  .phone + figcaption, .phones figcaption { margin-top: 12px; text-align: center; }
+
+  /* build: a checklist */
+  .checks { list-style: none; display: grid; gap: 0; border-top: 1px solid var(--line); }
+  .checks li { display: grid; grid-template-columns: 28px 1fr; gap: 12px; padding: 16px 0; border-bottom: 1px solid var(--line); font-size: 15.5px; line-height: 1.5; color: var(--link); }
+  .checks li::before { content: "✓"; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: color-mix(in srgb, var(--ok) 18%, transparent); color: var(--ok); font-size: 12px; }
+  .checks b { color: var(--text); font-weight: 500; }
+
+  /* next project */
+  .next { display: flex; justify-content: space-between; align-items: center; gap: 24px; margin: 0 auto var(--section-space); padding: 40px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .next span { display: block; font-size: 13px; color: var(--muted); margin-bottom: 8px; }
+  .next strong { font-weight: 500; font-size: clamp(36px, 5vw, 72px); letter-spacing: -.045em; line-height: 1; transition: color .3s, translate .4s var(--ease); display: inline-block; }
+  .next:hover strong { color: var(--accent); translate: 10px 0; }
+  .next .arrow { display: grid; place-items: center; flex: none; width: 64px; height: 64px; border-radius: 50%; background: var(--btn-bg); color: var(--btn-text); font-size: 22px; transition: transform .3s var(--ease), background .3s, color .3s; }
+  .next:hover .arrow { transform: rotate(-45deg); background: var(--accent); color: #fff; }
+
+  /* ---------- footer (same as home) ---------- */
+  .foot { position: relative; isolation: isolate; overflow: clip; padding-bottom: clamp(40px, 7vh, 64px); }
+  .foot::before { content: ""; position: absolute; z-index: -1; left: 50%; bottom: -42vh; width: 120vw; height: 95vh; transform: translateX(-50%); pointer-events: none;
+    background: radial-gradient(closest-side, var(--glow-1), var(--glow-2) 45%, transparent 75%); filter: blur(10px); }
+  .foot .k { display: block; margin-bottom: 14px; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+  .foot .soon { color: var(--muted); }
+  .dot-on { display: inline-flex; align-items: center; gap: 10px; padding: 7px 14px 7px 10px; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--ok) 35%, transparent);
+    background: color-mix(in srgb, var(--ok) 10%, transparent); color: var(--text); font-size: 14px; font-weight: 500; }
+  .dot-on i { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); }
+  .top-btn { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); font-size: 18px; transition: background .2s, transform .3s var(--ease); }
+  .top-btn:hover { background: var(--btn-bg); color: var(--btn-text); transform: translateY(-3px); }
+  .fc-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 40px; padding: 52px 0 44px; border-top: 1px solid var(--line); font-size: 15px; }
+  .fc-grid > div { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; color: var(--link); }
+  .fc-grid a:hover { color: var(--text); }
+  .fc-brand p { margin-top: 10px; max-width: 30ch; color: var(--muted); line-height: 1.55; }
+  .fc-brand p em { font-family: var(--serif); font-size: 1.15em; color: var(--accent); }
+  .fc-bottom { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-top: 22px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+
+  /* ---------- light reveal, as on the home page ---------- */
+  .reveal { opacity: 0; translate: 0 24px; transition: opacity .8s var(--ease) var(--rd, 0s), translate .9s var(--ease) var(--rd, 0s); }
+  .reveal.shown { opacity: 1; translate: none; }
+
+
+  /* ---------- mobile menu: a burger in the nav opens a full-screen panel with the sections, the contact button and the links ---------- */
+  .menu-btn { display: none; place-items: center; width: 36px; height: 36px; border-radius: 10px; background: var(--surface); border: 1px solid var(--line); color: var(--link); }
+  .menu-btn span { display: block; width: 16px; height: 1.6px; border-radius: 2px; background: currentColor; box-shadow: 0 5px 0 currentColor, 0 -5px 0 currentColor; }
+  .mnav { position: fixed; inset: 0; z-index: 100; display: flex; flex-direction: column; padding: 18px var(--gutter) 32px; overflow-y: auto; isolation: isolate;
+    background: var(--bg); opacity: 0; visibility: hidden; transition: opacity .35s var(--ease), visibility .35s; }
+  .mnav::before { content: ""; position: absolute; z-index: -1; left: 50%; bottom: -40vh; width: 140vw; height: 80vh; transform: translateX(-50%); pointer-events: none;
+    background: radial-gradient(closest-side, var(--glow-1), var(--glow-2) 45%, transparent 75%); filter: blur(10px); }
+  .mnav.open { opacity: 1; visibility: visible; }
+  .mnav[hidden] { display: none; }
+  .mnav-top { display: flex; justify-content: space-between; align-items: center; }
+  .mnav-close { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 10px; background: var(--surface); border: 1px solid var(--line); color: var(--link); font-size: 22px; line-height: 1; }
+  .mnav-links { list-style: none; margin-top: 44px; }
+  .mnav-links a { display: flex; align-items: baseline; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 40px; font-weight: 500; letter-spacing: -.04em; line-height: 1.1;
+    opacity: 0; translate: 0 16px; transition: opacity .5s var(--ease), translate .6s var(--ease), color .2s; }
+  .mnav-links a b { font: 500 12px ui-monospace, Menlo, monospace; letter-spacing: 0; color: var(--accent); }
+  .mnav-links a:hover, .mnav-links a[aria-current] { color: var(--accent); }
+  .mnav-links li:nth-child(2) a { transition-delay: .05s; } .mnav-links li:nth-child(3) a { transition-delay: .1s; } .mnav-links li:nth-child(4) a { transition-delay: .15s; }
+  .mnav.open .mnav-links a { opacity: 1; translate: none; }
+  .mnav-foot { margin-top: auto; padding-top: 36px; display: grid; gap: 14px; }
+  .mnav-cta { display: flex; justify-content: center; align-items: center; gap: 10px; height: 52px; border-radius: 12px; background: var(--btn-bg); color: var(--btn-text); font-size: 16px; font-weight: 500; }
+  .mnav-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .mnav-row a, .mnav-row span { display: inline-flex; align-items: center; height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line); font-size: 14px; color: var(--link); }
+  .mnav-row .soon { color: var(--muted); border-style: dashed; }
+
+
+  /* landing acquisition: close-ups of the Figma mockup */
+  .wide-shot { border-radius: 20px; overflow: hidden; border: 1px solid var(--line); background: #fff; }
+  .wide-shot img { display: block; width: 100%; }
+  .sec-body > figure + p, .sec-body > .grid + p, .sec-body > figure + figure { margin-top: 32px; }
+  @media (max-width: 900px) {
+    .actions .btn { display: none; } .menu-btn { display: grid; } /* the contact button moves into the menu */
+    .links, .actions .ghost { display: none; }
+    .nav { grid-template-columns: 1fr auto; }
+    .meta { grid-template-columns: 1fr 1fr; }
+    .sec { grid-template-columns: 1fr; gap: 22px; }
+    .sec-title { position: static; }
+    .g3, .g2, .stats { grid-template-columns: 1fr; }
+    .stats div + div { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); }
+    .phones { grid-template-columns: repeat(3, 72%); overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; scrollbar-width: none; }
+    .phones::-webkit-scrollbar { display: none; }
+    .sec-body > .phone-tabs { display: flex; justify-content: center; gap: 6px; }
+    .sec-body > .phone-tabs + .phones { margin-top: 18px; }
+    .phone-tabs button { font: inherit; font-size: 13px; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); background: transparent; color: var(--muted); cursor: pointer; transition: background .25s, color .25s, border-color .25s; }
+    .phone-tabs button[aria-current="true"] { background: var(--text); color: var(--bg); border-color: var(--text); }
+    .phones figure { scroll-snap-align: start; }
+    .stage .screen { max-height: min(520px, 110vw); }
+    .symbol { flex-direction: column; align-items: flex-start; }
+    .type div { flex-direction: column; align-items: flex-start; gap: 6px; } .type small { text-align: left; }
+    .next .arrow { width: 52px; height: 52px; }
+    /* centred footer on small screens — logo and line, then every link on one wrapping row, then the availability pill */
+    .fc-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 18px; text-align: center; }
+    .fc-brand { flex-basis: 100%; align-items: center !important; margin-bottom: 18px; }
+    .fc-brand p { margin-inline: auto; }
+    .fc-grid > div:not(.fc-brand) { display: contents; } /* the columns melt away: their links line up in one row */
+    .fc-grid .k { display: none; }
+    .fc-grid::after { content: ""; flex-basis: 100%; order: 9; }
+    .fc-grid .dot-on { order: 10; margin-top: 18px; }
+    .fc-bottom { flex-direction: column-reverse; gap: 18px; text-align: center; }
+    /* text links get a finger-sized tap area (about 32 px tall) without changing how they look */
+    .back { padding: 7px 0; margin-bottom: 18px; }
+    .fc-grid > div { gap: 0; } .fc-grid > div a, .fc-grid > div .soon { padding: 6px 0; } .foot .k { margin-bottom: 6px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1 !important; translate: none !important; transition: none !important; }
+  }
+  .foot .flag { width: 16px; height: 11px; margin-right: 7px; border-radius: 2px; vertical-align: -1px; box-shadow: 0 0 0 1px var(--line); }
+</style>
+</head>
+<body>
+<nav class="nav">
+    <a class="brand" href="index.html" aria-label="Just One Studio, accueil"><svg class="jos" viewBox="-6 -100 618 140" role="img" aria-label="Just One Studio"><text class="w" x="0" y="0">Just</text><text class="o" x="183.97" y="0">One</text><rect class="bx" x="173.97" y="-83.55" width="162.10" height="109.53"/><rect class="hd" x="166.97" y="-90.55" width="14" height="14"/><rect class="hd" x="329.07" y="-90.55" width="14" height="14"/><rect class="hd" x="166.97" y="18.98" width="14" height="14"/><rect class="hd" x="329.07" y="18.98" width="14" height="14"/><text class="w" x="358.07" y="0">Studio</text></svg></a>
+    <div class="links">
+      <a href="projets.html" aria-current="page">Projets</a>
+      <a href="index.html#methode">Méthode</a>
+      <a href="index.html#apropos">À propos</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+    <div class="actions">
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Passer en mode clair" aria-pressed="false">
+        <svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+      </button>
+      <a class="ghost" href="cv/cv-anissa-le-prunenec-fr.pdf" target="_blank" rel="noopener">CV</a>
+      <a class="btn" href="index.html#contact">Me contacter</a>
+      <button class="menu-btn" id="menu-btn" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mnav"><span></span></button>
+    </div>
+  </nav>
+
+
+<!-- mobile menu, opened by the burger in the nav (hidden on large screens) -->
+<div class="mnav" id="mnav" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+  <div class="mnav-top">
+    <a class="brand" href="index.html" aria-label="Just One Studio, accueil"><svg class="jos" viewBox="-6 -100 618 140" role="img" aria-label="Just One Studio"><text class="w" x="0" y="0">Just</text><text class="o" x="183.97" y="0">One</text><rect class="bx" x="173.97" y="-83.55" width="162.10" height="109.53"/><rect class="hd" x="166.97" y="-90.55" width="14" height="14"/><rect class="hd" x="329.07" y="-90.55" width="14" height="14"/><rect class="hd" x="166.97" y="18.98" width="14" height="14"/><rect class="hd" x="329.07" y="18.98" width="14" height="14"/><text class="w" x="358.07" y="0">Studio</text></svg></a>
+    <button class="mnav-close" id="mnav-close" type="button" aria-label="Fermer le menu">×</button>
+  </div>
+  <ul class="mnav-links">
+      <li><a href="projets.html" aria-current="page"><b>01</b>Projets</a></li>
+      <li><a href="index.html#methode"><b>02</b>Méthode</a></li>
+      <li><a href="index.html#apropos"><b>03</b>À propos</a></li>
+      <li><a href="index.html#contact"><b>04</b>Contact</a></li>
+  </ul>
+  <div class="mnav-foot">
+    <a class="mnav-cta" href="index.html#contact">Me contacter <span aria-hidden="true">→</span></a>
+    <div class="mnav-row"><a href="mailto:anissaleprunenec@gmail.com">Email</a><a href="https://www.linkedin.com/in/anissa-blp/" target="_blank" rel="noopener">LinkedIn ↗</a><a href="cv/cv-anissa-le-prunenec-fr.pdf" target="_blank" rel="noopener">CV (FR) ↗</a><a href="cv/cv-anissa-le-prunenec-en.pdf" target="_blank" rel="noopener" hreflang="en">CV (EN) ↗</a></div>
+  </div>
+</div>
+
+<div class="top">
+  <div class="nav-space" aria-hidden="true"></div>
+
+  <header class="wrap head">
+    <a class="back" href="projets.html">← Tous les projets</a>
+    <span class="kicker">09 · Site vitrine · Restaurant</span>
+    <h1>Puro <em>Osteria</em></h1>
+    <p class="lead">Un site vitrine pour une osteria italienne de quartier&nbsp;: un bleu profond, du blanc, des titres à empattements très gras et des illustrations au trait qui donnent à la page un ton chaleureux et un peu espiègle.</p>
+    <span class="note"><i></i>Projet personnel</span>
+    <div class="meta">
+      <div><span>Client</span>Puro Osteria, cuisine italienne</div>
+      <div><span>Mon rôle</span>UI design, intégration</div>
+      <div><span>Périmètre</span>Une page d’accueil et une réservation</div>
+      <div><span>Outils</span>Figma, puis intégration</div>
+      <div><span>Année</span>2026</div>
+      <div><span>Type</span>Site vitrine</div>
+    </div>
+  </header>
+</div>
+
+<main class="wrap">
+  <figure class="stage case-hero" style="--flat:#1a45aa"><div class="win"><div class="bar"><i></i><i></i><i></i><span>Puro Osteria — La simplicité italienne dans chaque assiette.</span></div><img src="img/puro-case/hero.png" alt="Hero de Puro Osteria : « La simplicité italienne dans chaque assiette. », avec l’illustration d’un homme qui mange une pizza" loading="lazy"></div></figure>
+
+  <section class="sec" id="contexte">
+    <div class="sec-title"><b>01</b><h2>Le <em>projet</em></h2></div>
+    <div class="sec-body">
+      <p>J’ai maquetté dans Figma le site d’une osteria de quartier, puis je l’ai intégré. L’idée&nbsp;: un restaurant simple et généreux, qui donne faim et envie de réserver dès le premier écran.</p>
+      <div class="grid g3">
+        <div class="card"><b>Objectif 1</b><h3>Une ambiance tout de suite</h3><p>Une seule couleur, des illustrations au trait et un titre gourmand dès le hero.</p></div>
+        <div class="card"><b>Objectif 2</b><h3>Donner envie de la carte</h3><p>Des catégories à parcourir, avec un plat mis en avant à chaque fois.</p></div>
+        <div class="card"><b>Objectif 3</b><h3>Réserver sans friction</h3><p>Le bouton de réservation partout, et un formulaire court dans une fenêtre.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="pages">
+    <div class="sec-title"><b>02</b><h2>La <em>page</em></h2></div>
+    <div class="sec-body">
+      <p class="hint"><span class="h-hover">Faites défiler ou attrapez la fenêtre pour parcourir la page jusqu’au footer.</span><span class="h-touch">Faites défiler dans la fenêtre pour voir la page en entier, jusqu’au footer.</span></p>
+      <div class="page">
+        <h3>Accueil<small>une seule page</small></h3>
+        <p>Le hero, l’histoire de l’osteria et ses chiffres, un plat à partager, la carte par catégories, les avis, un appel à réserver et le pied de page avec l’adresse et les horaires.</p>
+        <div class="stage" style="--flat:#1a45aa"><div class="win"><div class="bar"><i></i><i></i><i></i><span>Puro Osteria — Accueil</span></div><div class="screen" tabindex="0" aria-label="Page Puro Osteria, faire défiler"><img src="img/puro-case/maquette-full.jpg" alt="Page complète de Puro Osteria" loading="lazy"></div></div></div>
+      </div>
+      <div class="page">
+        <h3>Réservation<small>fenêtre</small></h3>
+        <p>Chaque bouton «&nbsp;Réserver votre table&nbsp;» ouvre la même fenêtre&nbsp;: nom, email, date, heure, nombre de personnes et un message facultatif.</p>
+        <div class="stage" style="--flat:#0f2d7a"><div class="win"><div class="bar"><i></i><i></i><i></i><span>Puro Osteria — Réservez votre table</span></div><img src="img/puro-case/reservation.png" alt="Fenêtre de réservation de Puro Osteria par-dessus la page assombrie" loading="lazy"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="sections">
+    <div class="sec-title"><b>03</b><h2>Les choix de <em>design</em></h2></div>
+    <div class="sec-body">
+      <p>Les illustrations au trait blanc remplacent les photos de plats&nbsp;: elles donnent une identité forte et restent lisibles sur le bleu.</p>
+      <figure><div class="wide-shot"><img src="img/puro-case/partage.png" alt="Section « Des nachos généreux pour vos envies de partage », avec une illustration d’assiette de nachos" loading="lazy"></div><figcaption>«&nbsp;Des nachos généreux pour vos envies de partage&nbsp;».</figcaption></figure>
+      <p>La carte se parcourt par catégories&nbsp;: un clic sur une catégorie fait apparaître un plat, avec son illustration dans une forme organique.</p>
+      <figure><div class="wide-shot"><img src="img/puro-case/menu.png" alt="Section de la carte : six catégories et un plat mis en avant, l’entrecôte grillée" loading="lazy"></div><figcaption>Six catégories, de la viande grillée aux desserts maison.</figcaption></figure>
+      <p>Les avis reprennent le bleu, avec un personnage qui se penche par-dessus la section.</p>
+      <figure><div class="wide-shot"><img src="img/puro-case/avis.png" alt="Section « Des centaines de clients satisfaits » avec trois avis" loading="lazy"></div><figcaption>«&nbsp;Des centaines de clients satisfaits.&nbsp;»</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="sec" id="direction">
+    <div class="sec-title"><b>04</b><h2>Une direction <em>artistique</em></h2></div>
+    <div class="sec-body">
+      <p>Un seul bleu, en deux nuances, et du blanc. Les titres sont dans une typographie à empattements très grasse, pour un ton chaleureux et rétro.</p>
+      <div class="grid g3">
+        <div class="swatch"><i style="background:#1a45aa"></i><span>Bleu<small>#1A45AA</small></span></div>
+        <div class="swatch"><i style="background:#0f2d7a"></i><span>Bleu nuit<small>#0F2D7A</small></span></div>
+        <div class="swatch"><i style="background:#ffffff"></i><span>Blanc<small>#FFFFFF</small></span></div>
+      </div>
+    </div>
+  </section>
+
+  <a class="next" href="projet-mon-choix-conso.html"><div><span>Projet suivant</span><strong>Landings avant / après</strong></div><span class="arrow" aria-hidden="true">→</span></a>
+</main>
+
+
+<footer class="foot">
+  <div class="wrap fc-grid">
+    <div class="fc-brand"><a class="brand" href="index.html" aria-label="Just One Studio, accueil"><svg class="jos" viewBox="-6 -100 618 140" role="img" aria-label="Just One Studio"><text class="w" x="0" y="0">Just</text><text class="o" x="183.97" y="0">One</text><rect class="bx" x="173.97" y="-83.55" width="162.10" height="109.53"/><rect class="hd" x="166.97" y="-90.55" width="14" height="14"/><rect class="hd" x="329.07" y="-90.55" width="14" height="14"/><rect class="hd" x="166.97" y="18.98" width="14" height="14"/><rect class="hd" x="329.07" y="18.98" width="14" height="14"/><text class="w" x="358.07" y="0">Studio</text></svg></a><p>Anissa B. Le Prunenec, UX/UI Designer qui code. Je conçois des interfaces qu’on comprend <em>du premier coup.</em></p></div>
+    <div><span class="k">Navigation</span><a href="projets.html">Projets</a><a href="index.html#methode">Méthode</a><a href="index.html#apropos">À propos</a><a href="index.html#contact">Contact</a></div>
+    <div><span class="k">Contact</span><a href="mailto:anissaleprunenec@gmail.com">Email</a><a href="https://www.linkedin.com/in/anissa-blp/" target="_blank" rel="noopener">LinkedIn ↗</a><a href="cv/cv-anissa-le-prunenec-fr.pdf" target="_blank" rel="noopener"><svg class="flag" viewBox="0 0 3 2" aria-hidden="true"><rect width="1" height="2" fill="#0055a4"/><rect x="1" width="1" height="2" fill="#fff"/><rect x="2" width="1" height="2" fill="#ef4135"/></svg>CV (FR) ↗</a><a href="cv/cv-anissa-le-prunenec-en.pdf" target="_blank" rel="noopener" hreflang="en"><svg class="flag" viewBox="0 0 60 30" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><clipPath id="uk-flag"><path d="M30,15h30v15zv15h-30zh-30v-15zv-15h30z"/></clipPath><path d="M0,0v30h60v-30z" fill="#012169"/><path d="M0,0 60,30M60,0 0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 60,30M60,0 0,30" clip-path="url(#uk-flag)" stroke="#c8102e" stroke-width="4"/><path d="M30,0v30M0,15h60" stroke="#fff" stroke-width="10"/><path d="M30,0v30M0,15h60" stroke="#c8102e" stroke-width="6"/></svg>CV (EN) ↗</a></div>
+    <div><span class="k">Statut</span><span class="dot-on"><i></i>Disponible pour vos projets</span></div>
+  </div>
+  <div class="wrap fc-bottom"><span>© 2026 Just One Studio · Conçu et codé par Anissa B. Le Prunenec</span><a class="top-btn" href="#" aria-label="Retour en haut">↑</a></div>
+</footer>
+
+<script>
+  const root = document.documentElement;
+  // light reveal, once, as each item comes into view
+  const io = new IntersectionObserver(entries => entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('shown'); io.unobserve(e.target); }
+  }), { threshold: .12 });
+  [...document.querySelectorAll('.head > *, .case-hero, .sec-title, .sec-body > *, .next, .fc-grid > div, .fc-bottom')].forEach(el => {
+    el.classList.add('reveal');
+    el.style.setProperty('--rd', `${(el.matches('.head > *') ? [...el.parentElement.children].indexOf(el) : 0) * .08}s`);
+    io.observe(el);
+  });
+
+  // grab and drag a page with the mouse (touch already scrolls natively)
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const nudge = new IntersectionObserver(entries => entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    nudge.unobserve(e.target);
+    // a small dip down and back, once, to show the page moves
+    if (reduce || e.target.scrollTop || e.target.scrollHeight - e.target.clientHeight < 20 || getComputedStyle(e.target).overflowY === 'hidden') return;
+    setTimeout(() => {
+      e.target.scrollTo({ top: 110, behavior: 'smooth' });
+      setTimeout(() => e.target.scrollTo({ top: 0, behavior: 'smooth' }), 650);
+    }, 500);
+  }), { threshold: .6 });
+  document.querySelectorAll('.screen').forEach(s => {
+    const cue = document.createElement('span');
+    cue.className = 'cue';
+    cue.setAttribute('aria-hidden', 'true');
+    cue.innerHTML = '<i class="mouse"></i><i class="swipe">↕</i><span class="t-mouse">Défilez ou attrapez</span><span class="t-touch">Glissez pour défiler</span>';
+    s.after(cue);
+    // the cue leaves once the visitor has really scrolled (not during the nudge)
+    let user = false;
+    ['wheel', 'pointerdown', 'touchstart', 'keydown'].forEach(t => s.addEventListener(t, () => { user = true; }, { passive: true }));
+    s.addEventListener('scroll', () => { if (user && s.scrollTop > 40) cue.classList.add('gone'); }, { passive: true });
+    // and comes back as soon as the mouse leaves the screen
+    s.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse' && !s.classList.contains('dragging')) cue.classList.remove('gone'); });
+    // a page that fits whole in its frame has nothing to scroll: no cue, no nudge
+    const fits = () => { cue.hidden = s.scrollHeight - s.clientHeight < 20; };
+    s.querySelector('img').addEventListener('load', fits);
+    addEventListener('resize', fits);
+    fits();
+    nudge.observe(s);
+  });
+  // phone row on small screens: tabs jump to a phone and follow the swipe
+  const row = document.querySelector('.phones'), tabs = [...document.querySelectorAll('.phone-tabs button')];
+  if (row) {
+    const figs = [...row.children];
+    tabs.forEach((b, i) => b.addEventListener('click', () => row.scrollTo({ left: figs[i].offsetLeft - figs[0].offsetLeft, behavior: reduce ? 'auto' : 'smooth' })));
+    row.addEventListener('scroll', () => {
+      const i = figs.reduce((best, f, n) => Math.abs(f.offsetLeft - figs[0].offsetLeft - row.scrollLeft) < Math.abs(figs[best].offsetLeft - figs[0].offsetLeft - row.scrollLeft) ? n : best, 0);
+      tabs.forEach((b, n) => b.setAttribute('aria-current', n === i ? 'true' : 'false'));
+    }, { passive: true });
+  }
+
+  document.querySelectorAll('.screen').forEach(s => {
+    // in the phone row, a sideways drag moves to the next phone
+    const row = s.closest('.phones');
+    let startX = 0, startY = 0, startTop = 0, startLeft = 0;
+    s.addEventListener('pointerdown', e => {
+      if (e.pointerType !== 'mouse' || e.button !== 0 || (!row && getComputedStyle(s).overflowY === 'hidden')) return;
+      startX = e.clientX; startY = e.clientY; startTop = s.scrollTop; startLeft = row ? row.scrollLeft : 0;
+      if (row) row.style.scrollSnapType = 'none';
+      s.classList.add('dragging'); s.setPointerCapture(e.pointerId);
+    });
+    s.addEventListener('pointermove', e => {
+      if (!s.classList.contains('dragging')) return;
+      s.scrollTop = startTop - (e.clientY - startY);
+      if (row) row.scrollLeft = startLeft - (e.clientX - startX);
+    });
+    const stop = () => { s.classList.remove('dragging'); if (row) row.style.scrollSnapType = ''; };
+    s.addEventListener('pointerup', stop);
+    s.addEventListener('pointercancel', stop);
+  });
+
+  // mobile menu: open / close, Escape closes, links close it before jumping, and it never stays open on a wide screen
+  const menuBtn = document.getElementById('menu-btn'), mnav = document.getElementById('mnav');
+  function openMenu() {
+    mnav.hidden = false;
+    // focus once the panel is visible, otherwise the browser refuses it
+    requestAnimationFrame(() => { mnav.classList.add('open'); mnav.querySelector('.mnav-links a').focus(); });
+    menuBtn.setAttribute('aria-expanded', 'true');
+    document.documentElement.style.overflow = 'hidden';
+  }
+  function closeMenu(restoreFocus) {
+    if (mnav.hidden) return;
+    mnav.classList.remove('open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+    document.documentElement.style.overflow = '';
+    setTimeout(() => { if (!mnav.classList.contains('open')) mnav.hidden = true; }, 350);
+    if (restoreFocus) menuBtn.focus();
+  }
+  menuBtn.addEventListener('click', openMenu);
+  document.getElementById('mnav-close').addEventListener('click', () => closeMenu(true));
+  mnav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => closeMenu(false)));
+  addEventListener('keydown', e => {
+    if (mnav.hidden) return;
+    if (e.key === 'Escape') closeMenu(true);
+    // keep Tab inside the open menu
+    if (e.key === 'Tab') {
+      const f = [...mnav.querySelectorAll('a, button')], first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
+  matchMedia('(min-width: 901px)').addEventListener('change', e => { if (e.matches) closeMenu(false); });
+
+  // light / dark toggle, shared with the home page through localStorage
+  const themeBtn = document.getElementById('theme-toggle');
+  function syncThemeButton() {
+    const light = root.dataset.theme === 'light';
+    themeBtn.setAttribute('aria-pressed', String(light));
+    themeBtn.setAttribute('aria-label', light ? 'Passer en mode sombre' : 'Passer en mode clair');
+  }
+  themeBtn.addEventListener('click', () => {
+    const light = root.dataset.theme !== 'light';
+    if (light) root.dataset.theme = 'light'; else delete root.dataset.theme;
+    try { localStorage.setItem('theme', light ? 'light' : 'dark'); } catch (e) {}
+    syncThemeButton();
+  });
+  syncThemeButton();
+
+</script>
+<script>
+  // the menu is taken out of the page flow, so its old place keeps the same height
+  (() => {
+    const root = document.documentElement, nav = document.querySelector('.nav'), space = document.querySelector('.nav-space');
+    function measure() {
+      const was = root.classList.contains('scrolled');
+      nav.style.transition = 'none'; root.classList.remove('scrolled');
+      space.style.height = nav.offsetHeight + 'px';
+      root.classList.toggle('scrolled', was); nav.offsetHeight; nav.style.transition = '';
+    }
+    const onScroll = () => root.classList.toggle('scrolled', scrollY > 8);
+    measure(); onScroll();
+    addEventListener('scroll', onScroll, { passive: true });
+    addEventListener('resize', measure);
+  })();
+</script>
+</body>
+</html>

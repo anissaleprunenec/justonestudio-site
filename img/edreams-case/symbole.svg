@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Edreams Factory">
+  
+  <g stroke="#3DDC84" stroke-width="12" fill="none"><path d="M33 16H17v88h16M87 16h16v88H87"/></g>
+  <g transform="translate(32.4 30) scale(.72)">
+    <path fill="#F2F1EC" d="M0 80 30 0h16l30 80H59L38 24 17 80z"/>
+    <path fill="#3DDC84" d="M28 66h20L38 40z"/>
+  </g>
+</svg>
