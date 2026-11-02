@@ -1,0 +1,77 @@
+/* Wecare — tokens. Source de vérité : ces valeurs sont les mêmes que tokens.json (import Figma). */
+:root {
+  /* Neutres */
+  --canvas: #E9EFFB;
+  --surface: #FFFFFF;
+  --surface-2: #F9F9F9;
+  --line: #EAE9FE;
+  --grid: #D6E0F5;
+  --line-2: #ECECEC;
+  --line-strong: #D9D8F7;
+  --ink: #293F6D;
+  --ink-2: #4A5C85;
+  --ink-3: #6A6A9A;
+  --ink-4: #9E9DBE;
+  --placeholder: #D9D9D9;
+
+  /* Marque */
+  --blue-700: #1A5BEE;
+  --blue-600: #1A5BEE;
+  --blue-500: #2865EF;
+  --sky: #1D9CEE;
+  --blue-200: #BAD0FA;
+  --blue-100: #E8EFFD;
+  --blue-50: #F3F7FE;
+  --grad: linear-gradient(180deg, #1A5BEE 0%, rgba(26, 91, 238, .7) 100%);
+  --sky-line: rgba(29, 156, 238, .3);
+  --sky-fill: rgba(29, 156, 238, .05);
+
+  /* Sémantique */
+  --danger: #D2353B;
+  --danger-bg: #FFF7F7;
+  --danger-line: #FF5F5F;
+  --success: #17754B;
+  --success-bg: #F4FEEF;
+  --success-line: #89EC28;
+  --warning: #7A6400;
+  --warning-bg: #FFFDF3;
+  --warning-line: #FFD615;
+
+  /* Typographie */
+  --font: 'Inter Tight', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --fs-xs: 12px;
+  --fs-sm: 13px;
+  --fs-md: 14px;
+  --fs-lg: 16px;
+  --fs-xl: 20px;
+  --fs-2xl: 24px;
+  --fs-3xl: 36px;
+
+  /* Espacement (base 4) */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 20px;
+  --s-6: 24px;
+  --s-8: 32px;
+  --s-10: 40px;
+
+  /* Rayons */
+  --r-sm: 8px;
+  --r-md: 15px;
+  --r-lg: 15px;
+  --r-xl: 35px;
+  --r-pill: 999px;
+
+  /* Ombres */
+  --shadow-sm: none;
+  --shadow-lg: 0 32px 53px rgba(172, 172, 172, .18), 0 2px 8px rgba(41, 63, 109, .05);
+}
+
+/* Couleur par praticien : fond à 5 %, contour plein. Toujours doublée d'un nom ou d'initiales. */
+.tone-p1 { --t-bg: #FAF2FF; --t-line: #A100FF; --t-ink: #7A00C2; }
+.tone-p2 { --t-bg: #F9FEF4; --t-line: #89EC28; --t-ink: #3F7A0B; }
+.tone-p3 { --t-bg: #FFFDF3; --t-line: #FFD615; --t-ink: #7A6400; }
+.tone-p4 { --t-bg: #FFF7F7; --t-line: #FF5F5F; --t-ink: #C22F2F; }
+.tone-p5 { --t-bg: #F4FAFE; --t-line: #1D9CEE; --t-ink: #0F6FB0; }
