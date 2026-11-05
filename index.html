@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <script>
   // apply the saved theme before first paint so the page doesn't flash dark
-  try { if (localStorage.getItem('theme') === 'light') document.documentElement.dataset.theme = 'light'; } catch (e) {}
+  try { if (localStorage.getItem('theme') !== 'dark') document.documentElement.dataset.theme = 'light'; } catch (e) { document.documentElement.dataset.theme = 'light'; }
 </script>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
@@ -714,7 +714,7 @@
   <div class="projects-head">
     <h2><span>Projets</span> <em>récents</em></h2>
     <!-- the "all projects" page doesn't exist yet -->
-    <a class="all-link" href="projets.html">Tous les projets <span class="count">(13)</span><span class="arrow" aria-hidden="true">→</span></a>
+    <a class="all-link" href="projets.html">Tous les projets <span class="count">(16)</span><span class="arrow" aria-hidden="true">→</span></a>
   </div>
   <!-- pitches are placeholders to be replaced with the real wording -->
   <div class="stack">

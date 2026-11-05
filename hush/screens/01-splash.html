@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hush — Bienvenue</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/hush.css">
+<script src="../js/transitions.js"></script>
+<style>
+  .splash { display: block; color: var(--white-800); }
+  /* anchored to the centre and the bottom so it holds on any screen height */
+  .splash__logo { position: absolute; left: calc(50% - 70px); top: 41%; width: 140px; height: 86px; --logo-sun: var(--mango); }
+  .splash__loader {
+    position: absolute; left: calc(50% - 13.3px); bottom: 190px; width: 26.7px; height: 26.7px; border-radius: 50%;
+    background: conic-gradient(from 0deg, rgba(251, 248, 255, 0), var(--white-800));
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 4px));
+    mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 4px));
+    animation: spin 1s linear infinite;
+  }
+  .splash__version { position: absolute; left: 0; right: 0; bottom: 46px; font-size: 12px; line-height: 16px; text-align: center; }
+  @media (prefers-reduced-motion: reduce) { .splash__loader { animation-duration: 3s; } }
+  @keyframes spin { to { transform: rotate(1turn); } }
+</style>
+</head>
+<body>
+<a class="screen screen--brand splash" href="02-onboarding.html" aria-label="Hush — continuer">
+  <div class="blobs"></div>
+  <div class="statusbar statusbar--light">
+    <span>9:41</span>
+    <span class="statusbar__icons"><svg><use href="../assets/icons.svg#sb-signal"/></svg><svg><use href="../assets/icons.svg#sb-wifi"/></svg><svg><use href="../assets/icons.svg#sb-battery"/></svg></span>
+  </div>
+
+  <svg class="splash__logo" fill="currentColor" role="img" aria-label="Hush"><use href="../assets/icons.svg#logo-hush"/></svg>
+  <span class="splash__loader" aria-hidden="true"></span>
+  <p class="splash__version">Version 1.0</p>
+
+  <span class="home-indicator home-indicator--light"></span>
+</a>
+</body>
+</html>

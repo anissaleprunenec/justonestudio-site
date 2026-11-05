@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <script>
   // apply the saved theme before first paint so the page doesn't flash dark
-  try { if (localStorage.getItem('theme') === 'light') document.documentElement.dataset.theme = 'light'; } catch (e) {}
+  try { if (localStorage.getItem('theme') !== 'dark') document.documentElement.dataset.theme = 'light'; } catch (e) { document.documentElement.dataset.theme = 'light'; }
 </script>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
@@ -350,7 +350,7 @@
     <p class="lead">Refaire, avec mon regard d’aujourd’hui, une page que j’avais dessinée il y a quelques années&nbsp;: un logo redessiné, une nouvelle direction artistique et une maquette codée de trois pages.</p>
     <span class="note"><i></i>Défi personnel · non commandé par Edreams Factory</span>
     <div class="meta">
-      <div><span>Client</span>Edreams Factory, logiciels métier sur mesure depuis 2012</div>
+      <div><span>Entreprise</span>Edreams Factory, logiciels métier sur mesure depuis 2012</div>
       <div><span>Mon rôle</span>Logo, UX/UI, intégration front-end</div>
       <div><span>Périmètre</span>Accueil, page secteur, demande de devis</div>
       <div><span>Outils</span>Figma, puis HTML, CSS et JavaScript sans framework</div>

@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <script>
   // apply the saved theme before first paint so the page doesn't flash dark
-  try { if (localStorage.getItem('theme') === 'light') document.documentElement.dataset.theme = 'light'; } catch (e) {}
+  try { if (localStorage.getItem('theme') !== 'dark') document.documentElement.dataset.theme = 'light'; } catch (e) { document.documentElement.dataset.theme = 'light'; }
 </script>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
@@ -355,7 +355,7 @@
     <p class="lead">Une landing page pour une agence qui conçoit des systèmes d’acquisition&nbsp;: un hero noir traversé d’une lueur bleue, puis des sections claires, un bleu cyan pour les actions et des blocs sombres pour les moments forts.</p>
     <span class="note"><i></i>Défi personnel · agence fictive, logos et certains textes provisoires</span>
     <div class="meta">
-      <div><span>Client</span>Agence de croissance fictive</div>
+      <div><span>Pour qui</span>Les agences de croissance</div>
       <div><span>Mon rôle</span>UI design</div>
       <div><span>Périmètre</span>Une landing page, version ordinateur</div>
       <div><span>Outil</span>Figma</div>

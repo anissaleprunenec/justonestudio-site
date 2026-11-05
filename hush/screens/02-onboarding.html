@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hush — Découvrir</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/hush.css">
+<script src="../js/transitions.js"></script>
+<style>
+  .collage {
+    position: absolute; left: 0; top: 0; width: 657px; height: 873px;
+    transform: matrix(.966, .259, -.259, .966, -7.8, -303.1); transform-origin: 0 0;
+  }
+  .collage .ph { position: absolute; width: 211px; height: 283px; border-radius: 24px; }
+  .collage .ph:nth-child(1) { left: 0; top: 153px; }
+  .collage .ph:nth-child(2) { left: 0; top: 448px; }
+  .collage .ph:nth-child(3) { left: 223px; top: 0; }
+  .collage .ph:nth-child(4) { left: 223px; top: 295px; }
+  .collage .ph:nth-child(5) { left: 223px; top: 590px; }
+  .collage .ph:nth-child(6) { left: 446px; top: 153px; }
+  .collage .ph:nth-child(7) { left: 446px; top: 448px; }
+  .shade { position: absolute; left: 0; right: 0; height: 497px; bottom: 0; background: linear-gradient(180deg, rgba(251, 248, 255, 0), var(--white-800) 28.8%); }
+  /* anchored to the bottom so it holds on any screen height */
+  .intro { position: absolute; left: var(--gutter); right: var(--gutter); bottom: 58px; text-align: center; }
+  .intro p { margin-top: 20px; }
+  .intro .btn { display: flex; margin-top: 60px; }
+</style>
+</head>
+<body>
+<main class="screen">
+  <div class="collage" aria-hidden="true">
+    <div class="ph ph--photo" style="--img: url(../assets/photos/onb-1.jpg)" role="img" aria-label="Le temple Ulun Danu se reflétant dans le lac"></div><div class="ph ph--photo" style="--img: url(../assets/photos/onb-2.jpg)" role="img" aria-label="Temple balinais parmi les fleurs"></div><div class="ph ph--photo" style="--img: url(../assets/photos/onb-3.jpg)" role="img" aria-label="Porte fendue d’un temple balinais"></div><div class="ph ph--photo" style="--img: url(../assets/photos/onb-4.jpg)" role="img" aria-label="Piscine de villa dans un jardin tropical"></div>
+    <div class="ph ph--photo" style="--img: url(../assets/photos/onb-5.jpg)" role="img" aria-label="Portes du temple de Lempuyang"></div><div class="ph ph--photo" style="--img: url(../assets/photos/onb-6.jpg)" role="img" aria-label="Piscine à débordement face à la jungle"></div><div class="ph ph--photo" style="--img: url(../assets/photos/onb-7.jpg)" role="img" aria-label="Temple à étages au bord d’un lac"></div>
+  </div>
+  <div class="shade"></div>
+
+  <div class="statusbar">
+    <span>9:41</span>
+    <span class="statusbar__icons"><svg><use href="../assets/icons.svg#sb-signal"/></svg><svg><use href="../assets/icons.svg#sb-wifi"/></svg><svg><use href="../assets/icons.svg#sb-battery"/></svg></span>
+  </div>
+
+  <section class="intro">
+    <h1 class="h1">Des vacances plus simples,<br>et plus douces</h1>
+    <p>Trouve l’endroit parfait, réserve en quelques gestes et laisse-toi porter.</p>
+    <a class="btn btn--lg" href="03-permissions.html">C’est parti</a>
+  </section>
+
+  <span class="home-indicator"></span>
+</main>
+</body>
+</html>

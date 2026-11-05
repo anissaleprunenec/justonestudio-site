@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <script>
   // apply the saved theme before first paint so the page doesn't flash dark
-  try { if (localStorage.getItem('theme') === 'light') document.documentElement.dataset.theme = 'light'; } catch (e) {}
+  try { if (localStorage.getItem('theme') !== 'dark') document.documentElement.dataset.theme = 'light'; } catch (e) { document.documentElement.dataset.theme = 'light'; }
 </script>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600&family=Instrument+Serif:ital@0;1&family=Geist:wght@400;600&display=swap" rel="stylesheet">
 <style>
@@ -358,7 +358,7 @@
     <p class="lead">Un site de trois pages pour un service fictif d’agents IA qui répondent aux clients des fintechs et des néobanques. Le défi&nbsp;: montrer ce que fait l’IA tout en rassurant sur la sécurité des données bancaires.</p>
     <span class="note"><i></i>Défi personnel · marque, clients et chiffres fictifs</span>
     <div class="meta">
-      <div><span>Client</span>Relaya, marque imaginée pour ce défi</div>
+      <div><span>Marque</span>Relaya, imaginée pour ce défi</div>
       <div><span>Mon rôle</span>UI, direction artistique, intégration</div>
       <div><span>Périmètre</span>Accueil, tarifs, connexion</div>
       <div><span>Outils</span>Figma, puis HTML, CSS et JavaScript sans framework</div>

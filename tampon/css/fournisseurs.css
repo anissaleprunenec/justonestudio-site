@@ -1,0 +1,102 @@
+/* Fournisseurs : liste et fiche, sur le même modèle que Factures et le tableau de bord */
+
+.pill--late { background: var(--danger-50); color: var(--danger-600); }
+.tags { display: flex; gap: 6px; flex-wrap: wrap; }
+
+/* Onglets de la liste */
+.tab--s-tous::before { display: none; }
+.tab--s-tous.is-active { background: var(--gray-800); color: #fff; box-shadow: none; }
+.tab--s-tous.is-active .tab-count { color: rgba(255, 255, 255, 0.7); }
+.tab--s-surveiller { --c: var(--warning-500); --c-bg: var(--warning-50); }
+.tab--s-ajour { --c: var(--primary-500); --c-bg: #e6f6ea; }
+
+/* Carte « À surveiller » cliquable */
+.stat--watch { font: inherit; text-align: left; cursor: pointer; transition: transform 0.15s, box-shadow 0.15s; }
+.stat--watch:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(16, 24, 40, 0.06); }
+.stat--watch .stat-value { color: var(--warning-600); }
+.stat--late .stat-value { color: var(--danger-500); }
+
+/* Tableau des fournisseurs */
+.sup-table tbody tr { cursor: pointer; }
+.sup-table .go { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--gray-50); color: var(--gray-600); }
+.sup-table .go svg.i { width: 14px; height: 14px; }
+.sup-table tbody tr:hover .go { background: var(--gray-800); color: #fff; }
+
+/* En-tête de la fiche (repris de la fiche facture) */
+.crumbs { display: flex; align-items: center; gap: 12px; }
+.crumbs a { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; color: var(--gray-600); text-decoration: none; }
+.crumbs a:hover { color: var(--gray-900); }
+.crumbs svg.i { width: 16px; height: 16px; }
+.inv-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; }
+.inv-head .supplier { gap: 14px; }
+.inv-head h1 { margin-bottom: 4px; }
+.inv-sum { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; text-align: right; }
+.inv-amount { font: 600 24px/1.2 var(--font-num); color: var(--gray-800); }
+
+.tile--neutral.tile--lg { width: 52px; height: 52px; border-radius: 12px; }
+.tile--neutral.tile--lg svg { width: 24px; height: 24px; }
+.sup-table .eng { font: 600 14px/1 var(--font-num); color: var(--gray-800); }
+
+/* Grille de la fiche */
+.sup-invoices { grid-column: span 7; align-self: start; }
+.sup-side { grid-column: span 5; display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.sup-side .card { background: #fff; border: 1px solid var(--gray-100); border-radius: 16px; padding: 20px; }
+.card-link { display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 600; color: var(--gray-700); text-decoration: none; }
+.card-link:hover { color: var(--gray-900); }
+.card-link svg.i { width: 14px; height: 14px; }
+.card-text { display: flex; gap: 6px; align-items: flex-start; font-size: 13px; color: var(--gray-600); margin-top: 12px; }
+.card-text svg.i { width: 14px; height: 14px; flex: none; margin-top: 3px; color: var(--primary-500); }
+
+/* Liste des factures du fournisseur */
+.inv-list { list-style: none; display: flex; flex-direction: column; }
+.inv-list li + li { border-top: 1px solid var(--gray-100); }
+.inv-list a {
+  display: grid; grid-template-columns: auto minmax(0, 1fr) auto auto; align-items: center; gap: 12px;
+  padding: 12px 8px; margin: 0 -8px; border-radius: 10px; color: inherit; text-decoration: none;
+}
+.inv-list a:hover { background: var(--gray-50); }
+.inv-list li.is-late a { box-shadow: inset 3px 0 0 var(--danger-500); background: #fff8f8; }
+.il-main { display: flex; flex-direction: column; min-width: 0; }
+.il-main strong { font-size: 14px; font-weight: 600; color: var(--gray-800); }
+.il-main span { font-size: 12px; color: var(--gray-600); }
+.il-amount { font: 600 14px/1 var(--font-num); color: var(--gray-800); white-space: nowrap; }
+
+/* Carte IBAN */
+.iban-card.is-warn { border-color: var(--warning-100) !important; background: #fffcf6 !important; }
+.iban-intro { display: flex; gap: 8px; align-items: flex-start; font-size: 13px; color: var(--gray-700); line-height: 1.5; }
+.iban-intro svg.i { width: 18px; height: 18px; flex: none; color: var(--warning-600); margin-top: 1px; }
+.iban-intro a { color: var(--gray-900); font-weight: 600; }
+.iban-compare { display: flex; flex-direction: column; gap: 8px; margin: 14px 0; }
+.iban-compare div { padding: 10px 12px; border-radius: 10px; background: #fff; border: 1px solid var(--gray-100); }
+.iban-compare div.is-new { border-color: var(--warning-100); background: var(--warning-50); }
+.iban-compare dt { font-size: 11px; font-weight: 600; color: var(--gray-600); text-transform: uppercase; letter-spacing: 0.04em; }
+.iban-compare dd { font: 600 13px/1.4 var(--font-num); color: var(--gray-800); overflow-wrap: anywhere; }
+.iban-compare .is-new dd { color: var(--warning-600); }
+.iban-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.iban-value { font: 600 15px/1.4 var(--font-num); color: var(--gray-800); overflow-wrap: anywhere; margin-bottom: 4px; }
+
+/* Ce que Tampon a appris */
+.learned { display: flex; flex-direction: column; }
+.learned div { display: grid; grid-template-columns: 140px minmax(0, 1fr); gap: 12px; padding: 10px 0; }
+.learned div + div { border-top: 1px solid var(--gray-100); }
+.learned dt { font-size: 13px; color: var(--gray-600); }
+.learned dd { font-size: 13px; font-weight: 600; color: var(--gray-800); }
+
+@media (max-width: 1100px) {
+  .sup-invoices, .sup-side { grid-column: span 12; }
+}
+@media (max-width: 640px) {
+  .inv-sum { align-items: flex-start; text-align: left; }
+  .inv-list a { grid-template-columns: auto minmax(0, 1fr) auto; }
+  .inv-list .pill { grid-column: 2; justify-self: start; }
+  .learned div { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  /* le tableau des fournisseurs devient une liste de cartes */
+  .sup-table tbody tr { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "sup amount" "cat state"; }
+  .sup-table td:nth-child(1) { grid-area: sup; }
+  .sup-table td:nth-child(2) { grid-area: cat; display: block; font-size: 12px; color: var(--gray-600); }
+  .sup-table td:nth-child(3) { display: none; }
+  .sup-table td:nth-child(4) { grid-area: amount; justify-self: end; }
+  .sup-table td:nth-child(5) { grid-area: open; display: none; }
+  .sup-table td:nth-child(6) { grid-area: state; justify-self: end; }
+  .sup-table td:nth-child(7) { display: none; }
+}

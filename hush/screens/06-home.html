@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hush — Accueil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/hush.css">
+<script src="../js/transitions.js"></script>
+<style>
+  .banner { position: relative; height: 297px; padding: 64px var(--gutter) 0; border-radius: 40px; color: var(--white-800); }
+  .banner > .ph { position: absolute; inset: 0; border-radius: inherit; padding-bottom: 39px; z-index: -1; }
+  .banner__top { display: flex; justify-content: space-between; align-items: center; }
+  /* solid white buttons: readable on any part of the photo */
+  .banner__top .glass { background: var(--white); color: var(--brand); box-shadow: 0 4px 12px rgba(var(--ink-rgb), .2); }
+  .banner__loc { font-weight: 500; text-shadow: 0 1px 4px rgba(var(--ink-rgb), .5); }
+  .banner__loc { display: flex; align-items: center; gap: 12px; }
+  .banner h1 { width: 300px; margin-top: 51px; font-size: 22px; line-height: 30px; font-weight: 600; }
+  .banner .field { margin-top: 20px; }
+  .banner .field .i { color: var(--white-800); }
+
+  .cats { display: flex; justify-content: space-between; padding: 0 var(--gutter); margin: 24px 0 32px; }
+  .cats a { display: grid; justify-items: center; gap: 8px; width: 60px; font-size: 12px; line-height: 16px; font-weight: 500; color: var(--ink); white-space: nowrap; }
+  /* white tiles that lift off the lavender page; icon in violet only, two shades */
+  .cats span {
+    display: grid; place-items: center; width: 60px; height: 60px; border-radius: 20px;
+    background: var(--white); color: var(--brand); --i2-op: .35;
+    box-shadow: 0 6px 16px rgba(var(--ink-rgb), .08), inset 0 0 0 1px var(--gray-300);
+  }
+  .cats span .i { width: 30px; height: 30px; }
+
+  .home-rail { margin-bottom: 24px; }
+</style>
+</head>
+<body>
+<main class="screen screen--gray">
+  <div class="statusbar">
+    <span>9:41</span>
+    <span class="statusbar__icons"><svg><use href="../assets/icons.svg#sb-signal"/></svg><svg><use href="../assets/icons.svg#sb-wifi"/></svg><svg><use href="../assets/icons.svg#sb-battery"/></svg></span>
+  </div>
+
+  <header class="banner">
+    <div class="ph ph--photo" style="--img: url(../assets/photos/home-banner.jpg)" role="img" aria-label="Un hamac tendu entre deux poteaux au-dessus d’une eau turquoise"></div>
+    <div class="banner__top">
+      <p class="banner__loc"><span class="glass"><svg class="i"><use href="../assets/icons.svg#sol-map-point"/></svg></span>Bali, Indonésie</p>
+      <a class="glass" href="20-notifications.html" aria-label="Notifications, 2 non lues"><svg class="i"><use href="../assets/icons.svg#sol-bell"/></svg></a>
+    </div>
+    <h1>Salut Inès ! Où est-ce qu’on s’évade ?</h1>
+    <a class="field field--glass field--icon-l" href="07-search.html">
+      <svg class="i"><use href="../assets/icons.svg#sol-search"/></svg>
+      <span>Une plage, un temple, une villa…</span>
+    </a>
+  </header>
+
+  <nav class="cats" aria-label="Catégories">
+    <a href="07-search.html"><span><svg class="i i--32"><use href="../assets/icons.svg#sol-bed"/></svg></span>Hôtels</a>
+    <a href="10-restaurant.html"><span><svg class="i i--32"><use href="../assets/icons.svg#sol-chef-hat"/></svg></span>Restos</a>
+    <a href="07-search.html"><span><svg class="i i--32"><use href="../assets/icons.svg#sol-map"/></svg></span>Visites</a>
+    <a href="07-search.html"><span><svg class="i i--32"><use href="../assets/icons.svg#sol-flag"/></svg></span>Guides</a>
+    <a href="07-search.html"><span><svg class="i i--32"><use href="../assets/icons.svg#sol-widget"/></svg></span>Plus</a>
+  </nav>
+
+  <section>
+    <div class="section-head"><h2>Populaires</h2><a href="15-explore.html">Voir tout</a></div>
+    <div class="rail home-rail">
+      <article class="listing" data-id="bratan">
+        <div class="listing__media">
+          <div class="ph ph--photo listing__img" style="--img: url(../assets/photos/tour-temple.jpg)" role="img" aria-label="Le temple Ulun Danu sur le lac Bratan"></div>
+          <span class="badge badge--off">−10 %</span>
+          <button class="glass glass--32 fav" aria-pressed="false" aria-label="Ajouter aux favoris"><svg class="i"><use href="../assets/icons.svg#sol-heart-linear"/></svg></button>
+        </div>
+        <div class="listing__body">
+          <h3><a class="card-link" href="08-hotel.html">Lac Bratan & Ulun Danu</a></h3>
+          <p class="rating"><svg class="i"><use href="../assets/icons.svg#sol-star"/></svg>4,8 (1 453)</p>
+          <p class="loc"><svg class="i"><use href="../assets/icons.svg#sol-pin"/></svg>Bedugul, Bali</p>
+          <p class="price">45<span> €</span><small> /pers.</small> <s>55 €</s></p>
+        </div>
+      </article>
+      <article class="listing" data-id="palmeraie">
+        <div class="listing__media">
+          <div class="ph ph--photo listing__img" style="--img: url(../assets/photos/vicoroy-hotel.jpg)" role="img" aria-label="Piscine bordée de palmiers de la Palmeraie Seminyak"></div>
+          <span class="badge badge--off">−10 %</span>
+          <button class="glass glass--32 fav" aria-pressed="false" aria-label="Ajouter aux favoris"><svg class="i"><use href="../assets/icons.svg#sol-heart-linear"/></svg></button>
+        </div>
+        <div class="listing__body">
+          <h3><a class="card-link" href="08-hotel.html">Palmeraie Seminyak</a></h3>
+          <p class="rating"><svg class="i"><use href="../assets/icons.svg#sol-star"/></svg>4,5 (4 136)</p>
+          <p class="loc"><svg class="i"><use href="../assets/icons.svg#sol-pin"/></svg>Seminyak, Bali</p>
+          <p class="price">149<span> €</span><small> /nuit</small> <s>169 €</s></p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>Pour toi</h2><a href="15-explore.html">Voir tout</a></div>
+    <div class="rail home-rail">
+      <article class="tile" data-id="alang">
+        <div class="ph ph--photo" style="--img: url(../assets/photos/neano-hotel.jpg)" role="img" aria-label="Villa au toit de chaume et sa piscine privée"></div>
+        <button class="glass glass--32 fav" aria-pressed="false" aria-label="Ajouter aux favoris"><svg class="i"><use href="../assets/icons.svg#sol-heart-linear"/></svg></button>
+        <div class="tile__body">
+          <h3><a class="card-link" href="08-hotel.html">Villa Alang-Alang</a></h3>
+          <p class="loc"><svg class="i"><use href="../assets/icons.svg#sol-pin"/></svg>Ubud, Bali</p>
+          <p class="rating"><svg class="i"><use href="../assets/icons.svg#sol-star"/></svg>4,7 (8 186)</p>
+          <p class="price">112<span> €</span><small> /nuit</small></p>
+        </div>
+      </article>
+      <article class="tile" data-id="pasir">
+        <div class="ph ph--photo" style="--img: url(../assets/photos/amnaya-resort.jpg)" role="img" aria-label="Piscine à débordement du Pasir Putih Resort"></div>
+        <button class="glass glass--32 fav" aria-pressed="false" aria-label="Ajouter aux favoris"><svg class="i"><use href="../assets/icons.svg#sol-heart-linear"/></svg></button>
+        <div class="tile__body">
+          <h3><a class="card-link" href="08-hotel.html">Pasir Putih Resort</a></h3>
+          <p class="loc"><svg class="i"><use href="../assets/icons.svg#sol-pin"/></svg>Nusa Dua, Bali</p>
+          <p class="rating"><svg class="i"><use href="../assets/icons.svg#sol-star"/></svg>4,9 (4 348)</p>
+          <p class="price">189<span> €</span><small> /nuit</small></p>
+        </div>
+      </article>
+      <article class="tile" data-id="hutan">
+        <div class="ph ph--photo" style="--img: url(../assets/photos/kastara-resort.jpg)" role="img" aria-label="Le Hutan Lodge vu du ciel"></div>
+        <button class="glass glass--32 fav" aria-pressed="false" aria-label="Ajouter aux favoris"><svg class="i"><use href="../assets/icons.svg#sol-heart-linear"/></svg></button>
+        <div class="tile__body">
+          <h3><a class="card-link" href="08-hotel.html">Hutan Lodge</a></h3>
+          <p class="loc"><svg class="i"><use href="../assets/icons.svg#sol-pin"/></svg>Sayan, Ubud</p>
+          <p class="rating"><svg class="i"><use href="../assets/icons.svg#sol-star"/></svg>5,0 (2 164)</p>
+          <p class="price">124<span> €</span><small> /nuit</small></p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <nav class="navbar" aria-label="Navigation principale">
+    <ul>
+      <li><a href="06-home.html" aria-current="page"><svg class="i"><use href="../assets/icons.svg#sol-home"/></svg>Accueil</a></li>
+      <li><a href="13-history.html"><svg class="i"><use href="../assets/icons.svg#sol-suitcase-linear"/></svg>Voyages</a></li>
+      <li><a href="15-explore.html"><svg class="i"><use href="../assets/icons.svg#sol-compass-linear"/></svg>Explorer</a></li>
+      <li><a href="16-favorite.html"><svg class="i"><use href="../assets/icons.svg#sol-heart-linear"/></svg>Favoris</a></li>
+      <li><a href="17-profile.html"><svg class="i"><use href="../assets/icons.svg#sol-user-linear"/></svg>Profil</a></li>
+    </ul>
+    <span class="home-indicator"></span>
+  </nav>
+</main>
+<script src="../js/hush.js"></script>
+</body>
+</html>

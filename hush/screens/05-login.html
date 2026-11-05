@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hush — Connexion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/hush.css">
+<script src="../js/transitions.js"></script>
+<link rel="stylesheet" href="../css/auth.css">
+</head>
+<body>
+<main class="screen screen--blush auth">
+  <div class="ph ph--photo auth__cover" style="--img: url(../assets/photos/auth-cover.jpg)" role="img" aria-label="Mer turquoise et resort en bord de plage"></div>
+  <div class="statusbar statusbar--light">
+    <span>9:41</span>
+    <span class="statusbar__icons"><svg><use href="../assets/icons.svg#sb-signal"/></svg><svg><use href="../assets/icons.svg#sb-wifi"/></svg><svg><use href="../assets/icons.svg#sb-battery"/></svg></span>
+  </div>
+
+  <form class="sheet auth__sheet" action="06-home.html" method="post" data-validate novalidate>
+    <h1 class="h2">Content de te revoir</h1>
+    <p class="soft auth__lead">Connecte-toi pour retrouver tes voyages<br>et tes adresses favorites.</p>
+
+    <label class="field field--icon-l is-active">
+      <svg class="i"><use href="../assets/icons.svg#sol-letter"/></svg>
+      <input id="login-email" type="email" name="email" autocomplete="email" value="ines.laurent@example.com" aria-label="E-mail" required data-error="Indique ton adresse e-mail" data-error-format="Cette adresse e-mail n’est pas valide">
+    </label>
+    <label class="field field--icon-l auth__password">
+      <svg class="i i--20"><use href="../assets/icons.svg#sol-lock"/></svg>
+      <input id="login-password" type="password" name="password" autocomplete="current-password" placeholder="Mot de passe" aria-label="Mot de passe" required data-error="Saisis ton mot de passe">
+      <button type="button" class="auth__eye" aria-label="Afficher le mot de passe"><svg class="i i--20"><use href="../assets/icons.svg#sol-eye-closed"/></svg></button>
+    </label>
+    <a class="brand auth__forgot" href="21-forgot.html">Mot de passe oublié ?</a>
+
+    <button class="btn btn--block" type="submit">Se connecter</button>
+
+    <div class="or"><span>ou continuer avec</span></div>
+
+    <a class="btn btn--block btn--social" href="06-home.html"><svg class="i"><use href="../assets/icons.svg#social-icon-google-default"/></svg>Continuer avec Google</a>
+    <a class="btn btn--block btn--social btn--apple" href="06-home.html"><svg class="i"><use href="../assets/icons.svg#social-icon-apple-white"/></svg>Continuer avec Apple</a>
+
+    <p class="center auth__switch">Pas encore de compte ? <a class="brand" href="04-register.html">S’inscrire</a></p>
+    <a class="auth__guest" href="06-home.html">Explorer sans compte</a>
+  </form>
+
+  <span class="home-indicator"></span>
+</main>
+<script src="../js/hush.js"></script>
+</body>
+</html>

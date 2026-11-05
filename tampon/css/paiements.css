@@ -1,0 +1,154 @@
+/* Paiements : lot de virements, sur le modèle du tableau de bord */
+
+.stat--late .stat-value { color: var(--danger-500); }
+.pay-main { grid-column: span 7; min-width: 0; }
+.pay-side { grid-column: span 5; display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.pay-main .card, .pay-side .card { background: #fff; border: 1px solid var(--gray-100); border-radius: 16px; padding: 20px; }
+.card-link { display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 600; color: var(--gray-700); text-decoration: none; }
+.card-link:hover { color: var(--gray-900); }
+.card-link svg.i { width: 14px; height: 14px; }
+.card-text { display: flex; gap: 6px; align-items: flex-start; font-size: 13px; color: var(--gray-600); margin-top: 12px; }
+.card-text svg.i { width: 14px; height: 14px; flex: none; margin-top: 3px; color: var(--primary-500); }
+
+/* Date d'envoi */
+.batch-date { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 12px 14px; border-radius: 12px; background: var(--gray-50); margin-bottom: 8px; }
+.batch-date > span { font-size: 13px; font-weight: 600; color: var(--gray-700); }
+.date-chips { display: flex; gap: 6px; }
+.chip {
+  display: inline-flex; align-items: baseline; gap: 6px;
+  padding: 7px 12px; border: 0; border-radius: 99px; background: #fff;
+  font: 600 13px/1 var(--font); color: var(--gray-600); cursor: pointer;
+}
+.chip small { font: 500 11px/1 var(--font-num); color: var(--gray-600); }
+.chip:hover { color: var(--gray-900); }
+.chip.is-on { background: var(--blue-50); color: var(--blue-600); box-shadow: inset 0 0 0 1.5px var(--blue-500); }
+.chip.is-on small { color: var(--blue-600); }
+
+/* Factures du lot */
+.pay-list { list-style: none; display: flex; flex-direction: column; }
+.pay-list li { border-bottom: 1px solid var(--gray-100); }
+.pay-list label {
+  display: grid; grid-template-columns: auto auto minmax(0, 1fr) auto; align-items: center; gap: 12px;
+  padding: 14px 8px; margin: 0 -8px; border-radius: 10px; cursor: pointer;
+}
+.pay-list label:hover { background: #fafbfb; }
+/* Retard : la ligne prend un fond rouge très pâle, comme dans la liste des factures */
+.pay-list li.is-late label, .pay-list li.is-late label:hover { background: #fff3f3; }
+.pay-list li.is-blocked label { cursor: default; }
+/* bloquée : on estompe le contenu, pas la barre de retard */
+.pay-list li.is-blocked .pl-main > span:not(.pay-note), .pay-list li.is-blocked .tile { opacity: 0.6; }
+.pay-list li.is-blocked label:hover { background: none; }
+.pl-main { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.pl-main strong { font-size: 14px; font-weight: 600; color: var(--gray-800); }
+.pl-main > span { font-size: 12px; color: var(--gray-600); }
+.pl-amount { font: 600 15px/1 var(--font-num); color: var(--gray-900); white-space: nowrap; }
+.pay-note { display: inline-flex; align-items: center; gap: 5px; margin-top: 4px; font-size: 12px; font-weight: 600; color: var(--success-600); }
+.pay-note svg.i { width: 14px; height: 14px; }
+.pay-note.is-warn { color: var(--warning-600); }
+.pay-note.is-late { color: var(--danger-600); }
+.pl-fix { display: inline-block; margin: -6px 0 12px 66px; font-size: 13px; font-weight: 600; color: var(--gray-900); }
+
+/* Cartes virement (piste P3) : une carte par facture, groupées par situation */
+.vgroup { display: flex; align-items: center; gap: 8px; margin: 18px 0 10px; font-size: 12px; font-weight: 700; color: var(--gray-600); text-transform: uppercase; letter-spacing: 0.04em; }
+.vgroup i { width: 8px; height: 8px; border-radius: 50%; }
+.vgroup span { font: 600 12px/1 var(--font-num); color: var(--gray-600); }
+.vgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 12px; }
+.vcard {
+  position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
+  padding: 16px; border: 0; border-radius: 18px; background: #fff; text-align: left; font: inherit; color: inherit;
+  box-shadow: inset 0 0 0 1px var(--gray-100); cursor: pointer;
+  transition: box-shadow 0.15s, background 0.15s, transform 0.15s;
+}
+.vcard:hover { transform: translateY(-2px); box-shadow: inset 0 0 0 1px var(--gray-300), 0 6px 16px rgba(16, 24, 40, 0.06); }
+.vcard.is-on { background: #f6fcf7; box-shadow: inset 0 0 0 2px var(--primary-500); }
+.vcard.is-blocked { cursor: default; background: repeating-linear-gradient(135deg, #fff 0 10px, #fbf4f4 10px 11px); box-shadow: inset 0 0 0 1px #f6d7d7; }
+.vcard.is-blocked:hover { transform: none; }
+.vcheck {
+  position: absolute; top: 14px; right: 14px; width: 22px; height: 22px; border-radius: 7px;
+  display: grid; place-items: center; background: #fff; color: transparent; box-shadow: inset 0 0 0 1.5px #dce4e8;
+}
+.vcheck svg.i { width: 14px; height: 14px; }
+.vcard.is-on .vcheck { background: var(--primary-500); color: #fff; box-shadow: none; }
+.vcheck.is-lock { background: var(--danger-50); color: var(--danger-600); box-shadow: none; }
+.vname { display: flex; flex-direction: column; min-width: 0; max-width: 100%; }
+.vname strong { font-size: 14px; font-weight: 600; color: var(--gray-900); }
+.vname span { font-size: 11px; color: var(--gray-600); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.vamount { font: 600 22px/1.1 var(--font-num); color: var(--gray-900); letter-spacing: -0.01em; }
+.vchip { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 700; padding: 4px 8px; border-radius: 8px; }
+.vchip svg.i { width: 13px; height: 13px; }
+.vchip.is-ok { background: var(--success-50); color: var(--success-600); }
+.vchip.is-warn { background: var(--warning-50); color: var(--warning-600); }
+.vchip.is-late { background: var(--danger-50); color: var(--danger-600); }
+.vfix { display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 700; color: var(--gray-900); text-decoration: none; }
+.vfix svg.i { width: 14px; height: 14px; }
+.vfix:hover { text-decoration: underline; }
+
+/* Barre noire du lot, comme un panier, qui reste visible en bas */
+.vbar {
+  position: sticky; bottom: 16px; z-index: 5;
+  display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;
+  margin-top: 18px; padding: 16px 18px; border-radius: 18px;
+  background: #121513; color: #fff; box-shadow: 0 10px 30px rgba(17, 17, 19, 0.25);
+}
+.vbar-sum { display: flex; flex-direction: column; gap: 2px; }
+.vbar-sum span { font-size: 12px; color: rgba(255, 255, 255, 0.6); }
+.vbar-sum b { font: 600 24px/1.15 var(--font-num); color: #fff; }
+.vbar-sum .is-low { color: #ff8a8a; font-weight: 600; }
+.vbar-note { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: rgba(255, 255, 255, 0.75); }
+.vbar-note svg.i { width: 16px; height: 16px; }
+.vbar .btn:disabled { background: rgba(255, 255, 255, 0.15); color: rgba(255, 255, 255, 0.5); }
+
+/* Pied du lot */
+.batch-foot { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 16px; padding-top: 16px; }
+.batch-sum { display: flex; flex-direction: column; gap: 2px; }
+.batch-sum span { font-size: 12px; color: var(--gray-600); }
+.batch-sum b { font: 600 24px/1.2 var(--font-num); color: var(--gray-900); }
+.batch-sum .is-low { color: var(--danger-600); font-weight: 600; }
+.batch-empty { display: flex; align-items: center; gap: 8px; color: var(--success-600); font-weight: 600; }
+.batch-empty svg.i { width: 18px; height: 18px; }
+
+/* Lot envoyé */
+.batch-done { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; padding: 36px 24px !important; }
+.done-stamp {
+  width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; margin-bottom: 8px;
+  background: linear-gradient(-155deg, #5dd26e 8.5%, #36a747 91.5%); color: #fff;
+  box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.15), 0 6px 16px rgba(51, 177, 76, 0.3);
+}
+.done-stamp svg.i { width: 30px; height: 30px; }
+.batch-done h2 { font-size: 20px; font-weight: 700; color: var(--gray-900); }
+.batch-done p { color: var(--gray-600); }
+.done-list { list-style: none; width: 100%; max-width: 380px; margin: 14px 0; display: flex; flex-direction: column; }
+.done-list li { display: flex; justify-content: space-between; padding: 8px 0; font-size: 14px; color: var(--gray-700); }
+.done-list li + li { border-top: 1px solid var(--gray-100); }
+.done-list li span:last-child { font: 600 14px/1.4 var(--font-num); color: var(--gray-900); }
+.done-actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.done-actions a { text-decoration: none; }
+
+/* Derniers virements */
+.hist { list-style: none; display: flex; flex-direction: column; }
+.hist li + li { border-top: 1px solid var(--gray-100); }
+.hist a { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 12px; padding: 10px 6px; margin: 0 -6px; border-radius: 10px; color: inherit; text-decoration: none; }
+.hist a:hover { background: var(--gray-50); }
+.hist-date { width: 42px; height: 42px; border-radius: 12px; background: var(--success-50); display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; color: var(--success-600); line-height: 1.1; }
+.hist-date b { font: 700 15px/1 var(--font-num); }
+.hist-main { display: flex; flex-direction: column; min-width: 0; }
+.hist-main strong { font-size: 14px; font-weight: 600; color: var(--gray-800); }
+.hist-main span { font-size: 12px; color: var(--gray-600); }
+.hist-amount { font: 600 14px/1 var(--font-num); color: var(--gray-800); white-space: nowrap; }
+.bank-iban { font: 600 15px/1.4 var(--font-num); color: var(--gray-800); }
+
+@media (max-width: 1100px) {
+  .pay-main, .pay-side { grid-column: span 12; }
+}
+@media (max-width: 640px) {
+  .batch-date { flex-direction: column; align-items: flex-start; }
+  .date-chips { flex-wrap: wrap; }
+  .pay-list label { grid-template-columns: auto auto minmax(0, 1fr); }
+  .pl-amount { grid-column: 3; }
+  .pl-fix { margin-left: 0; }
+  .batch-foot .btn, .vbar .btn { width: 100%; justify-content: center; }
+  .vgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .vcard { padding: 14px; }
+  .vamount { font-size: 18px; }
+  .vbar { bottom: 8px; }
+}

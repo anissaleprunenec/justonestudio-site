@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hush — Modifier le profil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/hush.css">
+<script src="../js/transitions.js"></script>
+<style>
+  .edit { display: flex; flex-direction: column; min-height: 852px; padding: 52px var(--gutter) 0; }
+  .edit .topbar { height: 48px; position: relative; justify-content: center; }
+  .edit .topbar a { position: absolute; left: 0; }
+  .avatar { display: grid; place-items: center; width: 116px; height: 116px; margin: 16px auto 0; border-radius: 24px; background: var(--brand); color: var(--white-800); }
+  .avatar .i { width: 40px; height: 40px; }
+  .edit__photo { align-self: center; margin-top: 12px; }
+  .edit .field { padding-left: 20px; }
+  .edit .field:first-of-type { margin-top: 32px; }
+  .edit .field + .field { margin-top: 12px; }
+  .edit .sheet__cta { padding-bottom: 58px; }
+</style>
+</head>
+<body>
+<main class="screen">
+  <div class="statusbar">
+    <span>9:41</span>
+    <span class="statusbar__icons"><svg><use href="../assets/icons.svg#sb-signal"/></svg><svg><use href="../assets/icons.svg#sb-wifi"/></svg><svg><use href="../assets/icons.svg#sb-battery"/></svg></span>
+  </div>
+
+  <form class="edit" action="17-profile.html">
+    <header class="topbar">
+      <a href="17-profile.html" aria-label="Retour"><svg class="i"><use href="../assets/icons.svg#sol-arrow-left"/></svg></a>
+      <h1>Modifier le profil</h1>
+    </header>
+
+    <div class="avatar"><svg class="i"><use href="../assets/icons.svg#sol-user"/></svg></div>
+    <button type="button" class="btn btn--sm btn--outline btn--icon-r edit__photo">Changer la photo<svg class="i i--16"><use href="../assets/icons.svg#sol-camera"/></svg></button>
+
+    <label class="field is-active"><input name="name" value="Inès Laurent" aria-label="Nom"></label>
+    <label class="field"><input name="email" type="email" value="ines.laurent@example.com" aria-label="E-mail"></label>
+
+    <div class="sheet__cta">
+      <button class="btn btn--block" type="submit">Enregistrer</button>
+    </div>
+  </form>
+
+  <span class="home-indicator"></span>
+</main>
+<script src="../js/hush.js"></script>
+</body>
+</html>

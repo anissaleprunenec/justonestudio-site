@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hush — Paiement</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/hush.css">
+<script src="../js/transitions.js"></script>
+<style>
+  .pay { padding-bottom: 34px; }
+  .pay .place { padding: 20px 0 0; }
+  .pay > .divider { margin: 20px 0; }
+  .pay .card-surface + .card-surface { margin-top: 16px; }
+  .pay .summary { margin-top: 20px; }
+  .pay .breakdown { margin-top: 20px; }
+
+  .method { margin-top: 20px; padding: 12px; }
+  .method__logos { display: flex; gap: 8px; margin: 8px 0; }
+  .method .field { padding-left: 8px; background: var(--white); }
+  .method__brand { display: flex; align-items: center; gap: 8px; color: var(--brand); }
+  .method__sep { width: 0; height: 24px; border-left: .5px solid var(--gray-500); }
+  .method > .divider { margin: 12px 0; }
+  .method__valid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; margin-top: 8px; }
+  .method__valid .field { padding-left: 20px; }
+
+  .checkout {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 56px; margin-top: 24px; padding: 4px 4px 4px 28px;
+    border-radius: var(--pill); background: var(--brand); color: var(--white-800);
+  }
+  .checkout .price span, .checkout .price s { color: inherit; }
+  .checkout .price s { font-weight: 300; }
+  .checkout .btn { width: 170px; background: var(--white-800); color: var(--ink); }
+
+</style>
+</head>
+<body>
+<main class="screen screen--dark">
+  <div class="statusbar statusbar--light">
+    <span>9:41</span>
+    <span class="statusbar__icons"><svg><use href="../assets/icons.svg#sb-signal"/></svg><svg><use href="../assets/icons.svg#sb-wifi"/></svg><svg><use href="../assets/icons.svg#sb-battery"/></svg></span>
+  </div>
+
+  <section class="sheet pay">
+    <header class="topbar">
+      <a href="09-booking.html" aria-label="Retour"><svg class="i"><use href="../assets/icons.svg#sol-arrow-left"/></svg></a>
+      <h1>Paiement</h1>
+      <button aria-label="Ajouter aux favoris"><svg class="i"><use href="../assets/icons.svg#sol-heart-linear"/></svg></button>
+    </header>
+
+    <div class="place">
+      <span class="place__kind">Villa 5 étoiles</span>
+      <h2 class="place__name">Villa Alang-Alang</h2>
+      <p class="loc loc--lg"><svg class="i"><use href="../assets/icons.svg#sol-pin"/></svg>Ubud, Bali</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <dl class="card-surface info">
+      <div><dt data-bind="nights">2 nuits</dt><dd data-bind="dates">Dim. 23 mai – mar. 25 mai 2027</dd></div>
+      <svg class="i"><use href="../assets/icons.svg#sol-calendar"/></svg>
+    </dl>
+    <dl class="card-surface info">
+      <div><dt>Voyageurs</dt><dd data-bind="guests">2 adultes</dd></div>
+      <svg class="i i--20" style="margin-right:4px"><use href="../assets/icons.svg#sol-user-linear"/></svg>
+    </dl>
+
+    <div class="summary">
+      <a class="summary__link" href="#">Voir le détail</a>
+      <h3 data-bind="room">Chambre Deluxe twin</h3>
+      <ul class="dot-list">
+        <li data-bind="perk1">Petit-déjeuner non inclus</li>
+        <li data-bind="perk2">1 lit queen ou 2 lits simples</li>
+        <li>2 adultes maximum. Pour les enfants, les conditions dépendent de la villa.</li>
+      </ul>
+      <div class="divider"></div>
+      <p class="note"><svg class="i i--16"><use href="../assets/icons.svg#sol-check-circle"/></svg><span data-bind="cancel">Annulation gratuite jusqu’au 20 mai 2027</span></p>
+    </div>
+
+<section class="card-surface breakdown" aria-labelledby="breakdown-title">
+      <h3 id="breakdown-title">Détail du prix</h3>
+      <dl>
+        <div><dt data-bind="base-label">159 € × 2 nuits</dt><dd data-bind="base">318 €</dd></div>
+        <div><dt data-bind="discount-label">Prix Hush (−10 € par nuit)</dt><dd data-bind="discount">−20 €</dd></div>
+        <div><dt>Taxes et frais de service</dt><dd>Inclus</dd></div>
+        <div class="breakdown__total"><dt>Total</dt><dd data-bind="total">298 €</dd></div>
+      </dl>
+      <p class="breakdown__note"><svg class="i i--16"><use href="../assets/icons.svg#sol-shield-check"/></svg>Paiement sécurisé, aucun frais caché</p>
+    </section>
+
+    <form class="card-surface method" id="pay-form" action="#success" method="post" data-validate data-loading="Paiement en cours…" novalidate>
+      <p class="muted">Moyen de paiement</p>
+      <div class="method__logos">
+        <span class="payment-logo"><svg><use href="../assets/icons.svg#payment-logo-master-card"/></svg></span>
+        <span class="payment-logo"><svg><use href="../assets/icons.svg#payment-logo-paypal"/></svg></span>
+        <span class="payment-logo"><svg><use href="../assets/icons.svg#payment-logo-union-pay"/></svg></span>
+      </div>
+      <button type="button" class="link-more" data-fill-card>Utiliser ma carte enregistrée •••• 3456</button>
+      <label class="field">
+        <span class="method__brand">
+          <span class="payment-logo payment-logo--lg"><svg><use href="../assets/icons.svg#payment-logo-master-card"/></svg></span>
+          <svg class="i i--16"><use href="../assets/icons.svg#sol-chevron-down"/></svg>
+        </span>
+        <span class="method__sep"></span>
+        <input id="card-number" placeholder="1234 5678 9012 3456" inputmode="numeric" autocomplete="cc-number" aria-label="Numéro de carte" required pattern="\d{4} \d{4} \d{4} \d{4}" data-format="card" data-error="Indique le numéro de ta carte" data-error-format="Numéro de carte incomplet">
+      </label>
+      <div class="divider"></div>
+      <p class="muted">Expiration</p>
+      <div class="method__valid">
+        <div><label class="field"><input id="card-expiry" placeholder="MM/AA" inputmode="numeric" autocomplete="cc-exp" aria-label="Date d’expiration" required pattern="(0[1-9]|1[0-2])/\d{2}" data-format="expiry" data-error="Date manquante" data-error-format="Format MM/AA"></label></div>
+        <div><label class="field"><input id="card-cvc" placeholder="CVC" inputmode="numeric" autocomplete="cc-csc" aria-label="Code de sécurité" required pattern="\d{3}" data-format="cvc" data-error="Code manquant" data-error-format="3 chiffres"></label></div>
+      </div>
+    </form>
+
+    <div class="checkout">
+      <p class="price price--lg"><b data-bind="total-num">298</b><span> €</span> <s data-bind="base">318 €</s></p>
+      <button class="btn" type="submit" form="pay-form">Payer</button>
+    </div>
+  </section>
+
+  <div class="modal" id="success">
+    <a class="modal__scrim" href="#" aria-label="Fermer"></a>
+    <div class="modal__box" role="dialog" aria-modal="true" aria-labelledby="success-title">
+      <svg class="i"><use href="../assets/icons.svg#sol-check-circle-duo"/></svg>
+      <h2 class="h3" id="success-title">Réservation confirmée</h2>
+      <p>Bon séjour à la Villa Alang-Alang ! Tous les détails sont dans ta boîte mail.</p>
+      <p class="modal__ref">Réservation n° HSH-27A4K9</p>
+      <a class="btn btn--block" href="13-history.html">Voir mes voyages</a>
+    </div>
+  </div>
+
+  <span class="home-indicator"></span>
+</main>
+<script src="../js/hush.js"></script>
+</body>
+</html>

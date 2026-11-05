@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hush — Recherche</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/hush.css">
+<script src="../js/transitions.js"></script>
+<style>
+  .search .field { margin-top: 24px; }
+  .search .chips { margin-top: 12px; }
+  .results { display: grid; gap: 12px; margin-top: 16px; padding-bottom: 40px; }
+  .results .listing__body { padding-top: 8px; }
+</style>
+</head>
+<body>
+<main class="screen screen--blush">
+  <div class="statusbar">
+    <span>9:41</span>
+    <span class="statusbar__icons"><svg><use href="../assets/icons.svg#sb-signal"/></svg><svg><use href="../assets/icons.svg#sb-wifi"/></svg><svg><use href="../assets/icons.svg#sb-battery"/></svg></span>
+  </div>
+
+  <section class="sheet sheet--gray search">
+    <header class="topbar">
+      <a href="06-home.html" aria-label="Fermer"><svg class="i"><use href="../assets/icons.svg#sol-close"/></svg></a>
+      <h1>Rechercher</h1>
+      <button class="filter-dot" aria-label="Filtres" data-open-filters><svg class="i"><use href="../assets/icons.svg#sol-filter"/></svg></button>
+    </header>
+
+    <label class="field field--white">
+      <input type="search" placeholder="Hôtel, plage, temple…" aria-label="Rechercher" data-search>
+      <svg class="i"><use href="../assets/icons.svg#sol-search"/></svg>
+    </label>
+
+    <div class="chips" role="group" aria-label="Catégorie">
+      <button class="btn btn--sm" aria-pressed="true" data-filter="all">Tout</button>
+      <button class="btn btn--sm" aria-pressed="false" data-filter="hotel">Hôtels</button>
+      <button class="btn btn--sm" aria-pressed="false" data-filter="resort">Resorts</button>
+      <button class="btn btn--sm" aria-pressed="false" data-filter="restaurant">Restaurants</button>
+      <button class="btn btn--sm" aria-pressed="false" data-filter="guide">Guides</button>
+    </div>
+
+    <div class="results" data-list="search" aria-live="polite"></div>
+    <div class="empty" data-empty="search" hidden>
+      <span class="empty__art"><svg class="i"><use href="../assets/icons.svg#sol-search"/></svg></span>
+      <h2>Aucun résultat</h2>
+      <p>On n’a rien trouvé <span data-term></span>. Essaie un autre mot ou retire un filtre.</p>
+      <button type="button" class="btn btn--sm btn--outline" data-reset-search>Tout effacer</button>
+    </div>
+  </section>
+
+  <div class="dialog-sheet" data-filters hidden>
+    <div class="dialog-sheet__scrim" data-close></div>
+    <div class="dialog-sheet__panel" role="dialog" aria-modal="true" aria-labelledby="filters-title">
+      <h2 id="filters-title" tabindex="-1">Filtres</h2>
+      <h3>Budget</h3>
+      <div class="range"><output data-price-out>Tous les prix</output><input type="range" name="max-price" min="20" max="250" step="10" value="250" aria-label="Prix maximum"></div>
+      <h3>Note minimale</h3>
+      <div class="chips" role="group" aria-label="Note minimale">
+        <button type="button" class="btn btn--sm" aria-pressed="true" data-rating="0">Toutes</button>
+        <button type="button" class="btn btn--sm" aria-pressed="false" data-rating="4.5">4,5 et plus</button>
+        <button type="button" class="btn btn--sm" aria-pressed="false" data-rating="4.8">4,8 et plus</button>
+      </div>
+      <label class="check" style="font-size:14px"><input type="checkbox" name="promo"><span>Seulement les offres en promotion</span></label>
+      <div class="dialog-sheet__foot">
+        <button type="button" class="btn btn--line" data-clear>Réinitialiser</button>
+        <button type="button" class="btn" data-apply data-count>Afficher</button>
+      </div>
+    </div>
+  </div>
+
+  <span class="home-indicator"></span>
+</main>
+<script src="../js/hush.js"></script>
+</body>
+</html>

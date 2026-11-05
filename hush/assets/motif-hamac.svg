@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260" fill="none" stroke="#fff" stroke-linecap="round">
+  <!-- Hush background motif: two poles, the hammock between them, the sun above -->
+  <path d="M30 14v240M370 14v240" stroke-width="10"/>
+  <path d="M30 52Q200 236 370 52" stroke-width="10"/>
+  <path d="M30 52Q200 196 370 52" stroke-width="4"/>
+  <circle cx="200" cy="34" r="16" fill="#fff" stroke="none"/>
+</svg>

@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <script>
   // apply the saved theme before first paint so the page doesn't flash dark
-  try { if (localStorage.getItem('theme') === 'light') document.documentElement.dataset.theme = 'light'; } catch (e) {}
+  try { if (localStorage.getItem('theme') !== 'dark') document.documentElement.dataset.theme = 'light'; } catch (e) { document.documentElement.dataset.theme = 'light'; }
 </script>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@500;600&display=swap" rel="stylesheet">
 <style>
@@ -379,7 +379,7 @@
       <a href="wecare/design-system.html" target="_blank" rel="noopener">Voir le design system <span aria-hidden="true">↗</span></a>
     </div>
     <div class="meta">
-      <div><span>Client</span>Une maison de santé fictive, avec cinq praticiens</div>
+      <div><span>Pour qui</span>Les maisons de santé&nbsp;: le secrétariat et les praticiens</div>
       <div><span>Mon rôle</span>UX, UI, design system, intégration</div>
       <div><span>Périmètre</span>Agenda, patients, prise de rendez-vous, design system</div>
       <div><span>Outils</span>Figma, puis HTML, CSS et JavaScript sans framework</div>
@@ -554,7 +554,7 @@
     </div>
   </section>
 
-  <a class="next" href="projet-relaya.html"><div><span>Projet suivant</span><strong>Relaya</strong></div><span class="arrow" aria-hidden="true">→</span></a>
+  <a class="next" href="projet-tampon.html"><div><span>Projet suivant</span><strong>Tampon</strong></div><span class="arrow" aria-hidden="true">→</span></a>
 </main>
 
 

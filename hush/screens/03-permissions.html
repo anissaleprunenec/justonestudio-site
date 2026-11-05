@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hush — Dernière étape</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/hush.css">
+<script src="../js/transitions.js"></script>
+<style>
+  .perm { padding: 68px var(--gutter) 0; color: var(--white-800); }
+  .perm > p { margin-top: 20px; }
+  .perm ul { display: grid; gap: 24px; margin-top: 40px; }
+  .perm li { display: flex; gap: 16px; align-items: center; }
+  .perm__icon { display: grid; place-items: center; flex: none; width: 52px; height: 52px; border-radius: 20px; background: var(--white-800); color: var(--brand); }
+  .perm h2 { font-size: 16px; line-height: 22px; font-weight: 600; }
+  .perm li p { margin-top: 4px; font-size: 14px; line-height: 20px; }
+  .perm__cta { position: absolute; left: var(--gutter); right: var(--gutter); bottom: 58px; display: grid; gap: 24px; }
+  .perm__cta .btn--ghost { font-weight: 500; }
+</style>
+</head>
+<body>
+<main class="screen screen--brand">
+  <div class="blobs"></div>
+  <div class="statusbar statusbar--light">
+    <span>9:41</span>
+    <span class="statusbar__icons"><svg><use href="../assets/icons.svg#sb-signal"/></svg><svg><use href="../assets/icons.svg#sb-wifi"/></svg><svg><use href="../assets/icons.svg#sb-battery"/></svg></span>
+  </div>
+
+  <section class="perm">
+    <h1 class="h1">Dernière étape…</h1>
+    <p>Pour profiter pleinement de Hush, autorise :</p>
+    <ul>
+      <li>
+        <span class="perm__icon"><svg class="i"><use href="../assets/icons.svg#sol-gps-duo"/></svg></span>
+        <div><h2>Localisation</h2><p>Pour te proposer les meilleures adresses autour de toi</p></div>
+      </li>
+      <li>
+        <span class="perm__icon"><svg class="i"><use href="../assets/icons.svg#sol-bell-bing"/></svg></span>
+        <div><h2>Notifications</h2><p>Pour suivre tes réservations et recevoir nos bons plans en avant-première</p></div>
+      </li>
+    </ul>
+  </section>
+
+  <div class="perm__cta">
+    <a class="btn btn--lg btn--light" href="04-register.html">Autoriser</a>
+    <a class="btn btn--ghost" href="04-register.html">Plus tard</a>
+  </div>
+
+  <span class="home-indicator home-indicator--light"></span>
+</main>
+</body>
+</html>

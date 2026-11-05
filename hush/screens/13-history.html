@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hush — Mes voyages</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/hush.css">
+<script src="../js/transitions.js"></script>
+<style>
+  .history { padding: 64px var(--gutter) 24px; }
+  .history .tabs { margin-top: 16px; }
+  .history .chips { margin-top: 12px; }
+  .trips { display: grid; gap: 12px; margin-top: 20px; }
+  .trip { display: grid; gap: 8px; padding: 12px; border-radius: 12px; background: var(--white); }
+  .trip__top { display: flex; justify-content: space-between; align-items: center; }
+  .trip h2 { font-size: 16px; line-height: 22px; font-weight: 600; }
+  .trip .loc { margin-top: 4px; }
+  .trip__top > .i { color: var(--brand); }
+  .trip__dates { display: flex; gap: 8px; color: var(--gray-600); }
+  .trip__dates strong { font-weight: 500; color: var(--brand); }
+</style>
+</head>
+<body>
+<main class="screen screen--gray screen--app">
+  <div class="statusbar">
+    <span>9:41</span>
+    <span class="statusbar__icons"><svg><use href="../assets/icons.svg#sb-signal"/></svg><svg><use href="../assets/icons.svg#sb-wifi"/></svg><svg><use href="../assets/icons.svg#sb-battery"/></svg></span>
+  </div>
+
+  <section class="history">
+    <label class="field">
+      <input type="search" placeholder="Rechercher un voyage" aria-label="Rechercher un voyage">
+      <svg class="i"><use href="../assets/icons.svg#sol-search"/></svg>
+    </label>
+
+    <div class="tabs" role="tablist" aria-label="Mes voyages">
+      <button type="button" role="tab" aria-selected="true" data-trips="upcoming">À venir <span>2</span></button>
+      <button type="button" role="tab" aria-selected="false" data-trips="past">Passés <span>2</span></button>
+    </div>
+
+    <div class="chips" role="group" aria-label="Catégorie">
+      <button class="btn btn--sm" aria-pressed="true" data-filter="all">Tout</button>
+      <button class="btn btn--sm" aria-pressed="false" data-filter="hotel">Hôtels</button>
+      <button class="btn btn--sm" aria-pressed="false" data-filter="resort">Resorts</button>
+      <button class="btn btn--sm" aria-pressed="false" data-filter="restaurant">Restaurants</button>
+      <button class="btn btn--sm" aria-pressed="false" data-filter="guide">Guides</button>
+    </div>
+
+    <ul class="trips">
+      <li data-when="upcoming" data-type="hotel"><a class="trip" href="14-history-detail.html">
+        <div class="trip__top">
+          <div><h2>Villa Alang-Alang</h2><p class="loc loc--lg"><svg class="i"><use href="../assets/icons.svg#sol-pin"/></svg>Ubud, Bali</p></div>
+          <svg class="i i--16"><use href="../assets/icons.svg#sol-chevron-right"/></svg>
+        </div>
+        <div class="divider"></div>
+        <p class="trip__dates">2 nuits <strong>dim. 23 – mar. 25 mai 2027</strong></p>
+      </a></li>
+      <li data-when="upcoming" data-type="resort"><a class="trip" href="14-history-detail.html">
+        <div class="trip__top">
+          <div><h2>Pasir Putih Resort</h2><p class="loc loc--lg"><svg class="i"><use href="../assets/icons.svg#sol-pin"/></svg>Nusa Dua, Bali</p></div>
+          <svg class="i i--16"><use href="../assets/icons.svg#sol-chevron-right"/></svg>
+        </div>
+        <div class="divider"></div>
+        <p class="trip__dates">2 nuits <strong>ven. 9 – dim. 11 juil. 2027</strong></p>
+      </a></li>
+      <li data-when="past" data-type="restaurant" hidden><a class="trip" href="14-history-detail.html">
+        <div class="trip__top">
+          <div><h2>Warung Danau</h2><p class="loc loc--lg"><svg class="i"><use href="../assets/icons.svg#sol-pin"/></svg>Kintamani, Bali</p></div>
+          <svg class="i i--16"><use href="../assets/icons.svg#sol-chevron-right"/></svg>
+        </div>
+        <div class="divider"></div>
+        <p class="trip__dates">Table <strong>sam. 17 avril 2027</strong> <em>Terminé</em></p>
+      </a></li>
+      <li data-when="past" data-type="hotel" hidden><a class="trip" href="14-history-detail.html">
+        <div class="trip__top">
+          <div><h2>Palmeraie Seminyak</h2><p class="loc loc--lg"><svg class="i"><use href="../assets/icons.svg#sol-pin"/></svg>Seminyak, Bali</p></div>
+          <svg class="i i--16"><use href="../assets/icons.svg#sol-chevron-right"/></svg>
+        </div>
+        <div class="divider"></div>
+        <p class="trip__dates">3 nuits <strong>mer. 10 – sam. 13 mars 2027</strong> <em>Terminé</em></p>
+      </a></li>
+    </ul>
+    <div class="empty" data-empty="trips" hidden>
+      <span class="empty__art"><svg class="i"><use href="../assets/icons.svg#sol-suitcase-linear"/></svg></span>
+      <h2>Rien de prévu ici</h2>
+      <p>Ton prochain voyage t’attend quelque part à Bali.</p>
+      <a class="btn btn--sm" href="15-explore.html">Trouver un séjour</a>
+    </div>
+  </section>
+
+  <nav class="navbar" aria-label="Navigation principale">
+    <ul>
+      <li><a href="06-home.html"><svg class="i"><use href="../assets/icons.svg#sol-home-linear"/></svg>Accueil</a></li>
+      <li><a href="13-history.html" aria-current="page"><svg class="i"><use href="../assets/icons.svg#sol-suitcase"/></svg>Voyages</a></li>
+      <li><a href="15-explore.html"><svg class="i"><use href="../assets/icons.svg#sol-compass-linear"/></svg>Explorer</a></li>
+      <li><a href="16-favorite.html"><svg class="i"><use href="../assets/icons.svg#sol-heart-linear"/></svg>Favoris</a></li>
+      <li><a href="17-profile.html"><svg class="i"><use href="../assets/icons.svg#sol-user-linear"/></svg>Profil</a></li>
+    </ul>
+    <span class="home-indicator"></span>
+  </nav>
+</main>
+<script src="../js/hush.js"></script>
+</body>
+</html>

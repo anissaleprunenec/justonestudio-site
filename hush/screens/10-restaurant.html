@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hush — Warung Danau</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/hush.css">
+<script src="../js/transitions.js"></script>
+</head>
+<body>
+<main class="screen screen--dark">
+  <div class="statusbar statusbar--light">
+    <span>9:41</span>
+    <span class="statusbar__icons"><svg><use href="../assets/icons.svg#sb-signal"/></svg><svg><use href="../assets/icons.svg#sb-wifi"/></svg><svg><use href="../assets/icons.svg#sb-battery"/></svg></span>
+  </div>
+
+  <article class="sheet sheet--hero sheet--flex">
+    <div class="hero">
+      <div class="ph ph--photo" style="--img: url(../assets/photos/kampung-cafe.jpg)" role="img" aria-label="Terrasse du Warung Danau face au lac"></div>
+      <div class="hero__actions">
+        <a class="glass" href="06-home.html" aria-label="Fermer" data-sheet-close><svg class="i"><use href="../assets/icons.svg#sol-chevron-down"/></svg></a>
+        <button class="glass" aria-label="Ajouter aux favoris"><svg class="i i--20"><use href="../assets/icons.svg#sol-heart-linear"/></svg></button>
+        <button class="glass" aria-label="Partager"><svg class="i"><use href="../assets/icons.svg#sol-share"/></svg></button>
+      </div>
+      <div class="pager" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    </div>
+
+    <header class="place">
+      <div class="place__row">
+        <div>
+          <h1 class="place__name" style="margin-top:0">Warung Danau</h1>
+          <p class="loc loc--lg"><svg class="i"><use href="../assets/icons.svg#sol-pin"/></svg>Kintamani, Bali</p>
+          <p class="rating rating--lg"><svg class="i"><use href="../assets/icons.svg#sol-star"/></svg>4,9 (3 726)</p>
+        </div>
+        <a class="btn btn--sm btn--outline btn--icon-r" href="19-map.html?focus=danau">Voir la carte<svg class="i i--16"><use href="../assets/icons.svg#sol-gps"/></svg></a>
+      </div>
+    </header>
+
+    <div class="divider" style="margin: 20px var(--gutter)"></div>
+
+    <div class="facts">
+      <section>
+        <h2>À propos</h2>
+        <p>Une terrasse face au lac Batur et à son volcan, une cuisine balinaise de saison et des jus pressés minute. Le meilleur moment ? Le lever du soleil.</p>
+      </section>
+      <section>
+        <h2>Équipements</h2>
+        <ul class="facilities">
+          <li><svg class="i"><use href="../assets/icons.svg#sol-wifi"/></svg>Wi-Fi gratuit</li>
+          <li><svg class="i"><use href="../assets/icons.svg#sol-sunset"/></svg>Vue sur le lac</li>
+          <li><svg class="i"><use href="../assets/icons.svg#sol-clock"/></svg>Ouvert 7j/7</li>
+          <li><svg class="i"><use href="../assets/icons.svg#sol-car"/></svg>Parking gratuit</li>
+        </ul>
+      </section>
+    </div>
+
+    <div class="sheet__cta">
+      <a class="btn btn--block" href="11-reservation.html">Réserver une table</a>
+    </div>
+  </article>
+
+  <span class="home-indicator"></span>
+</main>
+<script src="../js/hush.js"></script>
+</body>
+</html>

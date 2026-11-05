@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hush — Réservation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/hush.css">
+<script src="../js/transitions.js"></script>
+<style>
+  .booking .place { padding: 20px 0 0; }
+  .booking .place__row { align-items: flex-end; }
+  .booking form { margin-top: 24px; }
+  .booking form > * + .label { margin-top: 20px; }
+  .booking .rooms { margin-top: 0; padding-bottom: 34px; }
+  .rooms .room:not(.is-open) { background: none; }
+  .rooms .room__head { background: var(--white); border-radius: 24px; box-shadow: var(--shadow-card); }
+</style>
+</head>
+<body>
+<main class="screen screen--dark">
+  <div class="statusbar statusbar--light">
+    <span>9:41</span>
+    <span class="statusbar__icons"><svg><use href="../assets/icons.svg#sb-signal"/></svg><svg><use href="../assets/icons.svg#sb-wifi"/></svg><svg><use href="../assets/icons.svg#sb-battery"/></svg></span>
+  </div>
+
+  <section class="sheet booking">
+    <header class="topbar">
+      <a href="08-hotel.html" aria-label="Retour"><svg class="i"><use href="../assets/icons.svg#sol-arrow-left"/></svg></a>
+      <h1>Réservation</h1>
+      <button aria-label="Ajouter aux favoris"><svg class="i"><use href="../assets/icons.svg#sol-heart-linear"/></svg></button>
+    </header>
+
+    <div class="place">
+      <span class="place__kind">Villa 5 étoiles</span>
+      <div class="place__row">
+        <div>
+          <h2 class="place__name">Villa Alang-Alang</h2>
+          <p class="loc loc--lg"><svg class="i"><use href="../assets/icons.svg#sol-pin"/></svg>Ubud, Bali</p>
+          <p class="rating rating--lg"><svg class="i"><use href="../assets/icons.svg#sol-star"/></svg>4,7 (8 186)</p>
+        </div>
+        <a class="btn btn--sm btn--outline btn--icon-r" href="19-map.html?focus=alang">Voir la carte<svg class="i i--16"><use href="../assets/icons.svg#sol-gps"/></svg></a>
+      </div>
+    </div>
+
+    <form action="12-payment.html">
+      <label class="label" for="check-in">Arrivée</label>
+      <label class="field field--date is-active">
+        <input id="check-in" value="dim. 23 mai 2027" data-date="2027-05-23" data-cal="start" readonly aria-haspopup="dialog">
+        <svg class="i"><use href="../assets/icons.svg#sol-calendar"/></svg>
+      </label>
+
+      <label class="label" for="check-out">Départ</label>
+      <label class="field field--date">
+        <input id="check-out" value="mar. 25 mai 2027" data-date="2027-05-25" data-cal="end" readonly aria-haspopup="dialog">
+        <svg class="i"><use href="../assets/icons.svg#sol-calendar"/></svg>
+      </label>
+
+      <p class="label">Voyageurs</p>
+      <div class="stepper card-surface">
+        <div class="stepper__row" data-min="1" data-max="4">
+          <div><b>Adultes</b><small>13 ans et plus</small></div>
+          <div class="stepper__ctl">
+            <button type="button" data-step="-1" aria-label="Un adulte de moins">−</button>
+            <output aria-live="polite">2</output>
+            <button type="button" data-step="1" aria-label="Un adulte de plus">+</button>
+          </div>
+        </div>
+        <div class="stepper__row" data-min="0" data-max="3">
+          <div><b>Enfants</b><small>De 2 à 12 ans</small></div>
+          <div class="stepper__ctl">
+            <button type="button" data-step="-1" aria-label="Un enfant de moins">−</button>
+            <output aria-live="polite">0</output>
+            <button type="button" data-step="1" aria-label="Un enfant de plus">+</button>
+          </div>
+        </div>
+      </div>
+
+      <p class="label" style="margin-top:20px">Choisis ta chambre</p>
+      <div class="rooms">
+        <div class="room is-open">
+          <div class="room__head">
+            <div class="ph ph--photo ph--sm" style="--img: url(../assets/photos/room-deluxe.jpg)" role="img" aria-label="Chambre Deluxe twin"></div>
+            <div><h3>Chambre Deluxe twin</h3><p>25–30 m²</p></div>
+            <button type="button" data-toggle-room aria-expanded="true" aria-label="Afficher les offres"><svg class="i"><use href="../assets/icons.svg#sol-square-up"/></svg></button>
+          </div>
+          <div class="room__body">
+            <div class="room__option">
+              <p>Voir le détail</p>
+              <h4>Sans petit-déjeuner · 1 lit queen ou 2 lits simples</h4>
+              <p class="note"><svg class="i i--16"><use href="../assets/icons.svg#sol-check-circle"/></svg>Annulation gratuite jusqu’au 20 mai 2027</p>
+              <div class="room__cta">
+                <p class="price price--lg">149<span> €</span><small> /nuit</small> <s>159 €</s></p>
+                <a class="btn btn--sm" href="12-payment.html">Réserver</a>
+              </div>
+            </div>
+            <div class="divider"></div>
+            <div class="room__option">
+              <p>Voir le détail</p>
+              <h4>Sans petit-déjeuner · Lit attribué à l’arrivée</h4>
+              <p class="note"><svg class="i i--16"><use href="../assets/icons.svg#sol-check-circle"/></svg>Annulation gratuite jusqu’au 20 mai 2027</p>
+              <div class="room__cta">
+                <p class="price price--lg">129<span> €</span><small> /nuit</small> <s>149 €</s></p>
+                <a class="btn btn--sm" href="12-payment.html">Réserver</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="room">
+          <div class="room__head">
+            <div class="ph ph--photo ph--sm" style="--img: url(../assets/photos/room-bungalow.jpg)" role="img" aria-label="Chambre du bungalow"></div>
+            <div><h3>Bungalow côté jardin</h3><p>25–30 m²</p></div>
+            <button type="button" data-toggle-room aria-expanded="false" aria-label="Afficher les offres"><svg class="i"><use href="../assets/icons.svg#sol-square-down"/></svg></button>
+          </div>
+          <div class="room__body">
+            <div class="room__option">
+              <p>Voir le détail</p>
+              <h4>Petit-déjeuner inclus · 1 lit king</h4>
+              <p class="note"><svg class="i i--16"><use href="../assets/icons.svg#sol-check-circle"/></svg>Annulation gratuite jusqu’au 20 mai 2027</p>
+              <div class="room__cta">
+                <p class="price price--lg">169<span> €</span><small> /nuit</small> <s>189 €</s></p>
+                <a class="btn btn--sm" href="12-payment.html">Réserver</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="room">
+          <div class="room__head">
+            <div class="ph ph--photo ph--sm" style="--img: url(../assets/photos/room-suite.jpg)" role="img" aria-label="Chambre de la suite Premium"></div>
+            <div><h3>Suite Premium</h3><p>25–30 m²</p></div>
+            <button type="button" data-toggle-room aria-expanded="false" aria-label="Afficher les offres"><svg class="i"><use href="../assets/icons.svg#sol-square-down"/></svg></button>
+          </div>
+          <div class="room__body">
+            <div class="room__option">
+              <p>Voir le détail</p>
+              <h4>Petit-déjeuner inclus · 1 lit king, vue sur la jungle</h4>
+              <p class="note"><svg class="i i--16"><use href="../assets/icons.svg#sol-check-circle"/></svg>Annulation gratuite jusqu’au 20 mai 2027</p>
+              <div class="room__cta">
+                <p class="price price--lg">219<span> €</span><small> /nuit</small> <s>249 €</s></p>
+                <a class="btn btn--sm" href="12-payment.html">Réserver</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </section>
+
+  <span class="home-indicator"></span>
+</main>
+<script src="../js/hush.js"></script>
+</body>
+</html>

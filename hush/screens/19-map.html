@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hush — Carte</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/hush.css">
+<script src="../js/transitions.js"></script>
+<style>
+  .map-screen { background: #e9e4fb; }
+  .map { position: absolute; inset: 0; }
+  .map svg { width: 100%; height: 100%; display: block; }
+  .map__land { fill: var(--white); stroke: #d6cdf5; stroke-width: 1.2; }
+  .map__hill { fill: #f3effc; }
+  .map__town { font: 500 3.8px 'DM Sans', sans-serif; fill: var(--gray-600); }
+  .pin { cursor: pointer; }
+  .pin rect, .pin path { fill: var(--white); stroke: #d6cdf5; stroke-width: .35; transition: fill .15s; }
+  .pin text { font: 600 4.2px 'DM Sans', sans-serif; fill: var(--ink); text-anchor: middle; }
+  .pin.is-on rect, .pin.is-on path { fill: var(--brand); stroke: var(--brand); }
+  .pin.is-on text { fill: var(--white); }
+  .pin:focus { outline: none; }
+  .pin:focus-visible rect { stroke: var(--ink); stroke-width: 1.2; }
+  .pin[hidden] { display: none; }
+
+  .map-top { position: absolute; z-index: 2; left: var(--gutter); right: var(--gutter); top: 60px; display: grid; gap: 12px; }
+  .map-top__bar { display: flex; align-items: center; gap: 12px; }
+  .map-top .glass { background: var(--white); color: var(--ink); box-shadow: 0 4px 12px rgba(var(--ink-rgb), .15); }
+  .map-top h1 { flex: 1; height: 40px; padding: 0 16px; border-radius: var(--pill); background: var(--white); box-shadow: 0 4px 12px rgba(var(--ink-rgb), .15); font-size: 15px; font-weight: 600; line-height: 40px; }
+  .map-top h1 span { color: var(--gray-600); font-weight: 400; }
+  .map-top .chips .btn[aria-pressed="false"] { background: var(--white); }
+
+  .map-card { position: absolute; z-index: 2; left: var(--gutter); right: var(--gutter); bottom: 34px; display: flex; gap: 12px; padding: 10px; }
+  .map-card__img { flex: none; width: 104px; height: 104px; border-radius: 18px; }
+  .map-card__body { display: grid; align-content: center; gap: 4px; min-width: 0; padding-right: 36px; }
+  .map-card h2 { font-size: 16px; line-height: 22px; font-weight: 600; }
+  .map-card .fav { top: 10px; right: 10px; background: var(--white-700); color: var(--ink); }
+</style>
+</head>
+<body>
+<main class="screen map-screen">
+  <div class="statusbar">
+    <span>9:41</span>
+    <span class="statusbar__icons"><svg><use href="../assets/icons.svg#sb-signal"/></svg><svg><use href="../assets/icons.svg#sb-wifi"/></svg><svg><use href="../assets/icons.svg#sb-battery"/></svg></span>
+  </div>
+
+  <div class="map">
+    <svg viewBox="160 28 120 262" preserveAspectRatio="xMidYMid slice" role="img" aria-labelledby="map-title">
+      <title id="map-title">Carte de Bali avec les adresses Hush</title>
+      <path class="map__land" d="M20 110C60 85 110 70 150 62S230 50 270 58S345 80 372 100S392 128 380 140C360 150 330 158 300 166S250 180 228 196S214 214 210 226C222 236 226 252 214 262S180 270 168 258S170 236 182 230C176 214 168 204 150 196S100 172 70 156S22 128 20 110Z"/>
+      <ellipse class="map__hill" cx="258" cy="98" rx="26" ry="14"/>
+      <ellipse class="map__hill" cx="196" cy="98" rx="20" ry="11"/>
+      <text class="map__town" x="238" y="150">Ubud</text>
+      <text class="map__town" x="247" y="111">Kintamani</text>
+      <text class="map__town" x="178" y="105">Bedugul</text>
+      <text class="map__town" x="166" y="200">Seminyak</text>
+      <text class="map__town" x="227" y="236">Nusa Dua</text>
+      <g data-pins></g>
+    </svg>
+  </div>
+
+  <div class="map-top">
+    <div class="map-top__bar">
+      <a class="glass" href="15-explore.html" aria-label="Retour"><svg class="i"><use href="../assets/icons.svg#sol-arrow-left"/></svg></a>
+      <h1>Bali <span data-count></span></h1>
+    </div>
+    <div class="chips" role="group" aria-label="Catégorie">
+      <button class="btn btn--sm" aria-pressed="true" data-filter="all">Tout</button>
+      <button class="btn btn--sm" aria-pressed="false" data-filter="hotel">Hôtels</button>
+      <button class="btn btn--sm" aria-pressed="false" data-filter="resort">Resorts</button>
+      <button class="btn btn--sm" aria-pressed="false" data-filter="restaurant">Restaurants</button>
+      <button class="btn btn--sm" aria-pressed="false" data-filter="guide">Guides</button>
+    </div>
+  </div>
+
+  <article class="map-card card-surface" data-id="" aria-live="polite">
+    <div class="ph ph--photo map-card__img" role="img"></div>
+    <div class="map-card__body">
+      <h2><a class="card-link" href="#"></a></h2>
+      <p class="loc"><svg class="i"><use href="../assets/icons.svg#sol-pin"/></svg><span></span></p>
+      <p class="rating"><svg class="i"><use href="../assets/icons.svg#sol-star"/></svg><span></span></p>
+      <p class="price"></p>
+    </div>
+    <button class="glass glass--32 fav" aria-pressed="false" aria-label="Ajouter aux favoris"><svg class="i"><use href="../assets/icons.svg#sol-heart-linear"/></svg></button>
+  </article>
+
+  <span class="home-indicator"></span>
+</main>
+<script src="../js/hush.js"></script>
+<script>
+  // map: one price pin per place, the selected one is shown in the card at the bottom
+  const pinsLayer = document.querySelector('[data-pins]');
+  const card = document.querySelector('.map-card');
+  const NS = 'http://www.w3.org/2000/svg';
+  PLACES.forEach((p) => {
+    const [x, y] = p.map;
+    const g = document.createElementNS(NS, 'g');
+    g.setAttribute('class', 'pin');
+    g.setAttribute('transform', `translate(${x} ${y})`);
+    g.setAttribute('tabindex', '0');
+    g.setAttribute('role', 'button');
+    g.setAttribute('aria-label', `${p.name}, ${p.price} euros`);
+    g.dataset.place = p.id;
+    g.innerHTML = `<rect x="-11" y="-13" width="22" height="8.5" rx="4.25"/><path d="M-2 -4.6h4l-2 2.6z"/><text y="-7.3">${p.price}${NB}€</text>`;
+    pinsLayer.appendChild(g);
+  });
+  const select = (id) => {
+    const p = placeById(id);
+    document.querySelectorAll('.pin').forEach((g) => g.classList.toggle('is-on', g.dataset.place === id));
+    const on = document.querySelector(`.pin[data-place="${id}"]`);
+    pinsLayer.appendChild(on); // selected pin drawn on top
+    card.dataset.id = p.id;
+    card.querySelector('.map-card__img').style.setProperty('--img', `url(../assets/photos/${p.img}.jpg)`);
+    card.querySelector('.map-card__img').setAttribute('aria-label', p.alt);
+    const link = card.querySelector('.card-link');
+    link.textContent = p.name; link.href = p.href;
+    card.querySelector('.loc span').textContent = p.loc;
+    card.querySelector('.rating span').textContent = `${p.rating} (${p.reviews.replace(' ', NB)})`;
+    card.querySelector('.price').innerHTML = `${p.price}<span>${NB}€</span><small>${NB}${p.unit}</small>`;
+    paintFav(card.querySelector('.fav'), favs().includes(p.id));
+  };
+  pinsLayer.addEventListener('click', (e) => { const g = e.target.closest('.pin'); if (g) select(g.dataset.place); });
+  pinsLayer.addEventListener('keydown', (e) => { const g = e.target.closest('.pin'); if (g && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); select(g.dataset.place); } });
+  const filter = (type) => {
+    let first = null, n = 0;
+    document.querySelectorAll('.pin').forEach((g) => {
+      const show = type === 'all' || placeById(g.dataset.place).type === type;
+      g.toggleAttribute('hidden', !show);
+      if (show) { n++; first ??= g.dataset.place; }
+    });
+    document.querySelector('[data-count]').textContent = `· ${n} adresse${n > 1 ? 's' : ''}`;
+    if (!document.querySelector('.pin.is-on:not([hidden])') && first) select(first);
+  };
+  document.addEventListener('chipchange', (e) => filter(e.detail));
+  select(new URLSearchParams(location.search).get('focus') || 'alang');
+  filter('all');
+</script>
+</body>
+</html>

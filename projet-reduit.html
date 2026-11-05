@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <script>
   // apply the saved theme before first paint so the page doesn't flash dark
-  try { if (localStorage.getItem('theme') === 'light') document.documentElement.dataset.theme = 'light'; } catch (e) {}
+  try { if (localStorage.getItem('theme') !== 'dark') document.documentElement.dataset.theme = 'light'; } catch (e) { document.documentElement.dataset.theme = 'light'; }
 </script>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600&family=Instrument+Serif:ital@0;1&family=Geist:wght@400;600&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
@@ -361,7 +361,7 @@
     <p class="lead">Une landing page pour un cloud fictif qui chiffre tes fichiers puis les range dans un ancien bunker de l’armée suisse, sous 900&nbsp;m de granit. Un projet plus sombre et plus sec que les autres.</p>
     <span class="note"><i></i>Défi personnel · marque, bunker et chiffres fictifs</span>
     <div class="meta">
-      <div><span>Client</span>Réduit, marque imaginée pour ce défi</div>
+      <div><span>Marque</span>Réduit, imaginée pour ce défi</div>
       <div><span>Mon rôle</span>UI, direction artistique, logo, intégration</div>
       <div><span>Périmètre</span>Une landing page, ordinateur et mobile</div>
       <div><span>Outils</span>Figma, puis HTML, CSS, JavaScript et Three.js pour les tuiles 3D</div>

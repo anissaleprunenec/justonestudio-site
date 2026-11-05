@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hush — Maquette mobile</title>
+<link rel="icon" href="assets/logo-hush-mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+  :root { --brand: #9c7bff; --ink: #1e1240; --muted: #a8a2bc; --bg: #1e1240; }
+  * { box-sizing: border-box; margin: 0; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: #f9f9f9; padding: 56px 40px 80px; }
+  header { max-width: 1200px; margin: 0 auto 56px; }
+  header svg { width: 129px; height: 79px; color: #fbf8ff; --logo-mid: var(--brand); --logo-sun: #ff9f1c; }
+  header h1 { margin-top: 20px; font-size: 32px; line-height: 44px; font-weight: 600; }
+  header p { margin-top: 8px; max-width: 560px; color: #b3b3b3; font-size: 14px; line-height: 22px; }
+  section { max-width: 1800px; margin: 0 auto 64px; }
+  h2 { margin-bottom: 24px; font-size: 14px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--brand); }
+  .row { display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start; }
+  figure { width: 393px; }
+  figcaption { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 14px; }
+  figcaption a { color: var(--muted); text-decoration: none; font-size: 12px; }
+  figcaption a:hover { color: #fff; }
+  .phone { border-radius: 40px; overflow: hidden; box-shadow: 0 30px 60px rgba(0, 0, 0, .4); }
+  iframe { display: block; width: 393px; border: 0; }
+  @media (max-width: 480px) { body { padding: 32px 16px; } figure, iframe { width: 100%; } }
+</style>
+</head>
+<body>
+<header>
+  <svg role="img" aria-label="Hush"><use href="assets/icons.svg#logo-hush"/></svg>
+  <h1>Réserver ses vacances, tout en douceur</h1>
+  <p>Hush, une app de réservation de séjours à Bali : 21 écrans codés en HTML/CSS, avec leurs états d’erreur et leurs états vides. Chaque écran est cliquable : les boutons et la barre de navigation enchaînent le parcours, et ce que tu fais (favoris, réservations) est gardé d’un écran à l’autre. <a href="design-system.html" style="color:inherit">Voir le design system</a>. Photos : Unsplash. Icônes : <a href="https://icon-sets.iconify.design/solar/" style="color:inherit">Solar</a> (CC BY 4.0).</p>
+</header>
+
+<section>
+  <h2>Onboarding</h2>
+  <div class="row">
+    <figure><figcaption>Splash screen <a href="screens/01-splash.html" target="_blank">Ouvrir ↗</a></figcaption><div class="phone"><iframe src="screens/01-splash.html" height="852" title="Splash screen" loading="lazy"></iframe></div></figure>
+    <figure><figcaption>Onboarding <a href="screens/02-onboarding.html" target="_blank">Ouvrir ↗</a></figcaption><div class="phone"><iframe src="screens/02-onboarding.html" height="852" title="Onboarding" loading="lazy"></iframe></div></figure>
+    <figure><figcaption>Autorisations <a href="screens/03-permissions.html" target="_blank">Ouvrir ↗</a></figcaption><div class="phone"><iframe src="screens/03-permissions.html" height="852" title="Autorisations" loading="lazy"></iframe></div></figure>
+    <figure><figcaption>Inscription <a href="screens/04-register.html" target="_blank">Ouvrir ↗</a></figcaption><div class="phone"><iframe src="screens/04-register.html" height="934" title="Inscription" loading="lazy"></iframe></div></figure>
+    <figure><figcaption>Connexion <a href="screens/05-login.html" target="_blank">Ouvrir ↗</a></figcaption><div class="phone"><iframe src="screens/05-login.html" height="855" title="Connexion" loading="lazy"></iframe></div></figure>
+    <figure><figcaption>Mot de passe oublié <a href="screens/21-forgot.html" target="_blank">Ouvrir ↗</a></figcaption><div class="phone"><iframe src="screens/21-forgot.html" height="852" title="Mot de passe oublié" loading="lazy"></iframe></div></figure>
+  </div>
+</section>
+
+<section>
+  <h2>Réserver un hôtel</h2>
+  <div class="row">
+    <figure><figcaption>Accueil <a href="screens/06-home.html" target="_blank">Ouvrir ↗</a></figcaption><div class="phone"><iframe src="screens/06-home.html" height="1157" title="Accueil" loading="lazy"></iframe></div></figure>
+    <figure><figcaption>Recherche <a href="screens/07-search.html" target="_blank">Ouvrir ↗</a></figcaption><div class="phone"><iframe src="screens/07-search.html" height="2124" title="Recherche" loading="lazy"></iframe></div></figure>
+    <figure><figcaption>Fiche hôtel <a href="screens/08-hotel.html" target="_blank">Ouvrir ↗</a></figcaption><div class="phone"><iframe src="screens/08-hotel.html" height="1577" title="Fiche hôtel" loading="lazy"></iframe></div></figure>
+    <figure><figcaption>Réservation hôtel <a href="screens/09-booking.html" target="_blank">Ouvrir ↗</a></figcaption><div class="phone"><iframe src="screens/09-booking.html" height="1327" title="Réservation hôtel" loading="lazy"></iframe></div></figure>
+    <figure><figcaption>Paiement <a href="screens/12-payment.html" target="_blank">Ouvrir ↗</a></figcaption><div class="phone"><iframe src="screens/12-payment.html" height="1255" title="Paiement" loading="lazy"></iframe></div></figure>
+    <figure><figcaption>Réservation confirmée <a href="screens/12-payment.html#success" target="_blank">Ouvrir ↗</a></figcaption><div class="phone"><iframe src="screens/12-payment.html#success" height="852" title="Réservation confirmée" loading="lazy" scrolling="no"></iframe></div></figure>
+  </div>
+</section>
+
+<section>
+  <h2>Réserver une table</h2>
+  <div class="row">
+    <figure><figcaption>Fiche restaurant <a href="screens/10-restaurant.html" target="_blank">Ouvrir ↗</a></figcaption><div class="phone"><iframe src="screens/10-restaurant.html" height="852" title="Fiche restaurant" loading="lazy"></iframe></div></figure>
+    <figure><figcaption>Formulaire de réservation <a href="screens/11-reservation.html" target="_blank">Ouvrir ↗</a></figcaption><div class="phone"><iframe src="screens/11-reservation.html" height="917" title="Formulaire de réservation" loading="lazy"></iframe></div></figure>
+  </div>
+</section>
+
+<section>
+  <h2>Mon compte</h2>
+  <div class="row">
+    <figure><figcaption>Historique <a href="screens/13-history.html" target="_blank">Ouvrir ↗</a></figcaption><div class="phone"><iframe src="screens/13-history.html" height="852" title="Historique" loading="lazy"></iframe></div></figure>
+    <figure><figcaption>Détail d’une réservation <a href="screens/14-history-detail.html" target="_blank">Ouvrir ↗</a></figcaption><div class="phone"><iframe src="screens/14-history-detail.html" height="1262" title="Détail d’une réservation" loading="lazy"></iframe></div></figure>
+    <figure><figcaption>Explorer <a href="screens/15-explore.html" target="_blank">Ouvrir ↗</a></figcaption><div class="phone"><iframe src="screens/15-explore.html" height="1308" title="Explorer" loading="lazy"></iframe></div></figure>
+    <figure><figcaption>Favoris <a href="screens/16-favorite.html" target="_blank">Ouvrir ↗</a></figcaption><div class="phone"><iframe src="screens/16-favorite.html" height="1142" title="Favoris" loading="lazy"></iframe></div></figure>
+    <figure><figcaption>Profil <a href="screens/17-profile.html" target="_blank">Ouvrir ↗</a></figcaption><div class="phone"><iframe src="screens/17-profile.html" height="1075" title="Profil" loading="lazy"></iframe></div></figure>
+    <figure><figcaption>Modifier le profil <a href="screens/18-edit-profile.html" target="_blank">Ouvrir ↗</a></figcaption><div class="phone"><iframe src="screens/18-edit-profile.html" height="852" title="Modifier le profil" loading="lazy"></iframe></div></figure>
+    <figure><figcaption>Carte <a href="screens/19-map.html" target="_blank">Ouvrir ↗</a></figcaption><div class="phone"><iframe src="screens/19-map.html" height="852" title="Carte" loading="lazy"></iframe></div></figure>
+    <figure><figcaption>Notifications <a href="screens/20-notifications.html" target="_blank">Ouvrir ↗</a></figcaption><div class="phone"><iframe src="screens/20-notifications.html" height="852" title="Notifications" loading="lazy"></iframe></div></figure>
+  </div>
+</section>
+
+<section>
+  <h2>Quand ça ne se passe pas comme prévu</h2>
+  <div class="row">
+    <figure><figcaption>Paiement incomplet <a href="screens/12-payment.html?erreurs" target="_blank">Ouvrir ↗</a></figcaption><div class="phone"><iframe src="screens/12-payment.html?erreurs" height="1299" title="Paiement avec erreurs" loading="lazy"></iframe></div></figure>
+    <figure><figcaption>Inscription incomplète <a href="screens/04-register.html?erreurs" target="_blank">Ouvrir ↗</a></figcaption><div class="phone"><iframe src="screens/04-register.html?erreurs" height="1018" title="Inscription avec erreurs" loading="lazy"></iframe></div></figure>
+    <figure><figcaption>Recherche sans résultat <a href="screens/07-search.html?q=igloo" target="_blank">Ouvrir ↗</a></figcaption><div class="phone"><iframe src="screens/07-search.html?q=igloo" height="852" title="Recherche sans résultat" loading="lazy"></iframe></div></figure>
+    <figure><figcaption>Aucun favori <a href="screens/16-favorite.html?vide" target="_blank">Ouvrir ↗</a></figcaption><div class="phone"><iframe src="screens/16-favorite.html?vide" height="852" title="Aucun favori" loading="lazy"></iframe></div></figure>
+  </div>
+</section>
+</body>
+</html>

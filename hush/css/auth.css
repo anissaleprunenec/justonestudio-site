@@ -1,0 +1,24 @@
+/* Register / Login */
+
+/* the photo runs 40 px under the sheet so its rounded corners sit on the photo, not on a strip of background */
+.auth__cover { position: absolute; inset: 0 0 auto; height: 241px; padding-top: 40px; }
+.auth__sheet { margin-top: 201px; min-height: 651px; display: flex; flex-direction: column; padding-top: 48px; }
+.auth__lead { margin: 12px 0 40px; }
+.auth__password { margin-top: 12px; padding-right: 16px; }
+.auth__eye { display: grid; margin-left: auto; color: var(--gray-500); }
+.auth__forgot { align-self: flex-end; margin: 12px 0 20px; }
+.auth .or { margin: 20px 0; }
+.auth .btn--apple { margin-top: 12px; }
+.auth__switch { margin-top: 40px; }
+
+
+/* the sheet always reaches the bottom, whatever the screen height */
+.auth { display: flex; flex-direction: column; }
+.auth .auth__sheet { flex: 1; }
+
+/* sign-up fields, consent and guest access */
+.auth .field + .field { margin-top: 12px; }
+.auth .check + .btn { margin-top: 20px; }
+.auth .field-error + .field { margin-top: 12px; }
+.auth__guest { align-self: center; margin-top: 12px; padding: 8px; color: var(--gray-700); font-weight: 500; text-decoration: underline; text-underline-offset: 3px; }
+.auth .field-error + .btn { margin-top: 16px; }

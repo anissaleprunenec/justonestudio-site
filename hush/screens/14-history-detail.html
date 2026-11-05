@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hush — Détail du voyage</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/hush.css">
+<script src="../js/transitions.js"></script>
+<style>
+  .trip-detail { padding: 0 var(--gutter) 58px; }
+  .trip-detail .place { padding: 12px 0 0; }
+  .trip-detail .place__row { align-items: center; }
+  .trip-detail > .divider { margin: 20px 0; }
+  .trip-detail .card-surface + .card-surface { margin-top: 16px; }
+  .trip-detail .summary { margin-top: 20px; }
+  .trip-detail .breakdown { margin-top: 20px; }
+  .hero--top .hero__actions { top: 64px; }
+  .hero--top .ph { padding-top: 0; }
+</style>
+</head>
+<body>
+<main class="screen screen--gray">
+  <div class="statusbar statusbar--light">
+    <span>9:41</span>
+    <span class="statusbar__icons"><svg><use href="../assets/icons.svg#sb-signal"/></svg><svg><use href="../assets/icons.svg#sb-wifi"/></svg><svg><use href="../assets/icons.svg#sb-battery"/></svg></span>
+  </div>
+
+  <div class="hero hero--top">
+    <div class="ph ph--photo" style="--img: url(../assets/photos/neano-hotel.jpg)" role="img" aria-label="Villa au toit de chaume et sa piscine privée"></div>
+    <div class="hero__actions">
+      <a class="glass" href="13-history.html" aria-label="Retour"><svg class="i"><use href="../assets/icons.svg#sol-arrow-left"/></svg></a>
+      <button class="glass" aria-label="Ajouter aux favoris"><svg class="i i--20"><use href="../assets/icons.svg#sol-heart-linear"/></svg></button>
+      <button class="glass" aria-label="Partager"><svg class="i"><use href="../assets/icons.svg#sol-share"/></svg></button>
+    </div>
+    <div class="pager" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+  </div>
+
+  <section class="trip-detail">
+    <header class="place">
+      <span class="place__kind">Villa 5 étoiles</span>
+      <div class="place__row">
+        <div>
+          <h1 class="place__name">Villa Alang-Alang</h1>
+          <p class="loc loc--lg"><svg class="i"><use href="../assets/icons.svg#sol-pin"/></svg>Ubud, Bali</p>
+        </div>
+        <a class="btn btn--sm btn--outline btn--icon-r" href="19-map.html?focus=alang">Voir la carte<svg class="i i--16"><use href="../assets/icons.svg#sol-gps"/></svg></a>
+      </div>
+      <p class="status"><span class="status__chip">À venir</span>Réservation n° HSH-27A4K9</p>
+    </header>
+
+    <div class="divider"></div>
+
+    <dl class="card-surface info">
+      <div><dt>2 nuits</dt><dd>Dim. 23 mai – mar. 25 mai 2027</dd></div>
+      <svg class="i"><use href="../assets/icons.svg#sol-calendar"/></svg>
+    </dl>
+    <dl class="card-surface info">
+      <div><dt>Voyageurs</dt><dd>2 adultes</dd></div>
+      <svg class="i i--20" style="margin-right:4px"><use href="../assets/icons.svg#sol-user-linear"/></svg>
+    </dl>
+
+    <div class="summary">
+      <a class="summary__link" href="#">Voir le détail</a>
+      <h3>Chambre Deluxe twin</h3>
+      <ul class="dot-list">
+        <li>Petit-déjeuner non inclus</li>
+        <li>1 lit queen ou 2 lits simples</li>
+        <li>2 adultes maximum. Pour les enfants, les conditions dépendent de la villa.</li>
+      </ul>
+      <div class="divider"></div>
+      <p class="note"><svg class="i i--16"><use href="../assets/icons.svg#sol-check-circle"/></svg>Annulation gratuite jusqu’au 20 mai 2027</p>
+    </div>
+
+    <section class="card-surface breakdown" aria-labelledby="breakdown-title">
+      <h3 id="breakdown-title">Ce que tu as payé</h3>
+      <dl>
+        <div><dt>159 € × 2 nuits</dt><dd>318 €</dd></div>
+        <div><dt>Prix Hush (−10 € par nuit)</dt><dd>−20 €</dd></div>
+        <div><dt>Taxes et frais de service</dt><dd>Inclus</dd></div>
+        <div class="breakdown__total"><dt>Total</dt><dd>298 €</dd></div>
+      </dl>
+      <p class="breakdown__note"><svg class="i i--16"><use href="../assets/icons.svg#sol-shield-check"/></svg>Payé avec Mastercard •••• 3456 le 2 mai 2027</p>
+    </section>
+
+    <div class="trip-actions">
+      <a class="btn btn--block" href="#"><svg class="i i--20"><use href="../assets/icons.svg#sol-letter"/></svg>Contacter la villa</a>
+      <a class="btn btn--block btn--line" href="#cancel">Annuler la réservation</a>
+    </div>
+  </section>
+
+  <div class="modal" id="cancel">
+    <a class="modal__scrim" href="#" aria-label="Fermer"></a>
+    <div class="modal__box" role="dialog" aria-modal="true" aria-labelledby="cancel-title">
+      <h2 class="h3" id="cancel-title">Annuler ton séjour ?</h2>
+      <p>L’annulation est gratuite jusqu’au 20 mai 2027. Tu seras remboursée de 298 € sous 5 jours ouvrés.</p>
+      <a class="btn btn--block" href="#">Garder mon séjour</a>
+      <a class="btn btn--block btn--line" href="13-history.html">Oui, annuler</a>
+    </div>
+  </div>
+
+  <span class="home-indicator"></span>
+</main>
+<script src="../js/hush.js"></script>
+</body>
+</html>

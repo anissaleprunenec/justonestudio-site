@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hush — Réserver une table</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/hush.css">
+<script src="../js/transitions.js"></script>
+<style>
+  .booking .place { padding: 20px 0 0; }
+  .booking form { display: flex; flex-direction: column; flex: 1; margin-top: 24px; }
+  .booking form > * + .label { margin-top: 20px; }
+  .booking .chips { margin-right: 0; padding-right: 0; }
+  .booking .sheet__cta { padding-left: 0; padding-right: 0; }
+</style>
+</head>
+<body>
+<main class="screen screen--dark">
+  <div class="statusbar statusbar--light">
+    <span>9:41</span>
+    <span class="statusbar__icons"><svg><use href="../assets/icons.svg#sb-signal"/></svg><svg><use href="../assets/icons.svg#sb-wifi"/></svg><svg><use href="../assets/icons.svg#sb-battery"/></svg></span>
+  </div>
+
+  <section class="sheet sheet--flex booking">
+    <header class="topbar">
+      <a href="10-restaurant.html" aria-label="Retour"><svg class="i"><use href="../assets/icons.svg#sol-arrow-left"/></svg></a>
+      <h1>Réserver une table</h1>
+      <button aria-label="Ajouter aux favoris"><svg class="i"><use href="../assets/icons.svg#sol-heart-linear"/></svg></button>
+    </header>
+
+    <div class="place">
+      <div class="place__row">
+        <div>
+          <h2 class="place__name" style="margin-top:0">Warung Danau</h2>
+          <p class="loc loc--lg"><svg class="i"><use href="../assets/icons.svg#sol-pin"/></svg>Kintamani, Bali</p>
+          <p class="rating rating--lg"><svg class="i"><use href="../assets/icons.svg#sol-star"/></svg>4,9 (3 726)</p>
+        </div>
+        <a class="btn btn--sm btn--outline btn--icon-r" href="19-map.html?focus=danau">Voir la carte<svg class="i i--16"><use href="../assets/icons.svg#sol-gps"/></svg></a>
+      </div>
+    </div>
+
+    <form action="#table-ok" data-validate novalidate>
+      <label class="label" for="date">Date</label>
+      <label class="field field--date is-active">
+        <input id="date" value="ven. 28 mai 2027" data-date="2027-05-28" data-cal="single" readonly aria-haspopup="dialog">
+        <svg class="i"><use href="../assets/icons.svg#sol-calendar"/></svg>
+      </label>
+
+      <p class="label" style="margin-top:20px">Heure</p>
+      <div class="chips" role="group" aria-label="Heure" data-group="time">
+        <button type="button" class="btn btn--sm" aria-pressed="false">12:00</button>
+        <button type="button" class="btn btn--sm" aria-pressed="false">12:30</button>
+        <button type="button" class="btn btn--sm" aria-pressed="false">19:00</button>
+        <button type="button" class="btn btn--sm" aria-pressed="true">19:30</button>
+        <button type="button" class="btn btn--sm" aria-pressed="false">20:00</button>
+      </div>
+
+      <p class="label" style="margin-top:20px">Nombre de personnes</p>
+      <div class="stepper card-surface" data-stepper="people">
+        <div class="stepper__row" data-min="1" data-max="12">
+          <div><b>Personnes</b><small>Bébés compris</small></div>
+          <div class="stepper__ctl">
+            <button type="button" data-step="-1" aria-label="Une personne de moins">−</button>
+            <output aria-live="polite">2</output>
+            <button type="button" data-step="1" aria-label="Une personne de plus">+</button>
+          </div>
+        </div>
+      </div>
+
+      <p class="label" style="margin-top:20px">Où veux-tu t’installer ?</p>
+      <div class="chips" role="group" aria-label="Emplacement">
+        <button type="button" class="btn btn--sm" aria-pressed="true">En salle</button>
+        <button type="button" class="btn btn--sm" aria-pressed="false">En terrasse</button>
+        <button type="button" class="btn btn--sm" aria-pressed="false">Salon privé</button>
+      </div>
+
+      <label class="label" for="note" style="margin-top:20px">Une précision ? (facultatif)</label>
+      <label class="textarea">
+        <textarea id="note" maxlength="400" placeholder="Allergie, anniversaire, chaise bébé…"></textarea>
+        <span class="textarea__count">0/400</span>
+      </label>
+
+      <div class="sheet__cta">
+        <button class="btn btn--block" type="submit">Confirmer la réservation</button>
+      </div>
+    </form>
+  </section>
+
+  <div class="modal" id="table-ok">
+    <a class="modal__scrim" href="#" aria-label="Fermer"></a>
+    <div class="modal__box" role="dialog" aria-modal="true" aria-labelledby="table-title">
+      <svg class="i"><use href="../assets/icons.svg#sol-check-circle-duo"/></svg>
+      <h2 class="h3" id="table-title">Table réservée !</h2>
+      <p>Le Warung Danau t’attend <b data-out="date">ven. 28 mai 2027</b> à <b data-out="time">19:30</b>, pour <b data-out="people">2 personnes</b>. La confirmation est dans ta boîte mail.</p>
+      <a class="btn btn--block" href="13-history.html">Voir mes voyages</a>
+    </div>
+  </div>
+
+  <span class="home-indicator"></span>
+</main>
+<script src="../js/hush.js"></script>
+</body>
+</html>

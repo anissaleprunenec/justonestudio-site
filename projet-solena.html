@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <script>
   // apply the saved theme before first paint so the page doesn't flash dark
-  try { if (localStorage.getItem('theme') === 'light') document.documentElement.dataset.theme = 'light'; } catch (e) {}
+  try { if (localStorage.getItem('theme') !== 'dark') document.documentElement.dataset.theme = 'light'; } catch (e) { document.documentElement.dataset.theme = 'light'; }
 </script>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600&family=Instrument+Serif:ital@0;1&family=Geist:wght@400;600&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
@@ -362,7 +362,7 @@
     <p class="lead">Une boutique en ligne pour une marque fictive de soins du visage&nbsp;: un vert sauge, un ivoire chaud, de grandes images de produit et un pot de crème qui s’ouvre au défilement.</p>
     <span class="note"><i></i>Défi personnel · marque, produits et avis fictifs</span>
     <div class="meta">
-      <div><span>Client</span>SOLENA, marque imaginée pour ce défi</div>
+      <div><span>Marque</span>SOLENA, imaginée pour ce défi</div>
       <div><span>Mon rôle</span>UI/UX, direction artistique, intégration</div>
       <div><span>Périmètre</span>Page d’accueil e-commerce, ordinateur et mobile</div>
       <div><span>Outils</span>Figma, puis HTML, CSS et JavaScript sans framework</div>

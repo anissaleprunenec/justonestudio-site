@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <script>
   // apply the saved theme before first paint so the page doesn't flash dark
-  try { if (localStorage.getItem('theme') === 'light') document.documentElement.dataset.theme = 'light'; } catch (e) {}
+  try { if (localStorage.getItem('theme') !== 'dark') document.documentElement.dataset.theme = 'light'; } catch (e) { document.documentElement.dataset.theme = 'light'; }
 </script>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600&family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@500;800&display=swap" rel="stylesheet">
 <style>
@@ -360,7 +360,7 @@
     <p class="lead">Une application fictive pour organiser un voyage entre amis&nbsp;: voter pour une destination, s’accorder sur un budget sans gêne, trouver des dates communes, puis réserver ensemble. Mon premier projet complet, quatre pages reliées et cliquables de bout en bout.</p>
     <span class="note"><i></i>Défi personnel · marque, application et avis fictifs</span>
     <div class="meta">
-      <div><span>Client</span>Roamies, marque imaginée pour ce défi</div>
+      <div><span>Marque</span>Roamies, imaginée pour ce défi</div>
       <div><span>Mon rôle</span>UX/UI, logo, intégration front-end</div>
       <div><span>Périmètre</span>Accueil, destinations, fiche voyage, espace de groupe</div>
       <div><span>Outils</span>Figma, puis HTML, CSS et JavaScript sans framework</div>

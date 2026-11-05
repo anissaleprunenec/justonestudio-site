@@ -1,0 +1,681 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hush — Design system</title>
+<meta name="description" content="Couleurs, typographie, icônes, composants et règles d’usage de Hush, l’app de réservation de séjours à Bali.">
+<link rel="icon" href="assets/logo-hush-mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/hush.css">
+<style>
+  /* the app stylesheet draws a centred phone: this page is a normal document */
+  html { scroll-behavior: smooth; scroll-padding-top: 24px; }
+  body { display: block; background: var(--white-700); min-height: 0; }
+  .ds { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 40px; max-width: 1320px; margin: 0 auto; padding: 32px; }
+  .ds-nav { position: sticky; top: 32px; align-self: start; display: grid; gap: 2px; }
+  .ds-nav__brand { display: block; padding-bottom: 16px; color: var(--ink); --logo-mid: var(--brand); --logo-sun: var(--mango); }
+  .ds-nav__brand svg { width: 103px; height: 63px; }
+  .ds-nav h2 { padding: 16px 12px 4px; font-size: 12px; line-height: 16px; font-weight: 600; color: var(--gray-600); }
+  .ds-nav a:not(.ds-nav__brand) { padding: 7px 12px; border-radius: 12px; color: var(--gray-700); font-weight: 500; }
+  .ds-nav a:not(.ds-nav__brand):hover { background: var(--white); color: var(--brand); }
+  .ds-nav .btn { margin-top: 16px; }
+  .ds-head { padding: 16px 0 32px; }
+  .ds-head h1 { font-size: 40px; line-height: 48px; font-weight: 600; letter-spacing: -.02em; }
+  .ds-head p { max-width: 640px; margin-top: 8px; font-size: 16px; line-height: 24px; color: var(--gray-700); }
+  .ds-sec { padding: 32px; margin-bottom: 24px; background: var(--white); border-radius: 32px; }
+  .ds-sec > h2 { font-size: 24px; line-height: 32px; font-weight: 600; letter-spacing: -.01em; }
+  .ds-sec > p { max-width: 680px; margin: 4px 0 16px; color: var(--gray-700); }
+  .ds-sec > h3 { margin: 28px 0 12px; font-size: 12px; line-height: 16px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--gray-600); }
+  .ds-sec > h3:first-of-type { margin-top: 16px; }
+  .ds-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .ds-row--top { align-items: flex-start; }
+  .ds-stage { padding: 24px; border-radius: 24px; background: var(--white-800); box-shadow: inset 0 0 0 1px var(--gray-300); }
+  .ds-stage--gray { background: var(--white-700); }
+  .ds-stage--dark { background: var(--ink); }
+  .ds-cap { display: block; margin-bottom: 8px; font-size: 12px; line-height: 16px; font-weight: 600; color: var(--gray-600); }
+  .ds-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; align-items: start; }
+  .ds-grid--wide { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
+  small.ds-note { display: block; margin-top: 8px; font-size: 12px; line-height: 16px; color: var(--gray-600); }
+
+  /* principles */
+  .ds-rules { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+  .ds-rules li { padding: 16px; border-radius: 20px; background: var(--white-700); }
+  .ds-rules b { display: block; margin-bottom: 4px; font-weight: 600; }
+  .ds-rules span { color: var(--gray-700); }
+
+  /* logo */
+  .ds-logos { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 12px; }
+  .ds-logo { display: grid; place-items: center; min-height: 180px; border-radius: 24px; }
+  .ds-logo svg { width: 70%; max-width: 260px; height: auto; aspect-ratio: 258 / 158; }
+  .ds-logo--mark svg { width: 64px; aspect-ratio: 1; }
+  .ds-logo--light { background: var(--white-800); box-shadow: inset 0 0 0 1px var(--gray-300); color: var(--ink); --logo-mid: var(--brand); --logo-sun: var(--mango); }
+  .ds-logo--brand { background: var(--brand); color: var(--white-800); --logo-sun: var(--mango); }
+  .ds-logo--dark { background: var(--ink); color: var(--white-800); --logo-mid: #9c7bff; --logo-sun: var(--mango); }
+
+  /* colours */
+  .ds-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+  .ds-swatch { border-radius: 20px; overflow: hidden; box-shadow: inset 0 0 0 1px var(--gray-300); background: var(--white); }
+  .ds-swatch i { display: flex; align-items: flex-end; justify-content: space-between; height: 88px; padding: 10px 12px; font-style: normal; font-size: 12px; line-height: 16px; font-weight: 600; }
+  .ds-swatch span { display: block; padding: 10px 12px 12px; font-weight: 600; }
+  .ds-swatch small { display: block; font-size: 12px; line-height: 16px; font-weight: 400; color: var(--gray-600); }
+  .ds-swatch em { display: block; margin-top: 6px; font-style: normal; font-size: 12px; line-height: 16px; font-weight: 400; color: var(--gray-700); }
+  .ds-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .ds-table th { padding: 8px 12px; text-align: left; font-size: 12px; font-weight: 600; color: var(--gray-600); border-bottom: 1px solid var(--gray-300); }
+  .ds-table td { padding: 10px 12px; border-bottom: 1px solid var(--gray-300); vertical-align: middle; }
+  .ds-table tr:last-child td { border-bottom: 0; }
+  .ds-pair { display: inline-grid; place-items: center; min-width: 76px; height: 32px; padding: 0 12px; border-radius: var(--pill); font-weight: 600; font-size: 13px; }
+  .ds-ok { color: #1c7a4a; font-weight: 600; }
+  .ds-no { color: var(--danger); font-weight: 600; }
+
+  /* type */
+  .ds-type { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 16px; align-items: baseline; padding: 14px 0; border-bottom: 1px solid var(--gray-300); }
+  .ds-type:last-child { border-bottom: 0; }
+  .ds-type small { font-size: 12px; line-height: 16px; color: var(--gray-600); }
+  .ds-type small b { display: block; font-size: 14px; line-height: 20px; color: var(--ink); font-weight: 600; }
+
+  /* spacing, radius, shadow */
+  .ds-spaces { display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-end; }
+  .ds-spaces div { display: grid; justify-items: center; gap: 4px; font-size: 12px; color: var(--gray-600); }
+  .ds-spaces i { display: block; background: var(--brand-400); box-shadow: inset 0 0 0 1px var(--brand); border-radius: 2px; }
+  .ds-radius { display: grid; place-items: center; width: 104px; height: 72px; background: var(--brand-400); color: var(--brand); font-size: 12px; line-height: 16px; font-weight: 600; text-align: center; }
+  .ds-shadow { display: grid; place-items: center; width: 180px; height: 88px; border-radius: 24px; background: var(--white); font-size: 12px; font-weight: 600; text-align: center; }
+
+  /* icons */
+  .ds-icons { display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 8px; }
+  .ds-icon { display: grid; justify-items: center; gap: 8px; padding: 16px 6px 12px; border-radius: 16px; background: var(--white-800); color: var(--brand); text-align: center; }
+  .ds-icon code { font-size: 11px; line-height: 14px; color: var(--gray-700); word-break: break-all; }
+
+  /* components shown out of their phone */
+  .ds-phone { position: relative; width: 393px; max-width: 100%; border-radius: 32px; overflow: hidden; background: var(--white-800); box-shadow: inset 0 0 0 1px var(--gray-300); }
+  .ds-phone .navbar { position: relative; }
+  .ds .toast { position: static; transform: none; opacity: 1; display: inline-block; }
+  .ds .modal__box { position: static; transform: none; margin: 0 auto; box-shadow: 0 20px 40px rgba(var(--ink-rgb), .12); }
+  .ds-scrim { padding: 32px 16px; border-radius: 24px; background: rgba(var(--ink-rgb), .5); }
+  .ds .fav { position: absolute; }
+  .ds-favs { display: flex; gap: 16px; padding: 16px; border-radius: 20px; background: url(assets/photos/neano-hotel.jpg) center / cover; }
+  .ds-favs .fav { position: static; }
+  .ds-field { width: 300px; max-width: 100%; }
+  .ds-check { max-width: 320px; }
+  .ds-check .check { margin-top: 0; }
+  .ds-tabs { width: 340px; max-width: 100%; }
+  .ds-stepper { width: 340px; max-width: 100%; }
+  .ds-breakdown { width: 361px; max-width: 100%; }
+  .ds-empty { width: 361px; max-width: 100%; border-radius: 24px; background: var(--white-800); box-shadow: inset 0 0 0 1px var(--gray-300); }
+  .ds-status { margin-top: 0; }
+  .ds-badges { position: relative; display: flex; gap: 12px; align-items: center; }
+  .ds-badges .badge { position: static; }
+  .ds-tile-wrap { display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
+
+  /* content and accessibility rules */
+  .ds-dos { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
+  .ds-do { padding: 16px; border-radius: 20px; background: var(--white-700); }
+  .ds-do b { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-weight: 600; }
+  .ds-do b::before { content: '✓'; display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: var(--brand); color: var(--white); font-size: 11px; }
+  .ds-do.is-dont b::before { content: '✕'; background: var(--danger); }
+  .ds-do p { color: var(--gray-700); }
+  .ds-do p + p { margin-top: 6px; }
+  .ds-do q { color: var(--ink); font-weight: 500; }
+  .ds-list { display: grid; gap: 10px; max-width: 760px; }
+  .ds-list li { position: relative; padding-left: 22px; color: var(--gray-700); }
+  .ds-list li::before { content: ''; position: absolute; left: 4px; top: 7px; width: 7px; height: 7px; border-radius: 50%; background: var(--brand); }
+  .ds-list b { color: var(--ink); font-weight: 600; }
+  .ds-foot { padding: 8px 0 24px; font-size: 12px; line-height: 18px; color: var(--gray-600); }
+  .ds-foot a { color: var(--brand); text-decoration: underline; }
+
+  @media (max-width: 900px) {
+    .ds { grid-template-columns: minmax(0, 1fr); padding: 16px; gap: 8px; }
+    .ds-nav { position: static; display: flex; flex-wrap: wrap; }
+    .ds-nav h2 { display: none; }
+    .ds-nav__brand { width: 100%; }
+    .ds-head h1 { font-size: 32px; line-height: 40px; }
+    .ds-sec { padding: 20px 16px; border-radius: 24px; }
+    .ds-type { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+    .ds-logos { grid-template-columns: 1fr 1fr; }
+    .ds-logos > :first-child { grid-column: 1 / -1; }
+    .ds-table { font-size: 13px; }
+    .ds-table th:nth-child(4), .ds-table td:nth-child(4) { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="ds">
+  <nav class="ds-nav" aria-label="Sections du design system">
+    <a class="ds-nav__brand" href="index.html" aria-label="Hush, retour aux écrans"><svg role="img" aria-label="Hush"><use href="assets/icons.svg#logo-hush"/></svg></a>
+    <h2>Fondations</h2>
+    <a href="#principes">Principes</a>
+    <a href="#logo">Logo</a>
+    <a href="#couleurs">Couleurs</a>
+    <a href="#typo">Typographie</a>
+    <a href="#espaces">Espaces et formes</a>
+    <a href="#icones">Icônes</a>
+    <h2>Composants</h2>
+    <a href="#boutons">Boutons</a>
+    <a href="#filtres">Filtres et onglets</a>
+    <a href="#champs">Champs</a>
+    <a href="#voyageurs">Voyageurs</a>
+    <a href="#cartes">Cartes</a>
+    <a href="#prix">Prix et statut</a>
+    <a href="#messages">Messages</a>
+    <a href="#navigation">Navigation</a>
+    <h2>Règles</h2>
+    <a href="#contenu">Contenu</a>
+    <a href="#accessibilite">Accessibilité</a>
+    <a class="btn btn--sm btn--outline" href="index.html">Voir les écrans</a>
+  </nav>
+
+  <main>
+    <header class="ds-head">
+      <h1>Design system</h1>
+      <p>Les fondations, les composants et les règles d’usage de Hush, l’app qui réserve des vacances à Bali sans stress. Cette page charge la même feuille de style que les écrans&nbsp;: chaque composant ci-dessous est le vrai, pas une image.</p>
+    </header>
+
+    <!-- ===================== Fondations ===================== -->
+
+    <section class="ds-sec" id="principes">
+      <h2>Principes</h2>
+      <p>Quatre règles guident chaque écran.</p>
+      <ul class="ds-rules">
+        <li><b>Un seul endroit où regarder</b><span>Le violet est réservé à l’action principale, à l’onglet actif et aux icônes. L’œil sait toujours où aller.</span></li>
+        <li><b>Aucune surprise sur le prix</b><span>Le détail du prix apparaît avant de payer&nbsp;: nuits, remise, taxes, total.</span></li>
+        <li><b>Choisir plutôt que taper</b><span>Un calendrier et des compteurs remplacent les champs de date et de nombre.</span></li>
+        <li><b>Calme et lisible</b><span>Un badge par carte, 14&nbsp;px pour le texte, rien sous 11&nbsp;px.</span></li>
+      </ul>
+    </section>
+
+    <section class="ds-sec" id="logo">
+      <h2>Logo</h2>
+      <p>Le mot «&nbsp;hush&nbsp;» en minuscules. Les deux «&nbsp;h&nbsp;» se font face, le dernier en miroir, comme les deux poteaux d’un hamac. Un hamac mangue est tendu entre leurs sommets, au-dessus du «&nbsp;us&nbsp;», et un grand soleil se lève au-dessus. Le symbole garde les poteaux, le hamac et le soleil.</p>
+      <div class="ds-logos">
+        <div class="ds-logo ds-logo--light"><svg role="img" aria-label="Logo Hush sur fond clair"><use href="assets/icons.svg#logo-hush"/></svg></div>
+        <div class="ds-logo ds-logo--brand ds-logo--mark"><svg role="img" aria-label="Symbole Hush sur violet"><use href="assets/icons.svg#logo-hush-mark"/></svg></div>
+        <div class="ds-logo ds-logo--dark ds-logo--mark"><svg role="img" aria-label="Symbole Hush sur encre"><use href="assets/icons.svg#logo-hush-mark"/></svg></div>
+      </div>
+      <small class="ds-note">Quatre variables pilotent les couleurs&nbsp;: <code>--logo-poles</code> (poteaux, couleur du texte par défaut), <code>--logo-mid</code> (le «&nbsp;us&nbsp;») et <code>--logo-sun</code> (le soleil et, par défaut, le hamac&nbsp;; <code>--logo-hammock</code> pour le colorer à part). Symboles <code>#logo-hush</code> et <code>#logo-hush-mark</code> dans <code>assets/icons.svg</code>.</small>
+    </section>
+
+    <section class="ds-sec" id="couleurs">
+      <h2>Couleurs</h2>
+      <p>La palette «&nbsp;Mangue&nbsp;»&nbsp;: un violet électrique pour agir, une mangue pour signaler, une encre violette pour lire. Les fonds sont légèrement lavande pour que les cartes blanches s’en détachent.</p>
+      <h3>Marque</h3>
+      <div class="ds-swatches">
+        <div class="ds-swatch"><i style="background:var(--brand);color:var(--white)">Aa<span>5,6:1</span></i><span>Violet<small>--brand · #6C3BFF</small><em>Action principale, onglet actif, icônes, liens.</em></span></div>
+        <div class="ds-swatch"><i style="background:var(--brand-900);color:var(--white)">Aa<span>7,1:1</span></i><span>Violet appuyé<small>--brand-900 · #5226E0</small><em>Bouton pressé, filtre sélectionné.</em></span></div>
+        <div class="ds-swatch"><i style="background:var(--brand-400);color:var(--brand)">Aa<span>4,6:1</span></i><span>Lavande<small>--brand-400 · #ECE5FF</small><em>Fonds doux&nbsp;: statut, état vide, notification.</em></span></div>
+        <div class="ds-swatch"><i style="background:var(--mango);color:var(--ink)">Aa<span>8,4:1</span></i><span>Mangue<small>--mango · #FF9F1C</small><em>Badge promo et étoiles. Toujours avec un texte encre, jamais blanc.</em></span></div>
+        <div class="ds-swatch"><i style="background:var(--sun);color:var(--ink)">Aa</i><span>Soleil<small>--sun · #FFD166</small><em>Accent d’illustration, jamais pour du texte.</em></span></div>
+      </div>
+      <h3>Neutres</h3>
+      <div class="ds-swatches">
+        <div class="ds-swatch"><i style="background:var(--ink);color:var(--white)">Aa<span>16,4:1</span></i><span>Encre<small>--ink · #1E1240</small><em>Titres et texte principal.</em></span></div>
+        <div class="ds-swatch"><i style="background:var(--gray-700);color:var(--white)">Aa<span>8,7:1</span></i><span>Gris 700<small>--gray-700 · #4A4462</small><em>Paragraphes, listes, descriptions.</em></span></div>
+        <div class="ds-swatch"><i style="background:var(--gray-600);color:var(--white)">Aa<span>5:1</span></i><span>Gris 600<small>--gray-600 · #6E6787</small><em>Texte secondaire&nbsp;: lieu, date, légende.</em></span></div>
+        <div class="ds-swatch"><i style="background:var(--gray-500);color:var(--ink)"></i><span>Gris 500<small>--gray-500 · #A8A2BC</small><em>Bordures, éléments désactivés, exemples dans les champs. Jamais pour une information.</em></span></div>
+        <div class="ds-swatch"><i style="background:var(--gray-300)"></i><span>Gris 300<small>--gray-300 · #ECE8F5</small><em>Séparateurs, fond des onglets et des étiquettes.</em></span></div>
+        <div class="ds-swatch"><i style="background:var(--white-800)"></i><span>Page<small>--white-800 · #FBF8FF</small><em>Fond des écrans et des feuilles.</em></span></div>
+        <div class="ds-swatch"><i style="background:var(--white-700)"></i><span>Page grise<small>--white-700 · #F3EFFC</small><em>Écrans à cartes&nbsp;: accueil, voyages, favoris.</em></span></div>
+        <div class="ds-swatch"><i style="background:var(--white)"></i><span>Blanc<small>--white · #FFFFFF</small><em>Cartes, fenêtres, champs sur fond gris.</em></span></div>
+      </div>
+      <h3>Sémantique</h3>
+      <div class="ds-swatches">
+        <div class="ds-swatch"><i style="background:var(--danger);color:var(--white)">Aa<span>5,1:1</span></i><span>Danger<small>--danger · #D92D4F</small><em>Erreurs de saisie, annulation, suppression du compte.</em></span></div>
+      </div>
+      <h3>Contrastes vérifiés</h3>
+      <table class="ds-table">
+        <thead><tr><th>Exemple</th><th>Couple</th><th>Ratio</th><th>Usage</th></tr></thead>
+        <tbody>
+          <tr><td><span class="ds-pair" style="background:var(--brand);color:var(--white)">Payer</span></td><td>Blanc sur violet</td><td class="ds-ok">5,6:1 · AA</td><td>Boutons principaux</td></tr>
+          <tr><td><span class="ds-pair" style="background:var(--white-800);color:var(--ink);box-shadow:inset 0 0 0 1px var(--gray-300)">Texte</span></td><td>Encre sur page</td><td class="ds-ok">16,4:1 · AAA</td><td>Titres et texte</td></tr>
+          <tr><td><span class="ds-pair" style="background:var(--white-800);color:var(--gray-600);box-shadow:inset 0 0 0 1px var(--gray-300)">Ubud, Bali</span></td><td>Gris 600 sur page</td><td class="ds-ok">5:1 · AA</td><td>Texte secondaire</td></tr>
+          <tr><td><span class="ds-pair" style="background:var(--white-800);color:var(--brand);box-shadow:inset 0 0 0 1px var(--gray-300)">Voir tout</span></td><td>Violet sur page</td><td class="ds-ok">5,4:1 · AA</td><td>Liens</td></tr>
+          <tr><td><span class="ds-pair" style="background:var(--brand-400);color:var(--brand)">À venir</span></td><td>Violet sur lavande</td><td class="ds-ok">4,6:1 · AA</td><td>Puce de statut</td></tr>
+          <tr><td><span class="ds-pair" style="background:var(--white);color:var(--danger);box-shadow:inset 0 0 0 1px var(--gray-300)">Erreur</span></td><td>Danger sur blanc</td><td class="ds-ok">5,1:1 · AA</td><td>Messages d’erreur</td></tr>
+          <tr><td><span class="ds-pair" style="background:var(--mango);color:var(--ink)">−10&nbsp;%</span></td><td>Encre sur mangue</td><td class="ds-ok">8,4:1 · AAA</td><td>Badge promo</td></tr>
+          <tr><td><span class="ds-pair" style="background:var(--mango);color:var(--white)">−10&nbsp;%</span></td><td>Blanc sur mangue</td><td class="ds-no">2:1 · interdit</td><td>Ne jamais l’utiliser</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="ds-sec" id="typo">
+      <h2>Typographie</h2>
+      <p>DM Sans, de 400 à 600&nbsp;: ronde, chaleureuse et très lisible en petite taille. Deux tailles portent presque tout&nbsp;: 14&nbsp;px pour le texte, 12&nbsp;px pour le secondaire. Rien ne descend sous 11&nbsp;px.</p>
+      <div class="ds-type"><small><b>Titre d’écran</b>24 / 36 · 600 · <code>.h1</code></small><span class="h1">Salut Inès&nbsp;! Où est-ce qu’on s’évade&nbsp;?</span></div>
+      <div class="ds-type"><small><b>Nom du lieu</b>20 / 28 · 600 · <code>.place__name</code></small><span style="font-size:20px;line-height:28px;font-weight:600">Villa Alang-Alang</span></div>
+      <div class="ds-type"><small><b>Titre de section</b>18 / 26 · 600 · <code>.section-head</code></small><span style="font-size:18px;line-height:26px;font-weight:600">Populaires</span></div>
+      <div class="ds-type"><small><b>Titre de carte, prix</b>16 / 22 · 600 · <code>.h3</code> <code>.price</code></small><span class="h3">Palmeraie Seminyak · 149&nbsp;€</span></div>
+      <div class="ds-type"><small><b>Texte, bouton</b>14 / 21 · 400 et 500</small><span>Une villa au toit de chaume nichée dans la jungle d’Ubud, avec piscine privée.</span></div>
+      <div class="ds-type"><small><b>Secondaire</b>12 / 16 · 400 · <code>.loc</code> <code>.rating</code></small><span style="font-size:12px;line-height:16px;color:var(--gray-600)">Ubud, Bali · Annulation gratuite jusqu’au 20&nbsp;mai</span></div>
+      <div class="ds-type"><small><b>Barre de navigation</b>11 / 16 · 400 et 600 · minimum</small><span style="font-size:11px;line-height:16px">Accueil · Voyages · Explorer · Favoris · Profil</span></div>
+    </section>
+
+    <section class="ds-sec" id="espaces">
+      <h2>Espaces et formes</h2>
+      <p>Une grille de 4&nbsp;px et une marge latérale de 16&nbsp;px. Les angles sont très arrondis, comme les galets et les coussins du hamac&nbsp;: rien ne pique dans Hush.</p>
+      <h3>Espacement</h3>
+      <div class="ds-spaces">
+        <div><i style="width:4px;height:4px"></i>4</div><div><i style="width:8px;height:8px"></i>8</div><div><i style="width:12px;height:12px"></i>12</div><div><i style="width:16px;height:16px"></i>16 · marge</div><div><i style="width:20px;height:20px"></i>20</div><div><i style="width:24px;height:24px"></i>24</div><div><i style="width:32px;height:32px"></i>32</div><div><i style="width:40px;height:40px"></i>40</div>
+      </div>
+      <h3>Rayons</h3>
+      <div class="ds-row">
+        <div class="ds-radius" style="border-radius:16px">16<br>vignette</div>
+        <div class="ds-radius" style="border-radius:24px">24<br>carte, fenêtre</div>
+        <div class="ds-radius" style="border-radius:32px 32px 0 0">32<br>feuille</div>
+        <div class="ds-radius" style="border-radius:40px">40<br>photo, barre</div>
+        <div class="ds-radius" style="border-radius:var(--pill)">pilule<br>bouton, champ</div>
+      </div>
+      <h3>Ombres et surfaces</h3>
+      <div class="ds-row ds-stage ds-stage--gray">
+        <div class="ds-shadow" style="box-shadow:var(--shadow-card)">Carte<br><code>--shadow-card</code></div>
+        <div class="ds-shadow" style="box-shadow:0 -4px 12px rgba(var(--ink-rgb),.06)">Barre du bas</div>
+        <div class="ds-shadow" style="box-shadow:0 4px 12px rgba(var(--ink-rgb),.2)">Bouton sur photo</div>
+        <div class="ds-shadow" style="background:url(assets/photos/home-banner.jpg) center / cover"><span class="glass"><svg class="i"><use href="assets/icons.svg#sol-bell"/></svg></span></div>
+      </div>
+      <small class="ds-note">Sur une photo, les boutons ronds passent en verre sombre (<code>.glass</code>, encre à 40&nbsp;% et flou) pour rester lisibles quelle que soit l’image.</small>
+    </section>
+
+    <section class="ds-sec" id="icones">
+      <h2>Icônes</h2>
+      <p>Le jeu Solar, en deux styles. Le duotone (deux opacités d’une même couleur) donne du relief aux catégories, aux équipements et à l’onglet actif. Le trait sert aux actions et aux onglets inactifs. Toutes les icônes héritent de la couleur du texte&nbsp;: violet par défaut. Taille de base 24&nbsp;px, 16&nbsp;px dans les listes, 12&nbsp;px à côté d’un texte secondaire.</p>
+      <h3>Duotone</h3>
+      <div class="ds-icons">
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-bed"/></svg><code>sol-bed</code></div>
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-chef-hat"/></svg><code>sol-chef-hat</code></div>
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-map"/></svg><code>sol-map</code></div>
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-flag"/></svg><code>sol-flag</code></div>
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-widget"/></svg><code>sol-widget</code></div>
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-gps-duo"/></svg><code>sol-gps-duo</code></div>
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-bell-bing"/></svg><code>sol-bell-bing</code></div>
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-bell"/></svg><code>sol-bell</code></div>
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-check-circle-duo"/></svg><code>sol-check-circle-duo</code></div>
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-wifi"/></svg><code>sol-wifi</code></div>
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-swimming"/></svg><code>sol-swimming</code></div>
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-clock"/></svg><code>sol-clock</code></div>
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-plane"/></svg><code>sol-plane</code></div>
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-car"/></svg><code>sol-car</code></div>
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-sunset"/></svg><code>sol-sunset</code></div>
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-map-point"/></svg><code>sol-map-point</code></div>
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-card"/></svg><code>sol-card</code></div>
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-address"/></svg><code>sol-address</code></div>
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-shield-check"/></svg><code>sol-shield-check</code></div>
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-shield-user"/></svg><code>sol-shield-user</code></div>
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-logout"/></svg><code>sol-logout</code></div>
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-home"/></svg><code>sol-home</code></div>
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-suitcase"/></svg><code>sol-suitcase</code></div>
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-compass"/></svg><code>sol-compass</code></div>
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-heart-duo"/></svg><code>sol-heart-duo</code></div>
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-user"/></svg><code>sol-user</code></div>
+      </div>
+      <h3>Pleines</h3>
+      <div class="ds-icons">
+        <div class="ds-icon"><svg class="i" style="color:var(--star)"><use href="assets/icons.svg#sol-star"/></svg><code>sol-star</code></div>
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-heart"/></svg><code>sol-heart</code></div>
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-pin"/></svg><code>sol-pin</code></div>
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-eye-closed"/></svg><code>sol-eye-closed</code></div>
+      </div>
+      <h3>Trait</h3>
+      <div class="ds-icons">
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-heart-linear"/></svg><code>sol-heart-linear</code></div>
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-user-linear"/></svg><code>sol-user-linear</code></div>
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-home-linear"/></svg><code>sol-home-linear</code></div>
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-suitcase-linear"/></svg><code>sol-suitcase-linear</code></div>
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-compass-linear"/></svg><code>sol-compass-linear</code></div>
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-arrow-left"/></svg><code>sol-arrow-left</code></div>
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-close"/></svg><code>sol-close</code></div>
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-chevron-right"/></svg><code>sol-chevron-right</code></div>
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-chevron-down"/></svg><code>sol-chevron-down</code></div>
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-square-up"/></svg><code>sol-square-up</code></div>
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-square-down"/></svg><code>sol-square-down</code></div>
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-calendar"/></svg><code>sol-calendar</code></div>
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-search"/></svg><code>sol-search</code></div>
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-filter"/></svg><code>sol-filter</code></div>
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-gps"/></svg><code>sol-gps</code></div>
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-share"/></svg><code>sol-share</code></div>
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-check-circle"/></svg><code>sol-check-circle</code></div>
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-lock"/></svg><code>sol-lock</code></div>
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-letter"/></svg><code>sol-letter</code></div>
+        <div class="ds-icon"><svg class="i"><use href="assets/icons.svg#sol-camera"/></svg><code>sol-camera</code></div>
+      </div>
+      <small class="ds-note">Solar Icon Set, licence CC BY 4.0. Une icône seule porte toujours un <code>aria-label</code> sur son bouton&nbsp;; à côté d’un texte, elle reste décorative.</small>
+    </section>
+
+    <!-- ===================== Composants ===================== -->
+
+    <section class="ds-sec" id="boutons">
+      <h2>Boutons</h2>
+      <p>Une pilule de 48&nbsp;px de haut, 60&nbsp;px pour l’action finale d’un parcours. Un seul bouton violet plein par écran&nbsp;: c’est la prochaine étape.</p>
+      <h3>Principal</h3>
+      <div class="ds-row">
+        <button class="btn" type="button">Réserver</button>
+        <button class="btn is-pressed" type="button">Appuyé</button>
+        <button class="btn is-loading" type="button">Paiement en cours…</button>
+        <button class="btn" type="button" disabled>Désactivé</button>
+        <button class="btn btn--lg" type="button">C’est parti</button>
+      </div>
+      <h3>Secondaire</h3>
+      <div class="ds-row">
+        <button class="btn btn--outline" type="button"><svg class="i i--20"><use href="assets/icons.svg#sol-letter"/></svg>Contacter la villa</button>
+        <button class="btn btn--line" type="button">Annuler la réservation</button>
+        <button class="btn btn--sm btn--outline" type="button">Voir la carte <svg class="i i--16"><use href="assets/icons.svg#sol-gps"/></svg></button>
+        <button class="btn btn--sm" type="button">Changer</button>
+      </div>
+      <h3>Sur fond violet et connexion</h3>
+      <div class="ds-row ds-stage" style="background:var(--brand)">
+        <button class="btn btn--light" type="button">Autoriser</button>
+        <button class="btn btn--ghost" type="button">Plus tard</button>
+      </div>
+      <div class="ds-row" style="margin-top:12px">
+        <button class="btn btn--social" type="button"><svg class="i"><use href="assets/icons.svg#social-icon-google-default"/></svg>Continuer avec Google</button>
+        <button class="btn btn--social btn--apple" type="button"><svg class="i"><use href="assets/icons.svg#social-icon-apple-white"/></svg>Continuer avec Apple</button>
+      </div>
+      <h3>Destructif</h3>
+      <div class="ds-row">
+        <button class="btn btn--danger" type="button">Supprimer définitivement</button>
+        <button class="link-danger" type="button" style="margin:0">Supprimer mon compte</button>
+      </div>
+      <small class="ds-note">Le rouge plein n’apparaît que dans la fenêtre qui confirme une action irréversible. Sur la page, la même action reste un simple lien rouge.</small>
+    </section>
+
+    <section class="ds-sec" id="filtres">
+      <h2>Filtres et onglets</h2>
+      <p>Les filtres sont des pilules&nbsp;: une seule active par groupe, en violet appuyé. Les onglets séparent deux vues d’une même liste, avec leur nombre d’éléments.</p>
+      <h3>Filtres</h3>
+      <div class="chips" role="group" aria-label="Catégorie" style="margin-right:0;padding-right:0;flex-wrap:wrap">
+        <button class="btn btn--sm" aria-pressed="true" type="button">Tout</button>
+        <button class="btn btn--sm" aria-pressed="false" type="button">Hôtels</button>
+        <button class="btn btn--sm" aria-pressed="false" type="button">Resorts</button>
+        <button class="btn btn--sm" aria-pressed="false" type="button">Restaurants</button>
+        <button class="btn btn--sm" aria-pressed="false" type="button">Guides</button>
+      </div>
+      <h3>Onglets</h3>
+      <div class="tabs ds-tabs" role="tablist" aria-label="Mes voyages">
+        <button type="button" role="tab" aria-selected="true">À venir <span>2</span></button>
+        <button type="button" role="tab" aria-selected="false">Passés <span>2</span></button>
+      </div>
+      <h3>Filtre actif</h3>
+      <div class="ds-row">
+        <button class="glass filter-dot" type="button" aria-label="Filtres" style="background:var(--white);color:var(--ink);box-shadow:inset 0 0 0 1px var(--gray-300)"><svg class="i i--20"><use href="assets/icons.svg#sol-filter"/></svg></button>
+        <button class="glass filter-dot is-on" type="button" aria-label="Filtres, 2 actifs" style="background:var(--white);color:var(--ink);box-shadow:inset 0 0 0 1px var(--gray-300)"><svg class="i i--20"><use href="assets/icons.svg#sol-filter"/></svg></button>
+        <span class="muted">Un point violet rappelle que la liste est filtrée.</span>
+      </div>
+    </section>
+
+    <section class="ds-sec" id="champs">
+      <h2>Champs</h2>
+      <p>Une pilule de 48&nbsp;px avec une icône qui dit quoi écrire. Le contour et l’icône passent en violet au focus. L’erreur s’affiche sous le champ concerné et dit comment corriger.</p>
+      <div class="ds-grid">
+        <div class="ds-field"><span class="ds-cap">Par défaut</span><label class="field field--icon-l"><svg class="i"><use href="assets/icons.svg#sol-letter"/></svg><input type="email" placeholder="Adresse e-mail" aria-label="Exemple d’adresse e-mail"></label></div>
+        <div class="ds-field"><span class="ds-cap">Actif</span><label class="field field--icon-l is-active"><svg class="i"><use href="assets/icons.svg#sol-letter"/></svg><input type="email" value="ines.laurent@example.com" aria-label="Exemple de champ actif"></label></div>
+        <div class="ds-field"><span class="ds-cap">Erreur</span><label class="field field--icon-l is-invalid"><svg class="i"><use href="assets/icons.svg#sol-letter"/></svg><input type="email" value="ines.laurent@" aria-label="Exemple de champ en erreur" aria-invalid="true" aria-describedby="ds-err-mail"></label><p class="field-error" id="ds-err-mail">Cette adresse e-mail n’est pas valide</p></div>
+        <div class="ds-field"><span class="ds-cap">Mot de passe</span><label class="field field--icon-l"><svg class="i i--20"><use href="assets/icons.svg#sol-lock"/></svg><input type="password" value="hamac2027" aria-label="Exemple de mot de passe"><span style="display:grid;color:var(--gray-500)"><svg class="i i--20"><use href="assets/icons.svg#sol-eye-closed"/></svg></span></label></div>
+        <div class="ds-field"><span class="ds-cap">Date, ouvre le calendrier</span><label class="field field--date is-active"><input value="dim. 23 mai 2027" readonly aria-label="Exemple de date d’arrivée"><svg class="i"><use href="assets/icons.svg#sol-calendar"/></svg></label></div>
+        <div class="ds-field"><span class="ds-cap">Sur une photo</span><div class="ds-stage" style="padding:16px;background:url(assets/photos/home-banner.jpg) center / cover"><span class="field field--glass field--icon-l"><svg class="i"><use href="assets/icons.svg#sol-search"/></svg><span>Une plage, un temple…</span></span></div></div>
+      </div>
+      <h3>Texte long</h3>
+      <div class="ds-field" style="width:361px"><label class="textarea"><textarea placeholder="Allergie, anniversaire, chaise bébé…" aria-label="Exemple de précision"></textarea><span class="textarea__count">0/400</span></label></div>
+      <h3>Case à cocher</h3>
+      <div class="ds-grid">
+        <div class="ds-check"><span class="ds-cap">Par défaut</span><label class="check"><input type="checkbox"><span>J’accepte les <a href="#">conditions générales</a> et la <a href="#">politique de confidentialité</a> de Hush.</span></label></div>
+        <div class="ds-check"><span class="ds-cap">Erreur</span><label class="check is-invalid"><input type="checkbox" aria-invalid="true" aria-describedby="ds-err-terms"><span>J’accepte les <a href="#">conditions générales</a> et la <a href="#">politique de confidentialité</a> de Hush.</span></label><p class="field-error" id="ds-err-terms">Accepte les conditions pour créer ton compte</p></div>
+      </div>
+    </section>
+
+    <section class="ds-sec" id="voyageurs">
+      <h2>Voyageurs</h2>
+      <p>Des compteurs plutôt qu’un champ à taper. Les bornes sont claires&nbsp;: le bouton «&nbsp;moins&nbsp;» se grise au minimum, «&nbsp;plus&nbsp;» au maximum de la chambre.</p>
+      <div class="stepper card-surface ds-stepper" style="box-shadow:inset 0 0 0 1px var(--gray-300)">
+        <div class="stepper__row" data-min="1" data-max="4">
+          <div><b>Adultes</b><small>13 ans et plus</small></div>
+          <div class="stepper__ctl"><button type="button" data-step="-1" aria-label="Un adulte de moins">−</button><output aria-live="polite">2</output><button type="button" data-step="1" aria-label="Un adulte de plus">+</button></div>
+        </div>
+        <div class="stepper__row" data-min="0" data-max="3">
+          <div><b>Enfants</b><small>De 2 à 12 ans</small></div>
+          <div class="stepper__ctl"><button type="button" data-step="-1" aria-label="Un enfant de moins" disabled>−</button><output aria-live="polite">0</output><button type="button" data-step="1" aria-label="Un enfant de plus">+</button></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ds-sec" id="cartes">
+      <h2>Cartes</h2>
+      <p>Deux formats pour les lieux. La carte large (photo puis texte) sert aux listes et aux résultats. La tuile haute (texte sur la photo) sert aux suggestions. Un seul badge par carte, et seulement pour une promotion&nbsp;: la note dit déjà les étoiles. Toute la carte est cliquable, le cœur reste un bouton à part.</p>
+      <!-- --img is read inside css/hush.css, so its url() is written from the css/ folder -->
+      <div class="ds-tile-wrap ds-stage ds-stage--gray">
+        <div><span class="ds-cap">Carte large · .listing</span>
+          <article class="listing">
+            <div class="listing__media">
+              <div class="ph ph--photo listing__img" style="--img: url(../assets/photos/tour-temple.jpg)" role="img" aria-label="Le temple Ulun Danu sur le lac Bratan"></div>
+              <span class="badge badge--off">−10&nbsp;%</span>
+              <button class="glass glass--32 fav" type="button" aria-pressed="false" aria-label="Ajouter aux favoris"><svg class="i"><use href="assets/icons.svg#sol-heart-linear"/></svg></button>
+            </div>
+            <div class="listing__body">
+              <h3><a class="card-link" href="screens/08-hotel.html">Lac Bratan &amp; Ulun Danu</a></h3>
+              <p class="rating"><svg class="i"><use href="assets/icons.svg#sol-star"/></svg>4,8 (1&nbsp;453)</p>
+              <p class="loc"><svg class="i"><use href="assets/icons.svg#sol-pin"/></svg>Bedugul, Bali</p>
+              <p class="price">45<span>&nbsp;€</span><small> /pers.</small> <s>55&nbsp;€</s></p>
+            </div>
+          </article>
+        </div>
+        <div><span class="ds-cap">Tuile · .tile</span>
+          <article class="tile">
+            <div class="ph ph--photo" style="--img: url(../assets/photos/neano-hotel.jpg)" role="img" aria-label="Villa au toit de chaume et sa piscine privée"></div>
+            <button class="glass glass--32 fav" type="button" aria-pressed="true" aria-label="Retirer des favoris"><svg class="i"><use href="assets/icons.svg#sol-heart"/></svg></button>
+            <div class="tile__body">
+              <h3><a class="card-link" href="screens/08-hotel.html">Villa Alang-Alang</a></h3>
+              <p class="loc"><svg class="i"><use href="assets/icons.svg#sol-pin"/></svg>Ubud, Bali</p>
+              <p class="rating"><svg class="i"><use href="assets/icons.svg#sol-star"/></svg>4,7 (8&nbsp;186)</p>
+              <p class="price">112<span>&nbsp;€</span><small> /nuit</small></p>
+            </div>
+          </article>
+        </div>
+      </div>
+      <h3>Badge</h3>
+      <div class="ds-badges"><span class="badge">−10&nbsp;%</span><span class="badge">Jusqu’à −25&nbsp;%</span><span class="muted">Mangue, texte encre, lisible sur n’importe quelle photo.</span></div>
+      <h3>Favori · repos et aimé</h3>
+      <div class="ds-row">
+        <div class="ds-favs">
+          <button class="glass glass--32 fav" type="button" aria-pressed="false" aria-label="Ajouter aux favoris"><svg class="i"><use href="assets/icons.svg#sol-heart-linear"/></svg></button>
+          <button class="glass glass--32 fav" type="button" aria-pressed="true" aria-label="Retirer des favoris"><svg class="i"><use href="assets/icons.svg#sol-heart"/></svg></button>
+        </div>
+        <span class="muted">Clique pour essayer. Aimé, le bouton devient blanc pour que le cœur violet ressorte sur la photo, et un message confirme.</span>
+      </div>
+      <h3>Note et lieu</h3>
+      <div class="ds-row">
+        <p class="rating rating--lg"><svg class="i"><use href="assets/icons.svg#sol-star"/></svg>4,9 (4&nbsp;348)</p>
+        <p class="loc loc--lg"><svg class="i"><use href="assets/icons.svg#sol-pin"/></svg>Nusa Dua, Bali</p>
+      </div>
+    </section>
+
+    <section class="ds-sec" id="prix">
+      <h2>Prix et statut</h2>
+      <p>Le moment de payer est le plus stressant du parcours. Le détail du prix le désamorce&nbsp;: chaque ligne se vérifie, la remise Hush est visible, les taxes sont annoncées comme incluses et le total est souligné d’un trait pointillé.</p>
+      <div class="ds-row ds-row--top ds-stage ds-stage--gray">
+        <section class="card-surface breakdown ds-breakdown" aria-labelledby="ds-bd-title">
+          <h3 id="ds-bd-title">Détail du prix</h3>
+          <dl>
+            <div><dt>159&nbsp;€ × 2 nuits</dt><dd>318&nbsp;€</dd></div>
+            <div><dt>Prix Hush (−10&nbsp;€ par nuit)</dt><dd>−20&nbsp;€</dd></div>
+            <div><dt>Taxes et frais de service</dt><dd>Inclus</dd></div>
+            <div class="breakdown__total"><dt>Total</dt><dd>298&nbsp;€</dd></div>
+          </dl>
+          <p class="breakdown__note"><svg class="i i--16"><use href="assets/icons.svg#sol-shield-check"/></svg>Paiement sécurisé, aucun frais caché</p>
+        </section>
+        <div style="display:grid;gap:16px">
+          <div><span class="ds-cap">Prix</span><p class="price price--lg">298<span>&nbsp;€</span> <s>318&nbsp;€</s></p></div>
+          <div><span class="ds-cap">Statut du voyage</span><p class="status ds-status"><span class="status__chip">À venir</span>Réservation n°&nbsp;HSH-27A4K9</p></div>
+          <div><span class="ds-cap">Note rassurante</span><p class="note"><svg class="i i--16"><use href="assets/icons.svg#sol-check-circle"/></svg>Annulation gratuite jusqu’au 20&nbsp;mai 2027</p></div>
+          <div><span class="ds-cap">Récapitulatif</span><dl class="card-surface info" style="width:300px"><div><dt>2 nuits</dt><dd>Dim. 23 mai – mar. 25 mai 2027</dd></div><svg class="i"><use href="assets/icons.svg#sol-calendar"/></svg></dl></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ds-sec" id="messages">
+      <h2>Messages</h2>
+      <p>Chaque liste prévoit son état vide, avec une raison et une suite. Une confirmation rapide passe par un message en bas de l’écran. Ce qui engage (réservation confirmée, annulation, suppression) ouvre une fenêtre.</p>
+      <div class="ds-grid ds-grid--wide">
+        <div><span class="ds-cap">État vide · favoris</span>
+          <div class="empty ds-empty">
+            <span class="empty__art"><svg class="i"><use href="assets/icons.svg#sol-heart-linear"/></svg></span>
+            <h2>Pas encore de coup de cœur</h2>
+            <p>Touche le cœur sur une villa, un resort ou une visite pour la retrouver ici.</p>
+            <a class="btn btn--sm" href="screens/15-explore.html">Explorer Bali</a>
+          </div>
+        </div>
+        <div><span class="ds-cap">État vide · voyages</span>
+          <div class="empty ds-empty">
+            <span class="empty__art"><svg class="i"><use href="assets/icons.svg#sol-suitcase-linear"/></svg></span>
+            <h2>Rien de prévu ici</h2>
+            <p>Ton prochain voyage t’attend quelque part à Bali.</p>
+            <a class="btn btn--sm" href="screens/15-explore.html">Trouver un séjour</a>
+          </div>
+        </div>
+      </div>
+      <h3>Message bref</h3>
+      <div class="ds-row"><div class="toast" role="status">Ajouté à tes favoris</div><button class="btn btn--sm btn--outline" type="button" data-demo-toast>Déclencher</button></div>
+      <h3>Fenêtre</h3>
+      <div class="ds-grid ds-grid--wide">
+        <div class="ds-scrim">
+          <div class="modal__box" role="group" aria-labelledby="ds-modal-ok">
+            <svg class="i"><use href="assets/icons.svg#sol-check-circle-duo"/></svg>
+            <h2 class="h3" id="ds-modal-ok">Réservation confirmée</h2>
+            <p>Bon séjour à la Villa Alang-Alang&nbsp;! Tous les détails sont dans ta boîte mail.</p>
+            <p class="modal__ref">Réservation n°&nbsp;HSH-27A4K9</p>
+            <a class="btn btn--block" href="screens/13-history.html">Voir mes voyages</a>
+          </div>
+        </div>
+        <div class="ds-scrim">
+          <div class="modal__box" role="group" aria-labelledby="ds-modal-cancel">
+            <h2 class="h3" id="ds-modal-cancel">Annuler ton séjour&nbsp;?</h2>
+            <p>L’annulation est gratuite jusqu’au 20&nbsp;mai 2027. Tu seras remboursée de 298&nbsp;€ sous 5&nbsp;jours ouvrés.</p>
+            <button class="btn btn--block" type="button">Garder mon séjour</button>
+            <button class="btn btn--block btn--line" type="button">Oui, annuler</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ds-sec" id="navigation">
+      <h2>Navigation</h2>
+      <p>Cinq onglets en bas, à portée de pouce. L’onglet actif passe en icône duotone violette et en gras&nbsp;: la couleur n’est jamais le seul signal. En haut des feuilles, une barre simple&nbsp;: retour, titre, action.</p>
+      <div class="ds-row ds-row--top">
+        <div class="ds-phone">
+          <div style="padding:20px var(--gutter)"><header class="topbar"><a href="#" aria-label="Retour"><svg class="i"><use href="assets/icons.svg#sol-arrow-left"/></svg></a><h1>Paiement</h1><button type="button" aria-label="Ajouter aux favoris"><svg class="i"><use href="assets/icons.svg#sol-heart-linear"/></svg></button></header></div>
+          <nav class="navbar" aria-label="Exemple de navigation principale">
+            <ul>
+              <li><a href="screens/06-home.html" aria-current="page"><svg class="i"><use href="assets/icons.svg#sol-home"/></svg>Accueil</a></li>
+              <li><a href="screens/13-history.html"><svg class="i"><use href="assets/icons.svg#sol-suitcase-linear"/></svg>Voyages</a></li>
+              <li><a href="screens/15-explore.html"><svg class="i"><use href="assets/icons.svg#sol-compass-linear"/></svg>Explorer</a></li>
+              <li><a href="screens/16-favorite.html"><svg class="i"><use href="assets/icons.svg#sol-heart-linear"/></svg>Favoris</a></li>
+              <li><a href="screens/17-profile.html"><svg class="i"><use href="assets/icons.svg#sol-user-linear"/></svg>Profil</a></li>
+            </ul>
+            <span class="home-indicator"></span>
+          </nav>
+        </div>
+        <ul class="ds-list" style="max-width:420px">
+          <li><b>Fiches en feuille.</b> Une fiche de lieu monte du bas avec sa photo pleine largeur et se referme en glissant vers le bas, par la flèche ou d’un geste.</li>
+          <li><b>Feuilles de choix.</b> Calendrier, filtres&nbsp;: une feuille avec une poignée, un voile derrière, et un seul bouton pour valider.</li>
+          <li><b>Mouvements courts</b> (0,35 à 0,45&nbsp;s), coupés quand le téléphone demande moins d’animations.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===================== Règles ===================== -->
+
+    <section class="ds-sec" id="contenu">
+      <h2>Contenu</h2>
+      <p>Hush parle comme une amie qui a déjà tout organisé&nbsp;: elle tutoie, va droit au but et rassure.</p>
+      <div class="ds-dos">
+        <div class="ds-do"><b>Tutoyer et rassurer</b><p><q>Ton prochain voyage t’attend quelque part à Bali.</q></p><p><q>Annulation gratuite jusqu’au 20&nbsp;mai 2027.</q></p></div>
+        <div class="ds-do is-dont"><b>Le jargon de réservation</b><p><q>Tarif non remboursable hors conditions générales de vente.</q></p></div>
+        <div class="ds-do"><b>Une erreur qui dit quoi faire</b><p><q>Indique le numéro de ta carte</q></p><p><q>Format MM/AA</q></p></div>
+        <div class="ds-do is-dont"><b>Une erreur qui accuse</b><p><q>Saisie invalide.</q></p></div>
+        <div class="ds-do"><b>Des verbes sur les boutons</b><p><q>Réserver</q>, <q>Payer</q>, <q>Voir mes voyages</q>, <q>Garder mon séjour</q>.</p></div>
+        <div class="ds-do is-dont"><b>Des boutons vagues</b><p><q>OK</q>, <q>Valider</q>, <q>Continuer</q> sans contexte.</p></div>
+      </div>
+      <h3>Typographie française</h3>
+      <ul class="ds-list">
+        <li><b>Espace insécable</b> avant «&nbsp;?&nbsp;», «&nbsp;!&nbsp;», «&nbsp;:&nbsp;», «&nbsp;€&nbsp;» et «&nbsp;%&nbsp;»&nbsp;: <span class="soft">149&nbsp;€, −10&nbsp;%, Où est-ce qu’on s’évade&nbsp;?</span></li>
+        <li><b>Apostrophe typographique</b> (’) et guillemets français.</li>
+        <li><b>Dates en toutes lettres</b>, jour abrégé&nbsp;: <span class="soft">dim. 23 mai – mar. 25 mai 2027</span>. Prix sans décimales quand ils tombent rond.</li>
+        <li><b>Nombres lisibles</b>&nbsp;: virgule décimale et espace des milliers, <span class="soft">4,8 (1&nbsp;453)</span>.</li>
+      </ul>
+    </section>
+
+    <section class="ds-sec" id="accessibilite">
+      <h2>Accessibilité</h2>
+      <p>Hush vise le niveau AA des WCAG sur chaque écran.</p>
+      <ul class="ds-list">
+        <li><b>Contrastes</b>&nbsp;: tout texte atteint 4,5:1 au moins. La mangue ne porte jamais de texte blanc (2:1) et le gris 500 ne porte jamais d’information.</li>
+        <li><b>Tailles</b>&nbsp;: 14&nbsp;px pour le texte, 12&nbsp;px pour le secondaire, 11&nbsp;px minimum pour les libellés de la barre du bas.</li>
+        <li><b>Cibles tactiles</b>&nbsp;: 48&nbsp;px pour les boutons et les champs, 40&nbsp;px pour les compteurs, 44&nbsp;px pour les jours du calendrier.</li>
+        <li><b>Jamais la couleur seule</b>&nbsp;: l’onglet actif change d’icône et de graisse, une erreur ajoute un pictogramme et un texte, le favori change de forme.</li>
+        <li><b>Formulaires</b>&nbsp;: chaque champ a un nom accessible, l’erreur est reliée par <code>aria-describedby</code> et le premier champ fautif reçoit le focus.</li>
+        <li><b>États annoncés</b>&nbsp;: <code>aria-pressed</code> pour les filtres et le favori, <code>aria-selected</code> pour les onglets, <code>aria-current</code> pour la barre du bas, <code>role="status"</code> pour les messages brefs.</li>
+        <li><b>Clavier</b>&nbsp;: un contour violet de 2&nbsp;px sur tout élément focalisé, blanc sur les écrans violets.</li>
+        <li><b>Mouvement</b>&nbsp;: les feuilles, le cœur et le chargement s’arrêtent quand le système demande moins d’animations.</li>
+        <li><b>Images</b>&nbsp;: chaque photo décrit le lieu qu’elle montre.</li>
+      </ul>
+    </section>
+
+    <p class="ds-foot">Photos&nbsp;: Unsplash. Icônes&nbsp;: <a href="https://icon-sets.iconify.design/solar/">Solar</a>, CC BY 4.0. Lieux et personnes fictifs.</p>
+  </main>
+</div>
+
+<script>
+  // a few live states, so each component can be tried on this page
+  const ICONS = 'assets/icons.svg#';
+  function toast(message) {
+    let el = document.querySelector('body > .toast');
+    if (!el) {
+      el = document.createElement('div');
+      el.className = 'toast';
+      el.setAttribute('role', 'status');
+      el.style.cssText = 'position:fixed;left:50%;bottom:32px;transform:translate(-50%,20px);opacity:0;display:block';
+      document.body.appendChild(el);
+    }
+    el.textContent = message;
+    requestAnimationFrame(() => { el.style.opacity = 1; el.style.transform = 'translate(-50%,0)'; });
+    clearTimeout(toast.t);
+    toast.t = setTimeout(() => { el.style.opacity = 0; el.style.transform = 'translate(-50%,20px)'; }, 2200);
+  }
+  document.addEventListener('click', (e) => {
+    const fav = e.target.closest('.fav');
+    if (fav) {
+      const on = fav.getAttribute('aria-pressed') !== 'true';
+      fav.setAttribute('aria-pressed', on);
+      fav.setAttribute('aria-label', on ? 'Retirer des favoris' : 'Ajouter aux favoris');
+      fav.querySelector('use').setAttribute('href', ICONS + (on ? 'sol-heart' : 'sol-heart-linear'));
+      toast(on ? 'Ajouté à tes favoris' : 'Retiré de tes favoris');
+      return;
+    }
+    const chip = e.target.closest('.chips .btn');
+    if (chip) { chip.parentElement.querySelectorAll('.btn').forEach((b) => b.setAttribute('aria-pressed', b === chip)); return; }
+    const tab = e.target.closest('.tabs [role="tab"]');
+    if (tab) { tab.parentElement.querySelectorAll('[role="tab"]').forEach((b) => b.setAttribute('aria-selected', b === tab)); return; }
+    const step = e.target.closest('[data-step]');
+    if (step) {
+      const row = step.closest('.stepper__row'), out = row.querySelector('output');
+      const min = +row.dataset.min, max = +row.dataset.max;
+      const n = Math.min(max, Math.max(min, +out.value + +step.dataset.step));
+      out.value = out.textContent = n;
+      row.querySelector('[data-step="-1"]').disabled = n <= min;
+      row.querySelector('[data-step="1"]').disabled = n >= max;
+      return;
+    }
+    if (e.target.closest('[data-demo-toast]')) { toast('Ajouté à tes favoris'); return; }
+    const link = e.target.closest('a[href="#"]');
+    if (link) e.preventDefault();
+  });
+  document.addEventListener('focusin', (e) => {
+    const field = e.target.closest('.field');
+    if (field && !field.classList.contains('is-invalid')) field.classList.add('is-active');
+  });
+  // the "Actif" and date samples keep their active look; the others go back to rest
+  document.querySelectorAll('.field.is-active').forEach((f) => { f.dataset.keep = ''; });
+  document.addEventListener('focusout', (e) => {
+    const field = e.target.closest('.field');
+    if (field && !('keep' in field.dataset)) field.classList.remove('is-active');
+  });
+</script>
+</body>
+</html>

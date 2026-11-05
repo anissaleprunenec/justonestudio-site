@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <script>
   // apply the saved theme before first paint so the page doesn't flash dark
-  try { if (localStorage.getItem('theme') === 'light') document.documentElement.dataset.theme = 'light'; } catch (e) {}
+  try { if (localStorage.getItem('theme') !== 'dark') document.documentElement.dataset.theme = 'light'; } catch (e) { document.documentElement.dataset.theme = 'light'; }
 </script>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
@@ -358,7 +358,7 @@
     <p class="lead">Une landing page pour un service fictif de génération de leads B2B, avec un défi&nbsp;: rendre une offre complexe claire grâce à un bento design, une grille de cartes vivantes, puis des sections plus longues qui gardent la page lisible.</p>
     <span class="note"><i></i>Défi personnel · marque, partenaires et chiffres fictifs</span>
     <div class="meta">
-      <div><span>Client</span>Filon, marque imaginée pour ce défi</div>
+      <div><span>Marque</span>Filon, imaginée pour ce défi</div>
       <div><span>Mon rôle</span>UI, bento design, animations, intégration</div>
       <div><span>Périmètre</span>Une landing page, ordinateur et mobile</div>
       <div><span>Outils</span>Figma, puis HTML, CSS et JavaScript sans framework</div>

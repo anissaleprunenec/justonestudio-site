@@ -1,0 +1,112 @@
+/* Tampon — page du design system. Les composants montrés sont ceux de l'application, avec ses propres styles. */
+html { scroll-behavior: smooth; scroll-padding-top: 24px; }
+body { background: var(--gray-50); }
+.ds { display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 32px; max-width: 1320px; margin: 0 auto; padding: 24px; }
+
+/* Sommaire : le menu presque noir de l'application */
+.ds-nav { position: sticky; top: 24px; align-self: start; display: grid; gap: 2px; padding: 16px; border-radius: 16px; background: #121513; color: #fff; max-height: calc(100vh - 48px); overflow-y: auto; }
+.ds-brand { display: flex; align-items: center; gap: 10px; padding: 4px 8px 12px; color: #fff; text-decoration: none; font: 800 22px/1 var(--font); letter-spacing: -0.045em; }
+.ds-brand .brand-mark { width: 28px; height: 28px; color: #5dd26e; background: none; box-shadow: none; }
+.ds-nav h2 { padding: 14px 10px 4px; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255, 255, 255, 0.5); }
+.ds-nav a:not(.ds-brand) { padding: 7px 10px; border-radius: 8px; font-size: 14px; font-weight: 500; color: rgba(255, 255, 255, 0.72); text-decoration: none; }
+.ds-nav a:not(.ds-brand):hover { background: rgba(255, 255, 255, 0.08); color: #fff; }
+.ds-nav .ds-back { margin-top: 12px; color: #5dd26e !important; font-weight: 600 !important; }
+
+.ds-head { padding: 12px 0 28px; }
+.ds-head p.eyebrow { margin-bottom: 8px; }
+.ds-head h1 { font: 800 44px/1.05 var(--font); letter-spacing: -0.04em; color: var(--gray-900); }
+.ds-head h1 span { color: var(--primary-500); }
+.ds-head > p:not(.eyebrow) { max-width: 660px; margin-top: 12px; font-size: 17px; line-height: 1.55; color: var(--gray-700); }
+.ds-figs { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
+.ds-figs span { padding: 8px 14px; border-radius: 99px; background: #fff; box-shadow: inset 0 0 0 1px var(--gray-100); font-size: 13px; color: var(--gray-700); }
+.ds-figs b { font-family: var(--font-num); color: var(--gray-900); }
+
+.ds-sec { padding: 28px; margin-bottom: 24px; background: #fff; border: 1px solid var(--gray-100); border-radius: 20px; }
+.ds-sec > h2 { font: 700 24px/1.2 var(--font); letter-spacing: -0.02em; color: var(--gray-900); }
+.ds-sec > p { max-width: 680px; margin: 6px 0 4px; font-size: 15px; line-height: 1.55; color: var(--gray-700); }
+.ds-sec h3 { margin: 26px 0 12px; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gray-600); }
+.ds-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.ds-row--top { align-items: flex-start; }
+.ds-canvas { padding: 20px; border-radius: 16px; background: var(--gray-50); }
+.ds-note { margin-top: 10px; font-size: 13px; color: var(--gray-600); max-width: 680px; }
+.ds-note b { color: var(--gray-900); }
+
+/* Règles */
+.ds-rules { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-top: 16px; }
+.ds-rules li { padding: 16px; border-radius: 14px; background: var(--gray-50); }
+.ds-rules b { display: block; margin-bottom: 4px; font-size: 15px; color: var(--gray-900); }
+.ds-rules span { font-size: 14px; line-height: 1.5; color: var(--gray-700); }
+.ds-dodont { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.ds-dodont > div { padding: 16px; border-radius: 14px; }
+.ds-do { background: var(--success-50); }
+.ds-dont { background: var(--danger-50); }
+.ds-dodont b { display: block; margin-bottom: 8px; font-size: 13px; }
+.ds-do b { color: var(--success-600); }
+.ds-dont b { color: var(--danger-600); }
+.ds-dodont ul { list-style: none; display: grid; gap: 6px; font-size: 14px; color: var(--gray-800); }
+
+/* Couleurs */
+.ds-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+.ds-swatch { border: 1px solid var(--gray-100); border-radius: 14px; overflow: hidden; }
+.ds-swatch i { display: block; height: 60px; }
+.ds-swatch span { display: block; padding: 8px 12px 10px; font-size: 13px; font-weight: 700; color: var(--gray-900); }
+.ds-swatch small { display: block; margin-top: 2px; font: 500 11px/1.4 var(--font-num); color: var(--gray-600); }
+.ds-states { border: 1px solid var(--gray-100); border-radius: 16px; overflow: hidden; }
+.ds-state { display: grid; grid-template-columns: 150px 60px 1fr 1.2fr; gap: 16px; align-items: center; padding: 12px 16px; font-size: 14px; color: var(--gray-700); }
+.ds-state + .ds-state { border-top: 1px solid var(--gray-100); }
+.ds-state--head { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gray-600); background: var(--gray-50); }
+
+/* Typographie */
+.ds-type { display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: 16px; align-items: baseline; padding: 14px 0; border-bottom: 1px solid var(--gray-100); color: var(--gray-900); }
+.ds-type:last-child { border-bottom: 0; }
+.ds-type small { font-size: 12px; line-height: 1.5; color: var(--gray-600); }
+.ds-type small b { display: block; font-size: 13px; color: var(--gray-900); }
+
+/* Espaces, rayons, ombres */
+.ds-spaces { display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-end; }
+.ds-spaces div { display: grid; justify-items: center; gap: 6px; font: 500 12px var(--font-num); color: var(--gray-600); }
+.ds-spaces i { display: block; background: var(--primary-100); border-radius: 3px; }
+.ds-radius { width: 92px; height: 64px; display: grid; place-items: center; background: var(--gray-50); box-shadow: inset 0 0 0 1px var(--gray-100); font: 600 12px var(--font-num); color: var(--gray-700); }
+.ds-shadow { width: 170px; height: 80px; display: grid; place-items: center; border-radius: 14px; background: #fff; font-size: 13px; font-weight: 600; color: var(--gray-700); }
+
+/* Icônes */
+.ds-icons { display: grid; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: 8px; }
+.ds-icons div { display: grid; justify-items: center; gap: 8px; padding: 14px 6px; border-radius: 12px; background: var(--gray-50); font-size: 11px; color: var(--gray-600); text-align: center; }
+.ds-icons svg.i { width: 24px; height: 24px; color: var(--gray-900); }
+
+/* Composants posés à plat (dans l'application, ils flottent) */
+.ds-static .toast, .ds-static .floating, .ds-static .modal-back { position: static; transform: none; animation: none; left: auto; bottom: auto; translate: none; }
+.ds-static .toast { display: inline-flex; max-width: none; }
+.ds-static .modal-back { display: block; padding: 0; background: none; }
+.ds-static .modal { box-shadow: 0 16px 40px rgba(16, 24, 40, 0.14); max-height: none; }
+.ds-static .notif-panel { width: 360px; max-width: 100%; }
+.ds-static .row-menu { position: static; width: 240px; }
+.ds-static .inv-actions.is-decide { position: static; animation: none; }
+.ds-col { display: grid; gap: 8px; justify-items: start; }
+.ds-col > figcaption, .ds-fig figcaption { font-size: 12px; font-weight: 600; color: var(--gray-600); }
+.ds-fig { margin: 0; display: grid; gap: 8px; align-content: start; }
+.ds-grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start; }
+.ds-grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: start; }
+.ds-sec .kpis { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.ds-sec .stat-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.ds-table { border: 1px solid var(--gray-100); border-radius: 16px; overflow: hidden; }
+.ds-sec .fields { max-width: 520px; }
+.ds-phone { width: 375px; max-width: 100%; border-radius: 28px; padding: 10px; background: #1b1f2a; }
+.ds-phone > div { border-radius: 20px; overflow: hidden; background: #fff; }
+
+@media (max-width: 1100px) {
+  .ds-sec .kpis, .ds-sec .stat-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ds-grid3 { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 900px) {
+  .ds { grid-template-columns: minmax(0, 1fr); padding: 12px; gap: 12px; }
+  .ds-nav { position: static; display: flex; flex-wrap: wrap; max-height: none; }
+  .ds-nav h2 { display: none; }
+  .ds-brand { width: 100%; }
+  .ds-head h1 { font-size: 34px; }
+  .ds-sec { padding: 18px; border-radius: 16px; }
+  .ds-type, .ds-state { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  .ds-state--head { display: none; }
+  .ds-grid2, .ds-dodont { grid-template-columns: minmax(0, 1fr); }
+  .ds-sec .kpis, .ds-sec .stat-row { grid-template-columns: minmax(0, 1fr); }
+}

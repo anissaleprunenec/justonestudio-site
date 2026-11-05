@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hush — Profil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/hush.css">
+<script src="../js/transitions.js"></script>
+<style>
+  .profile { padding: 72px var(--gutter) 24px; }
+  .avatar { position: relative; z-index: 1; display: grid; place-items: center; width: 116px; height: 116px; margin: 0 auto; border-radius: 24px; background: var(--brand); color: var(--white-800); }
+  .avatar .i { width: 40px; height: 40px; }
+  .id-card {
+    position: relative; height: 203px; margin-top: -58px; padding-top: 78px;
+    border-radius: 24px; background: var(--ink); color: var(--white-800); text-align: center; overflow: hidden;
+  }
+  /* the hammock motif, in filigree behind the name */
+  .id-card::before { content: ''; position: absolute; inset: 24px -40px -60px; background: url(../assets/motif-hamac.svg) center top / contain no-repeat; opacity: .08; }
+  .id-card h1 { font-size: 20px; line-height: 28px; font-weight: 600; }
+  .id-card p { font-size: 14px; line-height: 21px; }
+  .id-card .btn { position: relative; z-index: 1; width: 143px; margin-top: 20px; }
+  .profile h2 { margin: 24px 0 12px; font-size: 14px; line-height: 21px; font-weight: 400; color: var(--gray-700); }
+  /* one style of row: white grouped lists, violet icon, grey chevron */
+  .profile ul { border-radius: 24px; background: var(--white); box-shadow: var(--shadow-card); overflow: hidden; }
+  .profile li + li .menu { box-shadow: inset 0 1px 0 var(--gray-300); }
+  .profile .menu { height: 60px; border-radius: 0; background: none; }
+  .profile .menu > .i:first-child { color: var(--brand); }
+  .profile .menu > .i:last-child { width: 20px; height: 20px; color: var(--gray-500); }
+  .profile .menu small { color: var(--gray-600); opacity: 1; }
+  .logout { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; height: 48px; margin-top: 20px; color: var(--gray-700); font-weight: 500; }
+  .logout .i { width: 20px; height: 20px; }
+</style>
+</head>
+<body>
+<main class="screen screen--app">
+  <div class="statusbar">
+    <span>9:41</span>
+    <span class="statusbar__icons"><svg><use href="../assets/icons.svg#sb-signal"/></svg><svg><use href="../assets/icons.svg#sb-wifi"/></svg><svg><use href="../assets/icons.svg#sb-battery"/></svg></span>
+  </div>
+
+  <section class="profile">
+    <div class="avatar"><svg class="i"><use href="../assets/icons.svg#sol-user"/></svg></div>
+    <div class="id-card">
+      <h1>Inès Laurent</h1>
+      <p>ines.laurent@example.com</p>
+      <a class="btn btn--sm" href="18-edit-profile.html">Modifier le profil</a>
+    </div>
+
+    <h2>Général</h2>
+    <ul>
+      <li><a class="menu" href="#"><svg class="i"><use href="../assets/icons.svg#sol-address"/></svg>Mes adresses<svg class="i"><use href="../assets/icons.svg#sol-chevron-right"/></svg></a></li>
+      <li><a class="menu" href="20-notifications.html"><svg class="i"><use href="../assets/icons.svg#sol-bell"/></svg>Notifications<svg class="i"><use href="../assets/icons.svg#sol-chevron-right"/></svg></a></li>
+    </ul>
+
+    <h2>Paiement</h2>
+    <ul>
+      <li><a class="menu" href="#"><svg class="i"><use href="../assets/icons.svg#sol-card"/></svg><span>Moyens de paiement<small>Tes cartes et ton moyen par défaut</small></span><svg class="i"><use href="../assets/icons.svg#sol-chevron-right"/></svg></a></li>
+    </ul>
+
+    <h2>Autres</h2>
+    <ul>
+      <li><a class="menu" href="#"><svg class="i" style="--logo-sun: var(--mango)"><use href="../assets/icons.svg#logo-hush-mark"/></svg>À propos de Hush<svg class="i"><use href="../assets/icons.svg#sol-chevron-right"/></svg></a></li>
+      <li><a class="menu" href="#"><svg class="i"><use href="../assets/icons.svg#sol-shield-check"/></svg>Conditions générales<svg class="i"><use href="../assets/icons.svg#sol-chevron-right"/></svg></a></li>
+      <li><a class="menu" href="#"><svg class="i"><use href="../assets/icons.svg#sol-shield-user"/></svg>Confidentialité<svg class="i"><use href="../assets/icons.svg#sol-chevron-right"/></svg></a></li>
+    </ul>
+    <a class="logout" href="05-login.html"><svg class="i"><use href="../assets/icons.svg#sol-logout"/></svg>Se déconnecter</a>
+    <a class="link-danger" href="#delete">Supprimer mon compte</a>
+  </section>
+
+  <div class="modal" id="delete">
+    <a class="modal__scrim" href="#" aria-label="Fermer"></a>
+    <div class="modal__box" role="dialog" aria-modal="true" aria-labelledby="delete-title">
+      <h2 class="h3" id="delete-title">Supprimer ton compte ?</h2>
+      <p>Tes voyages, tes favoris et tes moyens de paiement seront effacés. Tes réservations à venir restent valables : tu recevras leurs détails par e-mail.</p>
+      <a class="btn btn--block" href="#">Garder mon compte</a>
+      <a class="btn btn--block btn--danger" href="04-register.html">Supprimer définitivement</a>
+    </div>
+  </div>
+
+  <nav class="navbar" aria-label="Navigation principale">
+    <ul>
+      <li><a href="06-home.html"><svg class="i"><use href="../assets/icons.svg#sol-home-linear"/></svg>Accueil</a></li>
+      <li><a href="13-history.html"><svg class="i"><use href="../assets/icons.svg#sol-suitcase-linear"/></svg>Voyages</a></li>
+      <li><a href="15-explore.html"><svg class="i"><use href="../assets/icons.svg#sol-compass-linear"/></svg>Explorer</a></li>
+      <li><a href="16-favorite.html"><svg class="i"><use href="../assets/icons.svg#sol-heart-linear"/></svg>Favoris</a></li>
+      <li><a href="17-profile.html" aria-current="page"><svg class="i"><use href="../assets/icons.svg#sol-user"/></svg>Profil</a></li>
+    </ul>
+    <span class="home-indicator"></span>
+  </nav>
+</main>
+<script src="../js/hush.js"></script>
+</body>
+</html>
