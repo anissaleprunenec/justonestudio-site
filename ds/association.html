@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Association enfance — Design system</title>
+<meta name="description" content="Le design system de la page d’accueil Association enfance : principes, couleurs, typographie, formes, composants et règles, avec la raison de chaque choix.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schoolbell&family=Montserrat:wght@400;500;700&family=Poppins:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ds.css">
+<style>
+  :root {
+    --ds-bg: #fffaf4; --ds-card: #ffffff; --ds-ink: #222222; --ds-soft: #595856; --ds-muted: #66645f; --ds-line: #ede5da;
+    --ds-accent: #443cd5; --ds-accent-text: #443cd5; --ds-font: "Montserrat", system-ui, sans-serif;
+    --ds-display: "Schoolbell", "Montserrat", cursive; --ds-display-weight: 400; --ds-radius: 16px;
+  }
+  .ds-head h1 { letter-spacing: 0; line-height: 1.15; color: #443cd5; }
+  .ds-sec > h2 { letter-spacing: 0; color: #443cd5; }
+  .hand { font-family: "Schoolbell", cursive; font-weight: 400; letter-spacing: 0; }
+  .squig { display: block; width: 120px; height: 10px; }
+  /* the real components, with the values measured on the mockup */
+  .btn { display: inline-flex; align-items: center; justify-content: center; height: 42px; padding: 0 30px; border-radius: 8px; border: 0; font: 500 14px/1 "Poppins", sans-serif; cursor: pointer; }
+  .btn-main { background: #4d299b; color: #fff; }
+  .btn-nav { background: #4d299b; color: #fff; height: 34px; padding: 0 18px; border-radius: 6px; font: 400 16px/1 "Schoolbell", cursive; }
+  .demo figure, .demo figure > * { max-width: 100%; } .demo figure { grid-template-columns: minmax(0, auto); }
+  .news { display: flex; align-items: center; gap: 8px; padding: 6px 6px 6px 16px; border-radius: 8px; background: #fff; box-shadow: 0 0 0 1px #ede5da; }
+  .news span { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; font: 400 12px "Poppins", sans-serif; color: #9d9d9d; }
+  .news b { padding: 9px 18px; border-radius: 999px; background: #d27194; color: #fff; font: 500 12px/1 "Poppins", sans-serif; }
+  .news-wrap { width: 344px; padding: 22px; border-radius: 14px; background: #4a2991; }
+  .eyebrow { font: 500 13px "Montserrat", sans-serif; letter-spacing: .14em; text-transform: uppercase; color: #db5e86; }
+  .sec-title { display: grid; gap: 6px; }
+  .sec-title strong { font: 400 48px/1.1 "Schoolbell", cursive; color: #443cd5; }
+  .mission { display: flex; gap: 18px; align-items: flex-start; max-width: 420px; }
+  .mission i { flex: none; width: 76px; height: 76px; border-radius: 50%; background: #f5f0f3; display: grid; place-items: center; }
+  .mission strong { display: block; font: 700 15px "Montserrat", sans-serif; color: #222; }
+  .mission p { margin-top: 6px; font-size: 14px; line-height: 1.6; color: #595856; }
+  .inst-bg { padding: 26px; border-radius: 20px; background: #d27194; display: flex; gap: 14px; }
+  .inst { width: 120px; padding: 14px 12px 16px; border-radius: 6px; background: #fff; }
+  .inst i { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 4px; background: #9985c2; }
+  .inst b { display: block; margin-top: 18px; font: 700 13px "Montserrat", sans-serif; color: #7367a9; }
+  .inst p { margin-top: 4px; font-size: 11.5px; line-height: 1.45; color: #595856; }
+  .more { display: inline-grid; gap: 2px; font: 500 15px "Poppins", sans-serif; color: #ef9f40; text-decoration: none; }
+  .frame { position: relative; width: 210px; height: 170px; border-radius: 16px; background: #ae95e8; overflow: hidden; }
+  .frame img { position: absolute; left: -100px; top: -115px; width: 900px; max-width: none; }
+</style>
+</head>
+<body>
+<main class="ds">
+  <header class="ds-head">
+    <span class="ds-eyebrow">Design system · version courte</span>
+    <h1>Un avenir serein pour chaque enfant</h1>
+    <p>Les fondations et les composants de la page d’accueil que j’ai proposée à une association qui accompagne des enfants. Chaque choix a sa raison, écrite à côté. Le projet est une maquette&nbsp;: les valeurs sont relevées sur la maquette, à 1&nbsp;440&nbsp;px de large.</p>
+    <ul class="ds-toc"><li><a href="#principes">Principes</a></li><li><a href="#couleurs">Couleurs</a></li><li><a href="#typo">Typographie</a></li><li><a href="#formes">Formes</a></li><li><a href="#composants">Composants</a></li><li><a href="#regles">Règles</a></li></ul>
+  </header>
+
+  <section class="ds-sec" id="principes">
+    <h2><b>01</b>Principes</h2>
+    <p class="lead">Trois idées tirées du brief guident tout le reste.</p>
+    <div class="principles">
+      <div class="principle"><b>01</b><h3>L’enfance se voit d’abord</h3><p>Une écriture d’enfant pour les titres, des couleurs vives et des photos découpées&nbsp;: on comprend à qui s’adresse l’association avant de lire une ligne.</p></div>
+      <div class="principle"><b>02</b><h3>L’information reste sérieuse</h3><p>Le texte courant, les missions et les coordonnées restent dans une police droite et sombre. Le jeu est dans le décor, jamais dans ce qu’on doit lire.</p></div>
+      <div class="principle"><b>03</b><h3>Une couleur par section</h3><p>Violet, bleu, vert, rose&nbsp;: chaque bloc change de fond et de côté. Le rythme tient l’attention tout au long d’une page longue.</p></div>
+    </div>
+  </section>
+
+  <section class="ds-sec" id="couleurs">
+    <h2><b>02</b>Couleurs</h2>
+    <p class="lead">Une famille de violets pour la marque, quatre couleurs vives pour les fonds, sur un crème. Les contrastes sont calculés avec les valeurs mesurées.</p>
+    <div class="colors">
+      <div class="color"><div class="chip" style="background:#fffaf4;color:#222;border-bottom:1px solid #ede5da"><span>crème</span></div><div class="info"><strong>Crème</strong><code>#FFFAF4</code><p>Fond de toute la page, entre le hero et le pied de page.</p><p class="why">Plus doux qu’un blanc pur, il rappelle le papier à dessin et laisse les blocs de couleur ressortir sans fatiguer l’œil.</p></div></div>
+      <div class="color"><div class="chip" style="background:#443cd5;color:#fff"><span>violet encre</span><span class="ratio">7,1:1</span></div><div class="info"><strong>Violet encre</strong><code>#443CD5</code><p>Les titres manuscrits sur fond crème.</p><p class="why">La couleur d’un feutre d’écolier. Assez foncée pour que l’écriture manuscrite, moins lisible qu’une police droite, garde un contraste élevé.</p></div></div>
+      <div class="color"><div class="chip" style="background:#4d299b;color:#fff"><span>violet nuit</span><span class="ratio">10,0:1</span></div><div class="info"><strong>Violet nuit</strong><code>#4D299B · pied #4A2991</code><p>Boutons et pied de page.</p><p class="why">Le violet le plus sombre porte ce qui se clique et ce qu’on cherche (adresse, horaires)&nbsp;: c’est la partie «&nbsp;institution&nbsp;» de la page.</p></div></div>
+      <div class="color"><div class="chip" style="background:#5d45bb;color:#fff"><span>violet</span><span class="ratio">6,9:1</span></div><div class="info"><strong>Violet</strong><code>#5D45BB</code><p>Le grand bloc «&nbsp;Un mot du directeur&nbsp;».</p><p class="why">Un cran plus clair que le violet nuit&nbsp;: le bloc reste dans la famille de la marque, mais se lit comme une parole, pas comme un bouton.</p></div></div>
+      <div class="color"><div class="chip" style="background:linear-gradient(90deg,#88a7fe,#aac1ff);color:#fff"><span>bleu hero</span></div><div class="info"><strong>Bleu pervenche</strong><code>#88A7FE → #AAC1FF</code><p>Fond du hero, en léger dégradé.</p><p class="why">Un ciel de dessin d’enfant pour le premier écran.</p></div></div>
+      <div class="color"><div class="chip" style="background:linear-gradient(90deg,#ae95e8 0 33%,#77d5f1 33% 66%,#a4eeaf 66%);color:#222"><span>fonds photo</span></div><div class="info"><strong>Lilas, bleu ciel, vert</strong><code>#AE95E8 · #77D5F1 · #A4EEAF</code><p>Fonds des photos détourées, une couleur par section.</p><p class="why">Des tons clairs et gais derrière les enfants&nbsp;: ils portent la couleur demandée par le brief sans jamais porter de texte.</p></div></div>
+      <div class="color"><div class="chip" style="background:#d27194;color:#fff"><span>rose</span></div><div class="info"><strong>Rose</strong><code>#D27194 · étiquette #DB5E86</code><p>Bloc «&nbsp;Les instances&nbsp;», bouton de la newsletter, étiquettes au-dessus des titres.</p><p class="why">La touche tendre de la palette, qui réchauffe le violet.</p></div></div>
+      <div class="color"><div class="chip" style="background:#ef9f40;color:#222"><span>orange</span></div><div class="info"><strong>Orange</strong><code>#EF9F40</code><p>Le lien «&nbsp;Learn More&nbsp;» et son trait ondulé.</p><p class="why">Une couleur chaude qui signale une action secondaire.</p></div></div>
+    </div>
+    <h3 class="ds-sub">Contrastes vérifiés</h3>
+    <table class="contrast">
+      <thead><tr><th>Couple</th><th>Ratio</th><th>Verdict</th><th>Usage autorisé</th></tr></thead>
+      <tbody>
+        <tr><td><span class="pair" style="background:#fffaf4;color:#222;border:1px solid #ede5da">Aa</span></td><td>15,3:1</td><td class="ok">AAA</td><td>Tout texte</td></tr>
+        <tr><td><span class="pair" style="background:#fffaf4;color:#443cd5;border:1px solid #ede5da">Aa</span></td><td>7,1:1</td><td class="ok">AAA</td><td>Titres manuscrits, icônes</td></tr>
+        <tr><td><span class="pair" style="background:#fffaf4;color:#595856;border:1px solid #ede5da">Aa</span></td><td>6,9:1</td><td class="ok">AA</td><td>Texte courant</td></tr>
+        <tr><td><span class="pair" style="background:#4d299b;color:#fff">Aa</span></td><td>10,0:1</td><td class="ok">AAA</td><td>Boutons, pied de page</td></tr>
+        <tr><td><span class="pair" style="background:#5d45bb;color:#fff">Aa</span></td><td>6,9:1</td><td class="ok">AA</td><td>Titre et citation du directeur</td></tr>
+        <tr><td><span class="pair" style="background:#fffaf4;color:#db5e86;border:1px solid #ede5da">Aa</span></td><td>3,4:1</td><td class="ok">AA grands textes</td><td>Étiquettes en capitales au-dessus des titres</td></tr>
+        <tr><td><span class="pair" style="background:#d27194;color:#fff">Aa</span></td><td>3,2:1</td><td class="ok">AA grands textes</td><td>Titre «&nbsp;Les instances&nbsp;» et son bouton</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="ds-sec" id="typo">
+    <h2><b>03</b>Typographie</h2>
+    <p class="lead">Trois familles, chacune à sa place&nbsp;: une écriture manuscrite pour la voix de l’enfant, une sans-serif droite pour l’information, une sans-serif ronde pour les boutons et le pied de page.</p>
+    <p class="why">Le brief demandait des titres écrits comme par un enfant. L’écriture choisie a des lettres irrégulières mais bien formées&nbsp;: on y croit, et on la lit sans effort. Je la limite aux titres et au menu&nbsp;; tout le reste passe dans une sans-serif droite et ouverte, pour garder le sérieux de l’association.</p>
+    <div class="types">
+      <div class="type-row"><div class="hand" style="font-size:clamp(36px,5vw,56px);line-height:1.25;color:#443cd5">Un Avenir Serein<br>pour Chaque Enfant</div><div class="meta"><strong>Titre du hero</strong><code>Manuscrite · 400 · ≈ 56 px · interligne ≈ 1,25</code><p class="why">Une seule phrase, très grande, soulignée de traits rose à la main&nbsp;: la promesse est dite comme un enfant l’écrirait.</p></div></div>
+      <div class="type-row"><div class="hand" style="font-size:clamp(34px,4.6vw,64px);line-height:1.1;color:#443cd5">Les missions</div><div class="meta"><strong>Titre de section</strong><code>Manuscrite · 400 · ≈ 64 px · violet encre</code><p class="why">Plus grand que le hero&nbsp;: l’écriture manuscrite a un petit œil, elle a besoin de taille pour rester lisible de loin.</p></div></div>
+      <div class="type-row"><div><span class="eyebrow">Lorem ipsum</span></div><div class="meta"><strong>Étiquette</strong><code>Sans-serif droite · 500 · ≈ 13 px · capitales · +14 %</code><p class="why">Une petite ligne droite et espacée au-dessus du titre manuscrit&nbsp;: elle range la section, comme une rubrique.</p></div></div>
+      <div class="type-row"><div style="font-size:16px;font-weight:700">Missions N°1</div><div class="meta"><strong>Titre d’élément</strong><code>Sans-serif droite · 700 · ≈ 16 px · encre</code><p class="why">Le gras suffit à distinguer chaque mission, sans ajouter une quatrième taille.</p></div></div>
+      <div class="type-row"><div style="font-size:16px;line-height:1.6;color:#595856;max-width:46ch">Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression.</div><div class="meta"><strong>Texte courant</strong><code>Sans-serif droite · 400 · ≈ 16 px · interligne ≈ 1,6 · gris</code><p class="why">Un interligne large et des lignes courtes&nbsp;: les parents lisent vite, souvent sur un téléphone.</p></div></div>
+      <div class="type-row"><div style="font:500 14px 'Poppins',sans-serif">En savoir plus</div><div class="meta"><strong>Boutons et pied de page</strong><code>Sans-serif ronde · 500 · ≈ 14 px</code><p class="why">Une police plus ronde que celle du texte pour ce qui se clique&nbsp;: le bouton se repère comme un objet à part.</p></div></div>
+    </div>
+  </section>
+
+  <section class="ds-sec" id="formes">
+    <h2><b>04</b>Formes</h2>
+    <div class="tokens">
+      <div class="token-card"><h3>Rayons</h3><div class="shapes"><div><i style="border-radius:6px"></i>6</div><div><i style="border-radius:8px"></i>8</div><div><i style="border-radius:16px"></i>16</div><div><i style="border-radius:999px;width:96px"></i>pilule</div></div><p class="why">6 à 8 pour les boutons et les cartes d’instance, 16 pour les cadres photo, de grands rayons irréguliers pour les blocs penchés. Rien n’est pointu dans un univers d’enfant.</p></div>
+      <div class="token-card"><h3>Vagues et inclinaisons</h3><div class="shapes"><div><svg width="150" height="40" viewBox="0 0 150 40" aria-hidden="true"><path d="M0 40V20q12.5-16 25 0t25 0 25 0 25 0 25 0 25 0V40z" fill="#88a7fe"/></svg>bord en vagues</div><div><i style="width:72px;height:44px;border:0;background:#5d45bb;border-radius:14px;rotate:-2deg"></i>≈ −2°</div></div><p class="why">Les bords en vagues du hero et du pied de page, et les grands blocs légèrement penchés, cassent la grille comme un dessin à main levée, sans la désordonner.</p></div>
+      <div class="token-card"><h3>Largeur et rythme</h3><div class="scale"><div><i style="width:100%"></i></div><div>≈ 1 240 px de contenu, marges de 100 px</div><div><i style="width:50%"></i></div><div>photo et texte en deux colonnes égales</div></div><p class="why">Une photo d’un côté, le texte de l’autre, et l’inverse à la section suivante&nbsp;: le regard zigzague et la page ne paraît jamais longue.</p></div>
+    </div>
+  </section>
+
+  <section class="ds-sec" id="composants">
+    <h2><b>05</b>Composants</h2>
+    <div class="comps">
+      <div class="comp wide"><div class="demo"><figure><button class="btn btn-main" type="button">En savoir plus</button><figcaption>bouton principal</figcaption></figure><figure><button class="btn btn-nav" type="button">Espace candidature</button><figcaption>bouton du menu</figcaption></figure><figure><div class="news-wrap"><div class="news"><span>Entrer votre adresse mail</span><b>Get Started</b></div></div><figcaption>newsletter, pied de page</figcaption></figure></div>
+        <div class="text"><h3>Boutons</h3><p>Rectangle violet nuit aux coins arrondis pour l’action principale. Le bouton du menu reprend l’écriture manuscrite. Dans le pied de page, le bouton rose est logé dans le champ.</p><p class="why">Un seul violet pour tout ce qui se clique, toujours le plus sombre de la page&nbsp;: au milieu des couleurs vives, l’action reste évidente. Le rose de la newsletter est la seule exception, posée sur le violet du pied de page où un bouton violet disparaîtrait.</p></div></div>
+      <div class="comp"><div class="demo center"><div class="sec-title"><span class="eyebrow">Lorem ipsum</span><strong>Les missions</strong></div></div><div class="text"><h3>Titre de section</h3><p>Une étiquette rose en capitales, puis le titre manuscrit violet.</p><p class="why">Le couple droit et manuscrit résume toute la page&nbsp;: l’ordre d’un côté, l’enfance de l’autre.</p></div></div>
+      <div class="comp"><div class="demo center"><div class="mission"><i><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#5851d8" stroke-width="1.4" aria-hidden="true"><path d="M8 4h8v5a4 4 0 0 1-8 0zM8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M9 20h6M10 17h4v3h-4z"/></svg></i><div><strong>Missions N°1</strong><p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression.</p></div></div></div><div class="text"><h3>Mission</h3><p>Une icône au trait violet dans un cercle clair, un titre en gras et deux lignes de texte.</p><p class="why">L’icône donne un repère à chaque mission (coupe, formes, fusée)&nbsp;; le cercle très pâle la rend douce sans voler la vedette au texte.</p></div></div>
+      <div class="comp"><div class="demo center"><div class="inst-bg"><div class="inst"><i><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" aria-hidden="true"><path d="M3 11 12 4l9 7M5 10v10h14V10M10 20v-5h4v5"/></svg></i><b>CS</b><p>Qu’est-ce que le Lorem Ipsum?</p></div><div class="inst"><i><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" aria-hidden="true"><path d="M3 11 12 4l9 7M5 10v10h14V10M10 20v-5h4v5"/></svg></i><b>CDU</b><p>Qu’est-ce que le Lorem Ipsum?</p></div></div></div><div class="text"><h3>Carte d’instance</h3><p>Carte blanche sur le bloc rose, icône sur un carré lilas, sigle de l’instance en gras.</p><p class="why">Les instances sont la partie la plus administrative de la page&nbsp;: des cartes blanches, identiques et alignées, la rendent sobre et facile à parcourir.</p></div></div>
+      <div class="comp"><div class="demo center"><figure><div class="frame"><img src="../img/association-case/missions.png" alt=""></div><figcaption>cadre photo</figcaption></figure><figure><a class="more" href="#composants">Learn More<svg class="squig" viewBox="0 0 96 10" aria-hidden="true"><path d="M2 6q4-5 8 0t8 0 8 0 8 0 8 0 8 0 8 0 8 0 8 0 8 0 8 0" fill="none" stroke="#ef9f40" stroke-width="2" stroke-linecap="round"/></svg></a><figcaption>lien</figcaption></figure></div><div class="text"><h3>Photo détourée et lien souligné</h3><p>Chaque enfant est découpé avec un contour blanc, posé sur un fond de couleur arrondi et entouré de petits dessins. Le lien est souligné d’un trait ondulé.</p><p class="why">Le collage aux ciseaux et le trait à main levée sont les gestes d’un enfant&nbsp;: ils portent l’univers demandé sans toucher au texte.</p></div></div>
+    </div>
+  </section>
+
+  <section class="ds-sec" id="regles">
+    <h2><b>06</b>Règles</h2>
+    <div class="rules">
+      <div class="do"><h3>À faire</h3><ul><li>L’écriture manuscrite pour les titres et le menu seulement.</li><li>Une couleur de fond différente à chaque section, et la photo qui change de côté.</li><li>Le violet nuit pour tout ce qui se clique.</li><li>Un contour blanc autour de chaque photo détourée.</li><li>Les dessins (étoiles, ampoule, traits) dans les marges, autour des photos.</li></ul></div>
+      <div class="dont"><h3>À éviter</h3><ul><li>Un paragraphe en écriture manuscrite.</li><li>Du texte en orange ou en rose clair sur le crème.</li><li>Du texte blanc sur le bleu pervenche ou les fonds photo.</li><li>Un dessin posé sur un texte ou sur un visage.</li></ul></div>
+    </div>
+  </section>
+
+  <p class="ds-foot">Association enfance · design system conçu par Anissa B. Le Prunenec · Just One Studio</p>
+</main>
+</body>
+</html>

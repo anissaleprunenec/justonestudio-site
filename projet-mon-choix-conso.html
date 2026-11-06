@@ -323,6 +323,22 @@
     .reveal { opacity: 1 !important; translate: none !important; transition: none !important; }
   }
   .foot .flag { width: 16px; height: 11px; margin-right: 7px; border-radius: 2px; vertical-align: -1px; box-shadow: 0 0 0 1px var(--line); }
+
+  /* theme switch: moon and sun both visible, a knob slides under the active mode */
+  .theme-toggle { position: relative; width: 68px; height: 36px; border-radius: 999px; display: flex; align-items: center; justify-content: space-between; padding: 0 9px; background: var(--surface); border: 1px solid var(--line); color: var(--muted); cursor: pointer; transition: border-color .2s; }
+  .theme-toggle:hover { border-color: var(--muted); background: var(--surface); }
+  .theme-toggle::before { content: ""; position: absolute; top: 3px; left: 3px; width: 28px; height: 28px; border-radius: 50%; background: var(--btn-bg); transition: translate .35s var(--ease); }
+  :root[data-theme="light"] .theme-toggle::before { translate: 32px 0; }
+  .theme-toggle .sun, .theme-toggle .moon, :root[data-theme="light"] .theme-toggle .sun, :root[data-theme="light"] .theme-toggle .moon { position: relative; z-index: 1; display: block; width: 16px; height: 16px; transition: color .3s; }
+  .theme-toggle .moon { order: -1; color: var(--btn-text); }
+  :root[data-theme="light"] .theme-toggle .moon { color: var(--muted); }
+  :root[data-theme="light"] .theme-toggle .sun { color: var(--btn-text); }
+  @media (prefers-reduced-motion: reduce) { .theme-toggle::before { transition: none; } }
+
+  .case-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+  .case-cta a { display: inline-flex; align-items: center; gap: 10px; height: 46px; padding: 0 20px; border-radius: 12px; border: 1px solid var(--line); font-size: 15px; font-weight: 500; transition: transform .2s, background .2s; }
+  .case-cta a:first-child { background: var(--btn-bg); color: var(--btn-text); border-color: transparent; }
+  .case-cta a:hover { transform: translateY(-1px); }
 </style>
 </head>
 <body>
@@ -369,7 +385,7 @@
 
   <header class="wrap head">
     <a class="back" href="projets.html">← Tous les projets</a>
-    <span class="kicker">11 · Landing page · Avant / après</span>
+    <span class="kicker">13 · Landing page · Rénovation</span>
     <h1>Landings <em>avant / après</em></h1>
     <p class="lead">La refonte de landing pages de génération de leads&nbsp;: un questionnaire qui aide le visiteur à trouver la meilleure offre, puis le met en relation avec un partenaire. Pour des clients de Leads Studio, j’ai repris les pages existantes pour les rendre plus claires, plus rassurantes et plus modernes.</p>
     <div class="meta">
@@ -449,18 +465,33 @@
       <h3 class="ba-sub">Mon Choix Conso</h3>
       <p>Un vert canard pour la marque et les boutons, un fond blanc cassé, un bleu nuit pour les mentions et le pied de page, et une typographie très ronde pour les titres.</p>
       <div class="grid g3">
-        <div class="swatch"><i style="background:#126e68"></i><span>Vert canard<small>#126E68</small></span></div>
-        <div class="swatch"><i style="background:#fbf9f4"></i><span>Blanc cassé<small>#FBF9F4</small></span></div>
+        <div class="swatch"><i style="background:#058280"></i><span>Vert canard<small>#058280</small></span></div>
+        <div class="swatch"><i style="background:#FFF9F4"></i><span>Blanc crème<small>#FFF9F4</small></span></div>
         <div class="swatch"><i style="background:#1f2a37"></i><span>Bleu nuit<small>#1F2A37</small></span></div>
       </div>
       <h3 class="ba-sub">Expert Rénovation</h3>
       <p>Un bleu marine profond pour le hero et le pied de page, un bleu vif pour les boutons, un fond gris très clair, et une touche d’orange réservée aux aides financières.</p>
       <div class="grid g4">
-        <div class="swatch"><i style="background:#142654"></i><span>Bleu marine<small>#142654</small></span></div>
-        <div class="swatch"><i style="background:#019ce6"></i><span>Bleu vif<small>#019CE6</small></span></div>
+        <div class="swatch"><i style="background:#16255E"></i><span>Bleu marine<small>#16255E</small></span></div>
+        <div class="swatch"><i style="background:#009EE8"></i><span>Bleu vif<small>#009EE8</small></span></div>
         <div class="swatch"><i style="background:#f7f8fa"></i><span>Gris clair<small>#F7F8FA</small></span></div>
-        <div class="swatch"><i style="background:#e55d2a"></i><span>Orange<small>#E55D2A</small></span></div>
+        <div class="swatch"><i style="background:#E95D2A"></i><span>Orange<small>#E95D2A</small></span></div>
       </div>
+    </div>
+  </section>
+
+  <section class="sec" id="design-system">
+    <div class="sec-title"><b>05</b><h2>Le design <em>system</em></h2></div>
+    <div class="sec-body">
+      <p>J’ai rassemblé les règles des deux pages «&nbsp;après&nbsp;» dans un design system court. Les deux marques partagent le même parcours et la même logique&nbsp;; seules les couleurs et les polices changent. J’ai relevé chaque valeur sur la maquette et écrit à côté la raison de chaque choix.</p>
+      <ul class="changes">
+        <li>Les règles communes d’abord&nbsp;: le formulaire visible dès l’arrivée à droite de la promesse, trois arguments sous le titre, une seule couleur pour les boutons.</li>
+        <li>Les couleurs des deux marques côte à côte&nbsp;: vert canard et vert pétrole pour Mon Choix Conso, bleu marine et bleu vif pour Expert Rénovation, avec l’orange réservé aux aides financières.</li>
+        <li>Chaque couleur a son rôle et son contraste mesuré, avec une seule couleur d’action par marque.</li>
+      </ul>
+      <p class="hint"><span class="h-hover">Faites défiler ou attrapez la fenêtre pour parcourir le design system.</span><span class="h-touch">Faites défiler dans la fenêtre pour parcourir le design system.</span></p>
+      <div class="stage" style="--flat:#126e68"><div class="win"><div class="bar"><i></i><i></i><i></i><span>Landings avant / après — Design system</span></div><div class="screen" tabindex="0" aria-label="Design system de Landings avant / après, faire défiler"><img src="img/monchoix-case/ds-full.jpg" alt="Page complète du design system des landings Mon Choix Conso et Expert Rénovation : principes communs, couleurs des deux marques côte à côte avec leurs contrastes, typographie, formes, composants (formulaires, boutons, arguments, cartes de garantie, étiquettes) et règles" loading="lazy"></div></div></div>
+      <div class="case-cta"><a href="ds/mon-choix-conso.html" target="_blank" rel="noopener">Ouvrir le design system <span aria-hidden="true">↗</span></a></div>
     </div>
   </section>
 

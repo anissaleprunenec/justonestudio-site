@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Réduit — Design system</title>
+<meta name="description" content="Le design system de Réduit : principes, couleurs, typographie, formes, composants et règles, avec la raison de chaque choix.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ds.css">
+<style>
+  :root {
+    --ds-bg: #0a0a0b; --ds-card: #111113; --ds-ink: #f2f1ec; --ds-soft: #9a9996; --ds-muted: #8a8987; --ds-line: rgba(242, 241, 236, .1);
+    --ds-accent: #e6a532; --ds-accent-text: #e6a532; --ds-font: "Geist", system-ui, sans-serif; --ds-display-weight: 400; --ds-radius: 14px;
+    --ds-surface: #111113; --ds-demo: #0a0a0b;
+    --mono: "Geist Mono", ui-monospace, monospace;
+  }
+  /* verdict colours readable on the dark page */
+  .ok { color: #6fd39a; } .ko { color: #e6a532; }
+  .ds-head h1 { letter-spacing: -.045em; }
+  .fade { background: linear-gradient(90deg, #f2f1ec 0%, #f2f1ec 62%, rgba(242, 241, 236, .45) 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .fade-2 { background: linear-gradient(90deg, rgba(242, 241, 236, .72), rgba(242, 241, 236, .38)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .label { display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 14px; letter-spacing: .04em; text-transform: uppercase; color: rgba(242, 241, 236, .62); }
+  .label b { font-weight: 400; color: #e6a532; }
+  .sq { width: 8px; height: 8px; background: #e6a532; flex: none; }
+  .code-pill { display: inline-block; padding: 3px 8px; border: 1px solid rgba(230, 165, 50, .35); border-radius: 999px; font-family: var(--mono); font-size: 11px; color: #e6a532; }
+  /* the real components, with the values of the site */
+  .btn { display: inline-flex; align-items: center; gap: 10px; height: 44px; padding: 0 20px; font: 500 14px var(--ds-font); color: #f2f1ec; border: 1px solid transparent; border-radius: 999px; transition: background .2s, border-color .2s, color .2s; }
+  .btn svg { width: 16px; height: 16px; flex: none; transition: transform .2s; }
+  .btn-accent { height: 48px; padding: 0 22px 0 24px; background: #e6a532; color: #1a1104; font-weight: 600; }
+  .btn-accent.is-hover { background: rgb(255, 196, 90); }
+  .btn-accent.is-hover svg { transform: translateX(3px); }
+  .btn.is-focus { outline: 2px solid rgb(255, 196, 90); outline-offset: 3px; }
+  .btn-ghost { height: 48px; padding: 0 22px; border-color: rgba(242, 241, 236, .2); background: rgba(242, 241, 236, .04); }
+  .btn-glass { height: 40px; padding: 0 18px; border-color: rgba(242, 241, 236, .3); background: rgba(242, 241, 236, .04); }
+  .cta-note { font-family: var(--mono); font-size: 12px; letter-spacing: .02em; color: rgba(242, 241, 236, .62); }
+  .callout { display: flex; gap: 12px; width: 270px; padding: 14px 16px; border: 1px solid rgba(242, 241, 236, .14); border-radius: 10px; background: rgba(12, 12, 14, .9); }
+  .callout.is-on { border-color: rgba(230, 165, 50, .6); }
+  .callout-num { flex: none; font-family: var(--mono); font-size: 12px; color: #e6a532; padding-top: 2px; }
+  .callout h3 { margin: 0 0 4px; font-size: 16px; font-weight: 500; letter-spacing: -.01em; }
+  .callout p { font-size: 13px; line-height: 1.45; color: rgba(242, 241, 236, .62); }
+  .callout .code-pill { margin-top: 10px; }
+  .plan { position: relative; display: flex; flex-direction: column; width: 300px; margin-top: 14px; padding: 30px 26px 26px; border-radius: 22px; border: 1px solid rgba(255, 238, 210, .45);
+    background: radial-gradient(130% 75% at 50% 0%, rgba(230, 165, 50, .78) 0%, rgba(185, 118, 28, .55) 28%, rgba(107, 63, 16, .32) 52%, rgba(29, 20, 10, .35) 72%, rgba(15, 15, 16, .55) 88%), rgba(15, 15, 16, .25);
+    box-shadow: inset 0 1px 0 rgba(255, 244, 222, .35); }
+  .plan-badge { position: absolute; top: -13px; left: 50%; transform: translateX(-50%); padding: 4px 12px; border-radius: 999px; background: #0b0b0c; border: 1px solid rgba(255, 238, 210, .55); font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; color: #e6a532; }
+  .plan h3 { font-size: 30px; font-weight: 600; letter-spacing: -.03em; line-height: 1.2; }
+  .plan-sub { margin-top: 6px; font-size: 14px; color: rgba(255, 244, 222, .75); }
+  .plan-price { display: flex; align-items: baseline; gap: 6px; margin-top: 34px; }
+  .plan-price b { font-size: 30px; font-weight: 600; letter-spacing: -.03em; }
+  .plan-price span { font-size: 13px; color: rgba(242, 241, 236, .62); }
+  .plan hr { width: 100%; height: 1px; margin: 28px 0 24px; border: 0; background: rgba(242, 241, 236, .14); }
+  .plan-for { margin-bottom: 10px; font-size: 15px; font-weight: 600; }
+  .plan ul { margin: 0 0 26px; padding: 0; list-style: none; }
+  .plan li { display: flex; gap: 10px; padding: 6px 0; font-size: 14px; line-height: 1.4; color: rgba(242, 241, 236, .82); }
+  .plan li svg { width: 17px; height: 17px; flex: none; margin-top: 1px; color: rgba(242, 241, 236, .75); }
+  .plan-cta { position: relative; display: flex; align-items: center; justify-content: center; height: 44px; padding: 0 48px 0 20px; border: 1px solid rgba(255, 238, 210, .5); border-radius: 999px; color: #fff; font-size: 15px; font-weight: 500; }
+  .plan-arrow { position: absolute; right: 4px; display: grid; place-items: center; width: 34px; height: 34px; border: 1.5px solid #fff; border-radius: 50%; background: #0b0b0c; color: #fff; }
+  .plan-arrow svg { width: 14px; height: 14px; }
+  .qcard { position: relative; display: flex; flex-direction: column; width: 100%; max-width: 340px; padding: 24px; border: 1px solid rgba(242, 241, 236, .14); border-radius: 16px; background: linear-gradient(160deg, rgba(242, 241, 236, .07), rgba(242, 241, 236, .015) 60%); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08); }
+  .qcard-top { display: flex; align-items: center; justify-content: space-between; }
+  .qcard .ic { display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid rgba(230, 165, 50, .3); border-radius: 11px; background: rgba(230, 165, 50, .06); color: #e6a532; }
+  .qcard .ic svg { width: 18px; height: 18px; }
+  .qn { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; color: rgba(242, 241, 236, .55); }
+  .qcard h3 { margin: 22px 0 8px; font-size: 18px; font-weight: 500; letter-spacing: -.01em; }
+  .qcard p { margin-bottom: 20px; font-size: 15px; line-height: 1.55; color: rgba(242, 241, 236, .62); }
+  .qcard .code-pill { align-self: flex-start; padding: 4px 10px; }
+  .form { width: 100%; padding: 22px; border: 1px solid var(--ds-line); border-radius: 16px; background: #111113; }
+  .field { display: block; margin-bottom: 12px; }
+  .field span { display: block; margin-bottom: 7px; font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: rgba(242, 241, 236, .55); }
+  .field i { display: block; padding: 12px 14px; border: 1px solid var(--ds-line); border-radius: 10px; background: #0d0d0f; font-style: normal; font-size: 15px; color: rgba(242, 241, 236, .55); }
+  .field.is-focus i { border-color: rgba(230, 165, 50, .6); color: #f2f1ec; }
+  .field.is-error i { border-color: #d8483f; }
+  .field-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .comp .demo .field-row figure { justify-items: stretch; gap: 0; min-width: 0; }
+  .field-row figcaption { text-align: center; }
+  @media (max-width: 600px) { .field-row { grid-template-columns: 1fr; } .field-row figcaption { margin-bottom: 8px; } }
+  .topics { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 12px; }
+  .topics b { display: inline-block; padding: 7px 13px; border: 1px solid var(--ds-line); border-radius: 999px; font-weight: 400; font-size: 13px; color: rgba(242, 241, 236, .62); }
+  .topics b.on { border-color: rgba(230, 165, 50, .6); color: #e6a532; }
+  .form-status { font-size: 14px; color: #e56b62; }
+  .light-demo { width: 96px; height: 64px; border-radius: 14px !important; }
+</style>
+</head>
+<body>
+<main class="ds">
+  <header class="ds-head">
+    <img class="ds-logo" src="../img/reduit-case/logo.svg" alt="Réduit">
+    <span class="ds-eyebrow">Design system · version courte</span>
+    <h1>Tes fichiers, <span class="fade">sous la montagne.</span></h1>
+    <p>Les fondations et les composants de Réduit, un stockage chiffré installé dans un ancien bunker des Alpes. Chaque choix a sa raison, écrite à côté.</p>
+    <ul class="ds-toc"><li><a href="#principes">Principes</a></li><li><a href="#couleurs">Couleurs</a></li><li><a href="#typo">Typographie</a></li><li><a href="#formes">Formes</a></li><li><a href="#composants">Composants</a></li><li><a href="#regles">Règles</a></li></ul>
+  </header>
+
+  <section class="ds-sec" id="principes">
+    <h2><b>01</b>Principes</h2>
+    <p class="lead">Trois idées guident tout le reste. Quand j’hésite entre deux options, je reviens à elles.</p>
+    <div class="principles">
+      <div class="principle"><b>01</b><h3>Rassurer sans jargon</h3><p>Chaque inquiétude a sa réponse visible&nbsp;: où sont les fichiers, qui peut les lire, ce qui se passe si l’on perd sa clé.</p></div>
+      <div class="principle"><b>02</b><h3>Prouver plutôt que promettre</h3><p>À côté de chaque promesse, le nom exact de la technique en monospace&nbsp;: on peut vérifier, pas seulement croire.</p></div>
+      <div class="principle"><b>03</b><h3>Un seul éclat</h3><p>Du noir profond, un texte crème et un or rare. Chaque effet a une fonction&nbsp;; j’ai retiré ceux qui n’en avaient pas.</p></div>
+    </div>
+  </section>
+
+  <section class="ds-sec" id="couleurs">
+    <h2><b>02</b>Couleurs</h2>
+    <p class="lead">Deux noirs, une crème déclinée en opacités, un or comme seul accent. Les contrastes sont mesurés sur le noir du fond.</p>
+    <div class="colors">
+      <div class="color"><div class="chip" style="background:#0a0a0b;color:#f2f1ec;border-bottom:1px solid rgba(242,241,236,.1)"><span>--bg</span></div><div class="info"><strong>Noir roche</strong><code>#0A0A0B</code><p>Fond de toute la page.</p><p class="why">Le noir de la roche et du bunker. Il donne du poids au propos et fait ressortir l’or sans effort.</p></div></div>
+      <div class="color"><div class="chip" style="background:#111113;color:#f2f1ec;border-bottom:1px solid rgba(242,241,236,.1)"><span>--bg-2</span></div><div class="info"><strong>Noir relevé</strong><code>#111113</code><p>Formulaire, fenêtre d’essai, fonds des repères.</p><p class="why">Un cran plus clair&nbsp;: il pose un bloc à remplir sur la page sans bordure lourde.</p></div></div>
+      <div class="color"><div class="chip" style="background:#f2f1ec;color:#0a0a0b"><span>--text</span><span class="ratio">17,5:1</span></div><div class="info"><strong>Crème</strong><code>#F2F1EC</code><p>Titres, texte principal.</p><p class="why">Un blanc cassé&nbsp;: sur un noir aussi profond, un blanc pur éblouit dans les longs textes.</p></div></div>
+      <div class="color"><div class="chip" style="background:#9a9996;color:#0a0a0b"><span>--text-soft</span><span class="ratio">7,0:1</span></div><div class="info"><strong>Crème douce</strong><code>rgba(242, 241, 236, .62)</code><p>Texte courant, descriptions, navigation.</p><p class="why">Une transparence plutôt qu’un gris fixe&nbsp;: le texte garde sa teinte crème sur le noir comme sur le verre des cartes.</p></div></div>
+      <div class="color"><div class="chip" style="background:#8a8987;color:#0a0a0b"><span>--text-mute</span><span class="ratio">5,7:1</span></div><div class="info"><strong>Crème atténuée</strong><code>rgba(242, 241, 236, .55)</code><p>Mentions en monospace, libellés de champs.</p><p class="why">Le niveau le plus discret qui reste lisible pour les mentions de 11&nbsp;px.</p></div></div>
+      <div class="color"><div class="chip" style="background:#e6a532;color:#1a1104"><span>--accent</span><span class="ratio">9,2:1</span></div><div class="info"><strong>Or ambré</strong><code>#E6A532</code><p>Bouton principal, numéros, repères du schéma, icônes.</p><p class="why">J’ai essayé le rouge, puis un bleu glacier. J’ai gardé l’or, plus chaud et plus précieux sur le noir&nbsp;: celui d’un coffre.</p></div></div>
+      <div class="color"><div class="chip" style="background:#1a1104;color:#e6a532"><span>--on-accent</span><span class="ratio">8,7:1</span></div><div class="info"><strong>Brun profond</strong><code>#1A1104</code><p>Texte des boutons dorés.</p><p class="why">Un brun très foncé plutôt que du noir&nbsp;: le libellé reste dans la chaleur de l’or.</p></div></div>
+      <div class="color"><div class="chip" style="background:#ffc45a;color:#1a1104"><span>--accent-hot</span></div><div class="info"><strong>Or vif</strong><code>#FFC45A</code><p>Survol du bouton doré, anneau de focus clavier.</p><p class="why">Au survol, l’or s’allume au lieu de foncer, comme une lampe qu’on approche. Le même or vif marque le focus clavier.</p></div></div>
+    </div>
+    <h3 class="ds-sub">Contrastes vérifiés</h3>
+    <table class="contrast">
+      <thead><tr><th>Couple</th><th>Ratio</th><th>Verdict</th><th>Usage autorisé</th></tr></thead>
+      <tbody>
+        <tr><td><span class="pair" style="background:#0a0a0b;color:#f2f1ec;border:1px solid rgba(242,241,236,.14)">Aa</span></td><td>17,5:1</td><td class="ok">AAA</td><td>Tout texte</td></tr>
+        <tr><td><span class="pair" style="background:#0a0a0b;color:#9a9996;border:1px solid rgba(242,241,236,.14)">Aa</span></td><td>7,0:1</td><td class="ok">AAA</td><td>Texte courant</td></tr>
+        <tr><td><span class="pair" style="background:#0a0a0b;color:#8a8987;border:1px solid rgba(242,241,236,.14)">Aa</span></td><td>5,7:1</td><td class="ok">AA</td><td>Mentions et libellés, dès 11&nbsp;px</td></tr>
+        <tr><td><span class="pair" style="background:#0a0a0b;color:#e6a532;border:1px solid rgba(242,241,236,.14)">Aa</span></td><td>9,2:1</td><td class="ok">AAA</td><td>Numéros, étiquettes techniques, icônes</td></tr>
+        <tr><td><span class="pair" style="background:#e6a532;color:#1a1104">Aa</span></td><td>8,7:1</td><td class="ok">AAA</td><td>Boutons dorés</td></tr>
+        <tr><td><span class="pair" style="background:#0a0a0b;color:#626260;border:1px solid rgba(242,241,236,.14)">Aa</span></td><td>3,2:1</td><td class="ok">AA grands textes</td><td>Fin du dégradé des titres (crème à 38&nbsp;%)&nbsp;: titres de 32&nbsp;px et plus seulement</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="ds-sec" id="typo">
+    <h2><b>03</b>Typographie</h2>
+    <p class="lead">Une famille en deux versions&nbsp;: Geist pour lire, Geist Mono pour vérifier.</p>
+    <p class="why">Geist est une grotesque nette, dessinée pour les écrans&nbsp;: ses formes droites donnent un ton technique et sobre, loin de mes projets plus arrondis. Geist Mono, de la même famille, est réservée aux faits vérifiables (chiffrement, numéros, libellés)&nbsp;: elle signale «&nbsp;ceci est un détail technique&nbsp;» sans changer de voix.</p>
+    <div class="types">
+      <div class="type-row"><div style="font-size:clamp(38px,5vw,64px);font-weight:400;line-height:1.02;letter-spacing:-.045em">Tes fichiers,<br><span class="fade">sous la montagne.</span></div><div class="meta"><strong>Titre principal</strong><code>400 · 42 → 80 px · interligne 1,02 · −4,5 %</code><p class="why">Une graisse légère sur un très grand corps&nbsp;: calme et sûr de lui. La fin s’efface en dégradé, comme un chemin qui s’enfonce dans la montagne.</p></div></div>
+      <div class="type-row"><div style="font-size:clamp(30px,3.4vw,44px);font-weight:400;line-height:1.08;letter-spacing:-.04em">Les réponses<br><span class="fade-2">avant de te lancer.</span></div><div class="meta"><strong>Titre de section</strong><code>400 · 32 → 60 px · interligne 1,08 · −4 %</code><p class="why">La même graisse que le titre principal&nbsp;: la hiérarchie vient de la taille. La seconde moitié, plus pâle, sert de sous-titre.</p></div></div>
+      <div class="type-row"><div style="font-size:24px;font-weight:500;letter-spacing:-.02em">Gardé sous 900&nbsp;m de granit</div><div class="meta"><strong>Titre de carte</strong><code>500 · 16 → 26 px · −1 à −2 %</code><p class="why">Un cran plus gras que le texte&nbsp;: on parcourt les cartes par leurs titres avant de lire.</p></div></div>
+      <div class="type-row"><div style="font-size:17px;line-height:1.6;color:#9a9996;max-width:44ch">Tout est chiffré avant de partir. Réduit ne stocke que des données illisibles et n’a aucun moyen de les ouvrir.</div><div class="meta"><strong>Texte courant</strong><code>400 · 17 px · interligne 1,6 · crème 62 % · 42 à 44 car.</code><p class="why">17&nbsp;px, des lignes courtes et le tutoiement&nbsp;: un texte qui explique, pas un contrat.</p></div></div>
+      <div class="type-row"><div><p class="label"><span class="sq" aria-hidden="true"></span><b>03</b> / Comment ça marche</p></div><div class="meta"><strong>Libellé de section</strong><code>Geist Mono 400 · 14 px · capitales · +4 %</code><p class="why">Comme la référence d’un dossier technique. Le numéro en or situe la section dans la page.</p></div></div>
+      <div class="type-row"><div><span class="code-pill">AES-256-GCM</span> <span class="code-pill">TLS 1.3</span></div><div class="meta"><strong>Détail technique</strong><code>Geist Mono · 11 px · or · pastille cerclée</code><p class="why">La preuve écrite à côté de la promesse&nbsp;: le nom exact de la technique, pour qui veut vérifier.</p></div></div>
+    </div>
+  </section>
+
+  <section class="ds-sec" id="formes">
+    <h2><b>04</b>Formes</h2>
+    <div class="tokens">
+      <div class="token-card"><h3>Rayons</h3><div class="shapes"><div><i style="border-radius:10px"></i>10</div><div><i style="border-radius:16px"></i>16</div><div><i style="border-radius:22px"></i>22</div><div><i style="border-radius:999px;width:96px"></i>pilule</div></div><p class="why">Plus serrés que dans mes autres projets, pour un ton technique&nbsp;: 10 pour les champs et encadrés, 14 à 16 pour les cartes, 22 pour les formules. La pilule reste pour ce qui se clique ou s’étiquette.</p></div>
+      <div class="token-card"><h3>Lumière</h3><div class="shapes"><div><i class="light-demo" style="background:linear-gradient(180deg,rgba(242,241,236,.11),rgba(242,241,236,.05));border-color:rgba(242,241,236,.28);box-shadow:inset 0 1px 0 rgba(255,255,255,.22)"></i>verre</div><div><i class="light-demo" style="border-color:rgba(230,165,50,.3);box-shadow:0 0 50px rgba(230,165,50,.1)"></i>focus</div><div><i class="light-demo" style="border-color:rgba(255,238,210,.45);box-shadow:inset 0 1px 0 rgba(255,244,222,.35),0 20px 60px rgba(230,165,50,.18)"></i>offre</div></div><p class="why">Sur du noir, une ombre ne se voit pas. Le relief vient d’un fil de lumière en haut des cartes, et d’une lueur dorée réservée au survol, au focus et à l’offre mise en avant.</p></div>
+      <div class="token-card"><h3>Rythme</h3><div class="scale"><div><i style="width:50%"></i>80 px en haut de section</div><div><i style="width:80%"></i>jusqu’à 128 px</div><div><i style="width:30%"></i>32 → 48 px en bas</div></div><p class="why">La marge basse est plus courte que la marge haute&nbsp;: l’écart entre deux sections ne se double pas, et chaque section reste liée à son titre.</p></div>
+    </div>
+  </section>
+
+  <section class="ds-sec" id="composants">
+    <h2><b>05</b>Composants</h2>
+    <div class="comps">
+      <div class="comp wide"><div class="demo"><figure><span class="btn btn-accent">Essayer 30 jours gratuits <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2"/></svg></span><figcaption>repos</figcaption></figure><figure><span class="btn btn-accent is-hover">Essayer 30 jours gratuits <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2"/></svg></span><figcaption>survol</figcaption></figure><figure><span class="btn btn-accent is-focus">Essayer 30 jours gratuits <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2"/></svg></span><figcaption>focus clavier</figcaption></figure><figure><span class="btn btn-ghost"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20 12 4l9 16Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M10.5 20v-5h3v5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>Visiter le bunker</span><figcaption>secondaire</figcaption></figure><figure><span class="btn btn-glass">Essai gratuit</span><figcaption>en-tête</figcaption></figure><p class="cta-note" style="flex-basis:100%">Sans carte bancaire · Résiliable en un clic</p></div>
+        <div class="text"><h3>Boutons</h3><p>Une pilule dorée pour l’essai gratuit, une pilule en verre pour le reste. Au survol, l’or s’allume et la flèche avance. Sous le bouton principal, une ligne en monospace lève les deux dernières craintes.</p><p class="why">Un seul bouton doré par bloc&nbsp;: c’est toujours lui l’action attendue. La note «&nbsp;sans carte bancaire&nbsp;» répond au doute au moment même du clic.</p></div></div>
+      <div class="comp"><div class="demo center"><figure><div class="callout"><span class="callout-num">03</span><div><h3>Gardé sous 900&nbsp;m de granit</h3><p>3 copies chiffrées, dans 2 galeries séparées.</p><span class="code-pill">Clé chez nous : aucune</span></div></div><figcaption>repos</figcaption></figure><figure><div class="callout is-on"><span class="callout-num">03</span><div><h3>Gardé sous 900&nbsp;m de granit</h3><p>3 copies chiffrées, dans 2 galeries séparées.</p><span class="code-pill">Clé chez nous : aucune</span></div></div><figcaption>étape active</figcaption></figure></div><div class="text"><h3>Encadré d’étape</h3><p>Un numéro en or, un titre, une phrase et le détail technique en pastille. Posé sur le schéma de la montagne, il s’allume avec son repère.</p><p class="why">L’étape se comprend en une phrase, et la pastille donne la preuve. Le contour doré relie le texte au point du schéma qu’il explique.</p></div></div>
+      <div class="comp"><div class="demo center"><article class="plan"><span class="plan-badge">Le plus choisi</span><h3>Famille</h3><p class="plan-sub">Le juste milieu</p><p class="plan-price"><b>9 CHF</b><span>/ mois</span></p><hr><p class="plan-for">Idéal pour&nbsp;:</p><ul><li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="m8.7 12.2 2.2 2.2 4.4-4.6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span>1 To partagé jusqu’à 6 personnes</span></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="m8.7 12.2 2.2 2.2 4.4-4.6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span>Un coffre privé par membre</span></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="m8.7 12.2 2.2 2.2 4.4-4.6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span>Dossiers partagés en famille</span></li></ul><span class="plan-cta">Essayer gratuitement<span class="plan-arrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 16.5 16.5 7.5M9.5 7.5h7v7" fill="none" stroke="currentColor" stroke-width="2"/></svg></span></span></article></div><div class="text"><h3>Carte de formule</h3><p>Fond noir et contour en dégradé pour Solo et Pro. L’offre du milieu est surélevée, dorée, avec sa pastille. Au survol de la carte, le bouton se remplit d’or de gauche à droite.</p><p class="why">On guide le choix sans cacher les autres offres. Le prix en francs et «&nbsp;Idéal pour&nbsp;» aident à se reconnaître dans une formule.</p></div></div>
+      <div class="comp"><div class="demo center"><article class="qcard"><div class="qcard-top"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 12h9M17.5 12v3M20.5 12v2" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span><span class="qn">Q.01</span></div><h3>Et si je perds ma clé&nbsp;?</h3><p>Ton code de secours de 24 mots la recrée. Sans lui, personne ne peut rouvrir ton coffre, pas même nous.</p><span class="code-pill">Code de secours · 24 mots</span></article></div><div class="text"><h3>Carte question</h3><p>Une icône en or, un numéro, la question telle qu’on se la pose, une réponse courte et un fait en pastille. Au survol, une lueur dorée se lève dans le coin.</p><p class="why">Les vraies inquiétudes, posées sans détour. Les réponses sont toutes visibles d’un coup&nbsp;: rien à ouvrir pour être rassuré.</p></div></div>
+      <div class="comp"><div class="demo"><div class="form"><div class="field-row"><figure><label class="field"><span>Nom</span><i>Ton nom</i></label><figcaption>repos</figcaption></figure><figure><label class="field is-focus"><span>E-mail</span><i>ton@email.ch</i></label><figcaption>focus</figcaption></figure><figure><label class="field is-error"><span>E-mail</span><i>ton@email.ch</i></label><figcaption>erreur</figcaption></figure></div><div class="topics"><b class="on">Question</b><b>Entreprise</b><b>Presse</b><b>Sécurité</b></div><p class="form-status">Remplis ton nom, un e-mail valide et ton message.</p></div></div><div class="text"><h3>Formulaire de contact</h3><p>Libellés en monospace, champs sur le noir relevé, sujets en pastilles. Le champ actif prend un contour doré, le champ en erreur un contour rouge, et un message dit quoi corriger.</p><p class="why">Le message d’erreur est écrit au tutoiement et dit exactement quoi faire. Il est annoncé aux lecteurs d’écran.</p></div></div>
+    </div>
+  </section>
+
+  <section class="ds-sec" id="regles">
+    <h2><b>06</b>Règles</h2>
+    <div class="rules">
+      <div class="do"><h3>À faire</h3><ul><li>Un seul bouton doré par bloc.</li><li>Le nom exact de la technique en Geist Mono à côté de chaque promesse.</li><li>Le tutoiement et des phrases courtes, sans jargon non expliqué.</li><li>Une lueur dorée seulement au survol, au focus ou sur l’offre mise en avant.</li><li>Respecter la réduction des animations&nbsp;: le trajet doré du schéma s’arrête.</li></ul></div>
+      <div class="dont"><h3>À éviter</h3><ul><li>Une deuxième couleur d’accent&nbsp;: seul le rouge des erreurs fait exception.</li><li>La fin du dégradé des titres pour du texte courant.</li><li>Un effet sans fonction&nbsp;: halo décoratif, particules.</li><li>Des cartes très arrondies, au-delà de 22&nbsp;px.</li></ul></div>
+    </div>
+  </section>
+
+  <p class="ds-foot">Réduit · design system conçu par Anissa B. Le Prunenec · Just One Studio</p>
+</main>
+</body>
+</html>

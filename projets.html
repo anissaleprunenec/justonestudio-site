@@ -91,7 +91,12 @@
   .win .bar span { margin-left: 10px; font-size: 10.5px; color: #6b7280; background: #fff; padding: 2px 10px; border-radius: 5px; }
   .win img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; }
   .pj-num { font: 500 12px ui-monospace, Menlo, monospace; color: var(--accent); }
-  .pj-kicker { font-size: 13px; color: var(--muted); }
+
+  /* project type: a tag with a coloured dot, one colour per category */
+  [data-cat="site"] { --c: #4f86ff; } [data-cat="app"] { --c: #9b6bff; } [data-cat="landing"] { --c: #ff7a3d; } [data-cat="branding"] { --c: #1fb57a; }
+  .pj-kicker { justify-self: start; display: inline-flex; align-items: center; gap: 8px; padding: 5px 12px 5px 10px; border-radius: 999px; font-size: 12.5px; font-weight: 500; line-height: 1.2; color: var(--text);
+    background: color-mix(in srgb, var(--c) 13%, transparent); border: 1px solid color-mix(in srgb, var(--c) 35%, transparent); }
+  .pj-kicker::before { content: ""; flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--c); box-shadow: 0 0 0 3px color-mix(in srgb, var(--c) 22%, transparent); }
   .pj-name { font-weight: 500; letter-spacing: -.035em; line-height: 1.02; }
   .pj-pitch { color: var(--link); font-size: 15px; line-height: 1.5; }
   .pj-tags { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; }
@@ -105,17 +110,24 @@
   .list { border-bottom: 1px solid var(--line); }
   .pj { border-top: 1px solid var(--line); }
   .pj-link { display: grid; grid-template-columns: 240px 1fr; gap: 32px; align-items: center; padding: 22px 0; }
-  .pj-meta { display: grid; grid-template-columns: 40px 1fr 200px 60px 40px; align-items: center; gap: 20px; }
-  .pj-num { grid-column: 1; grid-row: 1; }
-  .pj-name { grid-column: 2; grid-row: 1; font-size: clamp(28px, 3.4vw, 46px); transition: color .3s, translate .4s var(--ease); }
-  .pj-kicker { grid-column: 3; grid-row: 1; }
-  .pj-year { grid-column: 4; grid-row: 1; }
-  .pj-arrow { grid-column: 5; grid-row: 1; }
-  .pj-pitch, .pj-tags { display: none; }
+  .pj-meta { display: grid; grid-template-columns: 40px 1fr 250px 50px 40px; align-items: center; gap: 20px; }
+  .pj-num, .pj-kicker, .pj-year, .pj-arrow { grid-row: 1 / span 2; }
+  .pj-num { grid-column: 1; }
+  .pj-name { grid-column: 2; grid-row: 1; align-self: end; font-size: clamp(28px, 3.4vw, 46px); transition: color .3s, translate .4s var(--ease); }
+  /* a one-line description under each title */
+  .pj-pitch { grid-column: 2; grid-row: 2; align-self: start; max-width: 58ch; margin-top: -10px; color: var(--muted); transition: translate .4s var(--ease); }
+  .pj-kicker { grid-column: 3; }
+  .pj-year { grid-column: 4; }
+  .pj-arrow { grid-column: 5; }
+  .pj-tags { display: none; }
   .pj-link:hover .pj-name { color: var(--accent); translate: 12px 0; }
-  .pj-stage { padding: 12px 0 0 12px; border-radius: 12px; }
+  .pj-link:hover .pj-pitch { translate: 12px 0; }
+  /* hover: the whole thumbnail lifts, so nothing inside it gets cut */
+  .pj-stage { padding: 12px 0 0 12px; border-radius: 12px; transition: transform .5s var(--ease), box-shadow .5s var(--ease); }
   .pj-stage .win .bar { height: 16px; }
-  .pj-link:hover .pj-stage .win { transform: translateY(-4px); }
+  .pj-stage .win .bar span { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pj-link:hover .pj-stage { transform: translateY(-4px); box-shadow: 0 18px 36px -18px rgba(0,0,0,.45); }
+  @media (prefers-reduced-motion: reduce) { .pj-link:hover .pj-stage { transform: none; } }
 
 
 
@@ -173,8 +185,9 @@
     .pj-meta { grid-template-columns: 1fr auto; gap: 6px 16px; padding: 22px 0; }
     .pj-num, .pj-year { display: none; }
     .pj-name { grid-column: 1; grid-row: 1; }
-    .pj-kicker { grid-column: 1; grid-row: 2; }
-    .pj-arrow { grid-column: 2; grid-row: 1 / span 2; }
+    .pj-pitch { grid-column: 1; grid-row: 2; margin-top: 0; font-size: 13.5px; line-height: 1.4; }
+    .pj-kicker { grid-column: 1; grid-row: 3; margin-top: 4px; font-size: 11.5px; padding: 4px 10px 4px 8px; }
+    .pj-arrow { grid-column: 2; grid-row: 1 / span 3; }
     /* smaller thumbnails on small screens */
     .pj-link { grid-template-columns: 104px 1fr; gap: 16px; padding: 14px 0; }
     .pj-meta { padding: 0; }
@@ -198,6 +211,17 @@
     .reveal { opacity: 1 !important; translate: none !important; transition: none !important; }
   }
   .foot .flag { width: 16px; height: 11px; margin-right: 7px; border-radius: 2px; vertical-align: -1px; box-shadow: 0 0 0 1px var(--line); }
+
+  /* theme switch: moon and sun both visible, a knob slides under the active mode */
+  .theme-toggle { position: relative; width: 68px; height: 36px; border-radius: 999px; display: flex; align-items: center; justify-content: space-between; padding: 0 9px; background: var(--surface); border: 1px solid var(--line); color: var(--muted); cursor: pointer; transition: border-color .2s; }
+  .theme-toggle:hover { border-color: var(--muted); background: var(--surface); }
+  .theme-toggle::before { content: ""; position: absolute; top: 3px; left: 3px; width: 28px; height: 28px; border-radius: 50%; background: var(--btn-bg); transition: translate .35s var(--ease); }
+  :root[data-theme="light"] .theme-toggle::before { translate: 32px 0; }
+  .theme-toggle .sun, .theme-toggle .moon, :root[data-theme="light"] .theme-toggle .sun, :root[data-theme="light"] .theme-toggle .moon { position: relative; z-index: 1; display: block; width: 16px; height: 16px; transition: color .3s; }
+  .theme-toggle .moon { order: -1; color: var(--btn-text); }
+  :root[data-theme="light"] .theme-toggle .moon { color: var(--muted); }
+  :root[data-theme="light"] .theme-toggle .sun { color: var(--btn-text); }
+  @media (prefers-reduced-motion: reduce) { .theme-toggle::before { transition: none; } }
 </style>
 </head>
 <body>
@@ -248,9 +272,9 @@
     <p>Sites, applications, landing pages et graphisme&nbsp;: des projets pensés pour leurs utilisateurs, et souvent codés de bout en bout.</p>
     <div class="filters" role="group" aria-label="Filtrer les projets">
       <button type="button" data-filter="all" aria-pressed="true">Tous <span>16</span></button>
-      <button type="button" data-filter="site" aria-pressed="false">Sites &amp; refontes <span>6</span></button>
-      <button type="button" data-filter="app" aria-pressed="false">Applications <span>4</span></button>
-      <button type="button" data-filter="landing" aria-pressed="false">Landing pages <span>4</span></button>
+      <button type="button" data-filter="site" aria-pressed="false">Sites &amp; refontes <span>5</span></button>
+      <button type="button" data-filter="app" aria-pressed="false">Apps &amp; logiciels <span>4</span></button>
+      <button type="button" data-filter="landing" aria-pressed="false">Landing pages <span>5</span></button>
       <button type="button" data-filter="branding" aria-pressed="false">Graphisme &amp; publicités <span>2</span></button>
     </div>
   </header>
@@ -261,42 +285,42 @@
   <article class="pj" data-cat="site" style="--flat:#123b2b">
     <a class="pj-link" href="projet-edreams-factory.html">
       <div class="pj-stage"><div class="win"><div class="bar"><i></i><i></i><i></i><span>Edreams Factory — Accueil</span></div><img src="img/edreams.png" alt="Site Edreams Factory" loading="lazy"></div></div>
-      <div class="pj-meta"><span class="pj-num">01</span><span class="pj-kicker">Refonte · Site vitrine</span><h2 class="pj-name">Edreams Factory</h2><p class="pj-pitch">Clarifier une offre de logiciel sur mesure pour des dirigeants pressés.</p><ul class="pj-tags"><li>UX</li><li>UI</li><li>Code</li></ul><span class="pj-year">2026</span><span class="pj-arrow" aria-hidden="true">→</span></div>
-    </a>
-  </article>
-
-  <article class="pj" data-cat="landing" style="--flat:#2d5fd6">
-    <a class="pj-link" href="projet-filon.html">
-      <div class="pj-stage"><div class="win"><div class="bar"><i></i><i></i><i></i><span>Filon — Accueil</span></div><img src="img/filon.png" alt="Site Filon" loading="lazy"></div></div>
-      <div class="pj-meta"><span class="pj-num">02</span><span class="pj-kicker">Génération de leads</span><h2 class="pj-name">Filon</h2><p class="pj-pitch">Transformer une offre B2B complexe en page qui donne envie d’appeler.</p><ul class="pj-tags"><li>UI</li><li>Landing page</li></ul><span class="pj-year">2026</span><span class="pj-arrow" aria-hidden="true">→</span></div>
-    </a>
-  </article>
-
-  <article class="pj" data-cat="app" style="--flat:#e8946c">
-    <a class="pj-link" href="projet-roamies.html">
-      <div class="pj-stage"><div class="win"><div class="bar"><i></i><i></i><i></i><span>Roamies — Accueil</span></div><img src="img/roamies.png" alt="Application Roamies" loading="lazy"></div></div>
-      <div class="pj-meta"><span class="pj-num">03</span><span class="pj-kicker">App mobile &amp; web</span><h2 class="pj-name">Roamies</h2><p class="pj-pitch">Organiser un voyage à plusieurs sans se perdre dans le chat de groupe.</p><ul class="pj-tags"><li>UX research</li><li>UI</li><li>Code</li></ul><span class="pj-year">2026</span><span class="pj-arrow" aria-hidden="true">→</span></div>
-    </a>
-  </article>
-
-  <article class="pj" data-cat="site" style="--flat:#2f4a35">
-    <a class="pj-link" href="projet-solena.html">
-      <div class="pj-stage"><div class="win"><div class="bar"><i></i><i></i><i></i><span>SOLENA — Accueil</span></div><img src="img/solena.png" alt="Site SOLENA" loading="lazy"></div></div>
-      <div class="pj-meta"><span class="pj-num">04</span><span class="pj-kicker">E-commerce · Skincare</span><h2 class="pj-name">SOLENA</h2><p class="pj-pitch">Une boutique de soins calme et lumineuse, avec un pot de crème qui s’ouvre au défilement.</p><ul class="pj-tags"><li>UI</li><li>UX</li><li>Code</li></ul><span class="pj-year">2026</span><span class="pj-arrow" aria-hidden="true">→</span></div>
+      <div class="pj-meta"><span class="pj-num">01</span><span class="pj-kicker">Site vitrine · Logiciel</span><h2 class="pj-name">Edreams Factory</h2><p class="pj-pitch">Clarifier une offre de logiciel sur mesure pour des dirigeants pressés.</p><ul class="pj-tags"><li>UX</li><li>UI</li><li>Code</li></ul><span class="pj-year">2026</span><span class="pj-arrow" aria-hidden="true">→</span></div>
     </a>
   </article>
 
   <article class="pj" data-cat="app" style="--flat:#1a5bee">
     <a class="pj-link" href="projet-wecare.html">
       <div class="pj-stage"><div class="win"><div class="bar"><i></i><i></i><i></i><span>Wecare — Agenda</span></div><img src="img/wecare.png" alt="Application Wecare" loading="lazy"></div></div>
-      <div class="pj-meta"><span class="pj-num">05</span><span class="pj-kicker">Application métier · Santé</span><h2 class="pj-name">Wecare</h2><p class="pj-pitch">Un planning médical qui se lit en deux secondes, avec son design system.</p><ul class="pj-tags"><li>UX</li><li>UI</li><li>Design system</li><li>Code</li></ul><span class="pj-year">2026</span><span class="pj-arrow" aria-hidden="true">→</span></div>
+      <div class="pj-meta"><span class="pj-num">02</span><span class="pj-kicker">Logiciel métier · Santé</span><h2 class="pj-name">Wecare</h2><p class="pj-pitch">Un planning médical qui se lit en deux secondes, avec son design system.</p><ul class="pj-tags"><li>UX</li><li>UI</li><li>Design system</li><li>Code</li></ul><span class="pj-year">2026</span><span class="pj-arrow" aria-hidden="true">→</span></div>
+    </a>
+  </article>
+
+  <article class="pj" data-cat="app" style="--flat:#e8946c">
+    <a class="pj-link" href="projet-roamies.html">
+      <div class="pj-stage"><div class="win"><div class="bar"><i></i><i></i><i></i><span>Roamies — Accueil</span></div><img src="img/roamies.png" alt="Application Roamies" loading="lazy"></div></div>
+      <div class="pj-meta"><span class="pj-num">03</span><span class="pj-kicker">App web &amp; mobile · Voyage</span><h2 class="pj-name">Roamies</h2><p class="pj-pitch">Organiser un voyage à plusieurs sans se perdre dans le chat de groupe.</p><ul class="pj-tags"><li>UX research</li><li>UI</li><li>Code</li></ul><span class="pj-year">2026</span><span class="pj-arrow" aria-hidden="true">→</span></div>
+    </a>
+  </article>
+
+  <article class="pj" data-cat="site" style="--flat:#2f4a35">
+    <a class="pj-link" href="projet-solena.html">
+      <div class="pj-stage"><div class="win"><div class="bar"><i></i><i></i><i></i><span>SOLENA — Accueil</span></div><img src="img/solena.png" alt="Site SOLENA" loading="lazy"></div></div>
+      <div class="pj-meta"><span class="pj-num">04</span><span class="pj-kicker">E-commerce · Cosmétique</span><h2 class="pj-name">SOLENA</h2><p class="pj-pitch">Une boutique de soins lumineuse, avec un pot de crème qui s’ouvre au défilement.</p><ul class="pj-tags"><li>UI</li><li>UX</li><li>Code</li></ul><span class="pj-year">2026</span><span class="pj-arrow" aria-hidden="true">→</span></div>
+    </a>
+  </article>
+
+  <article class="pj" data-cat="landing" style="--flat:#2d5fd6">
+    <a class="pj-link" href="projet-filon.html">
+      <div class="pj-stage"><div class="win"><div class="bar"><i></i><i></i><i></i><span>Filon — Accueil</span></div><img src="img/filon.png" alt="Landing page Filon" loading="lazy"></div></div>
+      <div class="pj-meta"><span class="pj-num">05</span><span class="pj-kicker">Landing page · Génération de leads</span><h2 class="pj-name">Filon</h2><p class="pj-pitch">Transformer une offre B2B complexe en page qui donne envie d’appeler.</p><ul class="pj-tags"><li>UI</li><li>Landing page</li></ul><span class="pj-year">2026</span><span class="pj-arrow" aria-hidden="true">→</span></div>
     </a>
   </article>
 
   <article class="pj" data-cat="app" style="--flat:#1f6d2e">
     <a class="pj-link" href="projet-tampon.html">
       <div class="pj-stage"><div class="win"><div class="bar"><i></i><i></i><i></i><span>Tampon — Factures fournisseurs</span></div><img src="img/tampon-case/liste.jpg" alt="Application Tampon, liste des factures fournisseurs" loading="lazy"></div></div>
-      <div class="pj-meta"><span class="pj-num">06</span><span class="pj-kicker">Application métier · Finance</span><h2 class="pj-name">Tampon</h2><p class="pj-pitch">Des factures fournisseurs lues par l’IA, vérifiées par la comptable et validées par le gérant, jusque sur son téléphone.</p><ul class="pj-tags"><li>UX</li><li>UI</li><li>Design system</li><li>Code</li></ul><span class="pj-year">2026</span><span class="pj-arrow" aria-hidden="true">→</span></div>
+      <div class="pj-meta"><span class="pj-num">06</span><span class="pj-kicker">Logiciel métier · Finance</span><h2 class="pj-name">Tampon</h2><p class="pj-pitch">Des factures fournisseurs lues par l’IA et validées jusque sur téléphone.</p><ul class="pj-tags"><li>UX</li><li>UI</li><li>Design system</li><li>Code</li></ul><span class="pj-year">2026</span><span class="pj-arrow" aria-hidden="true">→</span></div>
     </a>
   </article>
   <article class="pj" data-cat="app" style="--flat:#6c3bff">
@@ -309,63 +333,63 @@
   <article class="pj" data-cat="site" style="--flat:#0e3a2a">
     <a class="pj-link" href="projet-relaya.html">
       <div class="pj-stage"><div class="win"><div class="bar"><i></i><i></i><i></i><span>Relaya — Accueil</span></div><img src="img/relaya.png" alt="Site Relaya" loading="lazy"></div></div>
-      <div class="pj-meta"><span class="pj-num">08</span><span class="pj-kicker">SaaS · Fintech</span><h2 class="pj-name">Relaya</h2><p class="pj-pitch">Présenter des agents IA de support client à des fintechs exigeantes sur la sécurité.</p><ul class="pj-tags"><li>UI</li><li>Code</li></ul><span class="pj-year">2026</span><span class="pj-arrow" aria-hidden="true">→</span></div>
+      <div class="pj-meta"><span class="pj-num">08</span><span class="pj-kicker">Site SaaS · Fintech</span><h2 class="pj-name">Relaya</h2><p class="pj-pitch">Présenter des agents IA de support client à des fintechs exigeantes.</p><ul class="pj-tags"><li>UI</li><li>Code</li></ul><span class="pj-year">2026</span><span class="pj-arrow" aria-hidden="true">→</span></div>
     </a>
   </article>
 
   <article class="pj" data-cat="landing" style="--flat:#5b2bd8">
     <a class="pj-link" href="projet-acquisition.html">
       <div class="pj-stage"><div class="win"><div class="bar"><i></i><i></i><i></i><span>Landing acquisition</span></div><img src="img/acquisition-violet.png" alt="Landing page d’acquisition violette" loading="lazy"></div></div>
-      <div class="pj-meta"><span class="pj-num">09</span><span class="pj-kicker">Agence marketing</span><h2 class="pj-name">Landing acquisition</h2><p class="pj-pitch">Une page qui transforme le trafic en clients, pour une agence d’acquisition.</p><ul class="pj-tags"><li>UI</li><li>Landing page</li></ul><span class="pj-year">2026</span><span class="pj-arrow" aria-hidden="true">→</span></div>
+      <div class="pj-meta"><span class="pj-num">09</span><span class="pj-kicker">Landing page · Marketing</span><h2 class="pj-name">Landing acquisition</h2><p class="pj-pitch">Une page qui transforme le trafic en clients, pour une agence d’acquisition.</p><ul class="pj-tags"><li>UI</li><li>Landing page</li></ul><span class="pj-year">2026</span><span class="pj-arrow" aria-hidden="true">→</span></div>
     </a>
   </article>
 
   <article class="pj" data-cat="landing" style="--flat:#1d3fb8">
     <a class="pj-link" href="projet-croissance.html">
       <div class="pj-stage"><div class="win"><div class="bar"><i></i><i></i><i></i><span>Landing croissance</span></div><img src="img/croissance-bleu.png" alt="Landing page croissance bleue" loading="lazy"></div></div>
-      <div class="pj-meta"><span class="pj-num">10</span><span class="pj-kicker">Agence de croissance</span><h2 class="pj-name">Landing croissance</h2><p class="pj-pitch">Un hero sombre et lumineux pour une agence qui promet de la croissance.</p><ul class="pj-tags"><li>UI</li><li>Landing page</li></ul><span class="pj-year">2026</span><span class="pj-arrow" aria-hidden="true">→</span></div>
+      <div class="pj-meta"><span class="pj-num">10</span><span class="pj-kicker">Landing page · Marketing</span><h2 class="pj-name">Landing croissance</h2><p class="pj-pitch">Un hero sombre et lumineux pour une agence qui promet de la croissance.</p><ul class="pj-tags"><li>UI</li><li>Landing page</li></ul><span class="pj-year">2026</span><span class="pj-arrow" aria-hidden="true">→</span></div>
     </a>
   </article>
 
-  <article class="pj" data-cat="site" style="--flat:#2a2f3a">
+  <article class="pj" data-cat="landing" style="--flat:#2a2f3a">
     <a class="pj-link" href="projet-reduit.html">
       <div class="pj-stage"><div class="win"><div class="bar"><i></i><i></i><i></i><span>Réduit — Accueil</span></div><img src="img/reduit.png" alt="Site Réduit" loading="lazy"></div></div>
-      <div class="pj-meta"><span class="pj-num">11</span><span class="pj-kicker">Stockage chiffré</span><h2 class="pj-name">Réduit</h2><p class="pj-pitch">Rendre rassurant un service de stockage chiffré, rangé dans un ancien bunker des Alpes.</p><ul class="pj-tags"><li>UI</li><li>Code</li></ul><span class="pj-year">2026</span><span class="pj-arrow" aria-hidden="true">→</span></div>
+      <div class="pj-meta"><span class="pj-num">11</span><span class="pj-kicker">Landing page · Cybersécurité</span><h2 class="pj-name">Réduit</h2><p class="pj-pitch">Rendre rassurant un stockage chiffré, rangé dans un ancien bunker des Alpes.</p><ul class="pj-tags"><li>UI</li><li>Code</li></ul><span class="pj-year">2026</span><span class="pj-arrow" aria-hidden="true">→</span></div>
     </a>
   </article>
 
   <article class="pj" data-cat="site" style="--flat:#1a45aa">
     <a class="pj-link" href="projet-puro-osteria.html">
       <div class="pj-stage"><div class="win"><div class="bar"><i></i><i></i><i></i><span>Puro Osteria — Accueil</span></div><img src="img/puro.png" alt="Site Puro Osteria" loading="lazy"></div></div>
-      <div class="pj-meta"><span class="pj-num">12</span><span class="pj-kicker">Restaurant italien</span><h2 class="pj-name">Puro Osteria</h2><p class="pj-pitch">Un site vitrine chaleureux qui donne faim et envie de réserver.</p><ul class="pj-tags"><li>UI</li><li>Intégration</li></ul><span class="pj-year">2026</span><span class="pj-arrow" aria-hidden="true">→</span></div>
+      <div class="pj-meta"><span class="pj-num">12</span><span class="pj-kicker">Site vitrine · Restauration</span><h2 class="pj-name">Puro Osteria</h2><p class="pj-pitch">Un site vitrine chaleureux qui donne faim et envie de réserver.</p><ul class="pj-tags"><li>UI</li><li>Intégration</li></ul><span class="pj-year">2026</span><span class="pj-arrow" aria-hidden="true">→</span></div>
     </a>
   </article>
 
   <article class="pj" data-cat="landing" style="--flat:#126e68">
     <a class="pj-link" href="projet-mon-choix-conso.html">
       <div class="pj-stage"><div class="win"><div class="bar"><i></i><i></i><i></i><span>Mon Choix Conso — Avant / après</span></div><img src="img/monchoix.png" alt="Avant et après de la landing Mon Choix Conso" loading="lazy"></div></div>
-      <div class="pj-meta"><span class="pj-num">13</span><span class="pj-kicker">Leads Studio · Mon Choix Conso, Expert Rénovation</span><h2 class="pj-name">Landings avant / après</h2><p class="pj-pitch">Refaire des landings de génération de leads pour qu’elles donnent envie de remplir le formulaire.</p><ul class="pj-tags"><li>UI</li><li>Landing page</li></ul><span class="pj-year">2026</span><span class="pj-arrow" aria-hidden="true">→</span></div>
+      <div class="pj-meta"><span class="pj-num">13</span><span class="pj-kicker">Landing page · Rénovation</span><h2 class="pj-name">Landings avant / après</h2><p class="pj-pitch">Des landings de leads refaites pour donner envie de remplir le formulaire.</p><ul class="pj-tags"><li>UI</li><li>Landing page</li></ul><span class="pj-year">2026</span><span class="pj-arrow" aria-hidden="true">→</span></div>
     </a>
   </article>
 
   <article class="pj" data-cat="site" style="--flat:#6c4fd1">
     <a class="pj-link" href="projet-association.html">
       <div class="pj-stage"><div class="win"><div class="bar"><i></i><i></i><i></i><span>Association — Accueil</span></div><img src="img/association.png" alt="Page d’accueil pour une association, univers enfantin" loading="lazy"></div></div>
-      <div class="pj-meta"><span class="pj-num">14</span><span class="pj-kicker">Proposition · Association</span><h2 class="pj-name">Association enfance</h2><p class="pj-pitch">Un univers enfantin et coloré, avec des titres écrits comme par un enfant.</p><ul class="pj-tags"><li>UI</li><li>Maquette</li></ul><span class="pj-year">2026</span><span class="pj-arrow" aria-hidden="true">→</span></div>
+      <div class="pj-meta"><span class="pj-num">14</span><span class="pj-kicker">Site vitrine · Associatif</span><h2 class="pj-name">Association enfance</h2><p class="pj-pitch">Un univers enfantin et coloré, avec des titres écrits comme par un enfant.</p><ul class="pj-tags"><li>UI</li><li>Maquette</li></ul><span class="pj-year">2026</span><span class="pj-arrow" aria-hidden="true">→</span></div>
     </a>
   </article>
 
   <article class="pj" data-cat="branding" style="--flat:#344d2c">
     <a class="pj-link" href="projet-les-plantes.html">
       <div class="pj-stage"><div class="win"><div class="bar"><i></i><i></i><i></i><span>Les Plantes d’Île-de-France</span></div><img src="img/plantes.png" alt="Deux publicités de Les Plantes d’Île-de-France" loading="lazy"></div></div>
-      <div class="pj-meta"><span class="pj-num">15</span><span class="pj-kicker">Jardinerie</span><h2 class="pj-name">Les Plantes d’Île-de-France</h2><p class="pj-pitch">Un logo redessiné et des publicités qui donnent envie de passer en boutique.</p><ul class="pj-tags"><li>Logo</li><li>Publicités</li></ul><span class="pj-year">2026</span><span class="pj-arrow" aria-hidden="true">→</span></div>
+      <div class="pj-meta"><span class="pj-num">15</span><span class="pj-kicker">Identité visuelle · Jardinerie</span><h2 class="pj-name">Les Plantes d’Île-de-France</h2><p class="pj-pitch">Un logo redessiné et des publicités qui donnent envie de passer en boutique.</p><ul class="pj-tags"><li>Logo</li><li>Publicités</li></ul><span class="pj-year">2026</span><span class="pj-arrow" aria-hidden="true">→</span></div>
     </a>
   </article>
 
   <article class="pj" data-cat="branding" style="--flat:#2d5fd6">
     <a class="pj-link" href="projet-miniatures.html">
       <div class="pj-stage"><div class="win"><div class="bar"><i></i><i></i><i></i><span>Leads Studio — Vidéos</span></div><img src="img/miniatures.png" alt="Miniatures YouTube pour Leads Studio" loading="lazy"></div></div>
-      <div class="pj-meta"><span class="pj-num">16</span><span class="pj-kicker">Leads Studio</span><h2 class="pj-name">Miniatures YouTube</h2><p class="pj-pitch">Des miniatures qui donnent envie de cliquer en une fraction de seconde.</p><ul class="pj-tags"><li>Graphisme</li><li>YouTube</li></ul><span class="pj-year">2026</span><span class="pj-arrow" aria-hidden="true">→</span></div>
+      <div class="pj-meta"><span class="pj-num">16</span><span class="pj-kicker">Graphisme · Marketing</span><h2 class="pj-name">Miniatures YouTube</h2><p class="pj-pitch">Des miniatures qui donnent envie de cliquer en une fraction de seconde.</p><ul class="pj-tags"><li>Graphisme</li><li>YouTube</li></ul><span class="pj-year">2026</span><span class="pj-arrow" aria-hidden="true">→</span></div>
     </a>
   </article>
 </main>

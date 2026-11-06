@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Relaya — Design system</title>
+<meta name="description" content="Le design system de Relaya : principes, couleurs, typographie, formes, composants et règles, avec la raison de chaque choix.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ds.css">
+<style>
+  :root {
+    --ds-bg: #ffffff; --ds-card: #ffffff; --ds-demo: #f5faf8; --ds-ink: #0b1210; --ds-soft: #6b7672; --ds-muted: #6b7672; --ds-line: #e4efeb;
+    --ds-accent: #10b981; --ds-accent-text: #047857; --ds-font: "Geist", system-ui, sans-serif; --ds-display-weight: 600; --ds-radius: 24px;
+    --shadow-card: 0 20px 40px -12px rgba(3, 17, 12, .14); --shadow-glow: 0 0 24px rgba(52, 211, 153, .45); --shadow-dark: 0 10px 20px -6px rgba(3, 17, 12, .45);
+  }
+  /* the header takes the night-green of the hero */
+  .ds-head { padding: clamp(32px, 5vw, 56px); border: 0; border-radius: 24px; color: #fff; background: radial-gradient(120% 90% at 50% 120%, #10b981 0, #064e3b 35%, #03110c 75%); }
+  .ds-head .ds-eyebrow { color: #a9bab3; }
+  .ds-head p { color: #e0eae7; }
+  .ds-head .ds-toc a { border-color: rgba(255, 255, 255, .22); color: #fff; }
+  .ds-head .ds-toc a:hover { border-color: #34d399; }
+  .ds-head h1 { letter-spacing: -.04em; }
+  .grad { background: linear-gradient(90deg, #d1fae5, #34d399); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .plate { padding: 22px; border-radius: 16px; background: #03110c; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+  /* the real components, with the values read on the mockups */
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 40px; padding: 0 18px; border-radius: 999px; border: 0; font: 500 14px/1 var(--ds-font); cursor: pointer; }
+  .btn-cta { background: #34d399; color: #03110c; box-shadow: var(--shadow-glow); }
+  .btn-ask { background: #047857; color: #fff; box-shadow: 0 6px 16px rgba(4, 120, 87, .35); }
+  .btn-ask svg { width: 14px; height: 14px; fill: currentColor; }
+  .btn-login { width: 260px; height: 48px; border-radius: 10px; background: linear-gradient(#173329, #071610); color: #fff; font-weight: 600; font-size: 15px; box-shadow: var(--shadow-dark); }
+  .badge { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border-radius: 999px; background: #d1fae5; color: #047857; font-size: 14px; font-weight: 500; }
+  .badge::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #047857; }
+  .toggle { display: inline-flex; align-items: center; gap: 4px; padding: 4px; border-radius: 999px; background: #f2f4f3; border: 1px solid #e4efeb; font-size: 14px; }
+  .toggle b { padding: 11px 22px; border-radius: 999px; background: linear-gradient(#10b981, #047857); color: #fff; font-weight: 600; box-shadow: 0 6px 14px rgba(4, 120, 87, .3); }
+  .toggle span { padding: 0 18px 0 14px; color: #6b7672; }
+  .toggle small { margin-left: 4px; color: #047857; font-size: 12.5px; font-weight: 600; }
+  .offer { width: 300px; padding: 26px 26px 24px; border-radius: 24px; background: #fff; border: 2px solid #10b981; box-shadow: var(--shadow-card); }
+  .offer .top { display: flex; align-items: center; gap: 12px; }
+  .offer .ico { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(#34d399, #047857); }
+  .offer .ico svg { width: 16px; height: 16px; fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .offer .top strong { font-size: 18px; font-weight: 600; }
+  .offer .top .tag { margin-left: auto; padding: 4px 10px; border-radius: 999px; background: #d1fae5; color: #047857; font-size: 12px; font-weight: 600; }
+  .offer .price { margin-top: 22px; font-size: 40px; font-weight: 600; letter-spacing: -.035em; line-height: 1; }
+  .offer .price small { margin-left: 6px; font-size: 13px; font-weight: 400; letter-spacing: 0; color: #6b7672; }
+  .offer .desc { margin-top: 14px; padding-bottom: 18px; border-bottom: 1px solid #e4efeb; font-size: 14px; line-height: 1.55; color: #6b7672; }
+  .offer ul { list-style: none; padding: 0; margin-top: 16px; display: grid; gap: 12px; font-size: 14px; }
+  .offer li { display: flex; align-items: center; gap: 10px; }
+  .offer li::before { content: "✓"; flex: none; width: 18px; height: 18px; border-radius: 50%; display: grid; place-items: center; background: #10b981; color: #fff; font-size: 10px; font-weight: 700; }
+  .field { width: 300px; display: grid; gap: 8px; }
+  .field .row { display: flex; justify-content: space-between; align-items: baseline; }
+  .field label { font-size: 14px; font-weight: 500; }
+  .field a { color: #047857; font-size: 13px; font-weight: 500; text-decoration: none; }
+  .field .input { height: 44px; padding: 0 16px; display: flex; align-items: center; border-radius: 10px; background: #f2f4f3; color: #9ca3a1; font-size: 14px; }
+  .shadow-demo { width: 96px; height: 64px; border-radius: 16px; background: #fff; }
+</style>
+</head>
+<body>
+<main class="ds">
+  <header class="ds-head">
+    <span class="ds-eyebrow">Design system · version courte</span>
+    <h1><span class="grad">Agents IA</span> pour le support client des fintechs</h1>
+    <p>Les fondations et les composants de Relaya, un site qui présente des agents IA de support client aux fintechs et aux néobanques. Chaque choix a sa raison, écrite à côté. Valeurs relevées sur les maquettes&nbsp;: couleurs échantillonnées au pixel, tailles et rayons mesurés à 1&nbsp;440&nbsp;px de large.</p>
+    <ul class="ds-toc"><li><a href="#principes">Principes</a></li><li><a href="#couleurs">Couleurs</a></li><li><a href="#typo">Typographie</a></li><li><a href="#formes">Formes</a></li><li><a href="#composants">Composants</a></li><li><a href="#regles">Règles</a></li></ul>
+  </header>
+
+  <section class="ds-sec" id="principes">
+    <h2><b>01</b>Principes</h2>
+    <p class="lead">Trois idées guident tout le reste. Elles viennent du défi de départ&nbsp;: montrer la technique tout en rassurant.</p>
+    <div class="principles">
+      <div class="principle"><b>01</b><h3>Rassurer avant d’impressionner</h3><p>On parle de comptes bancaires. Les garanties (hébergé en Europe, conforme RGPD, chiffrement) restent visibles, et la page de connexion dit qu’elle n’envoie rien.</p></div>
+      <div class="principle"><b>02</b><h3>Montrer l’IA au travail</h3><p>Une carte bloquée, une identité vérifiée, une réponse qui change de langue&nbsp;: je mets l’agent en scène plutôt que d’aligner des listes de fonctionnalités.</p></div>
+      <div class="principle"><b>03</b><h3>L’humain reste visible</h3><p>Au-delà des seuils fixés, un conseiller reprend la main en un clic. Le design ne cache jamais cette sortie.</p></div>
+    </div>
+  </section>
+
+  <section class="ds-sec" id="couleurs">
+    <h2><b>02</b>Couleurs</h2>
+    <p class="lead">Un vert nuit pour les grands moments, du blanc et un vert très pâle pour le reste, et une seule famille de verts vifs pour l’action.</p>
+    <div class="colors">
+      <div class="color"><div class="chip" style="background:#03110c;color:#e0eae7"><span>vert nuit</span><span class="ratio">15,7:1</span></div><div class="info"><strong>Vert nuit</strong><code>#03110C</code><p>Hero, avis clients, panneau de connexion.</p><p class="why">Un fond presque noir donne le sérieux attendu d’un outil bancaire. Teinté de vert, il reste la couleur de Relaya, et les lueurs émeraude y ressortent comme une lumière.</p></div></div>
+      <div class="color"><div class="chip" style="background:#34d399;color:#03110c"><span>émeraude vive</span><span class="ratio">10,0:1</span></div><div class="info"><strong>Émeraude vive</strong><code>#34D399</code><p>Bouton «&nbsp;Demander une démo&nbsp;» sur fond sombre, fin des dégradés de titre.</p><p class="why">Sur le vert nuit, c’est le point le plus lumineux de l’écran&nbsp;: l’œil trouve l’action principale sans la chercher.</p></div></div>
+      <div class="color"><div class="chip" style="background:#047857;color:#fff"><span>émeraude foncé</span><span class="ratio">5,5:1</span></div><div class="info"><strong>Émeraude foncé</strong><code>#047857</code><p>Texte vert sur fond clair&nbsp;: liens, badges, bouton «&nbsp;Demander&nbsp;».</p><p class="why">Un vert plus profond pour le texte sur fond clair&nbsp;: il garde la marque et passe le seuil AA.</p></div></div>
+      <div class="color"><div class="chip" style="background:#10b981;color:#fff"><span>émeraude</span></div><div class="info"><strong>Émeraude</strong><code>#10B981</code><p>Pastilles de coche, bordure de l’offre mise en avant.</p><p class="why">Le vert du «&nbsp;c’est fait&nbsp;». Je le garde pour des formes, toujours à côté d’un libellé.</p></div></div>
+      <div class="color"><div class="chip" style="background:#d1fae5;color:#047857"><span>menthe</span></div><div class="info"><strong>Menthe</strong><code>#D1FAE5</code><p>Fond des badges de section et de «&nbsp;Le plus choisi&nbsp;».</p><p class="why">Un repère doux qui annonce une section sans concurrencer le titre qui suit.</p></div></div>
+      <div class="color"><div class="chip" style="background:#f5faf8;color:#0b1210;border-bottom:1px solid #e4efeb"><span>vert pâle</span></div><div class="info"><strong>Vert pâle</strong><code>#F5FAF8</code><p>Fond des sections claires et du pied de page.</p><p class="why">Un blanc à peine vert&nbsp;: les cartes blanches s’en détachent, et la page reste dans la même famille que le hero.</p></div></div>
+      <div class="color"><div class="chip" style="background:#0b1210;color:#fff"><span>encre</span><span class="ratio">19,0:1</span></div><div class="info"><strong>Encre</strong><code>#0B1210</code><p>Titres, prix, texte principal sur fond clair.</p><p class="why">Un noir légèrement vert, pour un contraste maximal sans la dureté d’un noir pur.</p></div></div>
+      <div class="color"><div class="chip" style="background:#6b7672;color:#fff"><span>gris vert</span><span class="ratio">4,7:1</span></div><div class="info"><strong>Gris vert</strong><code>#6B7672</code><p>Texte des cartes, descriptions, mentions.</p><p class="why">Le texte long recule derrière les titres. Il passe AA sur blanc, c’est pourquoi je le pose dans des cartes blanches.</p></div></div>
+    </div>
+    <h3 class="ds-sub">Contrastes vérifiés</h3>
+    <table class="contrast">
+      <thead><tr><th>Couple</th><th>Ratio</th><th>Verdict</th><th>Usage autorisé</th></tr></thead>
+      <tbody>
+        <tr><td><span class="pair" style="background:#fff;color:#0b1210;border:1px solid #e4efeb">Aa</span></td><td>19,0:1</td><td class="ok">AAA</td><td>Tout texte</td></tr>
+        <tr><td><span class="pair" style="background:#03110c;color:#e0eae7">Aa</span></td><td>15,7:1</td><td class="ok">AAA</td><td>Texte courant du hero</td></tr>
+        <tr><td><span class="pair" style="background:#34d399;color:#03110c">Aa</span></td><td>10,0:1</td><td class="ok">AAA</td><td>Bouton «&nbsp;Demander une démo&nbsp;»</td></tr>
+        <tr><td><span class="pair" style="background:#047857;color:#fff">Aa</span></td><td>5,5:1</td><td class="ok">AA</td><td>Bouton «&nbsp;Demander&nbsp;», liens verts sur blanc</td></tr>
+        <tr><td><span class="pair" style="background:#d1fae5;color:#047857">Aa</span></td><td>4,8:1</td><td class="ok">AA</td><td>Badges de section</td></tr>
+        <tr><td><span class="pair" style="background:#fff;color:#6b7672;border:1px solid #e4efeb">Aa</span></td><td>4,7:1</td><td class="ok">AA</td><td>Texte des cartes sur blanc</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="ds-sec" id="typo">
+    <h2><b>03</b>Typographie</h2>
+    <p class="lead">Une seule famille, Geist, en deux graisses principales&nbsp;: 600 pour les titres, 400 pour le texte.</p>
+    <p class="why">Geist vient du monde des outils pour développeurs&nbsp;: nette, technique, sans fantaisie. C’est le ton d’un produit sérieux qui manipule des données. Ses chiffres restent lisibles dans les prix et les statistiques.</p>
+    <div class="types">
+      <div class="type-row"><div class="plate" style="display:block"><div style="font-size:clamp(34px,4.6vw,64px);font-weight:600;line-height:1.05;letter-spacing:-.04em;color:#fff"><span class="grad">Agents IA</span> pour le support</div></div><div class="meta"><strong>Titre principal</strong><code>600 · ≈ 64 px · interligne ≈ 1,05 · serré</code><p class="why">Le dégradé menthe → émeraude touche seulement les mots clés. Il désigne le sujet de la page, puis le titre reste blanc pour la lecture.</p></div></div>
+      <div class="type-row"><div style="font-size:clamp(28px,3.4vw,48px);font-weight:600;line-height:1.1;letter-spacing:-.035em">Pensé pour les équipes support qui veulent plus</div><div class="meta"><strong>Titre de section</strong><code>600 · ≈ 48 px · interligne ≈ 1,1</code><p class="why">Même graisse que le titre principal, en plus petit&nbsp;: la hiérarchie vient de la taille, la voix ne change pas.</p></div></div>
+      <div class="type-row"><div style="font-size:40px;font-weight:600;letter-spacing:-.035em;line-height:1">790 € <small style="font-size:13px;font-weight:400;letter-spacing:0;color:#6b7672">HT / mois</small></div><div class="meta"><strong>Prix</strong><code>600 · ≈ 40 px · mention 13 px gris vert</code><p class="why">Le montant est la seule chose qu’on compare entre les offres&nbsp;: il est énorme, la mention HT reste petite mais présente, par honnêteté.</p></div></div>
+      <div class="type-row"><div style="font-size:18px;font-weight:600;letter-spacing:-.01em">L’humain garde la main</div><div class="meta"><strong>Titre de carte</strong><code>600 · ≈ 18 px</code><p class="why">Une phrase courte qui résume la carte, lisible même si on ne lit rien d’autre.</p></div></div>
+      <div class="type-row"><div style="font-size:15px;line-height:1.55;color:#6b7672;max-width:46ch">Au-delà de vos seuils, Relaya transmet le dossier complet à un conseiller, en un clic.</div><div class="meta"><strong>Texte courant</strong><code>400 · ≈ 15 px · gris vert · ≈ 18 px dans le hero</code><p class="why">Deux lignes au plus dans les cartes&nbsp;: un responsable support parcourt la page, il ne la lit pas mot à mot.</p></div></div>
+    </div>
+  </section>
+
+  <section class="ds-sec" id="formes">
+    <h2><b>04</b>Formes</h2>
+    <div class="tokens">
+      <div class="token-card"><h3>Rayons</h3><div class="shapes"><div><i style="border-radius:10px"></i>10</div><div><i style="border-radius:16px"></i>16</div><div><i style="border-radius:24px"></i>24</div><div><i style="border-radius:999px;width:96px"></i>pilule</div></div><p class="why">10 pour les champs et le bouton de connexion, 16 pour le champ de question du hero, 24 pour les cartes et le panneau sombre. La pilule est pour ce qui se clique ou s’étiquette.</p></div>
+      <div class="token-card"><h3>Ombres</h3><div class="shapes"><div><i class="shadow-demo" style="box-shadow:var(--shadow-card);border:0"></i>carte</div><div><i class="shadow-demo" style="box-shadow:var(--shadow-glow);border:0;background:#34d399"></i>lueur</div><div><i class="shadow-demo" style="box-shadow:var(--shadow-dark);border:0;background:#0b1f17"></i>sombre</div></div><p class="why">Les cartes flottent doucement sur le vert pâle. Le bouton vif a une lueur, pas une ombre&nbsp;: sur le vert nuit, il s’allume. Valeurs approchées, relevées à l’œil.</p></div>
+      <div class="token-card"><h3>Largeur</h3><div class="scale"><div><i style="width:100%"></i></div><div>≈ 1 140 px de contenu</div></div><p class="why">Trois offres ou trois cartes du bento tiennent côte à côte. Au-delà, la comparaison des prix demanderait de tourner la tête.</p></div>
+    </div>
+  </section>
+
+  <section class="ds-sec" id="composants">
+    <h2><b>05</b>Composants</h2>
+    <div class="comps">
+      <div class="comp wide"><div class="demo"><div class="plate"><figure><button class="btn btn-cta" type="button">Demander une démo</button><figcaption style="color:#a9bab3">navigation</figcaption></figure><figure><button class="btn btn-ask" type="button"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0c.5 4 3.5 7.5 8 8-4.5.5-7.5 4-8 8-.5-4-3.5-7.5-8-8 4.5-.5 7.5-4 8-8z"/></svg>Demander</button><figcaption style="color:#a9bab3">champ de question</figcaption></figure></div><figure><button class="btn btn-login" type="button">Se connecter</button><figcaption>connexion</figcaption></figure></div>
+        <div class="text"><h3>Boutons</h3><p>Pilule émeraude vive sur le vert nuit, pilule émeraude foncé dans le champ de question, bloc sombre pleine largeur dans le formulaire de connexion.</p><p class="why">Chaque fond a son bouton, réglé pour le contraste&nbsp;: texte vert nuit sur le vert vif (10,0:1), blanc sur le vert foncé (5,5:1). Le bouton de connexion reprend le vert nuit du panneau d’à côté.</p></div></div>
+      <div class="comp"><div class="demo center"><span class="badge">Pourquoi Relaya</span></div><div class="text"><h3>Badge de section</h3><p>Pilule menthe, point vert foncé, libellé court.</p><p class="why">Il nomme la section comme dans le menu. On sait où l’on est dans une page longue, sans titre en plus.</p></div></div>
+      <div class="comp"><div class="demo center"><div class="toggle"><b>Mensuel</b><span>Annuel<small>−20&nbsp;%</small></span></div></div><div class="text"><h3>Bascule Mensuel / Annuel</h3><p>L’option active est une pilule émeraude en relief, l’autre reste grise avec la remise en vert.</p><p class="why">La remise est écrite à côté du mot «&nbsp;Annuel&nbsp;»&nbsp;: on voit ce qu’on gagne avant de cliquer, sans calcul.</p></div></div>
+      <div class="comp"><div class="demo center"><div class="offer"><div class="top"><span class="ico"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 11l4-4 3 3 5-5M10 5h4v4"/></svg></span><strong>Growth</strong><span class="tag">Le plus choisi</span></div><div class="price">790 €<small>HT / mois</small></div><p class="desc">Pour les néobanques en croissance qui veulent automatiser tout leur support.</p><ul><li>10 000 conversations / mois</li><li>Actions sur le compte (cartes, virements)</li><li>Support prioritaire</li></ul></div></div><div class="text"><h3>Carte d’offre</h3><p>Icône, nom, prix, une phrase pour la cible, puis la liste cochée. L’offre conseillée a une bordure émeraude et un badge.</p><p class="why">Chaque offre dit à qui elle s’adresse avant de lister ce qu’elle contient&nbsp;: une néobanque se reconnaît dans une phrase plus vite que dans une liste.</p></div></div>
+      <div class="comp"><div class="demo center"><div class="field"><label>E-mail professionnel</label><div class="input">claire.martin@entreprise.fr</div><div class="row" style="margin-top:8px"><label>Mot de passe</label><a href="#composants">Mot de passe oublié&nbsp;?</a></div><div class="input">••••••••</div></div></div><div class="text"><h3>Champ de formulaire</h3><p>Libellé au-dessus, champ gris clair sans bordure, lien d’aide aligné à droite du libellé.</p><p class="why">Le libellé reste visible pendant la saisie. Le lien «&nbsp;Mot de passe oublié&nbsp;?&nbsp;» est là où on le cherche, juste au-dessus du champ concerné.</p></div></div>
+    </div>
+  </section>
+
+  <section class="ds-sec" id="regles">
+    <h2><b>06</b>Règles</h2>
+    <div class="rules">
+      <div class="do"><h3>À faire</h3><ul><li>Un seul bouton émeraude vive par écran sombre.</li><li>L’émeraude foncé pour tout texte vert sur fond clair.</li><li>Les garanties de sécurité près des actions et dans le pied de page.</li><li>Le passage à un conseiller toujours visible.</li><li>Des animations jouées une seule fois, coupées si le système le demande.</li></ul></div>
+      <div class="dont"><h3>À éviter</h3><ul><li>L’émeraude ou l’émeraude vive en texte sur blanc.</li><li>Du texte gris directement sur le vert pâle.</li><li>Le dégradé sur plus que les mots clés d’un titre.</li><li>Une page qui fait croire qu’elle envoie des données alors qu’elle n’en envoie pas.</li></ul></div>
+    </div>
+  </section>
+
+  <p class="ds-foot">Relaya · design system conçu par Anissa B. Le Prunenec · Just One Studio</p>
+</main>
+</body>
+</html>

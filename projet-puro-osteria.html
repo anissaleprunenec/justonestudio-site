@@ -302,6 +302,22 @@
     .reveal { opacity: 1 !important; translate: none !important; transition: none !important; }
   }
   .foot .flag { width: 16px; height: 11px; margin-right: 7px; border-radius: 2px; vertical-align: -1px; box-shadow: 0 0 0 1px var(--line); }
+
+  /* theme switch: moon and sun both visible, a knob slides under the active mode */
+  .theme-toggle { position: relative; width: 68px; height: 36px; border-radius: 999px; display: flex; align-items: center; justify-content: space-between; padding: 0 9px; background: var(--surface); border: 1px solid var(--line); color: var(--muted); cursor: pointer; transition: border-color .2s; }
+  .theme-toggle:hover { border-color: var(--muted); background: var(--surface); }
+  .theme-toggle::before { content: ""; position: absolute; top: 3px; left: 3px; width: 28px; height: 28px; border-radius: 50%; background: var(--btn-bg); transition: translate .35s var(--ease); }
+  :root[data-theme="light"] .theme-toggle::before { translate: 32px 0; }
+  .theme-toggle .sun, .theme-toggle .moon, :root[data-theme="light"] .theme-toggle .sun, :root[data-theme="light"] .theme-toggle .moon { position: relative; z-index: 1; display: block; width: 16px; height: 16px; transition: color .3s; }
+  .theme-toggle .moon { order: -1; color: var(--btn-text); }
+  :root[data-theme="light"] .theme-toggle .moon { color: var(--muted); }
+  :root[data-theme="light"] .theme-toggle .sun { color: var(--btn-text); }
+  @media (prefers-reduced-motion: reduce) { .theme-toggle::before { transition: none; } }
+
+  .case-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+  .case-cta a { display: inline-flex; align-items: center; gap: 10px; height: 46px; padding: 0 20px; border-radius: 12px; border: 1px solid var(--line); font-size: 15px; font-weight: 500; transition: transform .2s, background .2s; }
+  .case-cta a:first-child { background: var(--btn-bg); color: var(--btn-text); border-color: transparent; }
+  .case-cta a:hover { transform: translateY(-1px); }
 </style>
 </head>
 <body>
@@ -348,7 +364,7 @@
 
   <header class="wrap head">
     <a class="back" href="projets.html">← Tous les projets</a>
-    <span class="kicker">10 · Site vitrine · Restaurant</span>
+    <span class="kicker">12 · Site vitrine · Restauration</span>
     <h1>Puro <em>Osteria</em></h1>
     <p class="lead">Un site vitrine pour une osteria italienne de quartier&nbsp;: un bleu profond, du blanc, des titres à empattements très gras et des illustrations au trait qui donnent à la page un ton chaleureux et un peu espiègle.</p>
     <span class="note"><i></i>Défi personnel</span>
@@ -416,6 +432,21 @@
         <div class="swatch"><i style="background:#0f2d7a"></i><span>Bleu nuit<small>#0F2D7A</small></span></div>
         <div class="swatch"><i style="background:#ffffff"></i><span>Blanc<small>#FFFFFF</small></span></div>
       </div>
+    </div>
+  </section>
+
+  <section class="sec" id="design-system">
+    <div class="sec-title"><b>05</b><h2>Le design <em>system</em></h2></div>
+    <div class="sec-body">
+      <p>J’ai rassemblé les fondations et les composants de Puro Osteria dans un design system court. Chaque couleur, chaque style de texte et chaque composant a sa raison d’être&nbsp;: donner faim, poser une ambiance et mener à la réservation.</p>
+      <ul class="changes">
+        <li>Trois principes guident les choix&nbsp;: une ambiance tout de suite, donner faim sans photo, et réserver sans friction.</li>
+        <li>Un seul bleu en deux nuances et du blanc, avec des contrastes mesurés. Les étiquettes lavande restent à un ou deux mots.</li>
+        <li>Une serif très grasse pour ce qui donne envie (titres, boutons, avis), une sans-serif neutre pour ce qui informe, et les vrais composants&nbsp;: boutons, champ au focus, catégories de la carte, carte d’avis.</li>
+      </ul>
+      <p class="hint"><span class="h-hover">Faites défiler ou attrapez la fenêtre pour parcourir le design system.</span><span class="h-touch">Faites défiler dans la fenêtre pour parcourir le design system.</span></p>
+      <div class="stage" style="--flat:#1a45aa"><div class="win"><div class="bar"><i></i><i></i><i></i><span>Puro Osteria — Design system</span></div><div class="screen" tabindex="0" aria-label="Design system de Puro Osteria, faire défiler"><img src="img/puro-case/ds-full.jpg" alt="Page complète du design system de Puro Osteria : principes, couleurs bleues avec leurs contrastes, typographie, formes, composants et règles" loading="lazy"></div></div></div>
+      <div class="case-cta"><a href="ds/puro-osteria.html" target="_blank" rel="noopener">Ouvrir le design system <span aria-hidden="true">↗</span></a></div>
     </div>
   </section>
 

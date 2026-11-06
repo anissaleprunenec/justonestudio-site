@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Edreams Factory — Design system</title>
+<meta name="description" content="Le design system de la refonte Edreams Factory : principes, couleurs, typographie, formes, composants et règles, avec la raison de chaque choix.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ds.css">
+<style>
+  :root {
+    --ds-bg: #0b0d0c; --ds-card: #161a18; --ds-ink: #f2f1ec; --ds-soft: #c9ccc8; --ds-muted: #a3a8a4; --ds-line: rgba(242, 241, 236, .1);
+    --ds-accent: #3ddc84; --ds-accent-text: #3ddc84; --ds-font: "Inter Tight", system-ui, sans-serif; --ds-display-weight: 700; --ds-radius: 24px;
+    --ds-surface: #1e2321; --serif: "Instrument Serif", Georgia, serif; --ease: cubic-bezier(.22, 1, .36, 1);
+  }
+  ::selection { background: #3ddc84; color: #04241a; }
+  .ds-head h1 { font-weight: 600; letter-spacing: -.045em; line-height: 1.04; }
+  .ds-head h1 em, .serif { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spacing: -.01em; color: #8ff0b8; }
+  .ds-head h1 em { font-size: 1.08em; }
+  .ok { color: #3ddc84; } .ko { color: #ffb86b; }
+  /* text selection highlight, final state of the hero animation */
+  .hl { position: relative; display: inline-block; line-height: 1; padding: .06em .1em .1em; margin: 0 .06em; box-shadow: inset 2px 0 0 #3ddc84, inset -2px 0 0 #3ddc84; background: rgba(61, 220, 132, .3); }
+  .hl::before, .hl::after { content: ""; position: absolute; width: 11px; height: 11px; border-radius: 50%; background: #3ddc84; box-shadow: 0 0 0 3px rgba(10, 29, 21, .6); }
+  .hl::before { left: -4.5px; top: -8px; } .hl::after { right: -4.5px; bottom: -8px; }
+  .eyebrow { font: 500 14px/1 var(--ds-font); color: #3ddc84; letter-spacing: .01em; }
+  /* the real components, with the values of the site */
+  .btn { display: inline-flex; align-items: center; gap: 10px; padding: 17px 26px; border-radius: 999px; font: 600 16px/1 var(--ds-font); border: 1px solid transparent; cursor: pointer; transition: transform .3s var(--ease), background .2s; }
+  .btn--mint { background: #3ddc84; color: #04241a; }
+  .btn--mint.is-hover { background: #6be8a4; transform: translateY(-2px); }
+  .btn--arrow { padding: 6px 6px 6px 24px; gap: 16px; }
+  .btn__circle { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; background: #04241a; color: #3ddc84; font-size: 17px; transition: transform .3s var(--ease); }
+  .btn.is-hover .btn__circle { transform: translateX(4px); }
+  .btn.is-focus { outline: 2px solid #3ddc84; outline-offset: 3px; }
+  .btn--glass { background: rgba(255, 255, 255, .08); border-color: rgba(255, 255, 255, .22); color: #fff; }
+  .demo-hero { background: linear-gradient(180deg, #0a1d15 0%, #10342a 45%, #1f5440 100%) !important; }
+  .demo-paper { background: #f4f5f0 !important; color: #0b0d0c; }
+  .demo-form { background: radial-gradient(120% 80% at 30% 0%, #ecf9f0 0%, transparent 60%), linear-gradient(180deg, #c6ebd3 0%, #d6f1df 100%) !important; color: #0b0d0c; }
+  .ico3d { width: 66px; height: 66px; border-radius: 20px; display: grid; place-items: center; color: #8ff0b8; background: linear-gradient(150deg, #2f6b52 0%, #10342a 55%, #0a1d15 100%); box-shadow: inset 0 1px 0 rgba(167, 247, 203, .45), inset 0 -5px 10px rgba(0, 0, 0, .35), 0 2px 0 #06120c, 0 10px 18px -8px rgba(0, 0, 0, .6); }
+  .ico3d svg { width: 30px; height: 30px; overflow: visible; filter: drop-shadow(0 0 6px rgba(61, 220, 132, .55)); }
+  .ico3d .s { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; } .ico3d .f { fill: currentColor; opacity: .45; }
+  .offer-card { width: 230px; display: grid; justify-items: center; gap: 18px; text-align: center; padding: 26px 18px; border-radius: 24px; background: linear-gradient(160deg, rgba(255, 255, 255, .07), rgba(255, 255, 255, .02)); border: 1px solid rgba(255, 255, 255, .09); }
+  .offer-card h4 { font-size: 18px; font-weight: 600; line-height: 1.25; letter-spacing: -.02em; }
+  .offer-card p { margin-top: -8px; font-size: 14px; line-height: 1.45; color: rgba(242, 241, 236, .76); max-width: 24ch; }
+  .demo.demo-fields { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; }
+  .comp .demo figure.field6 { display: grid; gap: 7px; justify-items: stretch; text-align: left; }
+  .field6 figcaption { text-align: center; }
+  @media (max-width: 560px) { .demo.demo-fields { grid-template-columns: 1fr; } }
+  .field6 label { font-size: 13.5px; font-weight: 600; color: #3f4844; }
+  .field6 .in { font: 500 16px var(--ds-font); color: #0b0d0c; padding: 14px 16px; border-radius: 14px; border: 1.5px solid rgba(17, 122, 69, .2); background: #fff; min-height: 52px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .field6 .in.is-focus { border-color: #14a85a; box-shadow: 0 0 0 4px rgba(61, 220, 132, .22); }
+  .field6 .in.is-invalid { border-color: #d0453a; }
+  .field6 small { font-size: 12.5px; font-weight: 500; color: #b42318; }
+  .qt-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .qt-chip { display: inline-flex; padding: 10px 16px; border-radius: 999px; font-size: 14.5px; font-weight: 500; background: #fff; border: 1.5px solid rgba(17, 122, 69, .14); color: #0b0d0c; }
+  .qt-chip.is-hover { border-color: rgba(17, 122, 69, .4); }
+  .qt-chip.is-on { color: #fff; background: #0c6034; border-color: #0c6034; }
+  .qt-next { display: inline-flex; align-items: center; gap: 14px; padding: 8px 8px 8px 24px; border: 0; border-radius: 999px; font: 600 16px var(--ds-font); color: #fff; background: #0c6034; }
+  .qt-next span { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; color: #04241a; background: #3ddc84; }
+  .sheet-demo { position: relative; width: 150px; height: 84px; border-radius: 16px; overflow: hidden; background: linear-gradient(180deg, #10342a, #1f5440); }
+  .sheet-demo i { position: absolute; left: 0; right: 0; bottom: 0; height: 46px; border-radius: 16px 16px 0 0; background: #f4f5f0; box-shadow: 0 -30px 60px -30px rgba(4, 20, 12, .45), 0 -8px 18px -10px rgba(0, 0, 0, .5); }
+  .demo .stack { display: grid; gap: 14px; justify-items: start; }
+</style>
+</head>
+<body>
+<main class="ds">
+  <header class="ds-head">
+    <img class="ds-logo" src="../img/edreams-case/logo-apres.svg" alt="Edreams Factory">
+    <span class="ds-eyebrow">Design system · version courte</span>
+    <h1>Le logiciel <em>pensé</em> pour votre entreprise, <span class="hl">fabriqué</span> par nos équipes.</h1>
+    <p>Les fondations et les composants de ma refonte du site d’Edreams Factory, qui conçoit des logiciels métier sur mesure. Chaque choix a sa raison, écrite à côté.</p>
+    <ul class="ds-toc"><li><a href="#principes">Principes</a></li><li><a href="#couleurs">Couleurs</a></li><li><a href="#typo">Typographie</a></li><li><a href="#formes">Formes</a></li><li><a href="#composants">Composants</a></li><li><a href="#regles">Règles</a></li></ul>
+  </header>
+
+  <section class="ds-sec" id="principes">
+    <h2><b>01</b>Principes</h2>
+    <p class="lead">Trois idées, tirées des objectifs de la refonte. Quand j’hésite entre deux options, je reviens à elles.</p>
+    <div class="principles">
+      <div class="principle"><b>01</b><h3>Compris en quelques secondes</h3><p>Des titres courts, un seul mot clé en italique, un seul vert. Un dirigeant pressé lit le mot clé d’abord, puis le reste.</p></div>
+      <div class="principle"><b>02</b><h3>Des preuves là où naît le doute</h3><p>Chiffres, logos clients et avis arrivent sur des feuilles claires, juste après chaque promesse faite sur fond sombre.</p></div>
+      <div class="principle"><b>03</b><h3>Un premier contact sans effort</h3><p>Deux champs pour être rappelé, un délai écrit (4&nbsp;h) et des prénoms. On sait qui appelle, et quand.</p></div>
+    </div>
+  </section>
+
+  <section class="ds-sec" id="couleurs">
+    <h2><b>02</b>Couleurs</h2>
+    <p class="lead">Un fond presque noir, un texte crème et le vert du logo comme seul accent. Les contrastes sont mesurés sur le fond où chaque couleur sert vraiment.</p>
+    <div class="colors">
+      <div class="color"><div class="chip" style="background:#0b0d0c;color:#f2f1ec;border-bottom:1px solid rgba(242,241,236,.1)"><span>--bg</span></div><div class="info"><strong>Encre</strong><code>#0B0D0C</code><p>Fond des sections sombres.</p><p class="why">Un noir à peine teinté de vert&nbsp;: moins dur qu’un noir pur, il installe le ton «&nbsp;tech éditorial&nbsp;» et fait briller le vert.</p></div></div>
+      <div class="color"><div class="chip" style="background:#f2f1ec;color:#0b0d0c"><span>--text</span><span class="ratio">17,2:1</span></div><div class="info"><strong>Crème</strong><code>#F2F1EC</code><p>Titres et texte sur fond sombre.</p><p class="why">Un blanc cassé éblouit moins qu’un blanc pur sur un fond noir, et rappelle le papier d’un magazine.</p></div></div>
+      <div class="color"><div class="chip" style="background:#a3a8a4;color:#0b0d0c"><span>--muted</span><span class="ratio">8,1:1</span></div><div class="info"><strong>Gris sauge</strong><code>#A3A8A4</code><p>Paragraphes d’introduction, textes secondaires.</p><p class="why">Le texte long recule derrière les titres, avec un contraste encore très confortable.</p></div></div>
+      <div class="color"><div class="chip" style="background:#3ddc84;color:#04241a"><span>--mint</span><span class="ratio">10,9:1</span></div><div class="info"><strong>Menthe</strong><code>#3DDC84</code><p>Bouton «&nbsp;Demander un devis&nbsp;», étiquettes de section, focus. Sur le dégradé vert, les mots clés passent en #8FF0B8.</p><p class="why">C’est le triangle du A du logo&nbsp;: la marque et l’action ont la même couleur. Un seul accent, et l’œil sait où cliquer.</p></div></div>
+      <div class="color"><div class="chip" style="background:linear-gradient(180deg,#0a1d15,#10342a 45%,#1f5440 80%,#2f6b52);color:#f2f1ec"><span>hero</span></div><div class="info"><strong>Vert profond</strong><code>#0A1D15 → #1F5440 → #2F6B52</code><p>Hero, contact, carte d’avis mise en avant, blocs d’icônes.</p><p class="why">Le vert qui s’éclaircit vers le bas casse le rythme sombre et guide l’œil vers le produit, posé à cheval sur le dégradé.</p></div></div>
+      <div class="color"><div class="chip" style="background:#f4f5f0;color:#0b0d0c"><span>--paper</span></div><div class="info"><strong>Papier</strong><code>#F4F5F0</code><p>Feuilles claires&nbsp;: méthode, secteurs, avis, demande de devis.</p><p class="why">Les preuves se lisent comme des documents&nbsp;: sur un fond clair, chiffres, logos et avis gagnent en netteté.</p></div></div>
+      <div class="color"><div class="chip" style="background:#0c6034;color:#fff"><span>vert foncé</span><span class="ratio">7,0:1</span></div><div class="info"><strong>Vert forêt</strong><code>#0C6034</code><p>Liens, choix sélectionnés et bouton «&nbsp;Continuer&nbsp;» sur le papier.</p><p class="why">Le menthe tombe à 1,6:1 sur le papier. Le même vert, foncé, garde la marque et redevient lisible.</p></div></div>
+    </div>
+    <h3 class="ds-sub">Contrastes vérifiés</h3>
+    <table class="contrast">
+      <thead><tr><th>Couple</th><th>Ratio</th><th>Verdict</th><th>Usage autorisé</th></tr></thead>
+      <tbody>
+        <tr><td><span class="pair" style="background:#0b0d0c;color:#f2f1ec;border:1px solid rgba(242,241,236,.2)">Aa</span></td><td>17,2:1</td><td class="ok">AAA</td><td>Tout texte</td></tr>
+        <tr><td><span class="pair" style="background:#3ddc84;color:#04241a">Aa</span></td><td>9,3:1</td><td class="ok">AAA</td><td>Bouton principal (encre verte #04241A sur menthe)</td></tr>
+        <tr><td><span class="pair" style="background:#1f5440;color:#8ff0b8">Aa</span></td><td>6,4:1</td><td class="ok">AA</td><td>Mots clés sur le dégradé (4,6:1 à son point le plus clair)</td></tr>
+        <tr><td><span class="pair" style="background:#f4f5f0;color:#0c6034">Aa</span></td><td>7,0:1</td><td class="ok">AA</td><td>Liens et textes verts sur le papier</td></tr>
+        <tr><td><span class="pair" style="background:#f4f5f0;color:#59615c">Aa</span></td><td>5,8:1</td><td class="ok">AA</td><td>Texte secondaire sur le papier</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="ds-sec" id="typo">
+    <h2><b>03</b>Typographie</h2>
+    <p class="lead">Deux familles&nbsp;: Inter Tight pour tout le texte, Instrument Serif en italique pour les mots clés et les chiffres.</p>
+    <p class="why">Inter Tight est nette et serrée, comme un outil bien fait&nbsp;: elle parle de logiciel. L’italique d’Instrument Serif apporte la main humaine, celle de «&nbsp;pensé&nbsp;». Le contraste des deux résume l’offre&nbsp;: du sur mesure, fabriqué avec rigueur.</p>
+    <div class="types">
+      <div class="type-row"><div style="font-size:clamp(34px,5vw,64px);font-weight:600;line-height:1.04;letter-spacing:-.045em">Le logiciel <span class="serif" style="font-size:1.08em">pensé</span> pour votre entreprise</div><div class="meta"><strong>Titre principal</strong><code>600 · 42 → 80 px · interligne 1,04 · −4,5 %</code><p class="why">Grand et serré, il se lit comme une une de magazine. Le mot en italique grossit de 8&nbsp;% pour tenir la même hauteur visuelle que le sans-serif.</p></div></div>
+      <div class="type-row"><div style="font-size:clamp(30px,3.8vw,52px);font-weight:700;line-height:1.05;letter-spacing:-.03em">Trois étapes, <span class="serif" style="font-size:1.06em">zéro surprise.</span></div><div class="meta"><strong>Titre de section</strong><code>700 · 36 → 64 px · interligne 1,05 · −3 %</code><p class="why">Plus gras que le titre principal, car plus petit&nbsp;: chaque section garde une vraie présence sur le fond sombre.</p></div></div>
+      <div class="type-row"><div style="font-size:18px;font-weight:600;line-height:1.25;letter-spacing:-.02em">ERP et CRM sur mesure</div><div class="meta"><strong>Titre de carte</strong><code>600 · 18 px · −2 %</code><p class="why">Le nom d’un service, lisible d’un coup d’œil, sans concurrencer le titre de la section.</p></div></div>
+      <div class="type-row"><div style="font-size:17px;line-height:1.6;color:#a3a8a4;max-width:52ch">Un rappel sous 4&nbsp;h ouvrées, 30&nbsp;minutes pour comprendre votre projet, puis une équipe qui reste à vos côtés.</div><div class="meta"><strong>Texte courant</strong><code>400 · 17 px · interligne 1,6 · gris sauge</code><p class="why">17&nbsp;px et un interligne généreux&nbsp;: sur fond sombre, le texte a besoin d’air pour rester confortable.</p></div></div>
+      <div class="type-row"><div><span class="eyebrow">[ 01 — Comment ça marche ]</span></div><div class="meta"><strong>Étiquette de section</strong><code>500 · 14 px · +1 % · menthe · entre crochets</code><p class="why">Les crochets reprennent ceux du logo et du symbole [A]&nbsp;: le code. Le numéro donne le fil de la page.</p></div></div>
+      <div class="type-row"><div style="font:italic 400 36px/1 var(--serif);letter-spacing:-.01em;color:#8ff0b8">+10 ans</div><div class="meta"><strong>Chiffres clés</strong><code>Instrument Serif italique · 400 · 36 px</code><p class="why">En serif, un chiffre se lit comme une citation plutôt qu’un argument commercial&nbsp;: il rassure sans crier.</p></div></div>
+    </div>
+  </section>
+
+  <section class="ds-sec" id="formes">
+    <h2><b>04</b>Formes</h2>
+    <div class="tokens">
+      <div class="token-card"><h3>Rayons</h3><div class="shapes"><div><i style="border-radius:14px"></i>14</div><div><i style="border-radius:24px"></i>24</div><div><i style="border-radius:44px 44px 0 0"></i>44</div><div><i style="border-radius:999px;width:96px"></i>pilule</div></div><p class="why">14 pour les champs, 24 pour toutes les cartes, 44 pour le haut des sections (30 sur mobile). La pilule est réservée aux boutons et aux étiquettes.</p></div>
+      <div class="token-card"><h3>Relief et ombres</h3><div class="shapes" style="align-items:center"><div><span class="ico3d" aria-hidden="true"><svg viewBox="0 0 32 32"><rect class="f" x="15" y="15" width="3.2" height="7" rx="1"/><rect class="f" x="20.5" y="11" width="3.2" height="11" rx="1"/><rect class="s" x="4" y="6" width="24" height="20" rx="3.5"/><path class="s" d="M11 6v20M6.8 11h1.6M6.8 15h1.6"/></svg></span>icône</div><div><span class="sheet-demo" aria-hidden="true"><i></i></span>feuille</div></div><p class="why">Des ombres rares et très diffuses&nbsp;; la plus marquée est portée vers le haut, quand une feuille remonte sur la précédente. Les icônes ont un léger relief vert&nbsp;: un seul style, partout.</p></div>
+      <div class="token-card"><h3>Largeur et rythme</h3><div class="scale"><div><i style="width:100%"></i></div><div>1 240 px de contenu au maximum</div><div><i style="width:42%"></i></div><div>110 → 140 px au-dessus et au-dessous de chaque section</div></div><p class="why">Chaque section remonte de 48&nbsp;px sur la précédente&nbsp;: la page se lit comme une pile de feuilles, une idée par feuille.</p></div>
+    </div>
+  </section>
+
+  <section class="ds-sec" id="composants">
+    <h2><b>05</b>Composants</h2>
+    <div class="comps">
+      <div class="comp wide"><div class="demo demo-hero"><figure><span class="btn btn--mint btn--arrow">Demander un devis <span class="btn__circle" aria-hidden="true">→</span></span><figcaption>repos</figcaption></figure><figure><span class="btn btn--mint btn--arrow is-hover">Demander un devis <span class="btn__circle" aria-hidden="true">→</span></span><figcaption>survol</figcaption></figure><figure><span class="btn btn--mint btn--arrow is-focus">Demander un devis <span class="btn__circle" aria-hidden="true">→</span></span><figcaption>focus clavier</figcaption></figure><figure><span class="btn btn--glass">Comment ça marche</span><figcaption>secondaire</figcaption></figure></div>
+        <div class="text"><h3>Boutons</h3><p>Pilule menthe avec une flèche dans un rond pour l’action principale, pilule de verre pour l’action secondaire. Au survol, le bouton s’éclaircit, monte de 2&nbsp;px et la flèche avance.</p><p class="why">La flèche dit «&nbsp;on avance&nbsp;» sans un mot de plus. Le verre laisse passer le dégradé&nbsp;: le second bouton existe sans voler la vedette.</p></div></div>
+      <div class="comp"><div class="demo center demo-hero"><div class="stack"><span class="eyebrow">[ 01 — Comment ça marche ]</span><span style="font-size:40px;font-weight:600;letter-spacing:-.045em;line-height:1.1;color:#fff"><span class="hl">fabriqué</span></span></div></div><div class="text"><h3>Étiquette et surlignage</h3><p>Une étiquette entre crochets au-dessus de chaque titre. Dans le hero, «&nbsp;fabriqué&nbsp;» se surligne comme une sélection de texte, avec ses deux poignées.</p><p class="why">La sélection est un geste que tout le monde connaît à l’écran&nbsp;: elle met le mot en avant et parle de logiciel en même temps.</p></div></div>
+      <div class="comp"><div class="demo center"><div class="offer-card"><span class="ico3d" aria-hidden="true"><svg viewBox="0 0 32 32"><rect class="f" x="15" y="15" width="3.2" height="7" rx="1"/><rect class="f" x="20.5" y="11" width="3.2" height="11" rx="1"/><rect class="s" x="4" y="6" width="24" height="20" rx="3.5"/><path class="s" d="M11 6v20M6.8 11h1.6M6.8 15h1.6"/></svg></span><h4>ERP et CRM<br>sur mesure</h4><p>Ventes, stocks et factures dans un seul outil.</p></div></div><div class="text"><h3>Carte de service</h3><p>Verre sombre, icône bicolore dans un bloc vert en relief, un titre et une phrase.</p><p class="why">Une phrase par service, pas plus&nbsp;: le visiteur compare quatre offres d’un regard, puis choisit la sienne.</p></div></div>
+      <div class="comp"><div class="demo demo-form demo-fields"><figure class="field6"><label>Votre entreprise</label><span class="in"></span><figcaption>repos</figcaption></figure><figure class="field6"><label>Votre entreprise</label><span class="in is-focus">Transports Breton</span><figcaption>focus</figcaption></figure><figure class="field6"><label>Votre téléphone</label><span class="in is-invalid">06 12</span><small>Indiquez un numéro à 10 chiffres.</small><figcaption>erreur</figcaption></figure></div><div class="text"><h3>Champ de formulaire</h3><p>Libellé au-dessus, champ blanc à bord vert. Au focus, un halo menthe de 4&nbsp;px. En erreur, un bord rouge et une phrase qui dit quoi faire.</p><p class="why">Le message d’erreur explique la correction, pas la faute. Le rouge est la seule couleur qui sort du vert&nbsp;: on ne peut pas le manquer.</p></div></div>
+      <div class="comp"><div class="demo center demo-paper"><div class="stack"><div class="qt-chips"><span class="qt-chip">Sécurité</span><span class="qt-chip is-hover">Santé</span><span class="qt-chip is-on">Transport et logistique</span></div><span class="qt-next">Continuer <span aria-hidden="true">→</span></span></div></div><div class="text"><h3>Choix du devis</h3><p>Des pastilles blanches à cocher, vert forêt une fois choisies, et le bouton «&nbsp;Continuer&nbsp;» à chaque étape.</p><p class="why">Cliquer une pastille demande moins d’effort que d’écrire. Le vert forêt confirme le choix, avec 7,7:1 de contraste pour le texte blanc.</p></div></div>
+    </div>
+  </section>
+
+  <section class="ds-sec" id="regles">
+    <h2><b>06</b>Règles</h2>
+    <div class="rules">
+      <div class="do"><h3>À faire</h3><ul><li>Un seul mot en italique serif par titre.</li><li>Une étiquette numérotée entre crochets au-dessus de chaque section.</li><li>Alterner feuilles sombres et feuilles claires.</li><li>Un contour menthe de 2&nbsp;px, décalé de 3&nbsp;px, sur tout ce qui reçoit le focus.</li><li>Écrire le nom en entier&nbsp;: Edreams Factory.</li></ul></div>
+      <div class="dont"><h3>À éviter</h3><ul><li>Le menthe en texte sur le papier (1,6:1).</li><li>Une deuxième couleur d’accent&nbsp;: seul le rouge des erreurs sort du vert.</li><li>Des icônes au trait seul, hors du bloc vert en relief.</li><li>Garder une animation quand le visiteur demande moins de mouvement&nbsp;: toutes se coupent.</li></ul></div>
+    </div>
+  </section>
+
+  <p class="ds-foot">Edreams Factory · design system conçu par Anissa B. Le Prunenec · Just One Studio</p>
+</main>
+</body>
+</html>

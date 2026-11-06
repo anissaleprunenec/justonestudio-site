@@ -302,6 +302,22 @@
     .reveal { opacity: 1 !important; translate: none !important; transition: none !important; }
   }
   .foot .flag { width: 16px; height: 11px; margin-right: 7px; border-radius: 2px; vertical-align: -1px; box-shadow: 0 0 0 1px var(--line); }
+
+  /* theme switch: moon and sun both visible, a knob slides under the active mode */
+  .theme-toggle { position: relative; width: 68px; height: 36px; border-radius: 999px; display: flex; align-items: center; justify-content: space-between; padding: 0 9px; background: var(--surface); border: 1px solid var(--line); color: var(--muted); cursor: pointer; transition: border-color .2s; }
+  .theme-toggle:hover { border-color: var(--muted); background: var(--surface); }
+  .theme-toggle::before { content: ""; position: absolute; top: 3px; left: 3px; width: 28px; height: 28px; border-radius: 50%; background: var(--btn-bg); transition: translate .35s var(--ease); }
+  :root[data-theme="light"] .theme-toggle::before { translate: 32px 0; }
+  .theme-toggle .sun, .theme-toggle .moon, :root[data-theme="light"] .theme-toggle .sun, :root[data-theme="light"] .theme-toggle .moon { position: relative; z-index: 1; display: block; width: 16px; height: 16px; transition: color .3s; }
+  .theme-toggle .moon { order: -1; color: var(--btn-text); }
+  :root[data-theme="light"] .theme-toggle .moon { color: var(--muted); }
+  :root[data-theme="light"] .theme-toggle .sun { color: var(--btn-text); }
+  @media (prefers-reduced-motion: reduce) { .theme-toggle::before { transition: none; } }
+
+  .case-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+  .case-cta a { display: inline-flex; align-items: center; gap: 10px; height: 46px; padding: 0 20px; border-radius: 12px; border: 1px solid var(--line); font-size: 15px; font-weight: 500; transition: transform .2s, background .2s; }
+  .case-cta a:first-child { background: var(--btn-bg); color: var(--btn-text); border-color: transparent; }
+  .case-cta a:hover { transform: translateY(-1px); }
 </style>
 </head>
 <body>
@@ -348,7 +364,7 @@
 
   <header class="wrap head">
     <a class="back" href="projets.html">← Tous les projets</a>
-    <span class="kicker">07 · Landing page · Maquette Figma</span>
+    <span class="kicker">09 · Landing page · Marketing</span>
     <h1>Landing <em>acquisition</em></h1>
     <p class="lead">Une landing page pour une agence d’acquisition qui transforme le trafic web en clients&nbsp;: un violet franc, un fond crème et de grands rubans blancs qui guident l’œil d’une section à l’autre.</p>
     <span class="note"><i></i>Défi personnel · agence et chiffres fictifs, logos provisoires</span>
@@ -410,8 +426,23 @@
       <div class="grid g3">
         <div class="swatch"><i style="background:#5c23c8"></i><span>Violet<small>#5C23C8</small></span></div>
         <div class="swatch"><i style="background:#fdffe5"></i><span>Crème<small>#FDFFE5</small></span></div>
-        <div class="swatch"><i style="background:#0b0b0f"></i><span>Noir<small>boutons</small></span></div>
+        <div class="swatch"><i style="background:#000000"></i><span>Noir<small>boutons</small></span></div>
       </div>
+    </div>
+  </section>
+
+  <section class="sec" id="design-system">
+    <div class="sec-title"><b>05</b><h2>Le design <em>system</em></h2></div>
+    <div class="sec-body">
+      <p>J’ai rassemblé les fondations et les composants de la landing dans un design system court. Je l’ai construit à partir des valeurs relevées sur la maquette Figma, et chaque choix y a sa raison écrite à côté.</p>
+      <ul class="changes">
+        <li>Trois principes guident la page&nbsp;: une promesse puis des preuves, des visages plutôt que des icônes, et tout mène à l’appel.</li>
+        <li>Le noir n’appartient qu’aux boutons qui mènent à l’audit ou à l’appel. Le violet et le crème portent tout le reste, avec des contrastes mesurés.</li>
+        <li>Deux familles se partagent le travail&nbsp;: une grotesque technique pour accrocher, une sans-serif douce pour expliquer. Le ruban ivoire relie les sections entre elles.</li>
+      </ul>
+      <p class="hint"><span class="h-hover">Faites défiler ou attrapez la fenêtre pour parcourir le design system.</span><span class="h-touch">Faites défiler dans la fenêtre pour parcourir le design system.</span></p>
+      <div class="stage" style="--flat:#5c23c8"><div class="win"><div class="bar"><i></i><i></i><i></i><span>Landing acquisition — Design system</span></div><div class="screen" tabindex="0" aria-label="Design system de Landing acquisition, faire défiler"><img src="img/acquisition-case/ds-full.jpg" alt="Page complète du design system de la landing acquisition : principes, couleurs violet et crème avec leurs contrastes, typographie, formes, composants (boutons, carte de frein, chiffre clé, étiquette, ruban) et règles" loading="lazy"></div></div></div>
+      <div class="case-cta"><a href="ds/acquisition.html" target="_blank" rel="noopener">Ouvrir le design system <span aria-hidden="true">↗</span></a></div>
     </div>
   </section>
 

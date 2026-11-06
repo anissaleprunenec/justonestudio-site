@@ -12,7 +12,7 @@
   // apply the saved theme before first paint so the page doesn't flash dark
   try { if (localStorage.getItem('theme') !== 'dark') document.documentElement.dataset.theme = 'light'; } catch (e) { document.documentElement.dataset.theme = 'light'; }
 </script>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@500;600&display=swap" rel="stylesheet">
 <style>
   /* same tokens as the home page (index.html) */
   :root {
@@ -92,8 +92,7 @@
   .win .bar i { width: 9px; height: 9px; border-radius: 50%; background: #c9ced8; }
   .win .bar span { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-left: 12px; font-size: 11px; color: #6b7280; background: #fff; padding: 3px 12px; border-radius: 6px; }
   .win img { width: 100%; }
-  .case-hero { margin-bottom: var(--section-space); position: relative; }
-  /* opening view: a desktop page with the phone version standing in front of it */
+  .case-hero { margin-bottom: var(--section-space); position: relative; }  /* opening view: a desktop page with the phone version standing in front of it */
   .case-hero .hero-phone { position: absolute; right: 6%; top: 20%; width: clamp(84px, 17%, 210px); padding: 6px; border-radius: 28px; box-shadow: 0 40px 80px -30px rgba(0,0,0,.85); }
   .hero-phone img { border-radius: 22px; aspect-ratio: 390 / 844; object-fit: cover; object-position: top; }
   @media (max-width: 600px) { .hero-phone { padding: 4px; border-radius: 18px; top: 13%; width: 24%; } .hero-phone img { border-radius: 14px; } }
@@ -121,6 +120,7 @@
   .logo-tile { display: grid; place-items: center; aspect-ratio: 16 / 9; border-radius: 20px; overflow: hidden; background: #0b0d0c; border: 1px solid rgba(255,255,255,.08); }
   .logo-tile img { width: 100%; height: 100%; object-fit: cover; }
   .logo-tile.svg img { width: 74%; height: auto; object-fit: contain; }
+  .logo-tile.light { background: #f2f1ec; } /* the original logo is dark ink, made for a light background */
   .tag { display: inline-block; margin-top: 12px; font-size: 13px; color: var(--muted); }
   .tag b { color: var(--text); font-weight: 500; }
   .changes { list-style: none; display: grid; gap: 10px; max-width: 62ch; }
@@ -142,7 +142,7 @@
   .type small { font-size: 13px; color: var(--muted); text-align: right; }
   .f-inter { font-family: "Inter Tight", var(--sans); font-weight: 600; letter-spacing: -.03em; }
   .f-serif { font-family: var(--serif); font-style: italic; color: #3ddc84; }
-  .f-mono { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 22px !important; color: #3ddc84; }
+  .f-label { font-family: "Inter Tight", sans-serif; font-weight: 500; font-size: 22px !important; color: #3ddc84; }
   :root[data-theme="light"] .f-serif, :root[data-theme="light"] .f-mono { color: #14a85a; }
 
   /* process: big figures */
@@ -299,6 +299,22 @@
     .reveal { opacity: 1 !important; translate: none !important; transition: none !important; }
   }
   .foot .flag { width: 16px; height: 11px; margin-right: 7px; border-radius: 2px; vertical-align: -1px; box-shadow: 0 0 0 1px var(--line); }
+
+  /* theme switch: moon and sun both visible, a knob slides under the active mode */
+  .theme-toggle { position: relative; width: 68px; height: 36px; border-radius: 999px; display: flex; align-items: center; justify-content: space-between; padding: 0 9px; background: var(--surface); border: 1px solid var(--line); color: var(--muted); cursor: pointer; transition: border-color .2s; }
+  .theme-toggle:hover { border-color: var(--muted); background: var(--surface); }
+  .theme-toggle::before { content: ""; position: absolute; top: 3px; left: 3px; width: 28px; height: 28px; border-radius: 50%; background: var(--btn-bg); transition: translate .35s var(--ease); }
+  :root[data-theme="light"] .theme-toggle::before { translate: 32px 0; }
+  .theme-toggle .sun, .theme-toggle .moon, :root[data-theme="light"] .theme-toggle .sun, :root[data-theme="light"] .theme-toggle .moon { position: relative; z-index: 1; display: block; width: 16px; height: 16px; transition: color .3s; }
+  .theme-toggle .moon { order: -1; color: var(--btn-text); }
+  :root[data-theme="light"] .theme-toggle .moon { color: var(--muted); }
+  :root[data-theme="light"] .theme-toggle .sun { color: var(--btn-text); }
+  @media (prefers-reduced-motion: reduce) { .theme-toggle::before { transition: none; } }
+
+  .case-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+  .case-cta a { display: inline-flex; align-items: center; gap: 10px; height: 46px; padding: 0 20px; border-radius: 12px; border: 1px solid var(--line); font-size: 15px; font-weight: 500; transition: transform .2s, background .2s; }
+  .case-cta a:first-child { background: var(--btn-bg); color: var(--btn-text); border-color: transparent; }
+  .case-cta a:hover { transform: translateY(-1px); }
 </style>
 </head>
 <body>
@@ -345,7 +361,7 @@
 
   <header class="wrap head">
     <a class="back" href="projets.html">← Tous les projets</a>
-    <span class="kicker">01 · Refonte conceptuelle</span>
+    <span class="kicker">01 · Site vitrine · Logiciel</span>
     <h1>Edreams <em>Factory</em></h1>
     <p class="lead">Refaire, avec mon regard d’aujourd’hui, une page que j’avais dessinée il y a quelques années&nbsp;: un logo redessiné, une nouvelle direction artistique et une maquette codée de trois pages.</p>
     <span class="note"><i></i>Défi personnel · non commandé par Edreams Factory</span>
@@ -361,7 +377,7 @@
 </div>
 
 <main class="wrap">
-  <figure class="stage case-hero" style="--flat:#123b2b"><div class="win"><div class="bar"><i></i><i></i><i></i><span>Edreams Factory — Transport et logistique</span></div><img src="img/edreams-case/secteur-desktop.png" alt="Page secteur Transport et logistique de la refonte Edreams Factory sur ordinateur" loading="lazy"></div><div class="phone hero-phone"><img src="img/edreams-case/home-mobile.png" alt="Accueil de la refonte Edreams Factory sur mobile" loading="lazy"></div></figure>
+  <figure class="stage case-hero" style="--flat:#123b2b"><div class="win"><div class="bar"><i></i><i></i><i></i><span>Edreams Factory — Accueil</span></div><img src="img/edreams-case/home-desktop.png" alt="Début de la page d’accueil de la refonte Edreams Factory sur ordinateur : « Le logiciel pensé pour votre entreprise, fabriqué par nos équipes. »" loading="lazy"></div></figure>
 
   <section class="sec" id="contexte">
     <div class="sec-title"><b>01</b><h2>Le point de <em>départ</em></h2></div>
@@ -417,12 +433,13 @@
     <div class="sec-body">
       <p>J’ai redessiné en vectoriel le logo d’origine, que j’avais créé, avec quelques ajustements pour qu’il reste net à toutes les tailles.</p>
       <div class="grid g2">
-        <figure><div class="logo-tile"><img src="img/edreams-case/logo-avant.webp" alt="Logo d’origine Edreams Factory" loading="lazy"></div><figcaption><b>Avant</b> · le logo d’origine</figcaption></figure>
+        <figure><div class="logo-tile svg light"><img src="img/edreams-case/logo-avant.png" alt="Logo d’origine Edreams Factory : EDREAMS en noir, puis Factory entre deux crochets vert menthe" loading="lazy"></div><figcaption><b>Avant</b> · le logo d’origine</figcaption></figure>
         <figure><div class="logo-tile svg"><img src="img/edreams-case/logo-apres.svg" alt="Logo redessiné Edreams Factory" loading="lazy"></div><figcaption><b>Après</b> · redessiné en tracés vectoriels</figcaption></figure>
       </div>
       <ul class="changes">
-        <li>Le A garde son triangle vert, seul détail de couleur dans le nom.</li>
-        <li>Un seul vert au lieu de deux, et des crochets plus épais pour rester lisibles en petit.</li>
+        <li>Le A prend un triangle vert, seul détail de couleur dans le nom.</li>
+        <li>Un vert plus franc que le menthe d’origine, et des crochets plus épais pour rester lisibles en petit.</li>
+        <li>Une version claire sur fond sombre, pour suivre la nouvelle direction artistique.</li>
         <li>Le F de Factory à la hauteur des capitales, pour qu’« Edreams » reste le mot principal.</li>
         <li>Des lettres dessinées en tracés, sans police&nbsp;: le logo s’affiche pareil partout.</li>
       </ul>
@@ -443,7 +460,7 @@
       <div class="type" style="margin-top:14px">
         <div><span class="sample f-inter">Logiciel sur mesure</span><small>Inter Tight<br>titres et texte</small></div>
         <div><span class="sample f-serif">pensé, fabriqué</span><small>Instrument Serif italique<br>les mots clés</small></div>
-        <div><span class="sample f-mono">[ 01 — Méthode ]</span><small>JetBrains Mono<br>les étiquettes</small></div>
+        <div><span class="sample f-label">[ 01 — Méthode ]</span><small>Inter Tight 500, en vert<br>les étiquettes</small></div>
       </div>
     </div>
   </section>
@@ -461,8 +478,23 @@
     </div>
   </section>
 
+  <section class="sec" id="design-system">
+    <div class="sec-title"><b>07</b><h2>Le design <em>system</em></h2></div>
+    <div class="sec-body">
+      <p>J’ai rassemblé les fondations et les composants de la refonte dans un design system court. Il reprend l’identité redessinée (le vert du A, les crochets) et donne à chaque couleur, chaque style de texte et chaque composant sa raison d’être.</p>
+      <ul class="changes">
+        <li>Trois principes tirés des objectifs de la refonte&nbsp;: compris en quelques secondes, des preuves là où naît le doute, un premier contact sans effort.</li>
+        <li>Un seul vert, décliné selon le fond&nbsp;: menthe sur le noir, vert d’eau sur le dégradé, vert forêt sur le papier. Chaque contraste est mesuré, y compris ceux qui ne passent pas.</li>
+        <li>Les vrais composants du site dans leurs états&nbsp;: bouton «&nbsp;Demander un devis&nbsp;», surlignage «&nbsp;fabriqué&nbsp;», carte de service, champ du rappel et choix du devis.</li>
+      </ul>
+      <p class="hint"><span class="h-hover">Faites défiler ou attrapez la fenêtre pour parcourir le design system.</span><span class="h-touch">Faites défiler dans la fenêtre pour parcourir le design system.</span></p>
+      <div class="stage" style="--flat:#123b2b"><div class="win"><div class="bar"><i></i><i></i><i></i><span>Edreams Factory — Design system</span></div><div class="screen" tabindex="0" aria-label="Design system de Edreams Factory, faire défiler"><img src="img/edreams-case/ds-full.jpg" alt="Page complète du design system d’Edreams Factory : principes, couleurs avec leurs contrastes, typographie Inter Tight et Instrument Serif, formes, composants et règles" loading="lazy"></div></div></div>
+      <div class="case-cta"><a href="ds/edreams-factory.html" target="_blank" rel="noopener">Ouvrir le design system <span aria-hidden="true">↗</span></a></div>
+    </div>
+  </section>
+
   <section class="sec" id="fabrication">
-    <div class="sec-title"><b>07</b><h2>La <em>fabrication</em></h2></div>
+    <div class="sec-title"><b>08</b><h2>La <em>fabrication</em></h2></div>
     <div class="sec-body">
       <p>J’ai codé la maquette moi-même, pour que le design et le site ne fassent qu’un.</p>
       <ul class="checks">
@@ -474,7 +506,7 @@
     </div>
   </section>
 
-  <a class="next" href="projet-filon.html"><div><span>Projet suivant</span><strong>Filon</strong></div><span class="arrow" aria-hidden="true">→</span></a>
+  <a class="next" href="projet-wecare.html"><div><span>Projet suivant</span><strong>Wecare</strong></div><span class="arrow" aria-hidden="true">→</span></a>
 </main>
 
 

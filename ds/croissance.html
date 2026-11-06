@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Landing croissance — Design system</title>
+<meta name="description" content="Le design system de la landing croissance : principes, couleurs, typographie, formes, composants et règles, avec la raison de chaque choix.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..900&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ds.css">
+<style>
+  :root {
+    --ds-bg: #ffffff; --ds-card: #ffffff; --ds-ink: #070707; --ds-soft: #3d3d42; --ds-muted: #5c5c61; --ds-line: #ebebeb;
+    --ds-accent: #36daff; --ds-accent-text: #0e233e; --ds-font: "Manrope", system-ui, sans-serif; --ds-display: "Archivo", system-ui, sans-serif; --ds-display-weight: 800; --ds-radius: 12px;
+    --ds-demo: #f5f5f5;
+    --cyan: #36daff; --night: #0e233e; --black: #070707;
+  }
+  .ds-head h1 { font-stretch: 106%; letter-spacing: -.02em; }
+  .ds-sec > h2 { font-weight: 600; font-stretch: 104%; letter-spacing: -.01em; }
+  .comp .demo.glow, .glow { background: radial-gradient(120% 90% at 85% 30%, #3b81f4 0, #1b4796 32%, #0e233e 52%, #070707 78%); }
+  /* the real components, with the values measured on the mockup */
+  .btn { display: inline-flex; align-items: center; gap: 12px; border: 0; border-radius: 999px; font-family: "Manrope", sans-serif; font-weight: 500; color: #070707; cursor: pointer; }
+  .btn-white { height: 57px; padding: 0 34px; background: #fafafa; font-size: 19px; }
+  .btn-cyan { height: 56px; padding: 0 40px; background: var(--cyan); font-size: 16px; }
+  .btn-arrow { height: 48px; padding: 0 4px 0 18px; background: var(--cyan); font-size: 16px; box-shadow: 0 0 0 2px rgba(255, 255, 255, .9); }
+  .btn-arrow i { width: 40px; height: 40px; border-radius: 50%; background: #070707; display: grid; place-items: center; }
+  .btn-arrow svg { width: 16px; height: 16px; }
+  .toggle { display: inline-flex; gap: 4px; padding: 2px; border-radius: 999px; background: #f5f5f5; }
+  .toggle span { height: 36px; padding: 0 clamp(12px, 3vw, 22px); white-space: nowrap; border-radius: 999px; display: grid; place-items: center; font-size: 16px; font-weight: 500; }
+  .toggle .on { background: var(--cyan); }
+  .plan { position: relative; width: 300px; padding: 22px; border-radius: 12px; background: #fff; border: 1px solid #ebebeb; box-shadow: 0 4px 10px rgba(0, 0, 0, .04); }
+  .plan .ico { width: 48px; height: 48px; border-radius: 10px; background: #070707; display: grid; place-items: center; }
+  .plan .ico svg { width: 22px; height: 22px; }
+  .plan .best { position: absolute; top: -14px; left: 170px; padding: 7px 12px; border-radius: 999px; background: #342de6; color: #fff; font-size: 14px; font-weight: 500; rotate: -4deg; }
+  .plan h4 { margin-top: 18px; font: 500 30px/1.2 "Archivo", sans-serif; font-stretch: 104%; }
+  .plan .price { margin-top: 14px; display: flex; align-items: baseline; gap: 10px; font: 700 40px/1 "Archivo", sans-serif; font-stretch: 104%; letter-spacing: -.02em; }
+  .plan .price small { font: 500 14px "Manrope", sans-serif; letter-spacing: 0; }
+  .plan .btn-cyan { width: 100%; justify-content: center; margin-top: 20px; height: 50px; padding: 0; }
+  .plan ul { list-style: none; padding: 0; margin-top: 18px; display: grid; gap: 12px; font-size: 14px; }
+  .plan li { display: flex; align-items: center; gap: 12px; }
+  .plan li i, .faq-q i { flex: none; }
+  .tick { width: 20px; height: 20px; border-radius: 50%; background: #070707; display: grid; place-items: center; }
+  .tick svg { width: 11px; height: 11px; }
+  .faq { width: 100%; display: grid; gap: 14px; padding: 28px; border-radius: 12px; }
+  .faq-item { position: relative; padding: 20px 24px; border-radius: 20px; background: #fff; border: 1px solid #e0e0e1; }
+  .faq-item.open { background: #fafafa; }
+  .faq-item.open::before { content: ""; position: absolute; left: -3px; top: 60px; width: 5px; height: 36px; border-radius: 3px; background: var(--cyan); }
+  .faq-q { display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 19px; font-weight: 500; color: #0c0c13; }
+  .faq-q svg { flex: none; width: 16px; height: 16px; }
+  .faq-a { margin-top: 10px; font-size: 15px; font-weight: 300; line-height: 1.8; color: #5c5c61; }
+  .xcard { position: relative; width: 100%; max-width: 380px; height: 230px; padding: 24px 26px; border-radius: 12px; background: var(--night); color: #fff; overflow: hidden; }
+  .xcard h4 { font: 500 26px/1.25 "Archivo", sans-serif; font-stretch: 104%; }
+  .xcard .btn-arrow { z-index: 1; position: absolute; left: 26px; bottom: 24px; box-shadow: 0 0 0 2px #0e233e, 0 0 0 4px var(--cyan); }
+  .xcard .bars { position: absolute; right: 22px; bottom: 0; display: flex; align-items: flex-end; gap: 7px; height: 120px; }
+  .xcard .bars b { width: 20px; border-radius: 6px 6px 0 0; background: #3b3a66; }
+  .xcard .bars b.hi { background: var(--cyan); }
+  .shadow-demo { width: 96px; height: 64px; border-radius: 12px; background: #fff; }
+</style>
+</head>
+<body>
+<main class="ds">
+  <header class="ds-head">
+    <span class="ds-eyebrow">Design system · version courte</span>
+    <h1>Votre croissance commence ici.</h1>
+    <p>Les fondations et les composants de ma landing pour une agence qui crée des systèmes d’acquisition sur mesure. Chaque choix a sa raison, écrite à côté. La maquette existe dans Figma&nbsp;: les valeurs sont relevées sur la maquette.</p>
+    <ul class="ds-toc"><li><a href="#principes">Principes</a></li><li><a href="#couleurs">Couleurs</a></li><li><a href="#typo">Typographie</a></li><li><a href="#formes">Formes</a></li><li><a href="#composants">Composants</a></li><li><a href="#regles">Règles</a></li></ul>
+  </header>
+
+  <section class="ds-sec" id="principes">
+    <h2><b>01</b>Principes</h2>
+    <p class="lead">Même sujet que ma landing violette, une ambiance plus sombre et plus «&nbsp;tech&nbsp;». Trois idées la tiennent.</p>
+    <div class="principles">
+      <div class="principle"><b>01</b><h3>Un hero qui marque</h3><p>Un titre très gras, une seule promesse, un seul bouton&nbsp;: obtenir un audit gratuit. Rien d’autre ne retient l’œil.</p></div>
+      <div class="principle"><b>02</b><h3>Montrer plutôt que lister</h3><p>Chaque service est une carte avec un morceau d’interface&nbsp;: un graphique, une landing, un tableau, un test A/B.</p></div>
+      <div class="principle"><b>03</b><h3>Comparer d’un coup d’œil</h3><p>Trois offres sur une grille simple, une bascule de durée, et une seule pastille pour la formule la plus choisie.</p></div>
+    </div>
+  </section>
+
+  <section class="ds-sec" id="couleurs">
+    <h2><b>02</b>Couleurs</h2>
+    <p class="lead">Du noir et du blanc pour la structure, un bleu pour la profondeur, un cyan vif réservé à l’action.</p>
+    <div class="colors">
+      <div class="color"><div class="chip" style="background:#070707;color:#fff"><span></span><span class="ratio">20,1:1</span></div><div class="info"><strong>Noir</strong><code>#070707</code><p>Fond du hero et de la FAQ, texte, icônes, pastilles des flèches.</p><p class="why">Un noir à peine levé, qui laisse la lueur bleue briller par contraste. C’est lui qui donne l’ambiance «&nbsp;tech&nbsp;».</p></div></div>
+      <div class="color"><div class="chip" style="background:#0e233e;color:#fff"><span></span><span class="ratio">15,8:1</span></div><div class="info"><strong>Bleu nuit</strong><code>#0E233E</code><p>Fond des cartes d’expertise.</p><p class="why">Plus clair que le noir, il détache les cartes de la page tout en gardant l’ambiance du hero.</p></div></div>
+      <div class="color"><div class="chip" style="background:#3b81f4;color:#fff"><span></span></div><div class="info"><strong>Bleu</strong><code>#3B81F4</code><p>La lueur du hero et de la FAQ.</p><p class="why">Une lumière plutôt qu’une couleur de fond&nbsp;: elle donne de la profondeur et rouvre la page dans la FAQ, comme un écho du début.</p></div></div>
+      <div class="color"><div class="chip" style="background:#36daff;color:#070707"><span></span><span class="ratio">12,1:1</span></div><div class="info"><strong>Cyan</strong><code>#36DAFF</code><p>Boutons, bascule active, barre de la question ouverte, barre mise en avant des graphiques.</p><p class="why">La couleur la plus vive de la page ne sert qu’à agir ou à montrer l’état actif&nbsp;: elle guide l’œil vers le prochain clic.</p></div></div>
+      <div class="color"><div class="chip" style="background:#342de6;color:#fff"><span></span><span class="ratio">7,9:1</span></div><div class="info"><strong>Bleu électrique</strong><code>#342DE6</code><p>La pastille «&nbsp;Best Deals&nbsp;» seulement.</p><p class="why">Une teinte qui n’apparaît nulle part ailleurs&nbsp;: la formule recommandée se repère sans avoir à lire.</p></div></div>
+      <div class="color"><div class="chip" style="background:#5c5c61;color:#fff"><span></span><span class="ratio">6,7:1</span></div><div class="info"><strong>Gris</strong><code>#5C5C61</code><p>Réponses de la FAQ, texte d’appui.</p><p class="why">La réponse recule derrière la question, qui reste en encre&nbsp;: on balaie les questions avant de lire.</p></div></div>
+    </div>
+    <h3 class="ds-sub">Contrastes vérifiés</h3>
+    <table class="contrast">
+      <thead><tr><th>Couple</th><th>Ratio</th><th>Verdict</th><th>Usage autorisé</th></tr></thead>
+      <tbody>
+        <tr><td><span class="pair" style="background:#070707;color:#fff">Aa</span></td><td>20,1:1</td><td class="ok">AAA</td><td>Tout texte sur le hero et la FAQ</td></tr>
+        <tr><td><span class="pair" style="background:#36daff;color:#070707">Aa</span></td><td>12,1:1</td><td class="ok">AAA</td><td>Libellés des boutons cyan</td></tr>
+        <tr><td><span class="pair" style="background:#0e233e;color:#fff">Aa</span></td><td>15,8:1</td><td class="ok">AAA</td><td>Titres des cartes d’expertise</td></tr>
+        <tr><td><span class="pair" style="background:#342de6;color:#fff">Aa</span></td><td>7,9:1</td><td class="ok">AAA</td><td>Pastille «&nbsp;Best Deals&nbsp;»</td></tr>
+        <tr><td><span class="pair" style="background:#fff;color:#5c5c61;border:1px solid #ebebeb">Aa</span></td><td>6,7:1</td><td class="ok">AA</td><td>Réponses, texte d’appui</td></tr>
+        <tr><td><span class="pair" style="background:#447dd9;color:#f6f2ff">Aa</span></td><td>3,7:1</td><td class="ok">AA grands textes</td><td>Titres sur la lueur bleue</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="ds-sec" id="typo">
+    <h2><b>03</b>Typographie</h2>
+    <p class="lead">Une grotesque large pour les titres, une sans-serif fine pour le texte.</p>
+    <p class="why">Les titres utilisent une grotesque élargie, très grasse dans le hero, plus posée dans les sections&nbsp;: sa largeur donne de l’assise à la promesse. La sans-serif, fine et régulière, laisse respirer le texte autour de ces titres lourds.</p>
+    <div class="types">
+      <div class="type-row"><div style="font:800 clamp(40px,6vw,100px)/1.08 Archivo,sans-serif;font-stretch:104%;letter-spacing:-.02em">Votre croissance commence ici.</div><div class="meta"><strong>Titre du hero</strong><code>grotesque large · très grasse · 100 px · interligne 1,08 · centré</code><p class="why">Il occupe presque toute la largeur&nbsp;: c’est la seule chose qu’on lit en arrivant.</p></div></div>
+      <div class="type-row"><div style="font:500 clamp(30px,3.6vw,48px)/1.17 Archivo,sans-serif;font-stretch:104%;letter-spacing:.005em">Des offres adaptées à votre croissance.</div><div class="meta"><strong>Titre de section</strong><code>grotesque large · moyenne · 48 px · interligne 1,17</code><p class="why">La même famille que le hero, en plus léger&nbsp;: la page garde une seule voix, et le hero reste seul à crier.</p></div></div>
+      <div class="type-row"><div style="font:700 46px/1 Archivo,sans-serif;font-stretch:104%;letter-spacing:-.02em">2000.00€ <span style="font:500 14px Manrope,sans-serif;letter-spacing:0">/Mois</span></div><div class="meta"><strong>Prix</strong><code>grotesque large · grasse · 46 px · unité en 14 px</code><p class="why">Le prix est la ligne la plus grasse de la carte&nbsp;: on compare les trois offres en ne lisant que lui.</p></div></div>
+      <div class="type-row"><div style="font-size:20px;font-weight:300;line-height:1.6;max-width:44ch">Nous créons des systèmes d’acquisition sur-mesure qui transforment votre trafic en clients qualifiés.</div><div class="meta"><strong>Sous-titre</strong><code>Sans-serif · 300 · 20 px · interligne 1,6</code><p class="why">Maigre sous un titre très gras&nbsp;: le contraste de graisse fait toute la hiérarchie, sans changer de couleur.</p></div></div>
+      <div class="type-row"><div style="font-size:16px;line-height:1.5;max-width:52ch">Choisissez le niveau d’accompagnement qui correspond à vos objectifs et à votre ambition.</div><div class="meta"><strong>Texte courant</strong><code>Sans-serif · 400 · 14 à 16 px · interligne 1,5</code><p class="why">Court et régulier&nbsp;: sur une landing, le texte confirme le titre, il ne le remplace pas.</p></div></div>
+    </div>
+  </section>
+
+  <section class="ds-sec" id="formes">
+    <h2><b>04</b>Formes</h2>
+    <div class="tokens">
+      <div class="token-card"><h3>Rayons</h3><div class="shapes"><div><i style="border-radius:10px;width:48px;height:48px"></i>10</div><div><i style="border-radius:12px"></i>12</div><div><i style="border-radius:20px"></i>20</div><div><i style="border-radius:999px;width:96px"></i>pilule</div></div><p class="why">10 pour les pastilles d’icône, 12 pour les cartes et les grands blocs, 20 pour les questions. La pilule est réservée à ce qui se clique.</p></div>
+      <div class="token-card"><h3>Ombres</h3><div class="shapes"><div><i class="shadow-demo" style="border:1px solid #ebebeb;box-shadow:0 4px 10px rgba(0,0,0,.04)"></i>carte d’offre</div></div><p class="why">Un filet gris et une ombre à peine visible&nbsp;: sur le blanc, les offres se détachent sans voler la vedette aux prix.</p></div>
+      <div class="token-card"><h3>Largeur</h3><div class="scale"><div><i style="width:100%"></i></div><div>1 280 px · expertise</div><div><i style="width:87.5%"></i></div><div>1 120 px · offres</div></div><p class="why">Les offres se resserrent&nbsp;: les prix sont plus proches les uns des autres, l’œil compare sans voyager.</p></div>
+    </div>
+  </section>
+
+  <section class="ds-sec" id="composants">
+    <h2><b>05</b>Composants</h2>
+    <div class="comps">
+      <div class="comp wide"><div class="demo glow"><figure><button class="btn btn-white" type="button">Obtenir un audit gratuit</button><figcaption style="color:#d6d6e4">hero</figcaption></figure><figure><button class="btn btn-arrow" type="button">Contactez-nous <i><svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="1.6" aria-hidden="true"><path d="M4 12 12 4M5.5 4H12v6.5"/></svg></i></button><figcaption style="color:#d6d6e4">navigation</figcaption></figure><figure><button class="btn btn-cyan" type="button">Démarrer maintenant</button><figcaption style="color:#d6d6e4">offre</figcaption></figure></div>
+        <div class="text"><h3>Boutons</h3><p>Pilule blanche de 57&nbsp;px pour l’unique bouton du hero. Ailleurs, pilule cyan, avec ou sans pastille noire fléchée.</p><p class="why">Dans le hero, le blanc est la tache la plus claire de l’écran&nbsp;: impossible de le manquer. Le cyan prend le relais partout ailleurs, toujours avec un libellé noir lisible à 12,1:1.</p></div></div>
+      <div class="comp"><div class="demo center"><div class="toggle"><span class="on">Mensuel</span><span>Trimestriel</span><span>Annuel (-15%)</span></div></div><div class="text"><h3>Bascule de durée</h3><p>Piste gris clair, pilule cyan sur la durée choisie.</p><p class="why">Les trois durées restent visibles&nbsp;: on voit tout de suite que l’annuel fait gagner 15&nbsp;%, sans ouvrir de menu.</p></div></div>
+      <div class="comp"><div class="demo center" style="padding-top:44px"><div class="plan"><span class="best">Best Deals</span><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#36daff" stroke-width="1.6" aria-hidden="true"><path d="M12 3.5 14.2 5l2.6-.2.8 2.5 2.1 1.6-.9 2.5.9 2.5-2.1 1.6-.8 2.5-2.6-.2L12 20.5 9.8 19l-2.6.2-.8-2.5-2.1-1.6.9-2.5-.9-2.5 2.1-1.6.8-2.5 2.6.2z"/><path d="m9 12 2 2 4-4"/></svg></div><h4>Growth Plan</h4><div class="price">2000.00€ <small>/Mois</small></div><button class="btn btn-cyan" type="button">Commencer maintenant</button><ul><li><i class="tick"><svg viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><path d="m2.5 6.3 2.3 2.2 4.7-5"/></svg></i>Stratégie complète d’acquisition</li><li><i class="tick"><svg viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><path d="m2.5 6.3 2.3 2.2 4.7-5"/></svg></i>A/B testing continu</li></ul></div></div><div class="text"><h3>Carte d’offre</h3><p>Pastille d’icône noire, nom, prix, bouton cyan pleine largeur, liste cochée.</p><p class="why">Les trois cartes suivent le même ordre&nbsp;: on compare ligne à ligne. La pastille penchée signale la formule la plus choisie sans changer la carte.</p></div></div>
+      <div class="comp"><div class="demo center glow"><div class="faq" style="padding:0"><div class="faq-item open"><div class="faq-q">Qu’est-ce qui nous différencie des autres agences&nbsp;? <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m3.5 10 4.5-4.5 4.5 4.5"/></svg></div><p class="faq-a">Contrairement aux agences classiques, nous construisons des systèmes d’acquisition complets, basés sur la data et l’optimisation continue. Notre priorité&nbsp;: des résultats mesurables, pas des promesses.</p></div><div class="faq-item"><div class="faq-q">Proposez-vous un audit avant de commencer&nbsp;? <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m3.5 6 4.5 4.5 4.5-4.5"/></svg></div></div></div></div><div class="text"><h3>Question de FAQ</h3><p>Carte blanche au rayon 20, chevron à droite. Ouverte, elle passe en gris très clair et prend une barre cyan à gauche.</p><p class="why">La barre cyan dit «&nbsp;vous lisez ici&nbsp;» sans changer la taille du texte. La réponse en gris maigre reste sous la question.</p></div></div>
+      <div class="comp"><div class="demo center" style="background:#fff"><div class="xcard"><h4>Acquisition<br>Payante</h4><div class="bars" aria-hidden="true"><b style="height:46%"></b><b style="height:66%"></b><b style="height:30%"></b><b class="hi" style="height:100%"></b><b style="height:56%"></b><b style="height:82%"></b></div><button class="btn btn-arrow" type="button">See More <i><svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="1.6" aria-hidden="true"><path d="M4 12 12 4M5.5 4H12v6.5"/></svg></i></button></div></div><div class="text"><h3>Carte d’expertise</h3><p>Fond bleu nuit, titre blanc sur deux lignes, morceau d’interface qui déborde, bouton «&nbsp;See More&nbsp;».</p><p class="why">Montrer un graphique plutôt qu’une liste de mots-clés&nbsp;: le visiteur voit à quoi ressemble le travail. La barre cyan pointe le résultat.</p></div></div>
+    </div>
+  </section>
+
+  <section class="ds-sec" id="regles">
+    <h2><b>06</b>Règles</h2>
+    <div class="rules">
+      <div class="do"><h3>À faire</h3><ul><li>Un seul bouton dans le hero.</li><li>Le cyan pour l’action et l’état actif, avec un libellé noir.</li><li>La même structure pour les trois offres, dans le même ordre.</li><li>Garder les textes fins sur la partie sombre de la lueur.</li></ul></div>
+      <div class="dont"><h3>À éviter</h3><ul><li>Du texte cyan sur fond blanc.</li><li>Le bleu électrique ailleurs que sur la pastille «&nbsp;Best Deals&nbsp;».</li><li>Un deuxième titre aussi gras que le hero.</li><li>Une liste de services sans visuel.</li></ul></div>
+    </div>
+  </section>
+
+  <p class="ds-foot">Landing croissance · design system conçu par Anissa B. Le Prunenec · Just One Studio</p>
+</main>
+</body>
+</html>

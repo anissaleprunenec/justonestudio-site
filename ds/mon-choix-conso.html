@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Landings avant / après — Design system</title>
+<meta name="description" content="Le design system des landings Mon Choix Conso et Expert Rénovation : les règles communes (formulaire, confiance, boutons) et les couleurs de chaque marque, avec la raison de chaque choix.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Quicksand:wght@500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ds.css">
+<style>
+  :root {
+    --ds-bg: #ffffff; --ds-card: #ffffff; --ds-ink: #081732; --ds-soft: #3f4a5c; --ds-muted: #5d6676; --ds-line: #e6e9ee;
+    --ds-accent: #058280; --ds-accent-text: #058280; --ds-font: "DM Sans", system-ui, sans-serif; --ds-display-weight: 700; --ds-radius: 16px; --ds-demo: #f7f8fa;
+  }
+  .mc { font-family: "Quicksand", sans-serif; }
+  .lil { font-family: "Lilita One", sans-serif; font-weight: 400; }
+  .brand-tag { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+  .brand-tag::before { content: ""; width: 12px; height: 12px; border-radius: 50%; background: var(--c); }
+  .duo { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .duo > div { display: grid; gap: 14px; align-content: start; }
+  .duo .colors { grid-template-columns: 1fr; }
+  .color .chip { height: 72px; }
+  @media (max-width: 860px) { .duo { grid-template-columns: 1fr; } }
+
+  /* Mon Choix Conso, values measured on the mockup */
+  .mc-btn { display: inline-flex; align-items: center; justify-content: center; height: 58px; padding: 0 46px; border-radius: 14px; border: 0; background: #058280; color: #fff; font: 400 20px/1 "Lilita One", sans-serif; }
+  .mc-btn.sm { height: 38px; padding: 0 56px; border-radius: 10px; font: 600 14px/1 "Quicksand", sans-serif; }
+  .mc-btn[disabled] { background: #a9daca; color: #fff; cursor: not-allowed; }
+  .mc-quiz { width: 330px; padding: 22px 20px 24px; border-radius: 20px; background: #fff; box-shadow: 0 10px 30px rgba(8, 23, 50, .08); font-family: "Quicksand", sans-serif; text-align: center; }
+  .mc-quiz .bar { height: 8px; border-radius: 999px; background: #ededed; }
+  .mc-quiz .bar i { display: block; width: 14%; height: 100%; border-radius: inherit; background: #54b695; }
+  .mc-quiz small { display: block; margin-top: 8px; font-size: 11px; color: #707580; }
+  .mc-quiz h4 { margin-top: 12px; font: 700 16px "Quicksand", sans-serif; color: #1d2f2f; }
+  .mc-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+  .mc-opts span { display: grid; gap: 8px; justify-items: center; padding: 18px 8px 14px; border-radius: 12px; border: 1.5px solid #e4e4e4; font-size: 13px; font-weight: 600; color: #1d2f2f; }
+  .mc-info { margin-top: 12px; padding: 9px 12px; border-radius: 10px; background: #f0f4f2; font-size: 11px; line-height: 1.45; text-align: left; color: #1d2f2f; }
+  .mc-info b { color: #058280; font-weight: 600; }
+  .mc-quiz .mc-btn { margin-top: 16px; }
+  .mc-list { display: grid; gap: 12px; font: 500 15px "Quicksand", sans-serif; color: #1d2f2f; list-style: none; padding: 0; }
+  .mc-list li { display: flex; gap: 12px; align-items: center; }
+  .mc-pill { display: inline-flex; gap: 6px; align-items: center; padding: 5px 12px; border-radius: 999px; background: #dfefee; color: #3d8093; font: 500 12.5px "Quicksand", sans-serif; }
+  .mc-card { width: 230px; padding: 26px 18px 24px; border-radius: 16px; background: #fff; box-shadow: 0 10px 30px rgba(8, 23, 50, .08); text-align: center; font-family: "Quicksand", sans-serif; }
+  .mc-card .tile { display: grid; place-items: center; width: 50px; height: 50px; margin: 0 auto; border-radius: 10px; background: #e6f2f2; color: #058280; font: 700 22px "Quicksand", sans-serif; box-shadow: 0 0 0 5px #fff, 0 4px 14px rgba(8, 23, 50, .1); }
+  .mc-card strong { display: block; margin-top: 22px; font: 400 17px "Lilita One", sans-serif; color: #01313d; }
+  .mc-card p { margin-top: 8px; font-size: 13px; line-height: 1.45; color: #1d2f2f; }
+
+  /* Expert Rénovation, values measured on the mockup */
+  .er-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 40px; padding: 0 28px; border-radius: 6px; border: 0; background: #009ee8; color: #fff; font: 700 14px/1 "DM Sans", sans-serif; }
+  .er-btn.orange { background: #e95d2a; }
+  .er-form { width: 330px; padding: 20px 20px 22px; border-radius: 10px; background: #fff; box-shadow: 0 16px 40px rgba(22, 37, 94, .18); font-family: "DM Sans", sans-serif; }
+  .er-form h4 { text-align: center; font-size: 18px; font-weight: 700; color: #1c223a; }
+  .er-form h4 em { font-style: normal; color: #009ee8; }
+  .er-form .sub { margin-top: 4px; text-align: center; font-size: 11px; color: #8d98aa; }
+  .er-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 14px; }
+  .er-fields span { padding: 9px 10px; border-radius: 6px; border: 1px solid #e3e6ec; font-size: 11.5px; color: #8d8d95; }
+  .er-fields .full { grid-column: 1 / -1; }
+  .er-fields .sel { display: flex; justify-content: space-between; color: #34374a; }
+  .er-check { display: flex; gap: 8px; margin-top: 10px; font-size: 10.5px; line-height: 1.4; color: #34374a; }
+  .er-check i { flex: none; width: 13px; height: 13px; margin-top: 1px; border: 1px solid #8d98aa; border-radius: 2px; }
+  .er-check a { color: #009ee8; }
+  .er-form .er-btn { width: 100%; margin-top: 14px; }
+  .er-hero { padding: 22px; border-radius: 12px; background: linear-gradient(90deg, #16255e, #1b2a63 70%, rgba(27, 42, 99, .85)); display: grid; gap: 14px; }
+  .er-pill { justify-self: start; padding: 5px 11px; border-radius: 999px; background: #00abff; color: #fff; font: 700 10.5px "DM Sans", sans-serif; letter-spacing: .03em; text-transform: uppercase; }
+  .er-pill.or { background: #fde9e1; color: #c2410c; }
+  .er-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .er-chips span { padding: 6px 12px; border-radius: 999px; background: rgba(255, 255, 255, .12); border: 1px solid rgba(255, 255, 255, .18); color: #fff; font: 500 12px "DM Sans", sans-serif; }
+  .er-steps { display: flex; flex-wrap: wrap; gap: 18px; color: #fff; font: 500 12px/1.3 "DM Sans", sans-serif; }
+  .er-steps span { display: flex; gap: 8px; align-items: center; max-width: 140px; }
+  .er-steps b { flex: none; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: #009ee8; font-size: 11px; }
+  .er-aide { width: 150px; padding: 16px 10px 12px; border-radius: 10px; background: #fff; border: 1px solid #e6e9ee; text-align: center; font-family: "DM Sans", sans-serif; }
+  .er-aide i { display: grid; place-items: center; width: 30px; height: 30px; margin: 0 auto; border-radius: 8px; background: #fde9e1; color: #e95d2a; font: 700 15px "DM Sans", sans-serif; font-style: normal; }
+  .er-aide strong { display: block; margin-top: 10px; font-size: 12px; color: #1c223a; }
+  .er-aide small { display: block; margin-top: 4px; font-size: 10.5px; color: #5d6676; }
+  .demo figure, .demo figure > * { max-width: 100%; } .demo figure { grid-template-columns: minmax(0, auto); }
+  .stack { display: grid; gap: 14px; justify-items: center; }
+</style>
+</head>
+<body>
+<main class="ds">
+  <header class="ds-head">
+    <span class="ds-eyebrow">Design system · version courte</span>
+    <h1>Deux marques, un même parcours</h1>
+    <p>Les règles communes et les couleurs des deux landings que j’ai refaites pour Leads Studio, Mon Choix Conso et Expert Rénovation, dans leur version «&nbsp;après&nbsp;». Chaque choix a sa raison, écrite à côté. Les pages sont des maquettes&nbsp;: les valeurs sont relevées sur la maquette, à 1&nbsp;440&nbsp;px de large.</p>
+    <ul class="ds-toc"><li><a href="#principes">Principes</a></li><li><a href="#couleurs">Couleurs</a></li><li><a href="#typo">Typographie</a></li><li><a href="#formes">Formes</a></li><li><a href="#composants">Composants</a></li><li><a href="#regles">Règles</a></li></ul>
+  </header>
+
+  <section class="ds-sec" id="principes">
+    <h2><b>01</b>Principes</h2>
+    <p class="lead">Les deux pages ont le même but&nbsp;: qu’un visiteur remplisse le formulaire. Trois idées s’appliquent aux deux marques.</p>
+    <div class="principles">
+      <div class="principle"><b>01</b><h3>Le formulaire d’abord</h3><p>Il est visible dès l’arrivée, à droite d’une promesse claire et de trois arguments. On n’a pas à le chercher sous un grand bloc de couleur.</p></div>
+      <div class="principle"><b>02</b><h3>Rassurer avant de demander</h3><p>Garanties en cartes, étapes numérotées, mentions légales complètes mais lisibles&nbsp;: on laisse son numéro à une page qui inspire confiance.</p></div>
+      <div class="principle"><b>03</b><h3>Une couleur, un rôle</h3><p>Une couleur forte pour la marque, une seule couleur pour les boutons, et un fond clair qui laisse respirer le formulaire.</p></div>
+    </div>
+  </section>
+
+  <section class="ds-sec" id="couleurs">
+    <h2><b>02</b>Couleurs</h2>
+    <p class="lead">La même logique, deux palettes. Les contrastes sont calculés avec les valeurs mesurées.</p>
+    <div class="duo">
+      <div>
+        <span class="brand-tag" style="--c:#058280">Mon Choix Conso</span>
+        <div class="colors">
+          <div class="color"><div class="chip" style="background:#058280;color:#fff"><span>vert canard</span><span class="ratio">4,7:1</span></div><div class="info"><strong>Vert canard</strong><code>#058280</code><p>Logo, boutons, mots clés des titres.</p><p class="why">Il remplace le bleu ciel et le jaune d’origine&nbsp;: un vert profond paraît plus sûr pour une assurance, et passe le seuil AA en texte blanc.</p></div></div>
+          <div class="color"><div class="chip" style="background:#54b695;color:#081732"><span>menthe</span></div><div class="info"><strong>Menthe</strong><code>#54B695 · désactivé #A9DACA</code><p>Barre de progression, icônes des options, bouton désactivé.</p><p class="why">La version claire du vert canard&nbsp;: elle accompagne le questionnaire sans jamais porter de texte.</p></div></div>
+          <div class="color"><div class="chip" style="background:#081732;color:#fff"><span>encre</span><span class="ratio">17,8:1</span></div><div class="info"><strong>Encre</strong><code>#081732 · sous-titres #1D2F2F</code><p>Titres de section et textes.</p><p class="why">Un bleu presque noir, plus doux que le noir, qui fait ressortir les mots en vert canard dans un même titre.</p></div></div>
+          <div class="color"><div class="chip" style="background:#01313d;color:#fff"><span>vert pétrole</span><span class="ratio">13,9:1</span></div><div class="info"><strong>Vert pétrole</strong><code>#01313D · pied #1F2A37 et #29333F</code><p>Bloc des avantages du partenaire, bandeau d’offres.</p><p class="why">Un seul bloc foncé au milieu de la page&nbsp;: il marque le résumé des avantages, celui qu’on relit avant de remplir.</p></div></div>
+          <div class="color"><div class="chip" style="background:linear-gradient(180deg,#fffefd,#fff9f4);color:#081732;border-bottom:1px solid #e6e9ee"><span>crème</span></div><div class="info"><strong>Blanc crème</strong><code>#FFFEFD → #FFF9F4</code><p>Fond du hero et des sections, en léger dégradé.</p><p class="why">Une chaleur discrète qui adoucit le ton d’une page d’assurance&nbsp;; les cartes blanches s’en détachent.</p></div></div>
+        </div>
+      </div>
+      <div>
+        <span class="brand-tag" style="--c:#009ee8">Expert Rénovation</span>
+        <div class="colors">
+          <div class="color"><div class="chip" style="background:#009ee8;color:#fff"><span>bleu vif</span></div><div class="info"><strong>Bleu vif</strong><code>#009EE8</code><p>Boutons, étiquettes, chiffres des étapes, mot clé du formulaire.</p><p class="why">Le bleu de l’air et de l’énergie propre, la seule couleur qui appelle à cliquer.</p></div></div>
+          <div class="color"><div class="chip" style="background:#16255e;color:#fff"><span>bleu marine</span><span class="ratio">14,4:1</span></div><div class="info"><strong>Bleu marine</strong><code>#16255E</code><p>Voile du hero sur la photo, pied de page.</p><p class="why">Il remplace le mélange de bleu et d’orange d’origine&nbsp;: un ton sérieux pour une dépense de plusieurs milliers d’euros, et un fond sûr pour le texte blanc sur la photo.</p></div></div>
+          <div class="color"><div class="chip" style="background:#1c223a;color:#fff"><span>encre</span><span class="ratio">14,8:1</span></div><div class="info"><strong>Encre</strong><code>#1C223A</code><p>Titres et textes sur fond clair.</p><p class="why">Proche du bleu marine, elle garde la même famille de couleur du hero jusqu’au bas de la page.</p></div></div>
+          <div class="color"><div class="chip" style="background:#e95d2a;color:#fff"><span>orange</span></div><div class="info"><strong>Orange</strong><code>#E95D2A</code><p>Bloc des aides financières seulement.</p><p class="why">Les aides sont l’argument qui décide&nbsp;: une couleur à part les signale, et on ne la voit nulle part ailleurs.</p></div></div>
+          <div class="color"><div class="chip" style="background:#f7f8fa;color:#1c223a;border-bottom:1px solid #e6e9ee"><span>gris clair</span></div><div class="info"><strong>Gris clair</strong><code>#F7F8FA</code><p>Fond des sections.</p><p class="why">Plus froid que le crème de Mon Choix Conso, il va avec le bleu et fait ressortir les cartes blanches.</p></div></div>
+        </div>
+      </div>
+    </div>
+    <h3 class="ds-sub">Contrastes vérifiés</h3>
+    <table class="contrast">
+      <thead><tr><th>Couple</th><th>Ratio</th><th>Verdict</th><th>Usage autorisé</th></tr></thead>
+      <tbody>
+        <tr><td><span class="pair" style="background:#fff;color:#081732;border:1px solid #e6e9ee">Aa</span></td><td>17,8:1</td><td class="ok">AAA</td><td>Tout texte (Mon Choix Conso)</td></tr>
+        <tr><td><span class="pair" style="background:#f7f8fa;color:#1c223a;border:1px solid #e6e9ee">Aa</span></td><td>14,8:1</td><td class="ok">AAA</td><td>Tout texte (Expert Rénovation)</td></tr>
+        <tr><td><span class="pair" style="background:#058280;color:#fff">Aa</span></td><td>4,7:1</td><td class="ok">AA</td><td>Boutons, mots clés des titres</td></tr>
+        <tr><td><span class="pair" style="background:#fff9f4;color:#058280;border:1px solid #e6e9ee">Aa</span></td><td>4,46:1</td><td class="ok">AA grands textes</td><td>Titres en vert sur le crème du hero</td></tr>
+        <tr><td><span class="pair" style="background:#16255e;color:#fff">Aa</span></td><td>14,4:1</td><td class="ok">AAA</td><td>Titre du hero, pied de page</td></tr>
+        <tr><td><span class="pair" style="background:#e95d2a;color:#fff">Aa</span></td><td>3,5:1</td><td class="ok">AA grands textes</td><td>Montant des aides en grand</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="ds-sec" id="typo">
+    <h2><b>03</b>Typographie</h2>
+    <p class="lead">Chaque marque a sa voix&nbsp;: une display très ronde et une sans-serif arrondie pour Mon Choix Conso, une sans-serif géométrique seule pour Expert Rénovation.</p>
+    <p class="why">Mon Choix Conso vend une assurance pour animaux&nbsp;: une police très ronde pour les titres rend la page chaleureuse, et le texte, rond lui aussi, reste lisible en petit. Expert Rénovation parle de travaux et de prix&nbsp;: une sans-serif nette et géométrique donne un ton d’expert, et ses chiffres restent clairs dans les montants.</p>
+    <div class="types">
+      <div class="type-row"><div class="lil" style="font-size:clamp(30px,3.4vw,40px);line-height:1.1;color:#058280">Assurance pour animaux</div><div class="meta"><strong>Titre du hero · Mon Choix Conso</strong><code>Display ronde · 400 · ≈ 40 px · vert canard</code><p class="why">Le produit d’abord, en vert, puis la promesse en encre juste dessous («&nbsp;Taux de remboursement jusqu’à 100&nbsp;%&nbsp;», ≈ 32&nbsp;px).</p></div></div>
+      <div class="type-row"><div class="lil" style="font-size:clamp(28px,3vw,36px);line-height:1.1;color:#081732">Votre offre en <span style="color:#058280">3 étapes</span></div><div class="meta"><strong>Titre de section · Mon Choix Conso</strong><code>Display ronde · 400 · ≈ 36 px · encre + vert</code><p class="why">Un ou deux mots en vert dans chaque titre&nbsp;: l’œil retient le bénéfice même en survolant la page.</p></div></div>
+      <div class="type-row"><div class="mc" style="font-size:15px;font-weight:500;color:#1d2f2f">Aucun surcoût lié à l’âge, la race et/ou la catégorie</div><div class="meta"><strong>Texte · Mon Choix Conso</strong><code>Sans-serif arrondie · 500 · ≈ 15 px</code><p class="why">Ronde comme les titres, mais assez ouverte pour les listes d’arguments et les mentions.</p></div></div>
+      <div class="type-row"><div style="font-size:clamp(28px,3.4vw,44px);font-weight:700;line-height:1.25;letter-spacing:-.02em;color:#1c223a">Combien peut coûter l’installation d’une Pompe à Chaleur</div><div class="meta"><strong>Titre du hero · Expert Rénovation</strong><code>Sans-serif géométrique · 700 · ≈ 44 px · blanc sur marine</code><p class="why">Une question sur le prix, la première que se pose le visiteur&nbsp;: le titre parle comme lui.</p></div></div>
+      <div class="type-row"><div style="font-size:18px;font-weight:700;color:#1c223a">Demandez votre <span style="color:#009ee8">étude gratuite</span></div><div class="meta"><strong>Titre du formulaire · Expert Rénovation</strong><code>Sans-serif géométrique · 700 · ≈ 17 px · encre + bleu vif</code><p class="why">Le mot «&nbsp;gratuite&nbsp;» prend la couleur du bouton&nbsp;: c’est la raison de remplir.</p></div></div>
+    </div>
+  </section>
+
+  <section class="ds-sec" id="formes">
+    <h2><b>04</b>Formes</h2>
+    <div class="tokens">
+      <div class="token-card"><h3>Rayons</h3><div class="shapes"><div><i style="border-radius:6px"></i>6 ER</div><div><i style="border-radius:10px"></i>10</div><div><i style="border-radius:14px"></i>14 MCC</div><div><i style="border-radius:20px"></i>20</div><div><i style="border-radius:999px;width:96px"></i>pilule</div></div><p class="why">Mon Choix Conso arrondit davantage (≈ 14 pour les boutons, ≈ 20 pour le questionnaire) pour rester douce&nbsp;; Expert Rénovation reste plus droite (≈ 6 et ≈ 10), plus technique. La pilule sert aux étiquettes dans les deux marques.</p></div>
+      <div class="token-card"><h3>Ombres</h3><div class="shapes"><div><i style="width:96px;height:64px;border:0;border-radius:14px;box-shadow:0 10px 30px rgba(8,23,50,.08)"></i>carte</div><div><i style="width:96px;height:64px;border:0;border-radius:10px;box-shadow:0 16px 40px rgba(22,37,94,.18)"></i>formulaire</div></div><p class="why">Une ombre large et très légère sous les cartes, plus marquée sous le formulaire&nbsp;: c’est l’élément qui flotte le plus haut, celui qu’on doit remplir.</p></div>
+      <div class="token-card"><h3>Largeur et rythme</h3><div class="scale"><div><i style="width:100%"></i></div><div>≈ 1 120 px de contenu</div><div><i style="width:46%"></i></div><div>promesse à gauche</div><div><i style="width:40%"></i></div><div>formulaire à droite</div></div><p class="why">Le hero se lit en deux colonnes&nbsp;: ce qu’on gagne à gauche, ce qu’il faut faire à droite. Les cartes s’alignent ensuite par trois ou par quatre.</p></div>
+    </div>
+  </section>
+
+  <section class="ds-sec" id="composants">
+    <h2><b>05</b>Composants</h2>
+    <div class="comps">
+      <div class="comp wide"><div class="demo center" style="align-items:flex-start">
+        <figure><div class="mc-quiz"><div class="bar"><i></i></div><small>Étape 1 sur 8</small><h4>De quelle espèce s’agit-il&nbsp;?</h4><div class="mc-opts"><span><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#54b695" stroke-width="1.8" aria-hidden="true"><path d="M5 5c-2 1-2 5 0 6M19 5c2 1 2 5 0 6"/><circle cx="12" cy="13" r="7"/><circle cx="9.5" cy="12" r=".6" fill="#54b695"/><circle cx="14.5" cy="12" r=".6" fill="#54b695"/><path d="M11 16h2"/></svg>Chien</span><span><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#54b695" stroke-width="1.8" aria-hidden="true"><path d="M5 4l3 4h8l3-4v9a7 7 0 0 1-14 0z"/><circle cx="9.5" cy="12" r=".6" fill="#54b695"/><circle cx="14.5" cy="12" r=".6" fill="#54b695"/></svg>Chat</span></div><p class="mc-info"><b>La force de nos partenaires&nbsp;:</b> un prix unique, peu importe l’âge jusqu’à 10&nbsp;ans ou la race de votre animal.</p><button class="mc-btn sm" type="button" disabled>Suivant</button></div><figcaption>Mon Choix Conso · questionnaire, «&nbsp;Suivant&nbsp;» désactivé</figcaption></figure>
+        <figure><div class="er-form"><h4>Demandez votre <em>étude gratuite</em></h4><p class="sub">Sans engagement — Réponse rapide</p><div class="er-fields"><span>Nom *</span><span>Prénom *</span><span>Code postal *</span><span>Ville *</span><span class="full">Téléphone *</span><span class="full">Email *</span><span class="full sel">Type de chauffage actuel *<b aria-hidden="true">⌄</b></span></div><p class="er-check"><i></i><span>Je consens au traitement de mes données personnelles en application de la <a href="#composants">politique de confidentialité</a></span></p><button class="er-btn" type="button">Envoyer ma demande</button></div><figcaption>Expert Rénovation · formulaire complet</figcaption></figure>
+      </div>
+        <div class="text"><h3>Formulaire</h3><p>Une carte blanche à droite du titre, dans les deux marques. Mon Choix Conso pose une question par étape, avec une barre de progression et un bouton désactivé tant qu’aucune réponse n’est choisie. Expert Rénovation regroupe tous les champs, avec le consentement juste avant le bouton.</p><p class="why">Une question à la fois rend l’assurance simple à commencer&nbsp;; pour une étude de travaux, voir tous les champs d’un coup dit combien de temps cela prend. Dans les deux cas, une phrase de réassurance («&nbsp;Sans engagement&nbsp;», «&nbsp;La force de nos partenaires&nbsp;») se place au cœur du formulaire, là où l’on hésite.</p></div></div>
+      <div class="comp"><div class="demo center"><figure><button class="mc-btn" type="button">Je découvre mes garanties</button><figcaption>Mon Choix Conso</figcaption></figure><figure><button class="er-btn" type="button">Envoyer ma demande</button><figcaption>Expert Rénovation</figcaption></figure><figure><button class="er-btn orange" type="button">Demander un devis <span aria-hidden="true">→</span></button><figcaption>section des aides</figcaption></figure></div><div class="text"><h3>Boutons</h3><p>Un bouton plein, toujours de la couleur d’action de la marque. Le libellé dit ce qui se passe après le clic.</p><p class="why">Un bouton revient après chaque grand bloc d’arguments&nbsp;: le visiteur convaincu n’a pas à remonter. L’orange n’apparaît que dans la section des aides, pour que le bouton y reprenne l’argument qui l’entoure.</p></div></div>
+      <div class="comp"><div class="demo center"><figure><ul class="mc-list"><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#058280" stroke-width="2.6" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg>Aucun surcoût lié à l’âge, la race et/ou la catégorie</li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#058280" stroke-width="2.6" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg>0 délai de carence pour les accidents</li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#058280" stroke-width="2.6" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg>Garantie assistance partout dans le monde</li></ul><figcaption>Mon Choix Conso</figcaption></figure><figure><div class="er-hero"><div class="er-chips"><span>Guide des prix estimatifs</span><span>Réponse rapide</span><span>Sans engagement</span></div><div class="er-steps"><span><b>1</b>Remplissez le formulaire</span><span><b>2</b>Recevez votre étude gratuite</span><span><b>3</b>Réalisez vos économies</span></div></div><figcaption>Expert Rénovation</figcaption></figure></div><div class="text"><h3>Arguments du hero</h3><p>Trois arguments sous le titre&nbsp;: une liste cochée chez Mon Choix Conso, des pastilles et trois étapes numérotées chez Expert Rénovation.</p><p class="why">Trois, pas plus&nbsp;: c’est ce qu’on lit d’un coup d’œil avant de décider de remplir. Les étapes répondent à la question «&nbsp;et après&nbsp;?&nbsp;».</p></div></div>
+      <div class="comp"><div class="demo center"><figure><div class="mc-card"><span class="tile">€</span><strong>Prix unique garanti</strong><p>Pas de surprime liée à l’âge ou à la race de votre animal</p></div><figcaption>Mon Choix Conso</figcaption></figure><figure><div class="er-aide"><i>$</i><strong>Jusqu’à 5&nbsp;000&nbsp;€(2)</strong><small>MaPrimeRénov’</small></div><figcaption>Expert Rénovation</figcaption></figure></div><div class="text"><h3>Carte de garantie</h3><p>Une icône dans un carré teinté, un titre court, une ligne d’explication. Les cartes vont par trois.</p><p class="why">Chaque garantie a sa carte&nbsp;: on peut les comparer, et aucune promesse ne se perd dans un paragraphe. Le renvoi (2) pointe vers les mentions, pour rester honnête sur les montants.</p></div></div>
+      <div class="comp"><div class="demo center"><figure><span class="mc-pill">✓ Avantage exclusif</span><figcaption>Mon Choix Conso</figcaption></figure><figure><span class="er-pill">Offre pompe à chaleur air/eau</span><figcaption>Expert Rénovation</figcaption></figure><figure><span class="er-pill or">Aides financières</span><figcaption>section des aides</figcaption></figure></div><div class="text"><h3>Étiquette de section</h3><p>Une petite pilule au-dessus de chaque titre de section, teintée de la couleur de la marque.</p><p class="why">Elle dit de quoi parle la section avant le titre&nbsp;: on trouve la garantie ou les aides qu’on cherche sans tout lire.</p></div></div>
+    </div>
+  </section>
+
+  <section class="ds-sec" id="regles">
+    <h2><b>06</b>Règles</h2>
+    <div class="rules">
+      <div class="do"><h3>À faire</h3><ul><li>Le formulaire visible dès l’arrivée, à droite de la promesse.</li><li>Une seule couleur pour tous les boutons d’une marque.</li><li>Trois arguments sous le titre, pas plus.</li><li>Les mentions légales complètes, rangées en cartes lisibles.</li><li>Un renvoi vers les mentions à côté de chaque montant.</li></ul></div>
+      <div class="dont"><h3>À éviter</h3><ul><li>Mélanger les palettes ou les polices des deux marques.</li><li>L’orange d’Expert Rénovation hors de la section des aides.</li><li>Du texte en menthe ou en bleu vif sur fond clair.</li><li>Enfermer le formulaire dans un grand bloc de couleur au centre, comme dans les versions d’origine.</li></ul></div>
+    </div>
+  </section>
+
+  <p class="ds-foot">Landings avant / après · Mon Choix Conso et Expert Rénovation pour Leads Studio · design system conçu par Anissa B. Le Prunenec · Just One Studio</p>
+</main>
+</body>
+</html>

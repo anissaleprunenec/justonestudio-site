@@ -304,6 +304,22 @@
     .reveal { opacity: 1 !important; translate: none !important; transition: none !important; }
   }
   .foot .flag { width: 16px; height: 11px; margin-right: 7px; border-radius: 2px; vertical-align: -1px; box-shadow: 0 0 0 1px var(--line); }
+
+  /* theme switch: moon and sun both visible, a knob slides under the active mode */
+  .theme-toggle { position: relative; width: 68px; height: 36px; border-radius: 999px; display: flex; align-items: center; justify-content: space-between; padding: 0 9px; background: var(--surface); border: 1px solid var(--line); color: var(--muted); cursor: pointer; transition: border-color .2s; }
+  .theme-toggle:hover { border-color: var(--muted); background: var(--surface); }
+  .theme-toggle::before { content: ""; position: absolute; top: 3px; left: 3px; width: 28px; height: 28px; border-radius: 50%; background: var(--btn-bg); transition: translate .35s var(--ease); }
+  :root[data-theme="light"] .theme-toggle::before { translate: 32px 0; }
+  .theme-toggle .sun, .theme-toggle .moon, :root[data-theme="light"] .theme-toggle .sun, :root[data-theme="light"] .theme-toggle .moon { position: relative; z-index: 1; display: block; width: 16px; height: 16px; transition: color .3s; }
+  .theme-toggle .moon { order: -1; color: var(--btn-text); }
+  :root[data-theme="light"] .theme-toggle .moon { color: var(--muted); }
+  :root[data-theme="light"] .theme-toggle .sun { color: var(--btn-text); }
+  @media (prefers-reduced-motion: reduce) { .theme-toggle::before { transition: none; } }
+
+  .case-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+  .case-cta a { display: inline-flex; align-items: center; gap: 10px; height: 46px; padding: 0 20px; border-radius: 12px; border: 1px solid var(--line); font-size: 15px; font-weight: 500; transition: transform .2s, background .2s; }
+  .case-cta a:first-child { background: var(--btn-bg); color: var(--btn-text); border-color: transparent; }
+  .case-cta a:hover { transform: translateY(-1px); }
 </style>
 </head>
 <body>
@@ -350,7 +366,7 @@
 
   <header class="wrap head">
     <a class="back" href="projets.html">← Tous les projets</a>
-    <span class="kicker">12 · Proposition · Association</span>
+    <span class="kicker">14 · Site vitrine · Associatif</span>
     <h1>Association <em>enfance</em></h1>
     <p class="lead">Une proposition de page d’accueil demandée par une association. Le brief&nbsp;: un univers enfantin qui garde les informations bien visibles, une écriture qui fasse penser à celle d’un enfant pour les titres, et des couleurs vives.</p>
     <span class="note"><i></i>Association non nommée · textes provisoires</span>
@@ -409,11 +425,26 @@
     <div class="sec-body">
       <p>Un violet comme couleur principale, accompagné de bleu ciel, de rose et de vert, sur un fond crème. Les bords en vagues du hero et du pied de page rappellent un dessin d’enfant.</p>
       <div class="grid g4">
-        <div class="swatch"><i style="background:#5b3fc4"></i><span>Violet<small>#5B3FC4</small></span></div>
-        <div class="swatch"><i style="background:#7fd3f0"></i><span>Bleu ciel<small>#7FD3F0</small></span></div>
-        <div class="swatch"><i style="background:#d9708f"></i><span>Rose<small>#D9708F</small></span></div>
-        <div class="swatch"><i style="background:#a6ef9e"></i><span>Vert<small>#A6EF9E</small></span></div>
+        <div class="swatch"><i style="background:#5D45BB"></i><span>Violet<small>#5D45BB</small></span></div>
+        <div class="swatch"><i style="background:#77D5F1"></i><span>Bleu ciel<small>#77D5F1</small></span></div>
+        <div class="swatch"><i style="background:#D27194"></i><span>Rose<small>#D27194</small></span></div>
+        <div class="swatch"><i style="background:#A4EEAF"></i><span>Vert<small>#A4EEAF</small></span></div>
       </div>
+    </div>
+  </section>
+
+  <section class="sec" id="design-system">
+    <div class="sec-title"><b>05</b><h2>Le design <em>system</em></h2></div>
+    <div class="sec-body">
+      <p>J’ai rassemblé les fondations et les composants de la page dans un design system court. Le projet est une maquette&nbsp;: j’ai relevé chaque couleur et chaque taille sur la maquette, et j’ai écrit à côté la raison de chaque choix.</p>
+      <ul class="changes">
+        <li>Trois familles, chacune à sa place&nbsp;: une écriture manuscrite pour la voix de l’enfant dans les titres, une sans-serif droite pour l’information, une sans-serif ronde pour les boutons.</li>
+        <li>Une famille de violets porte la marque et tout ce qui se clique&nbsp;; le bleu, le lilas, le vert et le rose changent à chaque section pour garder le rythme.</li>
+        <li>Chaque couleur a son rôle et son contraste mesuré, du violet encre des titres manuscrits aux fonds vifs qui changent à chaque section.</li>
+      </ul>
+      <p class="hint"><span class="h-hover">Faites défiler ou attrapez la fenêtre pour parcourir le design system.</span><span class="h-touch">Faites défiler dans la fenêtre pour parcourir le design system.</span></p>
+      <div class="stage" style="--flat:#6c4fd1"><div class="win"><div class="bar"><i></i><i></i><i></i><span>Association enfance — Design system</span></div><div class="screen" tabindex="0" aria-label="Design system de Association enfance, faire défiler"><img src="img/association-case/ds-full.jpg" alt="Page complète du design system de la page Association enfance : principes, couleurs avec leurs contrastes, typographie manuscrite, formes, composants (boutons, titre de section, mission, carte d’instance, photo détourée) et règles" loading="lazy"></div></div></div>
+      <div class="case-cta"><a href="ds/association.html" target="_blank" rel="noopener">Ouvrir le design system <span aria-hidden="true">↗</span></a></div>
     </div>
   </section>
 

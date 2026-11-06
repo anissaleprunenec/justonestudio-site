@@ -304,6 +304,22 @@
     .reveal { opacity: 1 !important; translate: none !important; transition: none !important; }
   }
   .foot .flag { width: 16px; height: 11px; margin-right: 7px; border-radius: 2px; vertical-align: -1px; box-shadow: 0 0 0 1px var(--line); }
+
+  /* theme switch: moon and sun both visible, a knob slides under the active mode */
+  .theme-toggle { position: relative; width: 68px; height: 36px; border-radius: 999px; display: flex; align-items: center; justify-content: space-between; padding: 0 9px; background: var(--surface); border: 1px solid var(--line); color: var(--muted); cursor: pointer; transition: border-color .2s; }
+  .theme-toggle:hover { border-color: var(--muted); background: var(--surface); }
+  .theme-toggle::before { content: ""; position: absolute; top: 3px; left: 3px; width: 28px; height: 28px; border-radius: 50%; background: var(--btn-bg); transition: translate .35s var(--ease); }
+  :root[data-theme="light"] .theme-toggle::before { translate: 32px 0; }
+  .theme-toggle .sun, .theme-toggle .moon, :root[data-theme="light"] .theme-toggle .sun, :root[data-theme="light"] .theme-toggle .moon { position: relative; z-index: 1; display: block; width: 16px; height: 16px; transition: color .3s; }
+  .theme-toggle .moon { order: -1; color: var(--btn-text); }
+  :root[data-theme="light"] .theme-toggle .moon { color: var(--muted); }
+  :root[data-theme="light"] .theme-toggle .sun { color: var(--btn-text); }
+  @media (prefers-reduced-motion: reduce) { .theme-toggle::before { transition: none; } }
+
+  .case-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+  .case-cta a { display: inline-flex; align-items: center; gap: 10px; height: 46px; padding: 0 20px; border-radius: 12px; border: 1px solid var(--line); font-size: 15px; font-weight: 500; transition: transform .2s, background .2s; }
+  .case-cta a:first-child { background: var(--btn-bg); color: var(--btn-text); border-color: transparent; }
+  .case-cta a:hover { transform: translateY(-1px); }
 </style>
 </head>
 <body>
@@ -350,7 +366,7 @@
 
   <header class="wrap head">
     <a class="back" href="projets.html">← Tous les projets</a>
-    <span class="kicker">08 · Landing page · Maquette Figma</span>
+    <span class="kicker">10 · Landing page · Marketing</span>
     <h1>Landing <em>croissance</em></h1>
     <p class="lead">Une landing page pour une agence qui conçoit des systèmes d’acquisition&nbsp;: un hero noir traversé d’une lueur bleue, puis des sections claires, un bleu cyan pour les actions et des blocs sombres pour les moments forts.</p>
     <span class="note"><i></i>Défi personnel · agence fictive, logos et certains textes provisoires</span>
@@ -415,6 +431,21 @@
         <div class="swatch"><i style="background:#3b81f4"></i><span>Bleu<small>#3B81F4</small></span></div>
         <div class="swatch"><i style="background:#36daff"></i><span>Cyan<small>#36DAFF</small></span></div>
       </div>
+    </div>
+  </section>
+
+  <section class="sec" id="design-system">
+    <div class="sec-title"><b>05</b><h2>Le design <em>system</em></h2></div>
+    <div class="sec-body">
+      <p>J’ai rassemblé les fondations et les composants de la landing dans un design system court. Je l’ai construit à partir des valeurs relevées sur la maquette Figma, et chaque choix y a sa raison écrite à côté.</p>
+      <ul class="changes">
+        <li>Trois principes guident la page&nbsp;: un hero qui marque, montrer plutôt que lister, et des offres qu’on compare d’un coup d’œil.</li>
+        <li>Le cyan est réservé à l’action et à l’état actif, toujours avec un libellé noir (12,1:1).</li>
+        <li>Les composants clés sont décrits avec leurs valeurs&nbsp;: boutons, bascule de durée, carte d’offre, question de FAQ ouverte et fermée, carte d’expertise.</li>
+      </ul>
+      <p class="hint"><span class="h-hover">Faites défiler ou attrapez la fenêtre pour parcourir le design system.</span><span class="h-touch">Faites défiler dans la fenêtre pour parcourir le design system.</span></p>
+      <div class="stage" style="--flat:#1f4fb8"><div class="win"><div class="bar"><i></i><i></i><i></i><span>Landing croissance — Design system</span></div><div class="screen" tabindex="0" aria-label="Design system de Landing croissance, faire défiler"><img src="img/croissance-case/ds-full.jpg" alt="Page complète du design system de la landing croissance : principes, couleurs noir, bleu nuit, bleu et cyan avec leurs contrastes, typographie, formes, composants (boutons, bascule, carte d’offre, FAQ, carte d’expertise) et règles" loading="lazy"></div></div></div>
+      <div class="case-cta"><a href="ds/croissance.html" target="_blank" rel="noopener">Ouvrir le design system <span aria-hidden="true">↗</span></a></div>
     </div>
   </section>
 

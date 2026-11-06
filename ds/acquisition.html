@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Landing acquisition — Design system</title>
+<meta name="description" content="Le design system de la landing acquisition : principes, couleurs, typographie, formes, composants et règles, avec la raison de chaque choix.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ds.css">
+<style>
+  :root {
+    --ds-bg: #fdffe5; --ds-card: #ffffff; --ds-ink: #0a0a0a; --ds-soft: #3f4148; --ds-muted: #55585f; --ds-line: #e9ebcf;
+    --ds-accent: #5c23c8; --ds-accent-text: #5c23c8; --ds-font: "Manrope", system-ui, sans-serif; --ds-display: "Space Grotesk", system-ui, sans-serif; --ds-display-weight: 600; --ds-radius: 20px;
+    --violet: #5c23c8; --ivory: #fefff4;
+  }
+  .ds-head h1 em { font-style: normal; color: var(--violet); }
+  .comp .demo.on-violet, .on-violet { background: linear-gradient(160deg, #6f2ec4, #4a1ebd); }
+  /* the real components, with the values measured on the mockup */
+  .btn { display: inline-flex; align-items: center; gap: 10px; height: 48px; padding: 0 26px; border-radius: 999px; border: 0; font: 600 14px/1 "Space Grotesk", sans-serif; cursor: pointer; }
+  .btn-black { background: #000; color: #fff; }
+  .btn-caps { font-size: 12px; letter-spacing: .02em; text-transform: uppercase; }
+  .btn-white { height: 37px; padding: 0 22px; background: #fff; color: #0c0c13; font: 500 13px/1 "Manrope", sans-serif; }
+  .btn-soft { height: 37px; padding: 0 22px; background: #8958d8; color: #fff; border: 1px solid rgba(255, 255, 255, .25); font: 500 13px/1 "Manrope", sans-serif; }
+  .btn svg { width: 14px; height: 14px; }
+  .pill { display: inline-flex; align-items: center; height: 21px; padding: 0 12px; border-radius: 999px; background: var(--ivory); color: #0a0a0a; font: 500 10.5px/1 "Space Grotesk", sans-serif; text-transform: uppercase; }
+  .eyebrow { font: 500 11px/1 "Manrope", sans-serif; letter-spacing: .1em; text-transform: uppercase; color: #989987; }
+  .frein { display: flex; align-items: center; gap: 16px; width: 100%; max-width: 420px; padding: 26px 30px; border-radius: 12px; background: #fff; border: 1px solid #f0f2da; font: 500 16px/1.6 "Manrope", sans-serif; }
+  .frein i { flex: none; width: 26px; height: 26px; border-radius: 50%; background: var(--violet); display: grid; place-items: center; }
+  .frein i svg { width: 14px; height: 14px; }
+  .stat { display: grid; gap: 6px; padding-left: 18px; border-left: 1px solid #dfe5c4; }
+  .stat b { font: 400 48px/1 "Manrope", sans-serif; letter-spacing: -.02em; }
+  .stat span { font-size: 13px; color: #55585f; }
+  .ribbon-demo { width: 100%; height: 150px; border-radius: 20px; overflow: hidden; }
+  .encore { display: inline-block; font: 600 40px/1 "Space Grotesk", sans-serif; color: var(--violet); rotate: 8deg; }
+  .shadow-demo { width: 96px; height: 64px; border-radius: 12px; background: #fff; }
+</style>
+</head>
+<body>
+<main class="ds">
+  <header class="ds-head">
+    <span class="ds-eyebrow">Design system · version courte</span>
+    <h1>Nous transformons votre trafic <em>en clients.</em></h1>
+    <p>Les fondations et les composants de ma landing pour une agence d’acquisition et de conversion. Chaque choix a sa raison, écrite à côté. La maquette existe dans Figma&nbsp;: les valeurs sont relevées sur la maquette.</p>
+    <ul class="ds-toc"><li><a href="#principes">Principes</a></li><li><a href="#couleurs">Couleurs</a></li><li><a href="#typo">Typographie</a></li><li><a href="#formes">Formes</a></li><li><a href="#composants">Composants</a></li><li><a href="#regles">Règles</a></li></ul>
+  </header>
+
+  <section class="ds-sec" id="principes">
+    <h2><b>01</b>Principes</h2>
+    <p class="lead">La page parle à des entreprises qui ont du trafic mais peu de résultats. Trois idées en découlent.</p>
+    <div class="principles">
+      <div class="principle"><b>01</b><h3>Une promesse, puis des preuves</h3><p>Le hero tient en une phrase. Les chiffres arrivent dès le premier défilement, avant toute explication.</p></div>
+      <div class="principle"><b>02</b><h3>Des visages, pas des icônes</h3><p>Des personnes photographiées, entourées du ruban blanc&nbsp;: une agence de marketing doit inspirer confiance avant de vendre une méthode.</p></div>
+      <div class="principle"><b>03</b><h3>Tout mène à l’appel</h3><p>Chaque bouton noir pousse vers le même but&nbsp;: demander un audit ou réserver un appel de 30&nbsp;minutes.</p></div>
+    </div>
+  </section>
+
+  <section class="ds-sec" id="couleurs">
+    <h2><b>02</b>Couleurs</h2>
+    <p class="lead">Deux couleurs très contrastées, du noir pour agir. Les contrastes sont mesurés sur le crème et sur le violet.</p>
+    <div class="colors">
+      <div class="color"><div class="chip" style="background:#5c23c8;color:#fff"><span></span><span class="ratio">8,3:1</span></div><div class="info"><strong>Violet</strong><code>#5C23C8</code><p>Blocs forts, hero, appel final, coches, mot «&nbsp;(encore)&nbsp;».</p><p class="why">Un violet profond se démarque des bleus habituels du secteur, et le blanc posé dessus reste très lisible.</p></div></div>
+      <div class="color"><div class="chip" style="background:linear-gradient(160deg,#6f2ec4,#4a1ebd);color:#fff"><span></span></div><div class="info"><strong>Dégradé du hero</strong><code>#6F2EC4 → #4A1EBD</code><p>Fond du hero, plus clair en haut à gauche.</p><p class="why">La lumière part du coin du titre&nbsp;: l’œil commence par la promesse, puis descend vers le bouton.</p></div></div>
+      <div class="color"><div class="chip" style="background:#fdffe5;color:#0a0a0a;border-bottom:1px solid #e9ebcf"><span></span></div><div class="info"><strong>Crème</strong><code>#FDFFE5</code><p>Bande des logos, bloc des freins, pied de page.</p><p class="why">Plus doux qu’un blanc pur à côté du violet&nbsp;: il calme les sections de lecture entre deux blocs forts.</p></div></div>
+      <div class="color"><div class="chip" style="background:#fefff4;color:#0a0a0a;border-bottom:1px solid #e9ebcf"><span></span></div><div class="info"><strong>Ivoire</strong><code>#FEFFF4</code><p>Le ruban, les étiquettes, le fond de page.</p><p class="why">Le ruban garde une pointe de chaleur&nbsp;: il se lit comme du papier posé sur la photo, pas comme un trou blanc.</p></div></div>
+      <div class="color"><div class="chip" style="background:#000;color:#fff"><span></span><span class="ratio">21:1</span></div><div class="info"><strong>Noir et encre</strong><code>#000000 · #0A0A0A</code><p>Noir pur pour les boutons, encre pour les titres et le texte.</p><p class="why">Ni violet ni crème&nbsp;: le noir n’appartient qu’à l’action, il se repère sur les deux fonds.</p></div></div>
+      <div class="color"><div class="chip" style="background:#55585f;color:#fff"><span></span><span class="ratio">7,0:1</span></div><div class="info"><strong>Gris</strong><code>#55585F</code><p>Légendes des chiffres, phrases d’introduction.</p><p class="why">Le texte d’appui recule derrière les titres sans passer sous le seuil de lecture.</p></div></div>
+    </div>
+    <h3 class="ds-sub">Contrastes vérifiés</h3>
+    <table class="contrast">
+      <thead><tr><th>Couple</th><th>Ratio</th><th>Verdict</th><th>Usage autorisé</th></tr></thead>
+      <tbody>
+        <tr><td><span class="pair" style="background:#fdffe5;color:#0a0a0a;border:1px solid #e9ebcf">Aa</span></td><td>19,4:1</td><td class="ok">AAA</td><td>Tout texte</td></tr>
+        <tr><td><span class="pair" style="background:#5c23c8;color:#fff">Aa</span></td><td>8,3:1</td><td class="ok">AAA</td><td>Titres et texte des blocs violets</td></tr>
+        <tr><td><span class="pair" style="background:#fdffe5;color:#5c23c8;border:1px solid #e9ebcf">Aa</span></td><td>8,2:1</td><td class="ok">AAA</td><td>Mot en accent, coches</td></tr>
+        <tr><td><span class="pair" style="background:#fdffe5;color:#55585f;border:1px solid #e9ebcf">Aa</span></td><td>7,0:1</td><td class="ok">AAA</td><td>Légendes, texte d’appui</td></tr>
+        <tr><td><span class="pair" style="background:#8958d8;color:#fff">Aa</span></td><td>4,7:1</td><td class="ok">AA</td><td>Bouton secondaire sur violet</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="ds-sec" id="typo">
+    <h2><b>03</b>Typographie</h2>
+    <p class="lead">Deux familles&nbsp;: une grotesque technique pour accrocher, une sans-serif douce pour expliquer.</p>
+    <p class="why">La grotesque a un dessin technique, presque d’ingénieur&nbsp;: il porte la promesse de «&nbsp;haute performance&nbsp;» du hero et des boutons. La sans-serif, plus neutre et très lisible, prend le relais dès que la page explique. Le changement de famille marque le passage de l’accroche à l’argument.</p>
+    <div class="types">
+      <div class="type-row"><div style="font:600 clamp(36px,5vw,64px)/1.06 'Space Grotesk',sans-serif;letter-spacing:-.01em">Nous transformons votre trafic en clients.</div><div class="meta"><strong>Titre du hero</strong><code>Grotesque · 600 · 64 px · interligne 1,06</code><p class="why">Gras et serré, il se lit comme un engagement. Trois lignes au plus, pour qu’il tienne à côté du portrait.</p></div></div>
+      <div class="type-row"><div style="padding:18px 22px;border-radius:12px;background:#5c23c8"><div style="padding-left:22px;border-left:4px solid #fefff4;color:#fff;font:600 18px/1.4 'Space Grotesk',sans-serif">Acquisition &amp; conversion haute performance.<br>Des tunnels qui vendent *vraiment.</div></div><div class="meta"><strong>Accroche</strong><code>Grotesque · 600 · 18 px · interligne 1,4 · filet de 4 px</code><p class="why">Le filet détache l’accroche du titre&nbsp;: c’est la seconde chose qu’on lit, avant le bouton.</p></div></div>
+      <div class="type-row"><div style="font-size:clamp(30px,3.6vw,48px);font-weight:500;line-height:1.25;letter-spacing:-.01em">Pourquoi votre marketing ne performe pas <span class="encore" style="font-size:.8em">(encore)</span></div><div class="meta"><strong>Titre de section et mot en accent</strong><code>Sans-serif · 500 · 48 px · interligne 1,25 — accent 600 · 40 px · violet · rotation 8°</code><p class="why">Le mot penché sort de la ligne comme une note écrite à la main&nbsp;: il garde un ton positif, le problème a une solution.</p></div></div>
+      <div class="type-row"><div class="stat" style="border:0;padding:0"><b>+42%</b><span>d’augmentation moyenne du taux de conversion</span></div><div class="meta"><strong>Chiffres</strong><code>Sans-serif · 400 · 48 px · légende 13 px gris</code><p class="why">En grand et en maigre, le chiffre suffit&nbsp;: il n’a pas besoin de gras pour convaincre.</p></div></div>
+      <div class="type-row"><div style="font-size:14px;line-height:1.55;color:#3f4148;max-width:56ch">Chaque élément de nos pages est conçu avec un objectif&nbsp;: guider l’utilisateur vers l’action. Structure persuasive, hiérarchisation stratégique et optimisation continue.</div><div class="meta"><strong>Texte courant</strong><code>Sans-serif · 400 · 14 px · interligne 1,55</code><p class="why">Des paragraphes de trois lignes au plus&nbsp;: sur une landing, le texte appuie le titre, il ne le remplace pas.</p></div></div>
+      <div class="type-row"><div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap"><span class="pill" style="background:#fff;border:1px solid #e9ebcf">Digital marketing</span><span class="eyebrow">Why choose us</span></div><div class="meta"><strong>Étiquettes</strong><code>Capitales · 10,5 à 11 px · en pilule ou espacées</code><p class="why">Elles situent la section en un coup d’œil, sans concurrencer le titre qui suit.</p></div></div>
+    </div>
+  </section>
+
+  <section class="ds-sec" id="formes">
+    <h2><b>04</b>Formes</h2>
+    <div class="tokens">
+      <div class="token-card"><h3>Rayons</h3><div class="shapes"><div><i style="border-radius:12px"></i>12</div><div><i style="border-radius:20px"></i>20</div><div><i style="border-radius:30px"></i>30</div><div><i style="border-radius:999px;width:96px"></i>pilule</div></div><p class="why">12 pour les cartes, 20 pour les blocs, 30 pour le grand bloc d’appel. La pilule est réservée aux boutons et aux étiquettes.</p></div>
+      <div class="token-card"><h3>Ombres</h3><div class="shapes"><div><i class="shadow-demo" style="border:1px solid #f0f2da"></i>filet 1 px</div></div><p class="why">Aucune ombre&nbsp;: des aplats francs et un filet très clair suffisent. Le relief viendrait brouiller le contraste violet et crème.</p></div>
+      <div class="token-card"><h3>Largeur</h3><div class="scale"><div><i style="width:100%"></i></div><div>1 210 px de contenu dans 1 440 px</div></div><p class="why">Les blocs violets prennent toute la largeur du contenu&nbsp;: ils rythment la page comme des temps forts.</p></div>
+    </div>
+  </section>
+
+  <section class="ds-sec" id="composants">
+    <h2><b>05</b>Composants</h2>
+    <div class="comps">
+      <div class="comp wide"><div class="demo on-violet"><figure><button class="btn btn-black" type="button">Demande d’audit gratuit <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12 12 4M5.5 4H12v6.5"/></svg></button><figcaption style="color:#e3dafa">principal</figcaption></figure><figure><button class="btn btn-black btn-caps" type="button">Voir nos études de cas</button><figcaption style="color:#e3dafa">navigation</figcaption></figure><figure><button class="btn btn-white" type="button">Découvrir notre méthode</button><figcaption style="color:#e3dafa">clair sur violet</figcaption></figure><figure><button class="btn btn-soft" type="button">Audit Gratuit</button><figcaption style="color:#e3dafa">secondaire</figcaption></figure></div>
+        <div class="text"><h3>Boutons</h3><p>Pilule noire de 48&nbsp;px pour l’action principale. Dans les blocs violets, une pilule blanche et une pilule violet clair, plus basses (37&nbsp;px).</p><p class="why">Le noir ne sert qu’aux boutons qui mènent à l’audit ou à l’appel&nbsp;: le visiteur apprend vite où cliquer. La flèche annonce un vrai départ, pas un simple lien.</p></div></div>
+      <div class="comp"><div class="demo center" style="background:#fdffe5"><div class="frein"><i><svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" aria-hidden="true"><path d="m3.5 8.5 3 3 6-7"/></svg></i>Votre offre manque de clarté.</div></div><div class="text"><h3>Carte de frein</h3><p>Carte blanche, rayon 12, coche violette, une phrase.</p><p class="why">Un frein par carte&nbsp;: le visiteur se reconnaît dans une ligne précise. La coche, plutôt qu’une croix, dit que le point sera réglé.</p></div></div>
+      <div class="comp"><div class="demo center" style="background:#fdffe5"><div class="stat"><b>3x</b><span>ROI moyen sur campagnes d’acquisition</span></div></div><div class="text"><h3>Chiffre clé</h3><p>Grand chiffre, légende grise, filet vertical à gauche.</p><p class="why">Quatre chiffres côte à côte, juste après le hero&nbsp;: la preuve arrive avant la méthode, comme le demande l’objectif «&nbsp;accrocher vite&nbsp;».</p></div></div>
+      <div class="comp"><div class="demo center" style="background:#fdffe5"><span class="pill" style="border:1px solid #e9ebcf">Digital marketing</span></div><div class="text"><h3>Étiquette</h3><p>Pilule ivoire de 21&nbsp;px, capitales.</p><p class="why">Posée sur le violet, elle reprend la couleur du ruban&nbsp;: le hero ne compte qu’un seul clair, ce qui le garde net.</p></div></div>
+      <div class="comp"><div class="demo center" style="padding:0;background:#5c23c8"><svg class="ribbon-demo" viewBox="0 0 420 150" preserveAspectRatio="none" aria-hidden="true"><path d="M-10 120 L150 40 L110 120 L300 20 L250 130 L430 60" fill="none" stroke="#fefff4" stroke-width="22" stroke-linejoin="miter"/></svg></div><div class="text"><h3>Ruban</h3><p>Bande ivoire épaisse, en zigzag ou en boucle, qui passe devant et derrière les personnes.</p><p class="why">C’est le fil conducteur de la page&nbsp;: il entoure chaque visage et relie les sections entre elles, comme un même geste de la première à la dernière.</p></div></div>
+    </div>
+  </section>
+
+  <section class="ds-sec" id="regles">
+    <h2><b>06</b>Règles</h2>
+    <div class="rules">
+      <div class="do"><h3>À faire</h3><ul><li>Du noir uniquement pour les boutons qui mènent à l’audit ou à l’appel.</li><li>Un ruban autour de chaque personne photographiée.</li><li>Une grotesque technique pour accrocher, une sans-serif douce pour expliquer.</li><li>Un seul mot en accent violet par titre.</li></ul></div>
+      <div class="dont"><h3>À éviter</h3><ul><li>Une troisième couleur&nbsp;: la page tient sur le violet et le crème.</li><li>Le gris olive pour du texte à lire.</li><li>Des ombres portées sur les cartes.</li><li>Un bouton noir qui ne mène pas à l’appel.</li></ul></div>
+    </div>
+  </section>
+
+  <p class="ds-foot">Landing acquisition · design system conçu par Anissa B. Le Prunenec · Just One Studio</p>
+</main>
+</body>
+</html>

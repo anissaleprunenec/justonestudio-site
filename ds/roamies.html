@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Roamies — Design system</title>
+<meta name="description" content="Le design system de Roamies : principes, couleurs, typographie, formes, composants et règles, avec la raison de chaque choix.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ds.css">
+<style>
+  :root {
+    --ds-bg: #fffbf7; --ds-card: #ffffff; --ds-ink: #0f1b2d; --ds-soft: #46546a; --ds-muted: #646f82; --ds-line: #e9e4dd;
+    --ds-accent: #f0614f; --ds-accent-text: #c7402f; --ds-font: "Plus Jakarta Sans", system-ui, sans-serif; --ds-display-weight: 800; --ds-radius: 20px;
+    --shadow-sm: 0 2px 8px rgba(15, 27, 45, .06); --shadow: 0 12px 32px rgba(15, 27, 45, .1); --shadow-lg: 0 24px 60px rgba(15, 27, 45, .16);
+  }
+  .grad { background: linear-gradient(90deg, #f59a4a, #f0614f); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  /* the real components, with the values of the site */
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 22px; border-radius: 999px; font: 600 15px/1 var(--ds-font); border: 0; cursor: pointer; transition: transform .18s, box-shadow .18s, background .18s; }
+  .btn-primary { background: #0f1b2d; color: #fff; box-shadow: 0 6px 16px rgba(15, 27, 45, .22); }
+  .btn-primary.is-hover { background: #1b2c47; box-shadow: 0 10px 24px rgba(15, 27, 45, .28); transform: translateY(-1px); }
+  .btn-ghost { background: rgba(255, 255, 255, .85); color: #0f1b2d; border: 1px solid rgba(15, 27, 45, .14); }
+  .btn.is-focus { outline: 3px solid #8ec5f5; outline-offset: 3px; }
+  .kicker { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px 6px 8px; border-radius: 999px; background: rgba(255, 255, 255, .85); border: 1px solid rgba(15, 27, 45, .12); box-shadow: var(--shadow-sm); font-size: 13px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; }
+  .kicker::before { content: ""; width: 16px; height: 16px; border-radius: 50%; background: radial-gradient(circle, #fff 0 28%, transparent 30%), conic-gradient(#f59a4a, #f0614f, #b28cf5, #8ec5f5, #5fcf9a, #f7c948, #f59a4a); }
+  .price-pill { padding: 6px 11px; border-radius: 999px; background: #0f1b2d; color: #fff; font-size: 12.5px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .dcard { width: 230px; padding: 8px; border-radius: 20px; background: #fff; box-shadow: var(--shadow); }
+  .dcard .ph { position: relative; height: 130px; border-radius: 14px; background: linear-gradient(135deg, #ffb37a, #ff9aa2 55%, #8ec5f5); }
+  .dcard .tag { position: absolute; top: 10px; left: 10px; padding: 5px 10px; border-radius: 999px; background: #fff; font-size: 11.5px; font-weight: 700; box-shadow: var(--shadow-sm); }
+  .dcard .body { padding: 12px 6px 4px; }
+  .dcard .body strong { display: block; font-size: 16px; }
+  .dcard .row { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; font-size: 12.5px; font-weight: 600; color: #46546a; }
+  .sticker { width: 74px; height: 74px; rotate: -8deg; filter: drop-shadow(0 6px 8px rgba(15, 27, 45, .2)); }
+  .vote { display: flex; align-items: center; gap: 10px; padding: 10px 14px 10px 10px; border-radius: 14px; background: #fff; box-shadow: var(--shadow-sm); font-size: 14px; font-weight: 600; }
+  .vote i { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; background: #2fb67c; color: #fff; font-style: normal; font-size: 14px; }
+  .shadow-demo { width: 96px; height: 64px; border-radius: 14px; background: #fff; }
+</style>
+</head>
+<body>
+<main class="ds">
+  <header class="ds-head">
+    <img class="ds-logo" src="../img/roamies-case/logo.svg" alt="Roamies">
+    <span class="ds-eyebrow">Design system · version courte</span>
+    <h1>Plan the trip. <span class="grad">Keep the friends.</span></h1>
+    <p>Les fondations et les composants de Roamies, une app pour organiser un voyage à plusieurs. Chaque choix a sa raison, écrite à côté.</p>
+    <ul class="ds-toc"><li><a href="#principes">Principes</a></li><li><a href="#couleurs">Couleurs</a></li><li><a href="#typo">Typographie</a></li><li><a href="#formes">Formes</a></li><li><a href="#composants">Composants</a></li><li><a href="#regles">Règles</a></li></ul>
+  </header>
+
+  <section class="ds-sec" id="principes">
+    <h2><b>01</b>Principes</h2>
+    <p class="lead">Trois idées guident tout le reste. Quand j’hésite entre deux options, je reviens à elles.</p>
+    <div class="principles">
+      <div class="principle"><b>01</b><h3>Entre amis, pas une agence</h3><p>Crème, pastels, coins ronds et autocollants&nbsp;: l’app doit ressembler à un carnet de voyage partagé, jamais à un comparateur de prix.</p></div>
+      <div class="principle"><b>02</b><h3>Une décision par carte</h3><p>Le vote, le budget et les dates ont chacun leur carte et un seul bouton principal. Le groupe avance une question à la fois.</p></div>
+      <div class="principle"><b>03</b><h3>Personne n’est gêné</h3><p>Le budget de chacun reste privé, le ton reste léger, et aucune couleur d’alarme ne pointe la personne qui n’a pas encore répondu.</p></div>
+    </div>
+  </section>
+
+  <section class="ds-sec" id="couleurs">
+    <h2><b>02</b>Couleurs</h2>
+    <p class="lead">Une base chaude et calme, un seul accent vif. Les contrastes sont mesurés sur le fond crème.</p>
+    <div class="colors">
+      <div class="color"><div class="chip" style="background:#fffbf7;color:#0f1b2d;border-bottom:1px solid #e9e4dd"><span>--bg</span></div><div class="info"><strong>Crème</strong><code>#FFFBF7</code><p>Fond de toutes les pages.</p><p class="why">Plus chaud que le blanc, il évoque le papier d’un carnet. Les cartes blanches s’en détachent sans bordure lourde.</p></div></div>
+      <div class="color"><div class="chip" style="background:#0f1b2d;color:#fff"><span>--ink</span><span class="ratio">16,8:1</span></div><div class="info"><strong>Bleu nuit</strong><code>#0F1B2D</code><p>Titres, texte principal, bouton principal, prix.</p><p class="why">Un noir adouci de bleu&nbsp;: il garde un contraste maximal tout en restant dans la famille du ciel.</p></div></div>
+      <div class="color"><div class="chip" style="background:#46546a;color:#fff"><span>--ink-soft</span><span class="ratio">7,5:1</span></div><div class="info"><strong>Ardoise</strong><code>#46546A</code><p>Texte courant et sous-titres.</p><p class="why">Le texte long recule d’un cran derrière les titres, sans perdre en lisibilité.</p></div></div>
+      <div class="color"><div class="chip" style="background:#646f82;color:#fff"><span>--ink-muted</span><span class="ratio">4,9:1</span></div><div class="info"><strong>Gris doux</strong><code>#646F82</code><p>Mentions, dates, notes.</p><p class="why">Le gris le plus clair qui passe encore le seuil AA pour les petits textes.</p></div></div>
+      <div class="color"><div class="chip" style="background:linear-gradient(90deg,#f59a4a,#f0614f);color:#fff"><span>--grad-text</span></div><div class="info"><strong>Orange → corail</strong><code>#F59A4A → #F0614F</code><p>Un ou deux mots clés des grands titres, chiffres mis en avant.</p><p class="why">La couleur d’un coucher de soleil&nbsp;: l’envie de partir. Je le réserve aux très grandes tailles.</p></div></div>
+      <div class="color"><div class="chip" style="background:#8ec5f5;color:#0f1b2d"><span>--sky</span></div><div class="info"><strong>Bleu ciel</strong><code>#8EC5F5</code><p>Anneau de focus clavier, fonds illustrés.</p><p class="why">Le ciel du voyage, repris pour le clavier&nbsp;: un anneau épais de 3&nbsp;px, décalé du bord, qui se repère autour des boutons bleu nuit.</p></div></div>
+      <div class="color"><div class="chip" style="background:#2fb67c;color:#fff"><span>--mint</span></div><div class="info"><strong>Menthe</strong><code>#2FB67C</code><p>Ce qui est fait&nbsp;: lien copié, onglet terminé, ami en ligne, budget tenu.</p><p class="why">La seule couleur «&nbsp;d’état&nbsp;», toujours accompagnée d’un mot ou d’une coche&nbsp;: la couleur seule ne porte jamais l’information.</p></div></div>
+    </div>
+    <h3 class="ds-sub">Contrastes vérifiés</h3>
+    <table class="contrast">
+      <thead><tr><th>Couple</th><th>Ratio</th><th>Verdict</th><th>Usage autorisé</th></tr></thead>
+      <tbody>
+        <tr><td><span class="pair" style="background:#fffbf7;color:#0f1b2d;border:1px solid #e9e4dd">Aa</span></td><td>16,8:1</td><td class="ok">AAA</td><td>Tout texte</td></tr>
+        <tr><td><span class="pair" style="background:#0f1b2d;color:#fff">Aa</span></td><td>17,3:1</td><td class="ok">AAA</td><td>Boutons principaux, prix</td></tr>
+        <tr><td><span class="pair" style="background:#fffbf7;color:#646f82;border:1px solid #e9e4dd">Aa</span></td><td>4,9:1</td><td class="ok">AA</td><td>Petits textes secondaires</td></tr>
+        <tr><td><span class="pair" style="background:#fffbf7;color:#f0614f;border:1px solid #e9e4dd">Aa</span></td><td>3,1:1</td><td class="ok">AA grands textes</td><td>Titres de 24&nbsp;px et plus, en gras</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="ds-sec" id="typo">
+    <h2><b>03</b>Typographie</h2>
+    <p class="lead">Une seule famille, Plus Jakarta Sans, en cinq styles.</p>
+    <p class="why">Ronde et géométrique, elle est amicale sans être enfantine, et ses chiffres restent nets dans les prix et les dates. Une seule famille, c’est une seule police à charger et une page qui ne change jamais de voix.</p>
+    <div class="types">
+      <div class="type-row"><div style="font-size:clamp(34px,5vw,64px);font-weight:800;line-height:1.04;letter-spacing:-.035em">Plan the trip. <span class="grad">Keep the friends.</span></div><div class="meta"><strong>Titre principal</strong><code>800 · 36 → 78 px · interligne 1,04 · −3,5 %</code><p class="why">Très gras et serré, il se lit comme une promesse. Le dégradé ne touche que la seconde moitié.</p></div></div>
+      <div class="type-row"><div style="font-size:clamp(28px,3.4vw,46px);font-weight:800;line-height:1.1;letter-spacing:-.03em">How it works</div><div class="meta"><strong>Titre de section</strong><code>800 · 30 → 46 px · interligne 1,1</code><p class="why">Le même poids que le titre principal, en plus petit&nbsp;: la hiérarchie vient de la taille, pas d’un changement de style.</p></div></div>
+      <div class="type-row"><div style="font-size:26px;font-weight:700;letter-spacing:-.02em">Vote on a destination</div><div class="meta"><strong>Titre de carte</strong><code>700 · 22 → 27 px</code><p class="why">Un cran plus léger que les sections, pour rester sous elles.</p></div></div>
+      <div class="type-row"><div style="font-size:17px;color:#46546a;max-width:46ch">Everyone gets a vote, and nobody has to chase replies in the group chat.</div><div class="meta"><strong>Texte courant</strong><code>400 · 16,5 → 17 px · ardoise · 56 car. max</code><p class="why">17&nbsp;px et des lignes courtes&nbsp;: on lit sans effort, même sur un téléphone tenu à bout de bras.</p></div></div>
+      <div class="type-row"><div><span class="kicker">How it works</span></div><div class="meta"><strong>Étiquette de section</strong><code>600 · 13 px · capitales · +5 %</code><p class="why">Les capitales espacées annoncent une section sans lui voler la vedette.</p></div></div>
+      <div class="type-row"><div style="font-size:48px;font-weight:800;letter-spacing:-.045em;font-variant-numeric:tabular-nums">$1,150</div><div class="meta"><strong>Chiffres</strong><code>800 · 36 → 48 px · chiffres tabulaires</code><p class="why">Les chiffres ont tous la même largeur&nbsp;: quand le prix se recalcule selon la taille du groupe, rien ne saute.</p></div></div>
+    </div>
+  </section>
+
+  <section class="ds-sec" id="formes">
+    <h2><b>04</b>Formes</h2>
+    <div class="tokens">
+      <div class="token-card"><h3>Rayons</h3><div class="shapes"><div><i style="border-radius:12px"></i>12</div><div><i style="border-radius:20px"></i>20</div><div><i style="border-radius:28px"></i>28</div><div><i style="border-radius:999px;width:96px"></i>pilule</div></div><p class="why">12 pour les petits éléments, 20 pour les cartes, 28 pour les grands blocs. La pilule est réservée à ce qui se clique ou s’étiquette.</p></div>
+      <div class="token-card"><h3>Ombres</h3><div class="shapes"><div><i class="shadow-demo" style="box-shadow:var(--shadow-sm);border:0"></i>sm</div><div><i class="shadow-demo" style="box-shadow:var(--shadow);border:0"></i>md</div><div><i class="shadow-demo" style="box-shadow:var(--shadow-lg);border:0"></i>lg</div></div><p class="why">Teintées de bleu nuit, jamais noires&nbsp;: une ombre noire salirait le crème. Plus une carte est importante, plus elle «&nbsp;flotte&nbsp;».</p></div>
+      <div class="token-card"><h3>Largeur</h3><div class="scale"><div><i style="width:100%"></i></div><div>1 180 px de contenu au maximum</div></div><p class="why">Assez large pour trois cartes de destination côte à côte, assez étroit pour que l’œil ne parcoure pas tout l’écran.</p></div>
+    </div>
+  </section>
+
+  <section class="ds-sec" id="composants">
+    <h2><b>05</b>Composants</h2>
+    <div class="comps">
+      <div class="comp wide"><div class="demo"><figure><button class="btn btn-primary" type="button">Start a group</button><figcaption>repos</figcaption></figure><figure><button class="btn btn-primary is-hover" type="button">Start a group</button><figcaption>survol</figcaption></figure><figure><button class="btn btn-primary is-focus" type="button">Start a group</button><figcaption>focus clavier</figcaption></figure><figure><button class="btn btn-ghost" type="button">Explore destinations</button><figcaption>secondaire</figcaption></figure></div>
+        <div class="text"><h3>Boutons</h3><p>Pilule bleu nuit pour l’action principale, pilule claire bordée pour l’action secondaire. Au survol, le bouton monte d’un pixel et son ombre s’allonge.</p><p class="why">Un seul bouton bleu nuit par bloc&nbsp;: c’est toujours lui qu’on doit cliquer. Le relief au survol confirme qu’il réagit.</p></div></div>
+      <div class="comp"><div class="demo center"><span class="kicker">The group space</span></div><div class="text"><h3>Étiquette de section</h3><p>Pilule blanche, pastille multicolore, texte en capitales.</p><p class="why">La pastille réunit toute la palette en un point&nbsp;: elle signe chaque section de Roamies sans ajouter de titre.</p></div></div>
+      <div class="comp"><div class="demo center"><div class="dcard"><div class="ph"><span class="tag">Group favourite</span></div><div class="body"><strong>Tokyo, Japan</strong><div class="row"><span>★ 4.9 · 7 nights</span><span class="price-pill">$1,150</span></div></div></div></div><div class="text"><h3>Carte de destination</h3><p>Photo arrondie dans la carte, étiquette blanche, prix en pilule bleu nuit.</p><p class="why">Le prix est la question qu’un groupe se pose en premier&nbsp;: c’est le seul élément foncé de la carte, l’œil y va tout de suite.</p></div></div>
+      <div class="comp"><div class="demo center"><svg class="sticker" viewBox="0 0 64 64" aria-hidden="true"><path d="M8 34 56 14 40 52 32 38z" fill="#f0614f" stroke="#fff" stroke-width="5" stroke-linejoin="round"/><path d="M32 38 56 14" stroke="#fff" stroke-width="3"/></svg></div><div class="text"><h3>Autocollant</h3><p>Contour blanc épais, ombre portée, légère rotation.</p><p class="why">Il marque les objets du voyage (avion, porte-monnaie, curseur)&nbsp;: comme collés dans un carnet, ils rendent l’interface ludique sans gêner la lecture.</p></div></div>
+      <div class="comp"><div class="demo center"><figure><button class="btn btn-primary btn-sm" type="button" style="padding:10px 16px;font-size:14px">Copy link</button><figcaption>avant</figcaption></figure><figure><button class="btn btn-sm" type="button" style="padding:10px 16px;font-size:14px;background:#2fb67c;color:#fff">Copied!</button><figcaption>après</figcaption></figure></div><div class="text"><h3>Bouton qui confirme</h3><p>Le bouton d’invitation passe au menthe, et affiche «&nbsp;Copied!&nbsp;».</p><p class="why">La réponse arrive à l’endroit même du clic&nbsp;: pas de message ailleurs dans la page, on sait tout de suite que le lien est prêt à partager.</p></div></div>
+    </div>
+  </section>
+
+  <section class="ds-sec" id="regles">
+    <h2><b>06</b>Règles</h2>
+    <div class="rules">
+      <div class="do"><h3>À faire</h3><ul><li>Un seul bouton principal par bloc.</li><li>Le dégradé sur un ou deux mots d’un grand titre, pas plus.</li><li>Des chiffres tabulaires pour tous les prix et toutes les dates.</li><li>Une icône ou un texte à côté de chaque couleur d’état.</li><li>Respecter la réduction des animations&nbsp;: l’avion se pose sans voler.</li></ul></div>
+      <div class="dont"><h3>À éviter</h3><ul><li>Le corail ou l’orange pour du texte courant.</li><li>Des ombres noires ou des coins droits.</li><li>Du rouge pour signaler un ami en retard.</li><li>Un autocollant sur un paragraphe&nbsp;: il marque un objet, pas un texte.</li></ul></div>
+    </div>
+  </section>
+
+  <p class="ds-foot">Roamies · design system conçu par Anissa B. Le Prunenec · Just One Studio</p>
+</main>
+</body>
+</html>

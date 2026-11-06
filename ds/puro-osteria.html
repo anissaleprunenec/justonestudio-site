@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Puro Osteria — Design system</title>
+<meta name="description" content="Le design system de Puro Osteria : principes, couleurs, typographie, formes, composants et règles, avec la raison de chaque choix.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ds.css">
+<style>
+  :root {
+    --ds-bg: #ffffff; --ds-card: #ffffff; --ds-demo: #ffffff; --ds-ink: #0f2d7a; --ds-soft: #576ca2; --ds-muted: #576ca2; --ds-line: #dce3f2;
+    --ds-accent: #1a45aa; --ds-accent-text: #1a45aa; --ds-font: "Inter", system-ui, sans-serif; --ds-display: "Fraunces", Georgia, serif; --ds-display-weight: 900; --ds-radius: 16px;
+    --serif: "Fraunces", Georgia, serif;
+  }
+  .ds h3, .ds .color .info strong { font-family: var(--serif); font-weight: 900; letter-spacing: -.005em; }
+  .ds .contrast th, .ds h3.ds-sub { font-family: var(--ds-font); }
+  /* the header takes the blue of the hero */
+  .ds-head { padding: clamp(32px, 5vw, 56px); border: 0; border-radius: 20px; background: #1a45aa; color: #fff; }
+  .ds-head .wordmark { font: 900 22px var(--serif); }
+  .ds-head .ds-eyebrow { color: #cadaff; letter-spacing: .2em; }
+  .ds-head h1 { letter-spacing: -.01em; line-height: 1.05; }
+  .ds-head p { color: #cadaff; }
+  .ds-head .ds-toc a { border-color: rgba(255, 255, 255, .35); color: #fff; }
+  .ds-head .ds-toc a:hover { border-color: #fff; }
+  .blue { padding: 22px; border-radius: 16px; background: #1a45aa; display: flex; flex-wrap: wrap; gap: 18px; align-items: center; }
+  /* the real components, with the values read on the mockup */
+  .btn { display: inline-flex; align-items: center; justify-content: center; height: 48px; padding: 0 28px; border-radius: 999px; border: 0; font: 900 15px/1 var(--serif); cursor: pointer; }
+  .btn-white { background: #fff; color: #1a45aa; }
+  .btn-blue { background: #1a45aa; color: #fff; }
+  .btn-wide { width: 300px; }
+  .link { color: #fff; font: 500 15px var(--ds-font); text-decoration: underline; text-decoration-color: rgba(255, 255, 255, .5); text-underline-offset: 6px; }
+  .label { font: 500 12px var(--ds-font); letter-spacing: .2em; text-transform: uppercase; color: #5f7cc4; }
+  .field { width: 240px; display: grid; gap: 10px; }
+  .input { height: 48px; padding: 0 16px; display: flex; align-items: center; border-radius: 8px; border: 1px solid #dce3f2; background: #fff; font-size: 15px; color: #0f2d7a; }
+  .input.is-focus { border: 1.5px solid #1a45aa; box-shadow: 0 0 0 3px #d1daee; }
+  .input.is-focus::after { content: ""; width: 1px; height: 22px; background: #0f2d7a; }
+  .cats { display: flex; gap: 12px; }
+  .cat { width: 128px; height: 108px; border-radius: 16px; border: 1px solid #eef1f8; background: #fff; display: grid; place-items: center; align-content: center; gap: 12px; font-size: 12.5px; font-weight: 500; color: #1a45aa; }
+  .cat i { width: 44px; height: 44px; border-radius: 50%; background: #f4f6fb; display: grid; place-items: center; }
+  .cat svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+  .cat.on { background: #1a45aa; border-color: #1a45aa; color: #fff; }
+  .cat.on i { background: rgba(255, 255, 255, .15); }
+  .pill-tag { display: inline-block; padding: 5px 13px; border-radius: 999px; border: 1.5px solid #1a45aa; color: #1a45aa; font: 600 10.5px var(--ds-font); letter-spacing: .14em; text-transform: uppercase; }
+  .nav-dots { display: flex; align-items: center; gap: 14px; }
+  .arrow { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: #fff; border: 2px solid #1a45aa; color: #1a45aa; box-shadow: 3px 4px 0 #1a45aa; font-size: 17px; }
+  .dot-on { width: 30px; height: 9px; border-radius: 999px; background: #1a45aa; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid #1a45aa; }
+  .review { width: 270px; padding: 26px 24px 24px; border-radius: 16px; background: #fff; color: #1a45aa; }
+  .review .stars { font-size: 13px; letter-spacing: .25em; }
+  .review blockquote { margin-top: 16px; font: 900 18px/1.4 var(--serif); }
+  .review .who { margin-top: 22px; display: flex; align-items: center; gap: 14px; font: 500 11px var(--ds-font); letter-spacing: .14em; text-transform: uppercase; }
+  .review .who i { width: 46px; height: 46px; border-radius: 50%; background: #1a45aa; }
+  .shapes i.curve, .shapes i.blob { background: #1a45aa; }
+  .cat svg { width: 22px; height: 22px; }
+  .curve { width: 96px; height: 64px; background: #1a45aa; border-radius: 0 0 0 100% / 0 0 0 100%; }
+  .blob { width: 80px; height: 64px; background: #1a45aa; border-radius: 58% 42% 46% 54% / 52% 60% 40% 48%; }
+</style>
+</head>
+<body>
+<main class="ds">
+  <header class="ds-head">
+    <span class="wordmark">Puro Osteria</span>
+    <span class="ds-eyebrow">Design system · version courte</span>
+    <h1>La simplicité italienne dans chaque assiette.</h1>
+    <p>Les fondations et les composants de Puro Osteria, une osteria italienne de quartier&nbsp;: une page d’accueil et une réservation. Chaque choix a sa raison, écrite à côté. Valeurs relevées sur la maquette&nbsp;: couleurs échantillonnées au pixel, tailles et rayons mesurés à 1&nbsp;440&nbsp;px de large.</p>
+    <ul class="ds-toc"><li><a href="#principes">Principes</a></li><li><a href="#couleurs">Couleurs</a></li><li><a href="#typo">Typographie</a></li><li><a href="#formes">Formes</a></li><li><a href="#composants">Composants</a></li><li><a href="#regles">Règles</a></li></ul>
+  </header>
+
+  <section class="ds-sec" id="principes">
+    <h2><b>01</b>Principes</h2>
+    <p class="lead">Trois idées guident tout le reste. Elles viennent de ce qu’une osteria de quartier doit faire sentir dès le premier écran.</p>
+    <div class="principles">
+      <div class="principle"><b>01</b><h3>Une ambiance tout de suite</h3><p>Un seul bleu, du blanc et des illustrations au trait&nbsp;: la page a un caractère avant même qu’on lise un mot.</p></div>
+      <div class="principle"><b>02</b><h3>Donner faim sans photo</h3><p>Les plats sont dessinés, pas photographiés. Le trait reste lisible sur le bleu, et l’identité ne dépend pas de la lumière d’une photo.</p></div>
+      <div class="principle"><b>03</b><h3>Réserver sans friction</h3><p>Le même bouton «&nbsp;Réserver votre table&nbsp;» partout, et une seule fenêtre courte, quel que soit l’endroit d’où l’on clique.</p></div>
+    </div>
+  </section>
+
+  <section class="ds-sec" id="couleurs">
+    <h2><b>02</b>Couleurs</h2>
+    <p class="lead">Un seul bleu en deux nuances, du blanc, et trois bleus atténués pour le texte. Aucune autre couleur.</p>
+    <div class="colors">
+      <div class="color"><div class="chip" style="background:#1a45aa;color:#fff"><span>bleu</span><span class="ratio">8,5:1</span></div><div class="info"><strong>Bleu Puro</strong><code>#1A45AA</code><p>Hero, section à partager, avis, boutons pleins, titres sur blanc.</p><p class="why">Un bleu profond et franc, comme une faïence de trattoria. Seul, il suffit à reconnaître le lieu, et le blanc s’y lit à 8,5:1.</p></div></div>
+      <div class="color"><div class="chip" style="background:#0f2d7a;color:#fff"><span>bleu nuit</span><span class="ratio">12,5:1</span></div><div class="info"><strong>Bleu nuit</strong><code>#0F2D7A</code><p>Titre de la fenêtre de réservation, pied de page, texte saisi.</p><p class="why">La même couleur, un cran plus sombre&nbsp;: elle marque la fin de la page et le moment de la réservation sans ajouter de teinte.</p></div></div>
+      <div class="color"><div class="chip" style="background:#fff;color:#1a45aa;border-bottom:1px solid #dce3f2"><span>blanc</span></div><div class="info"><strong>Blanc</strong><code>#FFFFFF</code><p>Fond des sections claires, trait des illustrations sur le bleu, boutons sur le bleu.</p><p class="why">Le blanc alterne avec le bleu d’une section à l’autre&nbsp;: la page respire et chaque section se lit comme une nouvelle assiette.</p></div></div>
+      <div class="color"><div class="chip" style="background:#576ca2;color:#fff"><span>ardoise</span><span class="ratio">5,2:1</span></div><div class="info"><strong>Bleu ardoise</strong><code>#576CA2</code><p>Texte courant sur blanc.</p><p class="why">Un gris tiré du bleu&nbsp;: le texte recule derrière les titres sans sortir de la palette.</p></div></div>
+      <div class="color"><div class="chip" style="background:#cadaff;color:#1a45aa"><span>brume</span></div><div class="info"><strong>Bleu brume</strong><code>#CADAFF</code><p>Texte courant posé sur le bleu.</p><p class="why">Le blanc pur est gardé pour les titres. Le texte un peu bleuté reste lisible (6,0:1) et laisse le titre en tête.</p></div></div>
+      <div class="color"><div class="chip" style="background:#5f7cc4;color:#fff"><span>lavande</span></div><div class="info"><strong>Bleu lavande</strong><code>#5F7CC4</code><p>Étiquettes en capitales&nbsp;: «&nbsp;Le menu&nbsp;», «&nbsp;Nom&nbsp;», «&nbsp;Email&nbsp;».</p><p class="why">Il annonce sans crier. Je le réserve à un ou deux mots, toujours suivis d’un titre ou d’un champ qui portent le sens.</p></div></div>
+    </div>
+    <h3 class="ds-sub">Contrastes vérifiés</h3>
+    <table class="contrast">
+      <thead><tr><th>Couple</th><th>Ratio</th><th>Verdict</th><th>Usage autorisé</th></tr></thead>
+      <tbody>
+        <tr><td><span class="pair" style="background:#fff;color:#0f2d7a;border:1px solid #dce3f2">Aa</span></td><td>12,5:1</td><td class="ok">AAA</td><td>Tout texte</td></tr>
+        <tr><td><span class="pair" style="background:#1a45aa;color:#fff">Aa</span></td><td>8,5:1</td><td class="ok">AAA</td><td>Titres et boutons sur le bleu, bouton bleu</td></tr>
+        <tr><td><span class="pair" style="background:#1a45aa;color:#cadaff">Aa</span></td><td>6,0:1</td><td class="ok">AA</td><td>Texte courant sur le bleu</td></tr>
+        <tr><td><span class="pair" style="background:#fff;color:#576ca2;border:1px solid #dce3f2">Aa</span></td><td>5,2:1</td><td class="ok">AA</td><td>Texte courant sur blanc</td></tr>
+        <tr><td><span class="pair" style="background:#fff;color:#5f7cc4;border:1px solid #dce3f2">Aa</span></td><td>4,1:1</td><td class="ok">AA grands textes</td><td>Étiquettes d’un ou deux mots, jamais une phrase</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="ds-sec" id="typo">
+    <h2><b>03</b>Typographie</h2>
+    <p class="lead">Deux familles&nbsp;: une serif très grasse pour ce qui doit donner faim, une sans-serif neutre pour ce qui doit informer.</p>
+    <p class="why">La serif, en 900, a des empattements ronds et généreux, un air rétro de devanture peinte&nbsp;: elle donne au site son ton chaleureux et un peu espiègle. La sans-serif, neutre et très lisible, porte les phrases, les horaires et les champs, là où l’on doit lire vite.</p>
+    <div class="types">
+      <div class="type-row"><div style="font:900 clamp(34px,4.4vw,54px)/1.05 var(--serif);color:#1a45aa">La simplicité italienne dans chaque assiette.</div><div class="meta"><strong>Titre principal</strong><code>Serif · 900 · ≈ 54 px · interligne ≈ 1,05</code><p class="why">Gras et serré, il se lit comme une enseigne. Le point final affirme la promesse.</p></div></div>
+      <div class="type-row"><div style="font:900 clamp(28px,3.4vw,44px)/1.1 var(--serif);color:#1a45aa">Une carte variée pour toutes les envies.</div><div class="meta"><strong>Titre de section</strong><code>Serif · 900 · ≈ 44 px</code><p class="why">Même famille, même graisse&nbsp;: chaque section parle avec la voix de l’enseigne.</p></div></div>
+      <div class="type-row"><div style="font:900 40px/1 var(--serif);color:#1a45aa">10+ &nbsp;4.9</div><div class="meta"><strong>Chiffres</strong><code>Serif · 900 · ≈ 40 px · légende en capitales</code><p class="why">Les chiffres de l’osteria sont dans la police des titres&nbsp;: ils se lisent comme des arguments, pas comme des statistiques.</p></div></div>
+      <div class="type-row"><div style="font:900 20px/1.4 var(--serif);color:#1a45aa;max-width:30ch">«&nbsp;Produits frais, portions généreuses et rapport qualité-prix remarquable.&nbsp;»</div><div class="meta"><strong>Citation d’avis</strong><code>Serif · 900 · ≈ 20 px · interligne ≈ 1,4</code><p class="why">L’avis d’un client est mis en voix comme un titre&nbsp;: c’est la preuve la plus forte de la page.</p></div></div>
+      <div class="type-row"><div style="font-size:16px;line-height:1.6;color:#576ca2;max-width:46ch">Entrecôte de bœuf maturée 30 jours, beurre persillé maison, fleur de sel, frites fraîches et salade de saison.</div><div class="meta"><strong>Texte courant</strong><code>Sans-serif · 400 · ≈ 16 px · ≈ 18 px dans le hero</code><p class="why">Une police neutre pour les détails&nbsp;: la serif grasse sur des lignes longues fatiguerait l’œil.</p></div></div>
+      <div class="type-row"><div><span class="label">Cucina italiana · depuis 2014</span></div><div class="meta"><strong>Étiquette</strong><code>Sans-serif · 500 · ≈ 12 px · capitales · très espacée</code><p class="why">Les capitales espacées posent le contexte au-dessus du titre, à la manière d’un menu imprimé.</p></div></div>
+    </div>
+  </section>
+
+  <section class="ds-sec" id="formes">
+    <h2><b>04</b>Formes</h2>
+    <div class="tokens">
+      <div class="token-card"><h3>Rayons</h3><div class="shapes"><div><i style="border-radius:8px"></i>8</div><div><i style="border-radius:16px"></i>16</div><div><i style="border-radius:20px"></i>20</div><div><i style="border-radius:999px;width:96px"></i>pilule</div></div><p class="why">8 pour les champs, 16 pour les catégories et les avis, 20 pour la fenêtre de réservation. La pilule est pour les boutons et les étiquettes&nbsp;: tout ce qui se clique est rond.</p></div>
+      <div class="token-card"><h3>Courbes et ombres</h3><div class="shapes"><div><i class="curve" style="border:0"></i>courbe</div><div><i class="blob" style="border:0"></i>organique</div><div><i style="width:48px;height:48px;border-radius:50%;border:2px solid #1a45aa;box-shadow:3px 4px 0 #1a45aa"></i>ombre pleine</div></div><p class="why">Une grande courbe sépare le hero du blanc, une forme organique tient chaque plat. Pas d’ombre floue&nbsp;: le site est à plat comme un dessin, seules les flèches ont une ombre pleine décalée.</p></div>
+      <div class="token-card"><h3>Largeur</h3><div class="scale"><div><i style="width:100%"></i></div><div>≈ 1 120 px de contenu</div></div><p class="why">Six catégories tiennent sur une ligne, et le texte d’une section reste dans sa demi-colonne, en lignes courtes.</p></div>
+    </div>
+  </section>
+
+  <section class="ds-sec" id="composants">
+    <h2><b>05</b>Composants</h2>
+    <div class="comps">
+      <div class="comp wide"><div class="demo"><div class="blue"><figure><button class="btn btn-white" type="button">Réserver votre table</button><figcaption style="color:#cadaff">sur le bleu</figcaption></figure><figure><a class="link" href="#composants">Voir le menu&nbsp;→</a><figcaption style="color:#cadaff">secondaire</figcaption></figure></div><figure><button class="btn btn-blue" type="button">Je réserve ma table</button><figcaption>sur blanc</figcaption></figure><figure><button class="btn btn-blue btn-wide" type="button">Réserver ma table</button><figcaption>fenêtre</figcaption></figure></div>
+        <div class="text"><h3>Boutons</h3><p>Pilule blanche sur le bleu, pilule bleue sur le blanc, libellé en serif grasse. L’action secondaire est un simple lien souligné avec une flèche.</p><p class="why">Le bouton inverse toujours la couleur du fond, il ressort partout à 8,5:1. Le libellé en serif grasse fait de la réservation une invitation, pas un formulaire.</p></div></div>
+      <div class="comp"><div class="demo center"><div class="field"><span class="label">Nom</span><div class="input is-focus"></div></div><div class="field"><span class="label">Email</span><div class="input"></div></div></div><div class="text"><h3>Champ de réservation</h3><p>Étiquette en capitales au-dessus, champ blanc à bordure claire. Au focus, la bordure passe au bleu avec un halo pâle.</p><p class="why">Au repos, la bordure s’efface pour garder la fenêtre légère. Au focus, le bleu montre sans doute possible où l’on écrit.</p></div></div>
+      <div class="comp"><div class="demo center"><div class="cats"><div class="cat on"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12c0-4 3-7 7.5-7S20 8 19 12s-4 7-8.5 7S5 16 5 12z"/><circle cx="11" cy="12" r="2.2"/></svg></i>Viandes grillées</div><div class="cat"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12c3-4 7-5 11-3l5-3v12l-5-3c-4 2-8 1-11-3z"/><circle cx="8" cy="11" r=".6"/></svg></i>Poissons</div></div></div><div class="text"><h3>Catégorie de la carte</h3><p>Tuile blanche presque sans bordure, pictogramme au trait dans un rond pâle. La catégorie choisie passe en bleu plein.</p><p class="why">Une seule tuile bleue à la fois&nbsp;: on sait quel plat est affiché en dessous, comme dans un onglet.</p></div></div>
+      <div class="comp"><div class="demo center" style="flex-direction:column"><span class="pill-tag">Viandes grillées</span><div class="nav-dots"><span class="arrow" aria-hidden="true">←</span><span class="dot-on"></span><span class="dot"></span><span class="arrow" aria-hidden="true">→</span></div></div><div class="text"><h3>Étiquette et navigation des plats</h3><p>Une étiquette contourée rappelle la catégorie au-dessus du plat. Deux flèches rondes à ombre pleine font défiler les plats, la pilule indique la position.</p><p class="why">L’ombre pleine donne aux flèches l’allure d’un bouton dessiné, dans le même trait que les illustrations.</p></div></div>
+      <div class="comp"><div class="demo center" style="background:#1a45aa"><div class="review"><div class="stars" aria-label="5 sur 5">★★★★★</div><blockquote>«&nbsp;Produits frais, portions généreuses et rapport qualité-prix remarquable.&nbsp;»</blockquote><div class="who"><i></i>Julien M.</div></div></div><div class="text"><h3>Carte d’avis</h3><p>Carte blanche sur le bleu&nbsp;: cinq étoiles, la citation en serif grasse, un avatar illustré (ici simplifié) et le prénom.</p><p class="why">Un prénom et une initiale, pas de nom complet&nbsp;: l’avis reste humain et crédible, comme un mot laissé sur un livre d’or.</p></div></div>
+    </div>
+  </section>
+
+  <section class="ds-sec" id="regles">
+    <h2><b>06</b>Règles</h2>
+    <div class="rules">
+      <div class="do"><h3>À faire</h3><ul><li>Alterner les sections bleues et blanches.</li><li>Le même libellé et la même fenêtre pour chaque bouton de réservation.</li><li>La serif grasse pour les titres, les chiffres, les boutons et les avis.</li><li>La sans-serif pour les phrases, les horaires et les champs.</li><li>Des illustrations au trait, blanches sur le bleu, bleues sur le blanc.</li></ul></div>
+      <div class="dont"><h3>À éviter</h3><ul><li>Une deuxième couleur vive, même pour une promotion.</li><li>Des photos de plats à côté des illustrations.</li><li>Le bleu lavande pour une phrase entière.</li><li>La serif grasse en texte courant, ou des ombres floues.</li></ul></div>
+    </div>
+  </section>
+
+  <p class="ds-foot">Puro Osteria · design system conçu par Anissa B. Le Prunenec · Just One Studio</p>
+</main>
+</body>
+</html>

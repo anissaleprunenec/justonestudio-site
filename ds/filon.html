@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Filon — Design system</title>
+<meta name="description" content="Le design system de Filon : principes, couleurs, typographie, formes, composants et règles, avec la raison de chaque choix.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ds.css">
+<style>
+  :root {
+    --ds-bg: #2f6ff5; --ds-card: #ffffff; --ds-ink: #141414; --ds-soft: #4a4f58; --ds-muted: #6b7079; --ds-line: rgba(20, 20, 20, .1);
+    --ds-accent: #2166e8; --ds-accent-text: #2166e8; --ds-font: "Poppins", system-ui, sans-serif; --ds-display-weight: 500; --ds-radius: 24px;
+    --ds-demo: #f6f8f5; --tile-shadow: 0 0 0 1px rgba(255, 255, 255, .35), 0 24px 70px rgba(12, 40, 120, .2);
+  }
+  /* the page sits like a Filon card on the blue backdrop */
+  .ds { margin: 16px auto 40px; max-width: 1180px; background: #fff; border-radius: 44px; box-shadow: var(--tile-shadow); padding-inline: clamp(20px, 5vw, 70px); }
+  .ds-head h1 { letter-spacing: -.045em; line-height: 1.08; }
+  .ds-head h1 em, .grad { font-style: normal; background: linear-gradient(100deg, #1d5fe6 0%, #3f8bff 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; padding-right: .05em; }
+  .ds-logo-txt { display: inline-flex; align-items: center; gap: 10px; font-size: 30px; font-weight: 600; letter-spacing: -.035em; line-height: 1; }
+  .ds-logo-txt svg { width: 33px; height: 33px; color: #141414; }
+  .ds-toc a { border-color: rgba(20, 20, 20, .1); }
+  /* the real components, with the values of the page */
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 12px; height: 52px; padding: 0 26px; border-radius: 999px; font: 500 14.5px/1 var(--ds-font); white-space: nowrap; transition: transform .18s, box-shadow .18s; }
+  .btn svg { width: 17px; height: 17px; flex-shrink: 0; transition: transform .18s; }
+  .btn-dark { background: linear-gradient(180deg, #2a2a2a 0%, #151515 100%); color: #fff; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .14), 0 6px 16px rgba(20, 20, 20, .16); }
+  .btn-dark.is-hover { transform: translateY(-2px); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .14), 0 14px 28px rgba(20, 20, 20, .26); }
+  .btn-dark.is-hover svg { transform: translate(2px, -2px); }
+  .btn.is-focus { outline: 2px solid #2166e8; outline-offset: 3px; }
+  .btn-soft { background: #fff; color: #141414; box-shadow: 0 6px 22px rgba(20, 20, 20, .07), 0 0 0 1px rgba(20, 20, 20, .06); }
+  .btn-soft svg { color: #2166e8; }
+  .btn-soft.is-hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(33, 102, 232, .14), 0 0 0 1px rgba(33, 102, 232, .28); }
+  .kicker { display: inline-block; padding: 5px 12px; border-radius: 999px; background: rgba(33, 102, 232, .09); color: #2166e8; font-size: 12px; font-weight: 500; }
+  .kicker.on-dark { background: rgba(255, 255, 255, .14); color: #fff; }
+  .dark-demo { background: linear-gradient(160deg, #232323 0%, #121212 100%) !important; color: #fff; }
+  .avatar { flex-shrink: 0; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; background: #e8efff; color: #2166e8; font-size: 13px; font-weight: 600; }
+  .f-lead { display: flex; align-items: center; gap: 12px; width: 300px; padding: 12px 14px; border-radius: 18px; background: #fff; box-shadow: 0 6px 22px rgba(20, 20, 20, .07), 0 0 0 1px rgba(20, 20, 20, .05); transition: transform .3s, box-shadow .3s; }
+  .f-lead.is-hover { transform: scale(1.03); box-shadow: 0 14px 34px rgba(33, 102, 232, .16), 0 0 0 1px rgba(33, 102, 232, .25); }
+  .f-lead b { display: block; font-size: 13.5px; font-weight: 600; line-height: 1.3; }
+  .f-lead div span { display: block; font-size: 12px; color: #7a7f87; }
+  .f-lead em { margin-left: auto; padding: 5px 10px; border-radius: 999px; background: #e9f8ef; color: #1c8a4c; font-style: normal; font-size: 12px; font-weight: 600; white-space: nowrap; }
+  .f-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .f-chip { padding: 8px 14px; border-radius: 999px; background: #fff; font-size: 13px; font-weight: 500; line-height: 1.5; box-shadow: 0 0 0 1px rgba(20, 20, 20, .06); }
+  .f-chip.on { background: #1a1a1a; color: #fff; }
+  .f-chip.is-hover { transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(33, 102, 232, .45), 0 6px 14px rgba(33, 102, 232, .16); }
+  .match { margin-top: 14px; font-size: 12.5px; color: #7a7f87; }
+  .match b { font-weight: 600; color: #141414; font-variant-numeric: tabular-nums; }
+  .tile { position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; width: 100%; max-width: 340px; min-height: 220px; padding: 28px; border-radius: 28px; background: linear-gradient(160deg, #232323 0%, #121212 100%); color: #fff; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .1), 0 24px 70px rgba(12, 40, 120, .2); }
+  .big { font-size: 72px; font-weight: 500; line-height: 1; letter-spacing: -.05em; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .big small { font-size: .42em; letter-spacing: -.02em; margin-left: .12em; }
+  .tile p { margin-top: 12px; font-size: 14.5px; line-height: 1.6; color: rgba(255, 255, 255, .66); }
+  .blue-demo { background: #2f6ff5 !important; }
+  .shadow-demo { width: 96px; height: 64px; border-radius: 18px; background: #fff; }
+  .demo .stack { display: grid; gap: 12px; justify-items: start; }
+  @media (max-width: 560px) { .ds { margin: 8px 8px 24px; border-radius: 24px; } .f-lead { width: 100%; } }
+</style>
+</head>
+<body>
+<main class="ds">
+  <header class="ds-head">
+    <span class="ds-logo-txt" role="img" aria-label="Filon"><svg viewBox="0 0 26 26" aria-hidden="true"><rect width="26" height="26" rx="8" fill="currentColor"/><path d="M6.5 19.5C8 12.5 12.5 8 19.5 6.8" fill="none" stroke="#6a9bff" stroke-width="3.2" stroke-linecap="round"/></svg>Filon</span>
+    <span class="ds-eyebrow">Design system · version courte</span>
+    <h1>Une Génération de Leads <em>qualifiés</em></h1>
+    <p>Les fondations et les composants de Filon, une marque de génération de leads B2B que j’ai inventée pour présenter une offre complexe en bento. Chaque choix a sa raison, écrite à côté.</p>
+    <ul class="ds-toc"><li><a href="#principes">Principes</a></li><li><a href="#couleurs">Couleurs</a></li><li><a href="#typo">Typographie</a></li><li><a href="#formes">Formes</a></li><li><a href="#composants">Composants</a></li><li><a href="#regles">Règles</a></li></ul>
+  </header>
+
+  <section class="ds-sec" id="principes">
+    <h2><b>01</b>Principes</h2>
+    <p class="lead">Trois idées, les objectifs du projet. Quand j’hésite entre deux options, je reviens à elles.</p>
+    <div class="principles">
+      <div class="principle"><b>01</b><h3>Une idée par carte</h3><p>Un chiffre, une promesse ou un geste&nbsp;: chaque carte du bento répond à une seule question qu’un acheteur se pose.</p></div>
+      <div class="principle"><b>02</b><h3>Un bento dosé</h3><p>Deux lignes de cartes sous le hero, pas plus. Ensuite, des sections longues laissent respirer la lecture.</p></div>
+      <div class="principle"><b>03</b><h3>Des cartes vivantes</h3><p>Chaque carte a sa petite animation ou son survol. Elle joue une fois, puis se fait oublier.</p></div>
+    </div>
+  </section>
+
+  <section class="ds-sec" id="couleurs">
+    <h2><b>02</b>Couleurs</h2>
+    <p class="lead">Un fond bleu, des cartes blanches, une encre presque noire et un seul bleu d’accent. Les contrastes sont mesurés sur le blanc des cartes.</p>
+    <div class="colors">
+      <div class="color"><div class="chip" style="background:linear-gradient(160deg,#2f6ff5,#3478f8 55%,#2b63f0);color:#fff"><span>fond</span></div><div class="info"><strong>Bleu de fond</strong><code>#2F6FF5</code><p>Le fond fixe sur lequel flottent toutes les cartes.</p><p class="why">Le bento ressemble à des cartes posées sur une table. Une table bleue donne l’énergie de la marque sans toucher au texte.</p></div></div>
+      <div class="color"><div class="chip" style="background:#141414;color:#fff"><span>--ink</span><span class="ratio">18,4:1</span></div><div class="info"><strong>Encre</strong><code>#141414</code><p>Titres, chiffres, bouton principal, critères choisis.</p><p class="why">Un noir à peine adouci&nbsp;: le contraste reste maximal sans la dureté du noir pur.</p></div></div>
+      <div class="color"><div class="chip" style="background:#4a4f58;color:#fff"><span>--ink-soft</span><span class="ratio">8,2:1</span></div><div class="info"><strong>Ardoise</strong><code>#4A4F58</code><p>Texte courant, liens de navigation.</p><p class="why">Les phrases reculent d’un cran derrière les titres, et restent très lisibles.</p></div></div>
+      <div class="color"><div class="chip" style="background:#7a7f87;color:#fff"><span>--muted</span></div><div class="info"><strong>Gris</strong><code>#7A7F87</code><p>Mentions&nbsp;: fonctions des leads, durée de lecture, «&nbsp;Ils nous font confiance&nbsp;».</p><p class="why">Un troisième niveau pour ce qu’on peut sauter. Je le réserve à ce qui n’est pas indispensable.</p></div></div>
+      <div class="color"><div class="chip" style="background:#2166e8;color:#fff"><span>--blue</span><span class="ratio">5,1:1</span></div><div class="info"><strong>Bleu</strong><code>#2166E8</code><p>Étiquettes, numéros d’étape, icônes, focus clavier, mot «&nbsp;qualifiés&nbsp;».</p><p class="why">Le même bleu que le fond, en plus dense&nbsp;: dans la carte, il signale ce qui guide, jamais ce qui décore.</p></div></div>
+      <div class="color"><div class="chip" style="background:#f6f8f5;color:#141414;border-bottom:1px solid rgba(20,20,20,.1)"><span>--tint</span></div><div class="info"><strong>Gris clair</strong><code>#F6F8F5</code><p>Carte du ciblage, blog, fonds des illustrations de la méthode.</p><p class="why">Un blanc à peine vert qui distingue deux cartes voisines sans ajouter une couleur.</p></div></div>
+      <div class="color"><div class="chip" style="background:linear-gradient(160deg,#232323,#121212);color:#fff"><span>sombre</span></div><div class="info"><strong>Carte sombre</strong><code>#232323 → #121212</code><p>Carte 24&nbsp;h, résultats, demande de devis.</p><p class="why">Le contraste le plus fort de la page&nbsp;: je le garde pour les chiffres et le formulaire, là où je veux l’œil.</p></div></div>
+      <div class="color"><div class="chip" style="background:#e9f8ef;color:#1c8a4c"><span>vert</span></div><div class="info"><strong>Vert</strong><code>#1C8A4C sur #E9F8EF</code><p>Scores des leads, nouveau lead, message envoyé.</p><p class="why">La seule couleur d’état&nbsp;: elle dit «&nbsp;c’est bon&nbsp;», toujours avec un mot ou un chiffre à côté.</p></div></div>
+    </div>
+    <h3 class="ds-sub">Contrastes vérifiés</h3>
+    <table class="contrast">
+      <thead><tr><th>Couple</th><th>Ratio</th><th>Verdict</th><th>Usage autorisé</th></tr></thead>
+      <tbody>
+        <tr><td><span class="pair" style="background:#fff;color:#141414;border:1px solid rgba(20,20,20,.12)">Aa</span></td><td>18,4:1</td><td class="ok">AAA</td><td>Tout texte</td></tr>
+        <tr><td><span class="pair" style="background:#fff;color:#4a4f58;border:1px solid rgba(20,20,20,.12)">Aa</span></td><td>8,2:1</td><td class="ok">AAA</td><td>Texte courant</td></tr>
+        <tr><td><span class="pair" style="background:#121212;color:rgba(255,255,255,.66)">Aa</span></td><td>8,4:1</td><td class="ok">AAA</td><td>Texte des cartes sombres (blanc à 66&nbsp;%)</td></tr>
+        <tr><td><span class="pair" style="background:#fff;color:#2166e8;border:1px solid rgba(20,20,20,.12)">Aa</span></td><td>5,1:1</td><td class="ok">AA</td><td>Numéros d’étape, liens, icônes</td></tr>
+        <tr><td><span class="pair" style="background:#fff;color:#7a7f87;border:1px solid rgba(20,20,20,.12)">Aa</span></td><td>4,0:1</td><td class="ok">AA grands textes</td><td>Mentions secondaires</td></tr>
+        <tr><td><span class="pair" style="background:#e9f8ef;color:#1c8a4c">Aa</span></td><td>4,0:1</td><td class="ok">AA grands textes</td><td>Scores, toujours lus avec la ligne du lead</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="ds-sec" id="typo">
+    <h2><b>03</b>Typographie</h2>
+    <p class="lead">Une seule famille, Poppins, avec des titres en 500 plutôt qu’en gras.</p>
+    <p class="why">Ronde et géométrique, Poppins rassure sur une offre B2B qui peut faire peur. En 500, les grands titres restent calmes et chers&nbsp;; le 600 est réservé aux noms, aux scores et aux mots à faire ressortir dans une phrase. Fredoka et Russo One ne servent qu’aux logos des partenaires fictifs, pour qu’ils aient chacun leur voix.</p>
+    <div class="types">
+      <div class="type-row"><div style="font-size:clamp(34px,5vw,64px);font-weight:500;line-height:1.08;letter-spacing:-.045em">Une Génération de Leads <span class="grad">qualifiés</span></div><div class="meta"><strong>Titre principal</strong><code>500 · 40 → 80 px · interligne 1,08 · −4,5 %</code><p class="why">Le dégradé bleu ne touche qu’un mot, celui qui fait la promesse&nbsp;: des leads qualifiés, pas seulement des leads.</p></div></div>
+      <div class="type-row"><div style="font-size:clamp(28px,3.4vw,48px);font-weight:500;line-height:1.1;letter-spacing:-.04em">Trois étapes, zéro prospection à froid</div><div class="meta"><strong>Titre de section</strong><code>500 · 30 → 48 px · interligne 1,1 · −4 %</code><p class="why">Même graisse que le titre principal&nbsp;: la hiérarchie vient de la taille, la page garde une seule voix.</p></div></div>
+      <div class="type-row"><div style="font-size:clamp(24px,2.3vw,33px);font-weight:500;line-height:1.14;letter-spacing:-.035em">Un ciblage précis</div><div class="meta"><strong>Titre de carte</strong><code>500 · 24 → 33 px · interligne 1,14 · −3,5 %</code><p class="why">Assez grand pour qu’une carte se comprenne de loin, à la seule lecture de son titre.</p></div></div>
+      <div class="type-row"><div style="font-size:14.5px;line-height:1.6;color:#4a4f58;max-width:46ch">Chaque contact est vérifié et noté avant de vous être transmis. Vous ne rappelez que des personnes qui ont un besoin réel.</div><div class="meta"><strong>Texte de carte</strong><code>400 · 14,5 px · interligne 1,6 · ardoise · 46 car. max</code><p class="why">Deux phrases courtes au plus&nbsp;: le texte confirme le titre, il ne le remplace pas.</p></div></div>
+      <div class="type-row"><div><span class="kicker">Solutions</span></div><div class="meta"><strong>Étiquette</strong><code>500 · 12 px · bleu sur bleu à 9 % · pilule</code><p class="why">Elle nomme la section sans titre de plus, et devient blanche sur les cartes sombres.</p></div></div>
+      <div class="type-row"><div class="big" style="font-size:clamp(56px,6.4vw,92px)">+68<small>%</small></div><div class="meta"><strong>Grand chiffre</strong><code>500 · 56 → 92 px · interligne 1 · −5 % · unité à 0,42 em</code><p class="why">Le chiffre est la carte. L’unité réduite le laisse parler seul, et les chiffres tabulaires ne sautent pas quand le compteur défile.</p></div></div>
+    </div>
+  </section>
+
+  <section class="ds-sec" id="formes">
+    <h2><b>04</b>Formes</h2>
+    <div class="tokens">
+      <div class="token-card"><h3>Rayons</h3><div class="shapes"><div><i style="border-radius:18px"></i>18</div><div><i style="border-radius:32px"></i>32</div><div><i style="border-radius:44px"></i>24 → 44</div><div><i style="border-radius:999px;width:96px"></i>pilule</div></div><p class="why">Tout est très arrondi&nbsp;: 18 pour les lignes dans une carte, 32 pour les articles, 24 à 44 selon l’écran pour les cartes du bento. La pilule pour ce qui se clique ou s’étiquette.</p></div>
+      <div class="token-card"><h3>Ombres</h3><div class="shapes"><div><i class="shadow-demo" style="box-shadow:0 6px 22px rgba(20,20,20,.07),0 0 0 1px rgba(20,20,20,.05);border:0"></i>ligne</div><div><i class="shadow-demo" style="box-shadow:0 0 0 1px rgba(20,20,20,.04),0 24px 70px rgba(12,40,120,.2);border:0"></i>carte</div><div><i class="shadow-demo" style="box-shadow:0 0 0 1px rgba(20,20,20,.04),0 36px 80px rgba(12,40,120,.34);border:0"></i>survol</div></div><p class="why">Les ombres des cartes sont teintées de bleu nuit, comme si le fond bleu les éclairait. Au survol, la carte monte de 6&nbsp;px et son ombre s’allonge.</p></div>
+      <div class="token-card"><h3>Grille et gouttière</h3><div class="scale"><div><i style="width:33%"></i><i style="width:58%"></i></div><div>12 colonnes · cartes de 4, 5 ou 7</div><div><i style="width:16px"></i></div><div>8 → 16 px entre toutes les cartes</div></div><p class="why">Le même écart partout, entre les cartes et autour d’elles&nbsp;: le bento se lit comme un seul objet. Les largeurs différentes font la hiérarchie.</p></div>
+    </div>
+  </section>
+
+  <section class="ds-sec" id="composants">
+    <h2><b>05</b>Composants</h2>
+    <div class="comps">
+      <div class="comp wide"><div class="demo"><figure><span class="btn btn-dark">Voir nos solutions <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span><figcaption>repos</figcaption></figure><figure><span class="btn btn-dark is-hover">Voir nos solutions <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span><figcaption>survol</figcaption></figure><figure><span class="btn btn-dark is-focus">Voir nos solutions <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span><figcaption>focus clavier</figcaption></figure><figure><span class="btn btn-soft">Devis gratuit <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 7.5v9L12 21l8-4.5v-9L12 3Z"/><path d="m4 7.5 8 4.5 8-4.5M12 12v9"/></svg></span><figcaption>secondaire</figcaption></figure><figure><span class="btn btn-soft is-hover">Devis gratuit <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 7.5v9L12 21l8-4.5v-9L12 3Z"/><path d="m4 7.5 8 4.5 8-4.5M12 12v9"/></svg></span><figcaption>secondaire, survol</figcaption></figure></div>
+        <div class="text"><h3>Boutons</h3><p>Pilule noire pour l’action principale, pilule blanche à icône bleue pour le devis. Au survol, le bouton monte de 2&nbsp;px, son ombre s’allonge, et la flèche part en diagonale.</p><p class="why">Le noir tranche sur le blanc comme sur le bleu&nbsp;: le bouton principal se voit partout. Le blanc reste une vraie option, mais d’un cran plus discret.</p></div></div>
+      <div class="comp"><div class="demo center"><figure><span class="kicker">Solutions</span><figcaption>sur carte claire</figcaption></figure><figure class="dark-demo" style="padding:14px 16px;border-radius:16px"><span class="kicker on-dark">Résultats</span><figcaption style="color:rgba(255,255,255,.66)">sur carte sombre</figcaption></figure></div><div class="text"><h3>Étiquette</h3><p>Petite pilule bleue en haut de chaque carte ou section, blanche sur les cartes sombres.</p><p class="why">Dans un bento, les cartes n’ont pas toutes un titre de section&nbsp;: l’étiquette dit en un mot de quoi parle chacune.</p></div></div>
+      <div class="comp"><div class="demo center"><figure><span class="f-lead"><span class="avatar">CR</span><div><b>Camille R.</b><span>Directrice marketing</span></div><em>Score 92</em></span><figcaption>repos</figcaption></figure><figure><span class="f-lead is-hover"><span class="avatar" style="background:#fff0e6;color:#d9661f">TM</span><div><b>Thomas M.</b><span>Gérant, 40 salariés</span></div><em>Score 88</em></span><figcaption>survol</figcaption></figure></div><div class="text"><h3>Ligne de lead</h3><p>Avatar à initiales, nom, fonction et score en pastille verte. Les lignes arrivent l’une après l’autre, puis s’écartent au survol de la carte.</p><p class="why">Montrer trois vrais leads plutôt qu’une liste à puces&nbsp;: le visiteur voit ce qu’il va recevoir avant de lire la promesse.</p></div></div>
+      <div class="comp"><div class="demo center" style="flex-direction:column"><div><div class="f-chips"><span class="f-chip on">Secteur</span><span class="f-chip is-hover">Taille d’entreprise</span><span class="f-chip on">Zone</span><span class="f-chip">Budget</span><span class="f-chip">Fonction</span></div><p class="match">≈ <b>3&#8239;120</b> entreprises correspondent</p></div></div><div class="text"><h3>Critères à bascule</h3><p>Chaque critère est un bouton à bascule&nbsp;: noir quand il est choisi, bordé de bleu au survol. Le nombre d’entreprises se met à jour et il est annoncé aux lecteurs d’écran.</p><p class="why">Le visiteur essaie le ciblage au lieu de le lire. Le chiffre qui bouge rend concrète une promesse abstraite.</p></div></div>
+      <div class="comp"><div class="demo center blue-demo"><div class="tile"><div class="big">24<small>h</small></div><p>C’est le délai maximum avant qu’un expert vous rappelle pour une démo personnalisée.</p></div></div><div class="text"><h3>Carte chiffre</h3><p>Carte sombre, un grand chiffre et une phrase. Sur la page, un arc bleu se trace une seule fois quand elle arrive à l’écran.</p><p class="why">Le délai est la première inquiétude d’un acheteur de leads. Posé en grand sur la carte la plus contrastée, il se lit avant tout le reste.</p></div></div>
+    </div>
+  </section>
+
+  <section class="ds-sec" id="regles">
+    <h2><b>06</b>Règles</h2>
+    <div class="rules">
+      <div class="do"><h3>À faire</h3><ul><li>Une seule idée par carte, et un seul bouton.</li><li>Deux lignes de bento au plus, puis des sections longues.</li><li>Le même écart entre toutes les cartes.</li><li>Des chiffres tabulaires pour tout ce qui compte ou défile.</li><li>Couper toutes les animations si le visiteur le demande.</li></ul></div>
+      <div class="dont"><h3>À éviter</h3><ul><li>Des titres en gras&nbsp;: ils restent en 500.</li><li>Le gris #7A7F87 pour une information utile en petit texte.</li><li>Un paragraphe sur la carte en verre&nbsp;: le contraste ne suffit pas.</li><li>Un logo de vrai partenaire&nbsp;: les cinq logos sont inventés, et le pied de page le dit.</li></ul></div>
+    </div>
+  </section>
+
+  <p class="ds-foot">Filon · marque fictive · design system conçu par Anissa B. Le Prunenec · Just One Studio</p>
+</main>
+</body>
+</html>

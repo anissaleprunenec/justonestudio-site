@@ -232,11 +232,16 @@
   .projects-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; margin-bottom: 48px; flex-wrap: wrap; }
   .projects-head h2 { font-weight: 500; font-size: clamp(34px, 4vw, 56px); letter-spacing: -.035em; line-height: 1; }
   .projects-head h2 em { font-family: var(--serif); font-weight: 400; letter-spacing: -.01em; color: var(--accent); }
-  .all-link { display: inline-flex; align-items: center; gap: 12px; padding: 8px 8px 8px 18px; border-radius: 999px; border: 1px solid var(--line); font-size: 14px; font-weight: 500; transition: background .2s; }
-  .all-link:hover { background: var(--surface-hover); }
-  .all-link .count { color: var(--muted); font-weight: 400; }
-  .all-link .arrow { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; background: var(--btn-bg); color: var(--btn-text); transition: transform .3s var(--ease); }
-  .all-link:hover .arrow { transform: rotate(-45deg); background: var(--accent); color: #fff; }
+  /* "all projects": a filled pill, the strongest button of the section */
+  .all-link { display: inline-flex; align-items: center; gap: 14px; padding: 8px 8px 8px 24px; border-radius: 999px; background: var(--btn-bg); color: var(--btn-text); font-size: 16px; font-weight: 500; white-space: nowrap; transition: background .2s, color .2s, box-shadow .3s; }
+  .all-link:hover { box-shadow: 0 10px 30px -10px var(--accent); }
+  .all-link .count { opacity: .55; font-weight: 400; }
+  .all-link .arrow { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; background: var(--accent); color: #fff; font-size: 18px; transition: transform .3s var(--ease); }
+  .all-link:hover .arrow { transform: rotate(-45deg); }
+  /* the same button again once the three cards have been seen */
+  .all-more { display: flex; justify-content: center; margin-top: clamp(40px, 6vw, 72px); }
+  .all-more .all-link { font-size: 18px; padding: 10px 10px 10px 30px; }
+  .all-more .all-link .arrow { width: 44px; height: 44px; }
   .stack { display: grid; gap: 28px; }
   .stack article { position: sticky; top: calc(24px + var(--i) * 18px); }
   /* a soft blue glow behind each card, alternating right / left / right */
@@ -251,8 +256,14 @@
   .stack .card { display: grid; grid-template-columns: 1fr 1.35fr; min-height: 440px; border-radius: 22px; overflow: hidden;
     background: var(--card); border: 1px solid var(--line); box-shadow: 0 -20px 60px -30px var(--card-shadow); }
   .stack .text { padding: clamp(28px, 3.4vw, 40px); display: flex; flex-direction: column; justify-content: space-between; gap: 28px; }
-  .stack .kicker { font-size: 13px; color: var(--muted); }
-  .stack .kicker b { color: var(--accent); font-weight: 500; }
+
+  /* project type: a tag with a coloured dot, one colour per category */
+  [data-cat="site"] { --c: #4f86ff; } [data-cat="app"] { --c: #9b6bff; } [data-cat="landing"] { --c: #ff7a3d; } [data-cat="branding"] { --c: #1fb57a; }
+  .stack .kicker { display: flex; align-items: center; gap: 12px; font-size: 13px; color: var(--muted); }
+  .stack .kicker b { font: 500 12px ui-monospace, Menlo, monospace; color: var(--accent); }
+  .tag { display: inline-flex; align-items: center; gap: 8px; padding: 5px 12px 5px 10px; border-radius: 999px; font-size: 12.5px; font-weight: 500; line-height: 1.2; color: var(--text);
+    background: color-mix(in srgb, var(--c) 13%, transparent); border: 1px solid color-mix(in srgb, var(--c) 35%, transparent); }
+  .tag::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--c); box-shadow: 0 0 0 3px color-mix(in srgb, var(--c) 22%, transparent); }
   .stack h3 { margin-top: 10px; font-weight: 500; font-size: clamp(30px, 3.2vw, 44px); letter-spacing: -.035em; line-height: 1.02; }
   .stack .pitch { color: var(--link); font-size: 16px; line-height: 1.5; max-width: 34ch; margin-top: 12px; }
   .stack .meta { display: flex; gap: 28px; font-size: 13px; color: var(--muted); }
@@ -265,7 +276,9 @@
   /* the capture sits in a real browser window, on a flat colour of the project */
   .stack .stage { background: var(--flat); padding: 40px 0 0 40px; display: flex; align-items: flex-end; }
   .stack .win { width: 100%; border-radius: 10px 0 0 0; overflow: hidden; background: #fff; box-shadow: 0 30px 60px -30px rgba(0,0,0,.6); transition: transform .6s var(--ease); }
-  .stack .card:hover .win { transform: translateY(-6px); }
+  /* hover: the window grows from its bottom-left corner, so it never leaves a gap under the screenshot */
+  .stack .win { transform-origin: 0 100%; }
+  .stack .card:hover .win { transform: scale(1.03); }
   .stack .win .bar { height: 30px; display: flex; align-items: center; gap: 6px; padding: 0 12px; background: #eef0f4; }
   .stack .win .bar i { width: 9px; height: 9px; border-radius: 50%; background: #c9ced8; }
   .stack .win .bar span { margin-left: 14px; font-size: 11px; color: #6b7280; background: #fff; padding: 3px 12px; border-radius: 6px; }
@@ -617,6 +630,17 @@
     .story .slide img { transition: none; }
   }
   .foot .flag { width: 16px; height: 11px; margin-right: 7px; border-radius: 2px; vertical-align: -1px; box-shadow: 0 0 0 1px var(--line); }
+
+  /* theme switch: moon and sun both visible, a knob slides under the active mode */
+  .theme-toggle { position: relative; width: 68px; height: 36px; border-radius: 999px; display: flex; align-items: center; justify-content: space-between; padding: 0 9px; background: var(--surface); border: 1px solid var(--line); color: var(--muted); cursor: pointer; transition: border-color .2s; }
+  .theme-toggle:hover { border-color: var(--muted); background: var(--surface); }
+  .theme-toggle::before { content: ""; position: absolute; top: 3px; left: 3px; width: 28px; height: 28px; border-radius: 50%; background: var(--btn-bg); transition: translate .35s var(--ease); }
+  :root[data-theme="light"] .theme-toggle::before { translate: 32px 0; }
+  .theme-toggle .sun, .theme-toggle .moon, :root[data-theme="light"] .theme-toggle .sun, :root[data-theme="light"] .theme-toggle .moon { position: relative; z-index: 1; display: block; width: 16px; height: 16px; transition: color .3s; }
+  .theme-toggle .moon { order: -1; color: var(--btn-text); }
+  :root[data-theme="light"] .theme-toggle .moon { color: var(--muted); }
+  :root[data-theme="light"] .theme-toggle .sun { color: var(--btn-text); }
+  @media (prefers-reduced-motion: reduce) { .theme-toggle::before { transition: none; } }
 </style>
 </head>
 <body>
@@ -721,7 +745,7 @@
     <article style="--i:0; --glow-c: #2fbf85">
       <a class="card" href="projet-edreams-factory.html">
         <div class="text">
-          <div><span class="kicker"><b>01</b> · Refonte</span><h3>Edreams Factory</h3><p class="pitch">Clarifier une offre de logiciel sur mesure pour des dirigeants pressés.</p></div>
+          <div><span class="kicker"><b>01</b><span class="tag" data-cat="site">Site vitrine · Logiciel</span></span><h3>Edreams Factory</h3><p class="pitch">Clarifier une offre de logiciel sur mesure pour des dirigeants pressés.</p></div>
           <div class="meta"><div>Rôle<b>UX, UI, code</b></div><div>Année<b>2026</b></div></div>
           <span class="go">Voir l’étude de cas <i>→</i></span>
         </div>
@@ -729,19 +753,19 @@
       </a>
     </article>
     <article style="--i:1; --glow-c: #3f7bff">
-      <a class="card" href="projet-filon.html">
+      <a class="card" href="projet-wecare.html">
         <div class="text">
-          <div><span class="kicker"><b>02</b> · Génération de leads</span><h3>Filon</h3><p class="pitch">Transformer une offre B2B complexe en page qui donne envie d’appeler.</p></div>
-          <div class="meta"><div>Rôle<b>UI, landing page</b></div><div>Année<b>2026</b></div></div>
+          <div><span class="kicker"><b>02</b><span class="tag" data-cat="app">Logiciel métier · Santé</span></span><h3>Wecare</h3><p class="pitch">Un planning médical qui se lit en deux secondes, avec son design system.</p></div>
+          <div class="meta"><div>Rôle<b>UX, UI, design system, code</b></div><div>Année<b>2026</b></div></div>
           <span class="go">Voir l’étude de cas <i>→</i></span>
         </div>
-        <div class="stage" style="--flat:#2d5fd6"><div class="win"><div class="bar"><i></i><i></i><i></i><span>Filon — Accueil</span></div><img src="img/filon.png" alt="Filon" loading="lazy"></div></div>
+        <div class="stage" style="--flat:#1a5bee"><div class="win"><div class="bar"><i></i><i></i><i></i><span>Wecare — Agenda</span></div><img src="img/wecare.png" alt="Wecare" loading="lazy"></div></div>
       </a>
     </article>
     <article style="--i:2; --glow-c: #ff8a50">
       <a class="card" href="projet-roamies.html">
         <div class="text">
-          <div><span class="kicker"><b>03</b> · App mobile &amp; web</span><h3>Roamies</h3><p class="pitch">Organiser un voyage à plusieurs sans se perdre dans le chat de groupe.</p></div>
+          <div><span class="kicker"><b>03</b><span class="tag" data-cat="app">App web &amp; mobile · Voyage</span></span><h3>Roamies</h3><p class="pitch">Organiser un voyage à plusieurs sans se perdre dans le chat de groupe.</p></div>
           <div class="meta"><div>Rôle<b>UX research, UI, code</b></div><div>Année<b>2026</b></div></div>
           <span class="go">Voir l’étude de cas <i>→</i></span>
         </div>
@@ -749,6 +773,7 @@
       </a>
     </article>
   </div>
+  <div class="all-more"><a class="all-link" href="projets.html">Voir tous les projets <span class="count">(16)</span><span class="arrow" aria-hidden="true">→</span></a></div>
 </section>
 
 <section class="method method-v3" id="methode">

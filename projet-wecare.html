@@ -324,6 +324,17 @@
     .reveal { opacity: 1 !important; translate: none !important; transition: none !important; }
   }
   .foot .flag { width: 16px; height: 11px; margin-right: 7px; border-radius: 2px; vertical-align: -1px; box-shadow: 0 0 0 1px var(--line); }
+
+  /* theme switch: moon and sun both visible, a knob slides under the active mode */
+  .theme-toggle { position: relative; width: 68px; height: 36px; border-radius: 999px; display: flex; align-items: center; justify-content: space-between; padding: 0 9px; background: var(--surface); border: 1px solid var(--line); color: var(--muted); cursor: pointer; transition: border-color .2s; }
+  .theme-toggle:hover { border-color: var(--muted); background: var(--surface); }
+  .theme-toggle::before { content: ""; position: absolute; top: 3px; left: 3px; width: 28px; height: 28px; border-radius: 50%; background: var(--btn-bg); transition: translate .35s var(--ease); }
+  :root[data-theme="light"] .theme-toggle::before { translate: 32px 0; }
+  .theme-toggle .sun, .theme-toggle .moon, :root[data-theme="light"] .theme-toggle .sun, :root[data-theme="light"] .theme-toggle .moon { position: relative; z-index: 1; display: block; width: 16px; height: 16px; transition: color .3s; }
+  .theme-toggle .moon { order: -1; color: var(--btn-text); }
+  :root[data-theme="light"] .theme-toggle .moon { color: var(--muted); }
+  :root[data-theme="light"] .theme-toggle .sun { color: var(--btn-text); }
+  @media (prefers-reduced-motion: reduce) { .theme-toggle::before { transition: none; } }
 </style>
 </head>
 <body>
@@ -370,7 +381,7 @@
 
   <header class="wrap head">
     <a class="back" href="projets.html">← Tous les projets</a>
-    <span class="kicker">05 · Application métier · Santé</span>
+    <span class="kicker">02 · Logiciel métier · Santé</span>
     <h1>Wecare</h1>
     <p class="lead">Un outil de planning pour un cabinet de soins, utilisé toute la journée par le secrétariat et les praticiens&nbsp;: agenda, dossiers patients, prise de rendez-vous, et le design system qui les relie.</p>
     <span class="note"><i></i>Défi personnel · cabinet, patients et rendez-vous fictifs</span>
@@ -554,7 +565,7 @@
     </div>
   </section>
 
-  <a class="next" href="projet-tampon.html"><div><span>Projet suivant</span><strong>Tampon</strong></div><span class="arrow" aria-hidden="true">→</span></a>
+  <a class="next" href="projet-roamies.html"><div><span>Projet suivant</span><strong>Roamies</strong></div><span class="arrow" aria-hidden="true">→</span></a>
 </main>
 
 
