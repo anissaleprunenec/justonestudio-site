@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hush — Design system</title>
-<meta name="description" content="Couleurs, typographie, icônes, composants et règles d’usage de Hush, l’app de réservation de séjours à Bali.">
-<link rel="icon" href="assets/logo-hush-mark.svg" type="image/svg+xml">
+<meta name="description" content="Couleurs, typographie, icônes, composants et règles d’usage de Hush, l’app de réservation de séjours.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
@@ -17,7 +17,7 @@
   .ds { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 40px; max-width: 1320px; margin: 0 auto; padding: 32px; }
   .ds-nav { position: sticky; top: 32px; align-self: start; display: grid; gap: 2px; }
   .ds-nav__brand { display: block; padding-bottom: 16px; color: var(--ink); --logo-mid: var(--brand); --logo-sun: var(--mango); }
-  .ds-nav__brand svg { width: 103px; height: 63px; }
+  .ds-nav__brand svg { width: 140px; height: 60px; }
   .ds-nav h2 { padding: 16px 12px 4px; font-size: 12px; line-height: 16px; font-weight: 600; color: var(--gray-600); }
   .ds-nav a:not(.ds-nav__brand) { padding: 7px 12px; border-radius: 12px; color: var(--gray-700); font-weight: 500; }
   .ds-nav a:not(.ds-nav__brand):hover { background: var(--white); color: var(--brand); }
@@ -49,7 +49,7 @@
   /* logo */
   .ds-logos { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 12px; }
   .ds-logo { display: grid; place-items: center; min-height: 180px; border-radius: 24px; }
-  .ds-logo svg { width: 70%; max-width: 260px; height: auto; aspect-ratio: 258 / 158; }
+  .ds-logo svg { width: 70%; max-width: 260px; height: auto; aspect-ratio: 1269 / 541; }
   .ds-logo--mark svg { width: 64px; aspect-ratio: 1; }
   .ds-logo--light { background: var(--white-800); box-shadow: inset 0 0 0 1px var(--gray-300); color: var(--ink); --logo-mid: var(--brand); --logo-sun: var(--mango); }
   .ds-logo--brand { background: var(--brand); color: var(--white-800); --logo-sun: var(--mango); }
@@ -169,7 +169,7 @@
   <main>
     <header class="ds-head">
       <h1>Design system</h1>
-      <p>Les fondations, les composants et les règles d’usage de Hush, l’app qui réserve des vacances à Bali sans stress. Cette page charge la même feuille de style que les écrans&nbsp;: chaque composant ci-dessous est le vrai, pas une image.</p>
+      <p>Les fondations, les composants et les règles d’usage de Hush, l’app qui réserve des vacances sans stress. Cette page charge la même feuille de style que les écrans&nbsp;: chaque composant ci-dessous est le vrai, pas une image.</p>
     </header>
 
     <!-- ===================== Fondations ===================== -->
@@ -187,13 +187,13 @@
 
     <section class="ds-sec" id="logo">
       <h2>Logo</h2>
-      <p>Le mot «&nbsp;hush&nbsp;» en minuscules. Les deux «&nbsp;h&nbsp;» se font face, le dernier en miroir, comme les deux poteaux d’un hamac. Un hamac mangue est tendu entre leurs sommets, au-dessus du «&nbsp;us&nbsp;», et un grand soleil se lève au-dessus. Le symbole garde les poteaux, le hamac et le soleil.</p>
+      <p>Le mot «&nbsp;hush&nbsp;» en écriture manuscrite, d’un seul trait. Les deux «&nbsp;h&nbsp;» tiennent les cordes d’un hamac mangue, et un soleil s’y couche, à moitié caché. Le symbole ne garde qu’un «&nbsp;h&nbsp;» devant le soleil&nbsp;: il sert d’icône d’app et de favicon.</p>
       <div class="ds-logos">
         <div class="ds-logo ds-logo--light"><svg role="img" aria-label="Logo Hush sur fond clair"><use href="assets/icons.svg#logo-hush"/></svg></div>
         <div class="ds-logo ds-logo--brand ds-logo--mark"><svg role="img" aria-label="Symbole Hush sur violet"><use href="assets/icons.svg#logo-hush-mark"/></svg></div>
         <div class="ds-logo ds-logo--dark ds-logo--mark"><svg role="img" aria-label="Symbole Hush sur encre"><use href="assets/icons.svg#logo-hush-mark"/></svg></div>
       </div>
-      <small class="ds-note">Quatre variables pilotent les couleurs&nbsp;: <code>--logo-poles</code> (poteaux, couleur du texte par défaut), <code>--logo-mid</code> (le «&nbsp;us&nbsp;») et <code>--logo-sun</code> (le soleil et, par défaut, le hamac&nbsp;; <code>--logo-hammock</code> pour le colorer à part). Symboles <code>#logo-hush</code> et <code>#logo-hush-mark</code> dans <code>assets/icons.svg</code>.</small>
+      <small class="ds-note">Deux variables pilotent les couleurs&nbsp;: <code>--logo-poles</code> (l’écriture, couleur du texte par défaut) et <code>--logo-sun</code> (le soleil et le hamac). Symboles <code>#logo-hush</code> et <code>#logo-hush-mark</code> dans <code>assets/icons.svg</code>, icône d’app dans <code>assets/favicon.svg</code>.</small>
     </section>
 
     <section class="ds-sec" id="couleurs">

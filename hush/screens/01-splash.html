@@ -12,7 +12,7 @@
 <style>
   .splash { display: block; color: var(--white-800); }
   /* anchored to the centre and the bottom so it holds on any screen height */
-  .splash__logo { position: absolute; left: calc(50% - 70px); top: 41%; width: 140px; height: 86px; --logo-sun: var(--mango); }
+  .splash__logo { position: absolute; left: calc(50% - 110px); top: 41%; width: 220px; height: 94px; --logo-sun: var(--mango); }
   .splash__loader {
     position: absolute; left: calc(50% - 13.3px); bottom: 190px; width: 26.7px; height: 26.7px; border-radius: 50%;
     background: conic-gradient(from 0deg, rgba(251, 248, 255, 0), var(--white-800));
@@ -24,6 +24,7 @@
   @media (prefers-reduced-motion: reduce) { .splash__loader { animation-duration: 3s; } }
   @keyframes spin { to { transform: rotate(1turn); } }
 </style>
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"><link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 </head>
 <body>
 <a class="screen screen--brand splash" href="02-onboarding.html" aria-label="Hush — continuer">
